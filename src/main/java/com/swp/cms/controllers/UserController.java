@@ -8,6 +8,7 @@ import com.swp.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,5 +36,12 @@ public class UserController {
         List<UserDto> userDto = mapper.fromEntityToUserDtoList(res);
         //return makeResponse(true, testingDto, "Get testing detail successful!");
         return userDto;
+    }
+
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable Integer id) {
+        User us = userService.getById(id);
+        UserDto user = mapper.fromEntityToUserDto(us);
+        return user;
     }
 }

@@ -1,5 +1,6 @@
 package com.swp.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,5 +21,6 @@ public class AwardType {
     private String awardType;
 
     @OneToMany(mappedBy = "awardType")
+    @JsonManagedReference
     private Set<Award> awardTypeAwards;
 }
