@@ -21,9 +21,9 @@ public class User {
     @Column(name = "display_name", nullable = false)
     private String display_name;
 
-
+    @Transient
     @NotNull
-    @Column(name = "additional_info", columnDefinition = "longtext")
+    @Column(name = "additional_info")
     private Text additional_info;
 
     @NotNull

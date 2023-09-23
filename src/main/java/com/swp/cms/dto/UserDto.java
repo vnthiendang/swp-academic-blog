@@ -5,7 +5,6 @@ import lombok.Data;
 import org.w3c.dom.Text;
 
 import java.time.OffsetDateTime;
-import java.util.Date;
 
 @Data
 public class UserDto {
@@ -14,6 +13,6 @@ public class UserDto {
     private Text additional_info;
     private String password;
     private String email;
-    private UserRole roleId;
+    private UserRole role_id;
     private OffsetDateTime created_date;
 }
