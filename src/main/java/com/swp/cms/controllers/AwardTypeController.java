@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/award_type")
+@RequestMapping("/blog/auth/award_type")
 public class AwardTypeController {
     private final AwardTypeRepository awardTypeRepository;
 

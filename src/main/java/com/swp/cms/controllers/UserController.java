@@ -1,47 +1,59 @@
 package com.swp.cms.controllers;
 
-import com.swp.cms.dto.UserDto;
-import com.swp.cms.mapper.UserMapper;
-import com.swp.entities.User;
-import com.swp.repositories.UserRepository;
+import com.swp.cms.reqDto.AuthenticationRequest;
+import com.swp.cms.reqDto.RegisterRequest;
 import com.swp.services.UserService;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/blog/auth")
 public class UserController {
-    private final UserRepository userRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
-    @Autowired
-    private UserMapper mapper;
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping()
-    public List<UserDto> getAll() {
-        List<User> res = userService.getAllUsers();
-        List<UserDto> userDto = mapper.fromEntityToUserDtoList(res);
-        //return makeResponse(true, testingDto, "Get testing detail successful!");
-        return userDto;
+    @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> register(
+            @RequestBody RegisterRequest request
+    ) {
+
+        return ResponseEntity.ok(userService.register(request));
     }
 
-    @GetMapping("/{id}")
-    public UserDto getUserById(@PathVariable Integer id) {
-        User us = userService.getById(id);
-        UserDto user = mapper.fromEntityToUserDto(us);
-        return user;
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(
+            @RequestBody AuthenticationRequest request
+    ) {
+        return ResponseEntity.ok(userService.authenticate(request));
     }
+
+//    @Autowired
+//    private ModelMapper modelMapper;
+//    @Autowired
+//    private UserMapper mapper;
+//    @Autowired
+//    private UserService userService;
+
+//    public UserController(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//    }
+
+//    @GetMapping()
+//    public List<UserDto> getAll() {
+//        List<User> res = userService.getAllUsers();
+//        List<UserDto> userDto = mapper.fromEntityToUserDtoList(res);
+//        //return makeResponse(true, testingDto, "Get testing detail successful!");
+//        return userDto;
+//    }
+//
+//    @GetMapping("/{id}")
+//    public UserDto getUserById(@PathVariable Integer id) {
+//        User us = userService.getById(id);
+//        UserDto user = mapper.fromEntityToUserDto(us);
+//        return user;
+//    }
 }
