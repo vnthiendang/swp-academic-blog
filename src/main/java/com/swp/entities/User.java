@@ -30,7 +30,6 @@ public class User implements UserDetails {
     private String display_name;
 
     @Transient
-    @NotNull
     @Column(name = "additional_info")
     private Text additional_info;
 
@@ -46,7 +45,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "role_id")
     private UserRole id;
 
-    @NotNull
     @Column(name = "created_date")
     private OffsetDateTime created_date;
 

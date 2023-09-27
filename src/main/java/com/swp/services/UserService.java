@@ -38,6 +38,7 @@ public class UserService {
                 .display_name(request.getDisplayName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .additional_info(request.getAdditionalInfo())
                 .role(Role.USER)
                 .build();
         userRepository.save(user);
