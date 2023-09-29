@@ -3,21 +3,23 @@ package com.swp.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.w3c.dom.Text;
 
-import java.time.OffsetDateTime;
-import java.util.Collection;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")})
 @Getter
 @Setter
 public class User implements UserDetails {
@@ -29,9 +31,8 @@ public class User implements UserDetails {
     @Column(name = "display_name", nullable = false)
     private String display_name;
 
-    @Transient
-    @Column(name = "additional_info")
-    private Text additional_info;
+    @Column(name = "additional_info", columnDefinition = "TEXT")
+    private String additional_info;
 
     @NotNull
     @Column(name = "email", nullable = false)
@@ -43,16 +44,14 @@ public class User implements UserDetails {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
-    private UserRole id;
+    private Role id;
 
     @Column(name = "created_date")
-    private OffsetDateTime created_date;
-
-    private Role role;
+    private LocalDateTime created_date;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority(id.toString()));
     }
 
     @Override
@@ -83,5 +82,29 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return userId != null && Objects.equals(userId, user.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "userId = " + userId + ", " +
+                "display_name = " + display_name + ", " +
+                "additional_info = " + additional_info + ", " +
+                "email = " + email + ", " +
+                "password = " + password + ", " +
+                "created_date = " + created_date + ")";
     }
 }

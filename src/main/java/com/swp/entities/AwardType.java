@@ -20,7 +20,4 @@ public class AwardType {
     @Column(name = "award_type", nullable = false)
     private String awardType;
 
-    @OneToMany(mappedBy = "awardType")
-    @JsonManagedReference
-    private Set<Award> awardTypeAwards;
 }

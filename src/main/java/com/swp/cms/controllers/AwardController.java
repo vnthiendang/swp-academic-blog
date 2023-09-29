@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/blog/auth/award")
+@RequestMapping("/blog/award")
 public class AwardController {
     private final AwardRepository awardRepository;
 
@@ -31,7 +31,7 @@ public class AwardController {
         this.awardRepository = awardRepository;
     }
 
-    @GetMapping()
+    @GetMapping
     public List<AwardDto> getAll() {
         List<Award> awards = awardService.getAll();
         List<AwardDto> awardDtos = mapper.fromEntityToAwardDtoList(awards);

@@ -27,9 +27,4 @@ public class Category {
     @JoinColumn(name = "parent_category_id")
     private Category parentCategory;
 
-    @OneToMany(mappedBy = "parentCategory")
-    private Set<Category> parentCategoryCategorys;
-
-    @OneToMany(mappedBy = "belongedToCategory")
-    private Set<Post> belongedToCategoryPosts;
 }

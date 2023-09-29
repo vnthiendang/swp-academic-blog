@@ -25,7 +25,4 @@ public class Tag {
 
     @Column(name = "created_date")
     private OffsetDateTime createdDate;
-
-    @OneToMany(mappedBy = "tag")
-    private Set<PostTag> tagPostTags;
 }

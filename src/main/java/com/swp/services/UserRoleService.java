@@ -1,6 +1,6 @@
 package com.swp.services;
 
-import com.swp.entities.UserRole;
+import com.swp.entities.Role;
 import com.swp.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class UserRoleService {
     @Autowired
     private RoleRepository userRoleRepository;
 
-    public UserRole getById(int id) {
+    public Role getById(int id) {
         return userRoleRepository.findById(id).orElseThrow();
     }
 
@@ -24,11 +24,11 @@ public class UserRoleService {
         userRoleRepository.deleteById(id);
     }
 
-    public UserRole addRole(UserRole role) {
+    public Role addRole(Role role) {
         return userRoleRepository.save(role);
     }
 
-    public List<UserRole> getAllRoles() {
+    public List<Role> getAllRoles() {
         return userRoleRepository.findAll();
     }
 }

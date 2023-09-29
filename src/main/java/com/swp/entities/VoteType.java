@@ -19,6 +19,4 @@ public class VoteType {
     @Column(name = "vote_type", nullable = false)
     private String voteType;
 
-    @OneToMany(mappedBy = "voteType")
-    private Set<Vote> voteTypeVotes;
 }

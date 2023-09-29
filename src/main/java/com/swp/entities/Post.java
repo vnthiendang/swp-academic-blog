@@ -34,21 +34,4 @@ public class Post {
     @JoinColumn(name = "belonged_to_category_id")
     private Category belongedToCategory;
 
-    @OneToMany(mappedBy = "post")
-    private Set<Vote> postVotes;
-
-    @OneToMany(mappedBy = "post")
-    private Set<Comment> postComments;
-
-    @OneToMany(mappedBy = "post")
-    private Set<PostTag> postPostTags;
-
-    @OneToMany(mappedBy = "post")
-    private Set<Award> postAwards;
-
-    @OneToMany(mappedBy = "post")
-    private Set<PostApprovals> postPostApprovalss;
-
-    @OneToMany(mappedBy = "post")
-    private Set<Media> postMedias;
 }
