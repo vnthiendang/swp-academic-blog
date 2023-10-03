@@ -26,7 +26,6 @@ public class VoteController {
     private VoteMapper mapper;
     @Autowired
     private VoteService voteService;
-
     public VoteController(VoteRepository voteRepository) {
         this.voteRepository = voteRepository;
     }
