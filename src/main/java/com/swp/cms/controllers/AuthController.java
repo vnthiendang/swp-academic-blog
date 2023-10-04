@@ -2,8 +2,8 @@ package com.swp.cms.controllers;
 
 import com.swp.cms.reqDto.AuthenticationRequest;
 import com.swp.cms.reqDto.RegisterRequest;
+import com.swp.cms.resDto.AuthenticationResponse;
 import com.swp.services.AuthService;
-import com.swp.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,6 +1,6 @@
 package com.swp.services;
 
-import com.swp.cms.controllers.AuthenticationResponse;
+import com.swp.cms.resDto.AuthenticationResponse;
 import com.swp.cms.reqDto.AuthenticationRequest;
 import com.swp.cms.reqDto.RegisterRequest;
 import com.swp.config.JwtService;

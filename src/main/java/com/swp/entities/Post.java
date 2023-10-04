@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ public class Post {
     @Id
     @Column(name = "id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer postsId;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -24,7 +25,7 @@ public class Post {
     private String postDetail;
 
     @Column(name = "created_date")
-    private OffsetDateTime createdTime;
+    private LocalDateTime createdTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_user_id")
