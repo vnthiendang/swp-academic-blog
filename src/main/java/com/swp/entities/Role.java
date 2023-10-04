@@ -9,16 +9,22 @@ import lombok.Setter;
 import java.util.Set;
 
 @Entity
-@Table(name = "role")
 @Getter
 @Setter
+@Table(name = "role")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "role_info", nullable = false)
+    @NotNull
     private String roleInfo;
 
+    public Role() {
+    }
+
+    public Role(String roleInfo) {
+        this.roleInfo = roleInfo;
+    }
 }

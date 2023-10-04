@@ -38,11 +38,11 @@ public class AwardController {
         return awardDtos;
     }
 
-    @GetMapping("/{id}")
-    public AwardDto getAwardById(@PathVariable Integer id) {
-
-        Award award = awardService.getById(id);
-        AwardDto dto = mapper.fromEntityToAwardDto(award);
-        return dto;
-    }
+//    @GetMapping("/{id}")
+//    public AwardDto getAwardById(@PathVariable Integer id) {
+//
+//        Award award = awardService.getById(id);
+//        AwardDto dto = mapper.fromEntityToAwardDto(award);
+//        return dto;
+//    }
 }

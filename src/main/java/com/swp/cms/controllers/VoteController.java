@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/blog/vote")
-public class VoteController {
+public class   VoteController {
     private final VoteRepository voteRepository;
 
     @Autowired

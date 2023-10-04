@@ -10,11 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
-@Data
 @RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
@@ -31,7 +28,7 @@ public class User implements UserDetails {
     @Column(name = "display_name", nullable = false)
     private String display_name;
 
-    @Column(name = "additional_info", columnDefinition = "TEXT")
+    @Column(name = "additional_info")
     private String additional_info;
 
     @NotNull
@@ -42,16 +39,16 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
-    private Role id;
+    private Role role_id;
 
     @Column(name = "created_date")
     private LocalDateTime created_date;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(id.toString()));
+        return List.of(new SimpleGrantedAuthority(role_id.toString()));
     }
 
     @Override
