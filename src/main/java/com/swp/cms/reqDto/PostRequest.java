@@ -4,11 +4,10 @@ import com.swp.entities.Category;
 import com.swp.entities.Media;
 import com.swp.entities.PostTag;
 import com.swp.entities.User;
-import lombok.Data;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
 public class PostRequest {

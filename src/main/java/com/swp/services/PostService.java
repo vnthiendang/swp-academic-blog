@@ -3,9 +3,7 @@ package com.swp.services;
 import com.swp.cms.dto.PostDto;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.*;
-import com.swp.repositories.CategoryRepository;
-import com.swp.repositories.PostRepository;
-import com.swp.repositories.UserRepository;
+import com.swp.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,18 +52,6 @@ public class PostService {
         post.setCreatedTime(LocalDateTime.now());
         post.setCreatedByUser(createdByUser);
         post.setBelongedToCategory(belongedToCategory);
-
-
-            Media media = new Media();
-            media.setMediaUrl(request.getMedia());
-            media.setPost(post);
-//            post.setMedia(media);
-
-            PostTag postTag = new PostTag();
-            postTag.setId(request.getTag());
-            postTag.setPost(post);
-//            post.setPostTag(postTag);
-
 
         return postRepository.save(post);
     }
