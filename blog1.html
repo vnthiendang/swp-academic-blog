@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
+    <title>Academic blog at FPT University</title>
+</head>
+
+<body class="w-screen h-screen bg-slate-700">
+    <!-- Header  -->
+    <header class="flex items-center justify-between w-full bg-black text-white p-1">
+        <div class="flex items-center">
+            <a href="/home.html" class="items-start justify-center px-2">
+                <img src="./img/Logo.png" alt="logo" class="w-16 h-auto">
+            </a>
+            <a href="/blog" class="p-2">
+                FPT BLOG
+            </a>
+            <a href="/home.html" class="p-2">
+                Home
+            </a>
+            <!-- login  -->
+            <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center">
+                    <span class="mr-1">Login</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    <li class="">
+                        <a class="rounded-t bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/facebook">Facebook</a>
+                    </li>
+                    <li class="">
+                        <a class="bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/google">Google</a>
+                    </li>
+                    <li class="w-full">
+                        <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/apple">Apple</a>
+                    </li>
+                </ul>
+            </div>
+            <a href="/blog" class="p-2">
+                Best articles
+            </a>
+            <!-- Category  -->
+            <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center">
+                    <span class="mr-1">Category</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    <li class="">
+                        <a class="rounded-t bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/SE">SE</a>
+                    </li>
+                    <li class="">
+                        <a class="bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/AI">AI</a>
+                    </li>
+                    <li class="w-full">
+                        <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/BS">BS</a>
+                    </li>
+                    <li class="w-full">
+                        <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/SA">SA</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="p-1">
+            <form class="flex items-center">
+                <label for="simple-search" class="sr-only">Search</label>
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                        </svg>
+                    </div>
+                    <input type="text" id="simple-search"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search branch name..." required>
+                </div>
+                <button type="submit"
+                    class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </form>
+
+        </div>
+    </header>
+
+    <!-- Main  -->
+    <Main>
+        <div class="p-4 w-full flex items-center justify-start bg-stone-500">
+            <div class="mt-4 ml-12 text-3xl font-sans">
+                <!-- Title  -->
+                <div class="mr-7">Solving the Modern Loneliness</div>
+                <div class="ml-4">Epidemic: Say I Do to AI</div>
+
+                <!-- content  -->
+                <div class="flex justify-between mt-6">
+                    <div>by <span class="text-orange-500">user01</span></div>
+                    <div>September 20,2023</div>
+                </div>
+
+                <!-- Reaction -->
+                <div class="flex justify-between mt-6 mx-4">
+                    <i class="fa-regular fa-heart cursor-pointer"></i>
+                    <i class="fa-solid fa-tags flex items-center cursor-pointer">
+                        <div class="text-base m-2">AI</div>
+                    </i>
+                </div>
+            </div>
+        </div>
+
+        <!-- card  -->
+        <div class="w-full flex items-center justify-center m-5">
+            <div class="flex flex-col justify-between p-4 leading-normal  w-[60%]">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Post-COVID-19: How to
+                    Please Fast-Changing Customers with AI?</h5>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The pandemic has triggered a sudden
+                    socioeconomic shift from physical to digital, both for consumers and businesses. Consumers are
+                    rapidly switching to digital channels, as the number of first-time online buyers went up by 76
+                    percent2 and online orders increased by 80 percent in the first quarter3. This is tricky, even for a
+                    trillion-dollar e-commerce company like Amazon, which was overwhelmed by customers’ unpredictable
+                    purchasing patterns and bulk buying that it started nudging customers to shop less. Further, this
+                    pandemic has caused hiccups in many parts of a company’s operations, including inventory management,
+                    sales forecast, customer support, etc. and business leaders need to act fast to adapt to this
+                    ever-changing purchasing behaviour. </p>
+            </div>
+            <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                src="./img/banner1.png" alt="">
+        </div>
+
+        <!-- comment -->
+        <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
+            <div class="max-w-2xl mx-auto px-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
+                </div>
+                <form class="mb-6">
+                    <div
+                        class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                        <label for="comment" class="sr-only">Your comment</label>
+                        <textarea id="comment" rows="6"
+                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                            placeholder="Write a comment..." required></textarea>
+                    </div>
+                    <button type="submit"
+                        class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                        Post comment
+                    </button>
+                </form>
+                <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                    <footer class="flex justify-between items-center mb-2">
+                        <div class="flex items-center">
+                            <p
+                                class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                                <img class="mr-2 w-6 h-6 rounded-full"
+                                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                    alt="Michael Gough">Michael Gough</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
+                                    title="February 8th, 2022">Feb. 8, 2022</time></p>
+                        </div>
+                        <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
+                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                            type="button">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 16 3">
+                                <path
+                                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                            </svg>
+                            <span class="sr-only">Comment settings</span>
+                        </button>
+                    </footer>
+                    <p class="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really worth time
+                        reading. Thank you! But tools are just the
+                        instruments for the UX designers. The knowledge of the design tools are as important as the
+                        creation of the design strategy.</p>
+                    <div class="flex items-center mt-4 space-x-4">
+                        <button type="button"
+                            class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                            <i class="fa-regular fa-comment px-2"></i>Rep
+                            Reply
+
+                        </button>
+                        <button type="button"
+                            class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                            <i class="fa-regular fa-thumbs-up mx-2"></i> Like
+                        </button>
+                    </div>
+                </article>
+                <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900">
+                    <footer class="flex justify-between items-center mb-2">
+                        <div class="flex items-center">
+                            <p
+                                class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                                <img class="mr-2 w-6 h-6 rounded-full"
+                                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                                    alt="Jese Leos">Jese Leos</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
+                                    title="February 12th, 2022">Feb. 12, 2022</time></p>
+                        </div>
+                        <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2"
+                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                            type="button">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 16 3">
+                                <path
+                                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                            </svg>
+                            <span class="sr-only">Comment settings</span>
+                        </button>
+                    </footer>
+                    <p class="text-gray-500 dark:text-gray-400">Much appreciated! Glad you liked it ☺️</p>
+                    <div class="flex items-center mt-4 space-x-4">
+                        <button type="button"
+                            class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                            <i class="fa-regular fa-comment px-2"></i>Rep
+                            Reply
+
+                        </button>
+                        <button type="button"
+                            class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                            <i class="fa-regular fa-thumbs-up mx-2"></i> Like
+                        </button>
+                    </div>
+                </article>
+                <article
+                    class="p-6 mb-3 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                    <footer class="flex justify-between items-center mb-2">
+                        <div class="flex items-center">
+                            <p
+                                class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                                <img class="mr-2 w-6 h-6 rounded-full"
+                                    src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                                    alt="Bonnie Green">Bonnie Green</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-03-12"
+                                    title="March 12th, 2022">Mar. 12, 2022</time></p>
+                        </div>
+                        <button id="dropdownComment3Button" data-dropdown-toggle="dropdownComment3"
+                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                            type="button">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 16 3">
+                                <path
+                                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                            </svg>
+                            <span class="sr-only">Comment settings</span>
+                        </button>
+                    </footer>
+                    <p class="text-gray-500 dark:text-gray-400">The article covers the essentials, challenges, myths and
+                        stages the UX designer should consider while creating the design strategy.</p>
+                    <div class="flex items-center mt-4 space-x-4">
+                        <button type="button"
+                            class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                            <i class="fa-regular fa-comment px-2"></i>Rep
+                            Reply
+
+                        </button>
+                        <button type="button"
+                            class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                            <i class="fa-regular fa-thumbs-up mx-2"></i> Like
+                        </button>
+                    </div>
+                </article>
+                <article class="p-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                    <footer class="flex justify-between items-center mb-2">
+                        <div class="flex items-center">
+                            <p
+                                class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                                <img class="mr-2 w-6 h-6 rounded-full"
+                                    src="https://flowbite.com/docs/images/people/profile-picture-4.jpg"
+                                    alt="Helene Engels">Helene Engels</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-06-23"
+                                    title="June 23rd, 2022">Jun. 23, 2022</time></p>
+                        </div>
+                    </footer>
+                    <p class="text-gray-500 dark:text-gray-400">Thanks for sharing this. I do came from the Backend
+                        development and explored some of the tools to design my Side Projects.</p>
+                    <div class="flex items-center mt-4 space-x-4">
+                        <button type="button"
+                            class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                            <i class="fa-regular fa-comment px-2"></i>Rep
+                            Reply
+
+                        </button>
+                        <button type="button"
+                            class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                            <i class="fa-regular fa-thumbs-up mx-2"></i> Like
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </Main>
+
+    <!-- footer  -->
+    <footer class="bg-white rounded-lg shadow dark:bg-gray-900">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
+                    <img src="./img/Logo.png" class="h-8 mr-3" alt="Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FPT Blog</span>
+                </a>
+                <ul
+                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a
+                    href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+</body>
+<script src="tailwind-config.js"></script>
+
+</html>
