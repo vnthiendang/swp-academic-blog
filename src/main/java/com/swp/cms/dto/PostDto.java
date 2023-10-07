@@ -22,12 +22,18 @@ public class PostDto {
     }
     private LocalDateTime createdTime;
     private MediaDto media;
-    public String getMedia(){
-        return media.getMediaUrl();
+    public String getMedia() {
+        if (media != null && media.getMediaUrl() != null) {
+            return media.getMediaUrl();
+        }
+        return null; // or handle the case when media or mediaUrl is null
     }
     private PostTagDto postTag;
     public Integer getPostTag(){
-        return postTag.getId();
+        if(postTag != null && postTag.getId() != null){
+            return postTag.getId();
+        }
+        return null;
     }
 
 //    public Integer getTagId() {

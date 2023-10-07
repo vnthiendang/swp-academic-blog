@@ -4,6 +4,8 @@ import com.swp.cms.dto.PostDto;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.*;
 import com.swp.repositories.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ public class PostService {
     private UserRepository userRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public Post getById(int id) {
         return postRepository.findById(id).orElseThrow();
@@ -55,4 +60,10 @@ public class PostService {
 
         return postRepository.save(post);
     }
+
+    public List<Post> searchPosts(String keyword) {
+        return postRepository.search(keyword);
+    }
+
+
 }
