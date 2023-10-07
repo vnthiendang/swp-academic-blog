@@ -24,7 +24,7 @@ public class PostService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Post getById(int id) {
+    public Post getById(Integer id) {
         return postRepository.findById(id).orElseThrow();
     }
 

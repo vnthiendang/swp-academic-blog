@@ -13,7 +13,7 @@ public class MediaService {
     @Autowired
     private MediaRepository mediaRepository;
 
-    public Media getById(int id) {
+    public Media getById(Integer id) {
         return mediaRepository.findById(id).orElseThrow();
     }
 
