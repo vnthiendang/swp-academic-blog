@@ -1,16 +1,6 @@
 body{
     background: white;
 }
-.form_message{
-    text-align: center;
-    margin-bottom: 1rem;
-}
-.form_message-success{
-    color: var(--color-success);
-}
-.form_message-error{
-    color: var(--color-error);
-}
 .title-text{
 margin-top: 200px;
 margin-left:100px;
@@ -87,9 +77,6 @@ p{
 .wraper p a{
     color: rgb(107, 107, 225);
     font-weight: 600;
-}
-.form--hidden{
-    display: none;
 }
 .box{ 
     width: 400px;
