@@ -61,6 +61,16 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    public Post updatePost(Integer postId, PostRequest postRequest) {
+        Post post = getById(postId);
+        post.setTitle(postRequest.getTitle());
+        post.setPostDetail(postRequest.getDetail());
+        post.setBelongedToCategory(categoryRepository.findById(postRequest.getCategoryIdValue())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Category")));
+
+        return postRepository.save(post); // Save and return the updated post
+    }
+
     public List<Post> searchPosts(String keyword) {
         return postRepository.search(keyword);
     }

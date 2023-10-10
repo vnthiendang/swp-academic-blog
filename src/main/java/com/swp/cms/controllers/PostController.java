@@ -98,6 +98,37 @@ public class PostController {
         return dto;
     }
 
+    //edit post
+    @PutMapping("/{postId}")
+    public PostDto updatePost(@PathVariable Integer postId, @RequestBody PostRequest postRequest) {
+        Post updatedPost = postService.updatePost(postId, postRequest);
+        PostDto postDto = modelMapper.map(updatedPost, PostDto.class);
+
+        String mediaUrl = postRequest.getMedia();
+        if (mediaUrl != null) {
+            Media media = new Media();
+            media.setMediaUrl(mediaUrl);
+            media.setPost(updatedPost);
+//            mediaService.add(media);
+            MediaDto mediaDto = modelMapper.map(media, MediaDto.class);
+            postDto.setMedia(mediaDto);
+        }
+
+        Integer tagId = postRequest.getTag();
+        if(tagId != null){
+            PostTag postTag = new PostTag();
+            Tag tag = tagService.getById(tagId);
+            tag.setId(tagId);
+            postTag.setTag(tag);
+            postTag.setPost(updatedPost);
+            postTagService.addPostTag(postTag);
+            PostTagDto postTagDto = modelMapper.map(postTag, PostTagDto.class);
+            postDto.setPostTag(postTagDto);
+        }
+
+        return postDto;
+    }
+
 
 //    private Media saveMedia(MultipartFile mediaFile, Post post) throws IOException {
 //        String fileUrl = mediaFile.getOriginalFilename();

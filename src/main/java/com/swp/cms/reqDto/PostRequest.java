@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @Data
 public class PostRequest {
 
+    private Integer postID;
     @NotNull
     private Category category;
 

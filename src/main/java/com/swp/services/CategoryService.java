@@ -12,15 +12,15 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public Category getById(int id) {
+    public Category getById(Integer id) {
         return categoryRepository.findById(id).orElseThrow();
     }
 
-    public Boolean existsById(int id) {
+    public Boolean existsById(Integer id) {
         return categoryRepository.existsById(id);
     }
 
-    public void deleteById(int id) {
+    public void deleteById(Integer id) {
         categoryRepository.deleteById(id);
     }
 
