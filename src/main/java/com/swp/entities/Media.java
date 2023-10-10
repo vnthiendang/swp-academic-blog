@@ -9,6 +9,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Media {
+    public Media() {
+        // Default constructor
+    }
+
+    public Media(String mediaUrl) {
+        this.mediaUrl = mediaUrl;
+    }
+
     @Id
     @Column(name = "id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

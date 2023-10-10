@@ -12,7 +12,7 @@ public class PostTagService {
     @Autowired
     private PostTagRepository postTagRepository;
 
-    public PostTag getById(int id) {
+    public PostTag getById(Integer id) {
         return postTagRepository.findById(id).orElseThrow();
     }
 

@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MediaService {
     @Autowired
     private MediaRepository mediaRepository;
 
-    public Media getById(int id) {
+    public Media getById(Integer id) {
         return mediaRepository.findById(id).orElseThrow();
     }
 

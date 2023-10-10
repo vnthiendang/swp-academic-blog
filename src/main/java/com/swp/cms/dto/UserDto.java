@@ -1,6 +1,6 @@
 package com.swp.cms.dto;
 
-import com.swp.entities.roles;
+import com.swp.entities.Role;
 import lombok.Data;
 
 import java.awt.*;
@@ -14,4 +14,5 @@ public class UserDto {
     private String password;
     private String email;
     private LocalDateTime created_date;
+    private Role role_id;
 }

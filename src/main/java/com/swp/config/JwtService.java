@@ -17,13 +17,13 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY ="Fej9LgXmWQmgHitAixOqc9unhaRL+wLMWi8Boy9MXhVTzSCRGk+bhw9Y/TEuRFze";
+    private static final String SECRET_KEY ="lsDt18LrXgGe9jzd84MrTJ35B5QY6YZKgbqrUlh9ipleuFPCGUi4YCsOC2kSldc8";
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
-        final Claims claims = extractAllClaims(token);
+        final Claims claims = extractClaims(token);
         return claimsResolver.apply(claims);
 
     }
@@ -60,13 +60,17 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    private Claims extractAllClaims(String token){
-        return Jwts
-                .parserBuilder()
-                .setSigningKey(getSignInKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+//    private Claims extractAllClaims(String token){
+//        return Jwts
+//                .parserBuilder()
+//                .setSigningKey(getSignInKey())
+//                .build()
+//                .parseClaimsJws(token)
+//                .getBody();
+//    }
+
+    private Claims extractClaims(String token) {
+        return Jwts.parserBuilder().setSigningKey(getSignInKey()).build().parseClaimsJws(token).getBody();
     }
 
     private Key getSignInKey() {

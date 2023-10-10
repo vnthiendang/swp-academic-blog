@@ -1,4 +1,4 @@
-package com.swp.cms.controllers;
+package com.swp.cms.resDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

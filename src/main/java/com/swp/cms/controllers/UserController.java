@@ -5,13 +5,13 @@ import com.swp.cms.mapper.UserMapper;
 import com.swp.entities.User;
 import com.swp.services.UserService;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,14 +40,35 @@ public class UserController {
 
         List<User> res = userService.getAllUsers();
         List<UserDto> userDto = mapper.fromEntityToUserDtoList(res);
-        //return makeResponse(true, testingDto, "Get testing detail successful!");
         return userDto;
     }
 //
-//    @GetMapping("/{id}")
-//    public UserDto getUserById(@PathVariable Integer id) {
-//        User us = userService.getById(id);
-//        UserDto user = mapper.fromEntityToUserDto(us);
-//        return user;
-//    }
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable Integer id) {
+        User us = userService.getById(id);
+        UserDto user = mapper.fromEntityToUserDto(us);
+        return user;
+    }
+
+    @Transactional
+    @PostMapping()
+    public UserDto addUser(@RequestBody UserDto userDto) {
+        User user = modelMapper.map(userDto, User.class);
+        User userCreate = userService.addUser(user);
+        UserDto usDto = modelMapper.map(userCreate, UserDto.class);
+        return usDto;
+    }
+
+    @PutMapping()
+    public UserDto updateUser(@Valid @RequestBody UserDto userDto) {
+        User users = userService.getById(userDto.getUserId());
+        users.setEmail(userDto.getEmail());
+        users.setDisplay_name(userDto.getDisplay_name());
+        users.setAdditional_info(userDto.getAdditional_info());
+        users.setPassword(userDto.getPassword());
+
+        User userUpdate= userService.addUser(users);
+        UserDto usersDto = modelMapper.map(userUpdate, UserDto.class);
+        return usersDto;
+    }
 }

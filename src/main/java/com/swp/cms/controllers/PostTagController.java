@@ -1,11 +1,8 @@
 package com.swp.cms.controllers;
 
 import com.swp.cms.dto.PostTagDto;
-import com.swp.cms.mapper.PostTagMapper;
 import com.swp.entities.PostTag;
-import com.swp.repositories.PostTagRepository;
 import com.swp.services.PostTagService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,18 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/blog/post")
+@RequestMapping("/blog/postTag")
 public class PostTagController {
-    private final PostTagRepository postTagRepository;
+    private final PostTagService postTagService;
+
+    public PostTagController(PostTagService postTagService) {
+        this.postTagService = postTagService;
+    }
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
     private PostTagMapper mapper;
-    @Autowired
-    private PostTagService postTagService;
-    public PostTagController(PostTagRepository postTagRepository) {
-        this.postTagRepository = postTagRepository;
+
+    @GetMapping("/{id}")
+    public PostTagDto getById(@PathVariable Integer id) {
+        PostTag postTag = postTagService.getById(id);
+        PostTagDto dto = modelMapper.map(postTag, PostTagDto.class);
+        return dto;
     }
+  
     @GetMapping()
     public List<PostTagDto> getAll() {
         List<PostTag> postTags = postTagService.getAll();
@@ -35,11 +39,11 @@ public class PostTagController {
         return dto;
     }
 
-    @GetMapping("/{id}")
-    public PostTagDto getPostTagById(@PathVariable Integer id) {
-        PostTag postTag = postTagService.getById(id);
-        PostTagDto dto = mapper.fromEntityToPostTagDto(postTag);
-        return dto;
-    }
-
+//    @GetMapping()
+//    public List<PostTagDto> getAll() {
+//        List<PostTag> postTags = postTagService.getAll();
+//        List<PostTagDto> dtos = modelMapper.map(postTags, PostTagDto.class);
+//        //return makeResponse(true, testingDto, "Get testing detail successful!");
+//        return dtos;
+//    }
 }
