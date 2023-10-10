@@ -1,70 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./src/createUser.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Sign In</title>
 </head>
+
 <body>
+
+    <p class="LogoFPT">
+        <img src="img/Logo_FPT_Education.png" alt="logofpt">
+    </p>
+
     <div class="container">
-    <form action="thanks.htm" class="form " id="login">
-        <div style="float:left ; width: 50%">
-        <h2 class="title-text">Hello Friend</h2>
-        <h3 class="title-text2">Enter your personal details and start journey with us</h3>
-        </div>
-        <div class="login-detail" style="float: right; width: 50%">
-        <h1 class="res-title">Sign in to FPT Blog</h1>
-        <div style="text-align: center;" class="form__message form__message--error"></div>
-        <div class="wraper">
-        <div class="login-info">   
-            <input type="text" name="username" placeholder="Username" id="username" class="input-control">
-            <i class='bx bxs-user'></i>
-        </div>
+        <form action="thanks.htm" class="form " id="createUser">
+            <div class="txt" style="float:left ; width: 50%">
+                <h2 class="title-text">Hello Friend</h2>
+                <h3 class="title-text2">Enter your personal details and start journey with us</h3>
+            </div>
+            <div class="login-detail" style="float: right; width: 50%">
 
-        <div class="login-info">
-            <input type="email" name="email" autofocus placeholder="Email" id="email" class="input-control">
-            <i class='bx bx-envelope' ></i>
-        </div>
+                <h1 class="res-title">Sign in to FPT Blog</h1>
 
-        <div class="login-info">
-            <input type="password" name="password"placeholder="Password" id="password" class="input-control">
-            <i class='bx bxs-lock'></i>
-        </div>
+                <div style="text-align: center;" class="form__message form__message--error"></div>
 
-        <div class="login-info">
-            
-            <input type="password" name="passwordConf" autofocus placeholder="Confirm password" id="passwordConf" class="input-control">
-            <i class='bx bxs-lock-open-alt' ></i>
-        </div>
+                <div class="wraper">
+                    <div class="login-username">
 
-        <div class="login-info">
-            <button type="submit" class="btn">Create</button>
-        </div>
-        <p class="center">
-            <a class="form-link" href="login.html" id="linkLogin">Already got an account?Login</a>
-        </p>
+                        <input type="text" name="username" placeholder="Username" id="displayName" class="input-control">
+                        <i class='bx bxs-user'></i>
+
+                    </div>
+
+                    <div class="login-email">
+
+                        <input type="email" name="email" autofocus placeholder="Email" id="email" class="input-control">
+                        <i class='bx bx-envelope'></i>
+
+                    </div>
+                    <div class="Role-ID">
+                        <div>
+                    
+                            <label for="role">Select your role:</label>
+                    
+                        </div>
+                    
+                        <div>
+                    
+                            <select name="role" id="role_id" class="input-control">
+                    
+                                <option value="teacher">Teacher</option>
+                                <option option value="student">Student</option>
+                                <option value="admin">Admin</option>
+                    
+                            </select>
+                    
+                        </div>
+                        <i class='bx bx-user-check'></i>
+                    </div>
+
+                    <div class="login-password">
+
+                        <input type="password" name="password" placeholder="Password" id="password"
+                            class="input-control">
+                        <i class='bx bxs-lock'></i>
+
+                    </div>
+
+                    <div class="login-passwordConf">
+
+                        <input type="password" name="passwordConf" autofocus placeholder="Confirm Password"
+                            id="passwordConf" class="input-control">
+                        <i class='bx bxs-lock-open-alt'></i>
+
+                    </div>
+
+
+                    <div class="login-info">
+                        <button type="submit" class="btn">Create</button>
+                    </div>
+                    <p class="center">
+                        <a class="form-link" href="login.html" id="linkLogin">Already got an account?Login</a>
+                    </p>
+                </div>
+            </div>
     </div>
-    </div>
-</div>
     </form>
 
     <script>
         // Get the form element
         var form = document.getElementById("login");
-    
+
         // Add a submit event listener to the form
-        form.addEventListener("submit", function(event) {
+        form.addEventListener("submit", function (event) {
             // Prevent the default form submission behavior
             event.preventDefault();
-    
+
             // Get the username, email and password values from the input fields
             var username = document.getElementById("username").value;
             var email = document.getElementById("email").value;
             var password = document.getElementById("password").value;
             var passwordConf = document.getElementById("passwordConf").value;
-    
+
             // Check if the password and password confirmation match
             if (password !== passwordConf) {
                 // Display an error message if they don't match
@@ -73,13 +113,15 @@
                 message.style.color = "red";
                 return;
             }
-    
+
             // Create a pop-up message to thank the user for creating an account
             alert("Thank you for creating an account, " + username + ". We will send a verification email to " + email + " to confirm.");
-    
+
             window.location.href = "login.html";
         });
     </script>
-    
+    <script src="js/register.js"></script>
+
 </body>
+
 </html>

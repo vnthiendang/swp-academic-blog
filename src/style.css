@@ -51,14 +51,12 @@ line-height: normal;
     
 }
 
-.wraper{
+/* .wraper{
     
-}
+} */
 .wraper input{
     width: 50%;
     background: transparent !important;
-    
-    
 }
 .login-info i{
     padding-right: 50px;
@@ -78,6 +76,9 @@ p{
     color: rgb(107, 107, 225);
     font-weight: 600;
 }
+
+/* ===================== login ======================= */
+
 .box{ 
     width: 400px;
     height: auto;

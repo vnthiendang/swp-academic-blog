@@ -1,0 +1,167 @@
+body {
+    background-color: bisque;
+}
+
+body .LogoFPT img{
+    /* background-color: white; */
+    height: 250px;
+    width: 1063px;
+    margin-left: 10%;
+    margin-top: 50px;
+    display: inline-block;
+    border-radius: 10%;
+}
+
+body .login-detail {
+    /* margin-top: 50px; */
+    padding-bottom: 50px;
+}
+
+.title-text {
+    margin-top: 200px;
+    margin-left: 100px;
+    height: 85px;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.title-text2 {
+    color: #6B6161;
+    margin-left: 70px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.res-title {
+    margin-top: 180px;
+    margin-right: 80px;
+    height: 85px;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.login-info {
+    padding-left: 150px;
+    height: 40px;
+    width: 100%;
+}
+
+.login-username input {
+    margin-left: 180px;
+    background-color: white;
+    border-radius: 10px;
+    margin-inline-end: 10px;
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    height: 30px;
+}
+
+.login-email input {
+    margin-left: 180px;
+    margin-top: 25px;
+    background-color: white;
+    border-radius: 10px;
+    margin-inline-end: 10px;
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    height: 30px;
+}
+
+.login-password input {
+    margin-left: 180px;
+    margin-top: 25px;
+    background-color: white;
+    border-radius: 10px;
+    margin-inline-end: 10px;
+    background-color: white !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    height: 30px;
+
+}
+
+.login-passwordConf input {
+    margin-left: 180px;
+    margin-top: 25px;
+    background-color: white;
+    border-radius: 10px;
+    margin-inline-end: 10px;
+    background-color: white !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    height: 30px;
+
+}
+.Role-ID {
+    margin-left: 180px;
+    margin-top: 25px;
+    background-color: white;
+    border-radius: 10px;
+
+    width: 380px;
+    height: 35px;
+
+    margin-inline-end: 5px;
+
+    background-color: white !important;
+    padding-left: 10px;
+    padding-right: 0px;
+    padding-top: 10px;
+}
+
+.Role-ID i {
+    background-color: red !important;   
+    margin-left: 390px;
+    margin-top: -200px;
+}
+
+.wraper input {
+    width: 50%;
+    background: transparent !important;
+}
+
+.login-info i {
+    padding-right: 50px;
+}
+
+.btn {
+    margin-top: 15px;
+    margin-left: 125px;
+    width: 33%;
+    height: 30px;
+    border-radius: 45px;
+    background-color: cornflowerblue;
+}
+
+p {
+    padding-left: 290px;
+    font-size: large;
+}
+
+.wraper p a {
+    margin-left: 25px;
+    color: rgb(107, 107, 225);
+    font-weight: 600;
+}
