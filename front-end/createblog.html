@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
+
+    <!-- Include stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="src/blog.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Home</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header  -->
+        <header class="flex items-center justify-between w-full bg-black text-white p-1">
+            <div class="flex items-center">
+                <a href="/home.html" class="items-start justify-center px-2">
+                    <img src="./img/Logo.png" alt="logo" class="w-16 h-auto">
+                </a>
+                <a href="/blog" class="p-2">
+                    FPT BLOG
+                </a>
+                <a href="/home" class="p-2">
+                    Home
+                </a>
+                <!-- login  -->
+                <div class="group inline-block relative">
+                    <button class="py-2 px-4 rounded inline-flex items-center">
+                        <a href="login.html">Login</a>
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                    </button>
+                </div>
+                <a href="/blog" class="p-2">
+                    Best articles
+                </a>
+                <!-- Category  -->
+                <div class="group inline-block relative">
+                    <button class="py-2 px-4 rounded inline-flex items-center">
+                        <span class="mr-1">Category</span>
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                    </button>
+                    <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                        <li class="">
+                            <a class="rounded-t bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                                href="/SE">SE</a>
+                        </li>
+                        <li class="">
+                            <a class="bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                                href="/AI">AI</a>
+                        </li>
+                        <li class="w-full">
+                            <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                                href="/BS">BS</a>
+                        </li>
+                        <li class="w-full">
+                            <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                                href="/SA">SA</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="p-1">
+                <form class="flex items-center">
+                    <label for="simple-search" class="sr-only">Search</label>
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                            </svg>
+                        </div>
+                        <input type="text" id="simple-search"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Search branch name..." required>
+                    </div>
+                    <button type="submit"
+                        class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </form>
+
+            </div>
+        </header>
+        <form action="home.html" class="admin-form">
+            <div class="submit-title">
+                <div class="title">
+                    <button type="submit">Save</button>
+                </div>
+                <div class="title1">
+                    <label for="published">
+                        <input type="checkbox" name="published" id="published">
+                        publish
+                    </label>
+                </div>
+            </div>
+            <div class="input-cap">
+                <div class="input-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" class="input-control">
+                </div>
+
+                <div class="input-group">
+                    <label for="topic">Allow Comments from Community</label>
+                    <select class="input-control" name="topic_id" id="topic">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="topic">Content type</label>
+                    <select class="input-control" name="topic_id" id="topic">
+                        <option value="Yes">SE</option>
+                        <option value="No">AI</option>
+                        <option value="Yes">SA</option>
+                        <option value="No">BS</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="post-editor">Body</label>
+                <div id="post-editor" class="post-text"></div>
+
+            </div>
+
+            <!-- Include the Quill library -->
+            <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+
+            <script src="js/post_quill_editor.js"></script>
+
+
+
+
+        </form>
+    </div>
+
+</body>

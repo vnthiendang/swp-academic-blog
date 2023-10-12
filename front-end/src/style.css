@@ -1,0 +1,104 @@
+body{
+    background: white;
+}
+.title-text{
+margin-top: 200px;
+margin-left:100px;
+height: 85px;
+flex-shrink: 0;
+color: #000;
+text-align: center;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size: 48px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}   
+.title-text2{
+    color: #6B6161;
+    margin-left: 70px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    }
+.res-title {
+    margin-top: 180px;
+    margin-right: 20px;
+    height: 85px;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.login-info{
+    padding-left: 150px;
+    height: 40px; 
+    width: 100%;
+}
+.login-info input{
+    background-color: white;
+    border-radius: 40px;
+    height: 30px;
+    background-color: white !important;
+    padding-left: 20px ;
+    
+}
+
+/* .wraper{
+    
+} */
+.wraper input{
+    width: 50%;
+    background: transparent !important;
+}
+.login-info i{
+    padding-right: 50px;
+}
+.btn{
+   margin-left: 90px;
+    width: 33%;
+    height: 30px;
+    border-radius: 45px;
+    background-color:#4B70E2 ;
+}
+p{
+    padding-left: 250px;
+    font-size: large;
+}
+.wraper p a{
+    color: rgb(107, 107, 225);
+    font-weight: 600;
+}
+
+/* ===================== login ======================= */
+
+.box{ 
+    width: 400px;
+    height: auto;
+    margin: 0 auto;
+    background-color: white;
+}
+.inner-box{
+    padding: 20px;
+}
+.box h3 {
+    text-align: center;
+    margin: 5px 0px;
+}
+.link a{
+    text-align: center;
+    padding-right: 500px;
+}
+
+/*----------------------------------------------------------------create blog----------------------------------------------------------------*/
+
+
+
+
