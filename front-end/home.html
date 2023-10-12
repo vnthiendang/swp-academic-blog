@@ -45,24 +45,7 @@
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
                 </button>
-                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-                    <li class="">
-                        <a class="rounded-t bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/SE">SE</a>
-                    </li>
-                    <li class="">
-                        <a class="bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/AI">AI</a>
-                    </li>
-                    <li class="w-full">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/BS">BS</a>
-                    </li>
-                    <li class="w-full">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/SA">SA</a>
-                    </li>
-                </ul>
+                <ul id="categoryList" class="absolute hidden text-gray-700 pt-1 group-hover:block"></ul>
             </div>
         </div>
         <div class="p-1">
@@ -78,7 +61,7 @@
                     </div>
                     <input type="text" id="simple-search"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search branch name..." required>
+                        placeholder="Search Blog, Tag, ..." required>
                 </div>
                 <button type="submit"
                     class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -141,7 +124,7 @@
 
     <section class="bg-white py-6 sm:py-16">
         <div class="px-4 sm:px-6 lg:px-8 max-w-8xl mx-auto">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <a href="blog1.html"
                     class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                     <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
@@ -261,6 +244,7 @@
                     href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
         </div>
     </footer>
+    <script src="js/home.js"></script>
 </body>
 <script src="tailwind-config.js"></script>
 
