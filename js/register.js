@@ -10,19 +10,13 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   // Get the values of the input fields from the form element
-  const displayName = form.displayName.value;
-  const email = form.email.value;
-  const role_id = form.role_id.value;
-  const password = form.password.value;
-  const passwordConf = form.passwordConf.value;
+  const displayName = document.getElementById("display_Name");
+  const email = document.getElementById("email");
+  const role_id = document.getElementById("role_id");
+  const password = document.getElementById("password");
+  const passwordConf = document.getElementById("passwordConf");
 
-  // Validate the input values and show error messages if any
-  // For example, check if the username is empty or contains invalid characters
-  // Change this line to use a different error message
-  if (!displayName || !/^[a-zA-Z0-9_]+$/.test(displayName)) {
-    alert("Oops! Your username is not valid. Please use only letters, numbers, and underscores.");
-    return;
-  }
+
 
   // Similarly, check for other input fields such as email, role_id, password, and passwordConf
   // You can use regular expressions or other methods to validate the input values
@@ -30,15 +24,6 @@ form.addEventListener("submit", async (event) => {
   // For example, see [How to Validate Forms Using JavaScript] or [Form Validation Using jQuery]
 
   // Change these lines to use different error messages
-  if (!email || !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-    alert("Oops! Your email is not valid. Please enter a valid email address.");
-    return;
-  }
-
-  if (!role_id || !["teacher", "student", "admin"].includes(role_id)) {
-    alert("Oops! Your role is not valid. Please select one of the options from the dropdown menu.");
-    return;
-  }
 
   if (!password || password.length < 8) {
     alert("Oops! Your password is not strong enough. Please use at least 8 characters.");
