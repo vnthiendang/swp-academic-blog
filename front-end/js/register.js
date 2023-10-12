@@ -9,68 +9,58 @@ form.addEventListener("submit", async (event) => {
   // Prevent the default behavior of the form, which is to reload the page
   event.preventDefault();
 
-  // Get the values of the input fields from the form element
-  const displayName = document.getElementById("display_Name");
-  const email = document.getElementById("email");
-  const role_id = document.getElementById("role_id");
-  const password = document.getElementById("password");
-  const passwordConf = document.getElementById("passwordConf");
+    // Get the input field values
+    const displayName = document.getElementById("display_Name").value;
+    const email = document.getElementById("email").value;
+    const role_id = document.getElementById("role_id").value;
+    const password = document.getElementById("password").value;
+    const passwordConf = document.getElementById("passwordConf").value;
 
-
-
-  // Similarly, check for other input fields such as email, role_id, password, and passwordConf
-  // You can use regular expressions or other methods to validate the input values
-  // You can also use some libraries or frameworks to simplify the validation process
-  // For example, see [How to Validate Forms Using JavaScript] or [Form Validation Using jQuery]
-
-  // Change these lines to use different error messages
-
+    //validate inputs
   if (!password || password.length < 8) {
     alert("Oops! Your password is not strong enough. Please use at least 8 characters.");
     return;
   }
 
-  if (!passwordConf || passwordConf !== password) {
+  if (password !== passwordConf) {
     alert("Oops! Your passwords do not match. Please re-enter your password correctly.");
     return;
-  }
+}
 
-  // If all the input values are valid, create an object that contains the user data
-  const user = {
-    displayName,
-    email,
-    role_id,
-    password,
-    passwordConf
+    // Create the user object
+    const user = {
+      displayName,
+      email,
+      role_id,
+      password,
+      passwordConf
   };
+    // Send the user data to the server
+    try {
+      const response = await fetch(api_url, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(user)
+      });
 
-  // Use fetch () to send a POST request to the API with the user data as JSON
-  fetch(api_url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(user)
-  })
-    .then(response => response.json()) // Convert the response to JSON
-    .then(data => {
-      // Do something with the data
-      // For example, check if the data contains an error message or a success message
-      if (data.error) {
-        // Display the error message to the user
-        // Change this line to use a different error message
-        alert("Sorry! Something went wrong. " + data.error);
-      } else {
-        // Display the success message to the user and redirect them to another page
-        // Change this line to use a different success message
-        alert("You have successfully created your account. " + data.message);
-        window.location.href = "login.html";
+      // Check if the response is empty
+      if (!response.ok) {
+          throw new Error("Failed to create the user.");
       }
-    })
-    .catch(error => {
-      // Handle any errors
+
+      const data = await response.json();
+
+      // Handle the response data
+      if (data.error) {
+          alert("Sorry! Something went wrong. " + data.error);
+      } else {
+          alert("You have successfully created your account. " + data.message);
+          window.location.href = "login.html";
+      }
+  } catch (error) {
       console.error(error);
-      // Change this line to use a different error message
       alert("Sorry! Something went wrong. Please try again later.");
-    });
+  }
 });
