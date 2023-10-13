@@ -25,48 +25,55 @@ import java.util.stream.Collectors;
 public class PostController {
     @Autowired
     private final PostService postService;
-    private final MediaService mediaService;
-    private final TagService tagService;
-    private final PostTagService postTagService;
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
     private PostMapper postMapper;
 
-    public PostController(PostService postService, MediaService mediaService, TagService tagService, PostTagService postTagService) {
+    public PostController(PostService postService) {
         this.postService = postService;
-        this.mediaService = mediaService;
-        this.tagService = tagService;
-        this.postTagService = postTagService;
     }
 
     //create post (upload mediaUrl & tag)
     @PostMapping()
     public PostDto addPost(@RequestBody PostRequest postRequest) {
-        Post post = modelMapper.map(postRequest, Post.class);
         Post createdPost = postService.createPost(postRequest);
-        PostDto postDto = modelMapper.map(createdPost, PostDto.class);
 
         String mediaUrl = postRequest.getMedia();
         if (mediaUrl != null) {
-                Media media = new Media();
-                media.setMediaUrl(mediaUrl);
-                media.setPost(createdPost);
-                mediaService.add(media);
-            MediaDto mediaDto = modelMapper.map(media, MediaDto.class);
-            postDto.setMedia(mediaDto);
+            Media media = new Media();
+            media.setMediaUrl(mediaUrl);
+            media.setPost(createdPost);
+            createdPost.getMedias().add(media);
         }
 
+        Integer tagId = postRequest.getTag();
+        if (tagId != null) {
+            Tag tag = new Tag();
+            tag.setId(tagId);
+            PostTag postTag = new PostTag();
+            postTag.setTag(tag);
+            postTag.setPost(createdPost);
+            createdPost.getTags().add(postTag);
+        }
 
-        PostTag postTag = new PostTag();
-        Tag tag = new Tag();
-        tag.setId(postRequest.getTag());
-        postTag.setTag(tag);
-        postTag.setPost(createdPost);
-        postTagService.addPostTag(postTag);
+        //store media & tag
+        createdPost = postService.savePosts(createdPost);
 
-        PostTagDto postTagDto = modelMapper.map(postTag, PostTagDto.class);
-        postDto.setPostTag(postTagDto);
+        // Map the created Post entity to PostDto
+        PostDto postDto = modelMapper.map(createdPost, PostDto.class);
+
+        // Map dtos
+        List<MediaDto> mediaDtoList = createdPost.getMedias().stream()
+                .map(media -> modelMapper.map(media, MediaDto.class))
+                .collect(Collectors.toList());
+        List<PostTagDto> postTagDtoList = createdPost.getTags().stream()
+                .map(postTag -> modelMapper.map(postTag, PostTagDto.class))
+                .collect(Collectors.toList());
+
+        // Set dtos
+        postDto.setMedia(mediaDtoList.isEmpty() ? null : mediaDtoList.get(0));
+        postDto.setPostTag(postTagDtoList.isEmpty() ? null : postTagDtoList.get(0));
 
         return postDto;
     }
@@ -84,79 +91,64 @@ public class PostController {
     //get approved posts
     @GetMapping
     public List<PostDto> getAllPostDtos() {
-
         List<Post> posts = postService.getAllApprovedPosts();
         List<PostDto> dtos = postMapper.fromEntityToPostDtoList(posts);
         return dtos;
     }
 
     //get post detail by post id
-    @GetMapping("/{id}")
-    public PostDto getById(@PathVariable Integer id) {
-        Post post = postService.getById(id);
-        PostDto dto = modelMapper.map(post, PostDto.class);
-
-        List<PostTag> postTagList = postTagService.getAll();
-        for(PostTag postTag : postTagList){
-            if(postTag.getPost().getPostsId() == id){
-                PostTagDto postTagDto = modelMapper.map(postTag, PostTagDto.class);
-                dto.setPostTag(postTagDto);
-            }
-        }
-
-        List<Media> mediaList = mediaService.getAll();
-        for(Media media : mediaList){
-            if(media.getPost().getPostsId() == id){
-                MediaDto mediaDto = modelMapper.map(media, MediaDto.class);
-                dto.setMedia(mediaDto);
-            }
-        }
-        return dto;
-    }
+//    @GetMapping("/{id}")
+//    public PostDto getById(@PathVariable Integer id) {
+//        Post post = postService.getById(id);
+//        PostDto dto = modelMapper.map(post, PostDto.class);
+//
+//        List<PostTag> postTagList = postTagService.getAll();
+//        for(PostTag postTag : postTagList){
+//            if(postTag.getPost().getPostsId() == id){
+//                PostTagDto postTagDto = modelMapper.map(postTag, PostTagDto.class);
+//                dto.setPostTag(postTagDto);
+//            }
+//        }
+//
+//        List<Media> mediaList = mediaService.getAll();
+//        for(Media media : mediaList){
+//            if(media.getPost().getPostsId() == id){
+//                MediaDto mediaDto = modelMapper.map(media, MediaDto.class);
+//                dto.setMedia(mediaDto);
+//            }
+//        }
+//        return dto;
+//    }
 
     //edit post
-    @PutMapping("/{postId}")
-    public PostDto updatePost(@PathVariable Integer postId, @RequestBody PostRequest postRequest) {
-        Post updatedPost = postService.updatePost(postId, postRequest);
-        PostDto postDto = modelMapper.map(updatedPost, PostDto.class);
-
-        String mediaUrl = postRequest.getMedia();
-        if (mediaUrl != null) {
-            Media media = new Media();
-            media.setMediaUrl(mediaUrl);
-            media.setPost(updatedPost);
-//            mediaService.add(media);
-            MediaDto mediaDto = modelMapper.map(media, MediaDto.class);
-            postDto.setMedia(mediaDto);
-        }
-
-        Integer tagId = postRequest.getTag();
-        if(tagId != null){
-            PostTag postTag = new PostTag();
-            Tag tag = tagService.getById(tagId);
-            tag.setId(tagId);
-            postTag.setTag(tag);
-            postTag.setPost(updatedPost);
-            postTagService.addPostTag(postTag);
-            PostTagDto postTagDto = modelMapper.map(postTag, PostTagDto.class);
-            postDto.setPostTag(postTagDto);
-        }
-
-        return postDto;
-    }
-
-
-//    private Media saveMedia(MultipartFile mediaFile, Post post) throws IOException {
-//        String fileUrl = mediaFile.getOriginalFilename();
-////        String contentType = mediaFile.getContentType();
-//        byte[] fileData = mediaFile.getBytes();
+//    @PutMapping("/{postId}")
+//    public PostDto updatePost(@PathVariable Integer postId, @RequestBody PostRequest postRequest) {
+//        Post updatedPost = postService.updatePost(postId, postRequest);
+//        PostDto postDto = modelMapper.map(updatedPost, PostDto.class);
 //
-//        // Save the media data to the media table
-//        Media media = new Media();
-//        media.setMediaUrl(fileUrl);
-//        media.setPost(post);
-//        mediaService.add(media);
+//        String mediaUrl = postRequest.getMedia();
+//        if (mediaUrl != null) {
+//            Media media = new Media();
+//            media.setMediaUrl(mediaUrl);
+//            media.setPost(updatedPost);
+////            mediaService.add(media);
+//            MediaDto mediaDto = modelMapper.map(media, MediaDto.class);
+//            postDto.setMedia(mediaDto);
+//        }
 //
-//        return media;
+//        Integer tagId = postRequest.getTag();
+//        if(tagId != null){
+//            PostTag postTag = new PostTag();
+//            Tag tag = tagService.getById(tagId);
+//            tag.setId(tagId);
+//            postTag.setTag(tag);
+//            postTag.setPost(updatedPost);
+//            postTagService.addPostTag(postTag);
+//            PostTagDto postTagDto = modelMapper.map(postTag, PostTagDto.class);
+//            postDto.setPostTag(postTagDto);
+//        }
+//
+//        return postDto;
 //    }
+
 }

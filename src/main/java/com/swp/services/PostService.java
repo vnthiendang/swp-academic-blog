@@ -1,11 +1,13 @@
 package com.swp.services;
 
-import com.swp.cms.dto.PostDto;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.*;
-import com.swp.repositories.*;
+import com.swp.repositories.CategoryRepository;
+import com.swp.repositories.PostRepository;
+import com.swp.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,5 +78,26 @@ public class PostService {
         return postRepository.searchApprovedPosts(keyword);
     }
 
+    //save media and tag
+    @Transactional
+    public Post savePosts(Post createdPost) {
 
+        List<Media> mediaList = createdPost.getMedias();
+        if (mediaList != null && !mediaList.isEmpty()) {
+            for (Media media : mediaList) {
+                media.setPost(createdPost);
+                entityManager.persist(media);
+            }
+        }
+
+        List<PostTag> tagList = createdPost.getTags();
+        if (tagList != null && !tagList.isEmpty()) {
+            for (PostTag tag : tagList) {
+                tag.setPost(createdPost);
+                entityManager.persist(tag);
+            }
+        }
+
+        return createdPost;
+    }
 }

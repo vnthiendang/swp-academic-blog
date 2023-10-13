@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -38,4 +39,8 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<PostApprovals> postApprovals;
+    @OneToMany(mappedBy = "post")
+    private List<Media> medias = new ArrayList<>();
+    @OneToMany(mappedBy = "post")
+    private List<PostTag> tags = new ArrayList<>();
 }
