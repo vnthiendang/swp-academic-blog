@@ -3,8 +3,12 @@ package com.swp.cms.controllers;
 import com.swp.cms.dto.MediaDto;
 import com.swp.cms.dto.PostDto;
 import com.swp.cms.dto.PostTagDto;
+import com.swp.cms.mapper.PostMapper;
 import com.swp.cms.reqDto.PostRequest;
-import com.swp.entities.*;
+import com.swp.entities.Media;
+import com.swp.entities.Post;
+import com.swp.entities.PostTag;
+import com.swp.entities.Tag;
 import com.swp.services.MediaService;
 import com.swp.services.PostService;
 import com.swp.services.PostTagService;
@@ -19,12 +23,15 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/blog/post")
 public class PostController {
+    @Autowired
     private final PostService postService;
     private final MediaService mediaService;
     private final TagService tagService;
     private final PostTagService postTagService;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private PostMapper postMapper;
 
     public PostController(PostService postService, MediaService mediaService, TagService tagService, PostTagService postTagService) {
         this.postService = postService;
@@ -72,6 +79,15 @@ public class PostController {
                 .map(post -> modelMapper.map(post, PostDto.class))
                 .collect(Collectors.toList());
         return postDtos;
+    }
+
+    //get approved posts
+    @GetMapping
+    public List<PostDto> getAllPostDtos() {
+
+        List<Post> posts = postService.getAllApprovedPosts();
+        List<PostDto> dtos = postMapper.fromEntityToPostDtoList(posts);
+        return dtos;
     }
 
     //get post detail by post id

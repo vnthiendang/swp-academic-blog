@@ -40,8 +40,8 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> getAll() {
-        return postRepository.findAll();
+    public List<Post> getAllApprovedPosts() {
+        return postRepository.findAllApprovedPosts();
     }
 
     public Post createPost(PostRequest request) {
@@ -71,8 +71,9 @@ public class PostService {
         return postRepository.save(post); // Save and return the updated post
     }
 
+    //DISPLAY APPROVED POSTS
     public List<Post> searchPosts(String keyword) {
-        return postRepository.search(keyword);
+        return postRepository.searchApprovedPosts(keyword);
     }
 
 

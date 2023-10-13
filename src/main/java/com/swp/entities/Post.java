@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,4 +36,6 @@ public class Post {
     @JoinColumn(name = "belonged_to_category_id")
     private Category belongedToCategory;
 
+    @OneToMany(mappedBy = "post")
+    private List<PostApprovals> postApprovals;
 }
