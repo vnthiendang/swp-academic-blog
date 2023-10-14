@@ -15,12 +15,10 @@ public class RegisterRequest {
     private String email;
     private String password;
     private String additional_info;
-    private Role role_id;
     public String getRole_id() {
-        return role_id.getRoleInfo();
+        return "Student";
     }
-
-    public void setRole_id(Role role_id) {
-        this.role_id = role_id;
-    }
+//    public void setRole_id(Role role_id) {
+//        this.role_id = role_id;
+//    }
 }

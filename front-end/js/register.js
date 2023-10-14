@@ -12,7 +12,6 @@ form.addEventListener("submit", async (event) => {
     // Get the input field values
     const displayName = document.getElementById("display_Name").value;
     const email = document.getElementById("email").value;
-    const role_id = document.getElementById("role_id").value;
     const password = document.getElementById("password").value;
     const passwordConf = document.getElementById("passwordConf").value;
 
@@ -31,7 +30,6 @@ form.addEventListener("submit", async (event) => {
     const user = {
       displayName,
       email,
-      role_id,
       password,
       passwordConf
   };
