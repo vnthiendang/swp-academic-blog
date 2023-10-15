@@ -8,27 +8,34 @@ import java.time.LocalDateTime;
 
 @Data
 public class PostDto {
-    private Integer id;
+    private Integer postsId;
+
     private String title;
     private String postDetail;
-//    private TagDto tagDto;
     private User createdByUser;
-    public Integer getCreatedByUser(){
-        return createdByUser.getUsId();
-    }
     private Category belongedToCategory;
-    public Integer getBelongedToCategory(){
-        return belongedToCategory.getCateId();
-    }
     private LocalDateTime createdTime;
     private MediaDto media;
+    private PostTagDto postTag;
+
+    public Integer getBelongedToCategory(){
+        if(belongedToCategory != null){
+            return belongedToCategory.getCateId();
+        }
+        return null;
+    }
+    public Integer getCreatedByUser() {
+        if (createdByUser != null) {
+            return createdByUser.getUsId();
+        }
+        return null; // or handle the case when createdByUser is null
+    }
     public String getMedia() {
         if (media != null && media.getMediaUrl() != null) {
             return media.getMediaUrl();
         }
         return null; // or handle the case when media or mediaUrl is null
     }
-    private PostTagDto postTag;
     public Integer getPostTag(){
         if(postTag != null && postTag.getId() != null){
             return postTag.getId();
@@ -36,10 +43,4 @@ public class PostDto {
         return null;
     }
 
-//    public Integer getTagId() {
-//        if (tagDto != null) {
-//            return tagDto.getId();
-//        }
-//        return null;
-//    }
 }

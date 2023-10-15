@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Entity
@@ -20,7 +21,7 @@ public class PostApprovals {
     private String status;
 
     @Column(name = "created_date")
-    private OffsetDateTime createdDate;
+    private LocalDateTime createdDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
