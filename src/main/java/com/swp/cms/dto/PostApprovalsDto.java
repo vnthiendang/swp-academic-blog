@@ -13,4 +13,19 @@ public class PostApprovalsDto {
     private OffsetDateTime createdDate;
     private Post post;
     private User viewedByUser;
+    public Integer getViewedByUser() {
+        if (viewedByUser != null) {
+            return viewedByUser.getUsId();
+        }
+        return null; // Or return a default value
+    }
+
+    public Integer getPost() {
+        if (post != null) {
+            return post.getPostsId();
+        }
+        return null; // Or return a default value
+    }
+
+
 }

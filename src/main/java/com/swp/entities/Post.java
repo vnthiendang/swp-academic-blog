@@ -2,6 +2,7 @@ package com.swp.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -12,7 +13,12 @@ import java.util.Set;
 @Table(name = "post")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Post {
+
+    public Post(Integer postId) {
+        this.postsId = postId;
+    }
     @Id
     @Column(name = "id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

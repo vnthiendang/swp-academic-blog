@@ -22,11 +22,12 @@ public class PostApprovals {
     @Column(name = "created_date")
     private OffsetDateTime createdDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "viewed_by_user_id")
     private User viewedByUser;
+
 }

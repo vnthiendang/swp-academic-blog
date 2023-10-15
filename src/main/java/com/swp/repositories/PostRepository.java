@@ -15,4 +15,10 @@ public interface PostRepository extends JpaRepository<Post, Integer>, JpaSpecifi
             "OR p.postDetail LIKE %:keyword% " +
             "OR p.belongedToCategory.content LIKE %:keyword% ")
     List<Post> search(@Param("keyword") String keyword);
+
+    @Query("SELECT DISTINCT p " +
+            "FROM Post p " +
+            "JOIN PostApprovals pa " +
+            "WHERE pa.status = 'approved'")
+    List<Post> getApprovedPosts();
 }

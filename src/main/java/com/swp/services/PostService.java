@@ -76,4 +76,7 @@ public class PostService {
     }
 
 
+    public List<Post> getAllApprovedPosts() {
+        return postRepository.getApprovedPosts();
+    }
 }

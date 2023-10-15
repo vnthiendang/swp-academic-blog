@@ -1,6 +1,7 @@
 package com.swp.cms.controllers;
 
 import com.swp.cms.dto.MediaDto;
+import com.swp.cms.dto.PostApprovalsDto;
 import com.swp.cms.dto.PostDto;
 import com.swp.cms.dto.PostTagDto;
 import com.swp.cms.reqDto.PostRequest;
@@ -9,8 +10,11 @@ import com.swp.services.MediaService;
 import com.swp.services.PostService;
 import com.swp.services.PostTagService;
 import com.swp.services.TagService;
+import jakarta.annotation.security.RolesAllowed;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -130,6 +134,15 @@ public class PostController {
     }
 
 
+    @GetMapping("/postthatApproved")
+    public List<PostDto> getAllApprovedPost() {
+        List<Post> approvedposts = postService.getAllApprovedPosts();
+        List<PostDto> postDtos = approvedposts.stream()
+                .map(Post -> modelMapper.map(Post, PostDto.class))
+                .collect(Collectors.toList());
+        return postDtos;
+
+    }
 //    private Media saveMedia(MultipartFile mediaFile, Post post) throws IOException {
 //        String fileUrl = mediaFile.getOriginalFilename();
 ////        String contentType = mediaFile.getContentType();
