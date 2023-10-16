@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/createUser.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Sign In</title>
+</head>
+
+<body>
+    <p class="LogoFPT">
+        <img src="img/Logo_FPT_Education.png" alt="logofpt">
+    </p>
+
+    <div class="container">
+        <form class="form" id="createUser">
+            <div class="txt" style="float:left ; width: 50%">
+                <h2 class="title-text">Hello Friend</h2>
+                <h3 class="title-text2">Enter your personal details and start journey with us</h3>
+            </div>
+            <div class="login-detail" style="float: right; width: 50%">
+
+                <h1 class="res-title">Sign in to FPT Blog</h1>
+
+
+                <div class="wraper">
+                    <div class="login-username">
+                        <input type="text" name="displayName" placeholder="Display Name" id="display_Name"
+                            class="input-control">
+                        <i class='bx bxs-user'></i>
+                    </div>
+
+                    <div class="login-email">
+
+                        <input type="email" name="email" autofocus placeholder="Email" id="email" class="input-control">
+                        <i class='bx bx-envelope'></i>
+
+                    </div>
+                    <div class="Role-ID">
+                        <label for="role_id">Select your role:</label>
+                        <select name="role_id" id="role_id" class="input-control">
+                            <option value="teacher">Teacher</option>
+                            <option value="student">Student</option>
+                        </select>
+                        <i class='bx bx-user-check'></i>
+                    </div>
+
+                    <div class="login-password">
+
+                        <input type="password" name="password" placeholder="Password" id="password"
+                            class="input-control">
+                        <i class='bx bxs-lock'></i>
+
+                    </div>
+
+                    <div class="login-passwordConf">
+
+                        <input type="password" name="passwordConf" autofocus placeholder="Confirm Password"
+                            id="passwordConf" class="input-control">
+                        <i class='bx bxs-lock-open-alt'></i>
+
+                    </div>
+
+
+                    <div class="login-info">
+                        <button type="submit" class="btn">Create</button>
+                    </div>
+                    <p class="center">
+                        <a class="form-link" href="login.html" >Already got an account?Login</a>
+                    </p>
+                </div>
+            </div>
+        </form>
+            </div>
+       
+<script src="js/register.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/css/style.css">
+    <link rel="stylesheet" href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/css/styleSE.css">
+    <link rel="shortcut icon" type="image/png" href="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Logo.png" />
+    <title>FPTU ACADEMIC BLOG | Digital Transformation</title>
+</head>
+
+<body>
+    <!-- Header  -->
+    <header class="flex items-center justify-between w-full bg-black text-white">
+        <div class="flex items-center">
+            <a href="/BLOG_UPDATE_VER2.3/home.html" class="items-start justify-center">
+                <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Logo.png" alt="logo" class="w-16 h-auto">
+            </a>
+            <a href="/BLOG_UPDATE_VER2.3/home.html" class="p-2">
+                FPT BLOG
+            </a>
+            <a href="/BLOG_UPDATE_VER2.3/home.html" class="p-2">
+                Home
+            </a>
+
+            <!-- Best Articles -->
+            <a href="/BLOG_UPDATE_VER2.3/blog1.html" class="p-2">
+                Best articles
+            </a>
+
+            <!-- Category  -->
+            <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center">
+                    <span class="mr-1">Category</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    <li class="">
+                        <a class="rounded-t bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">Technoloy</a>
+                    </li>
+                    <li class="">
+                        <a class="bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">AI</a>
+                    </li>
+                    <li class="w-full">
+                        <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">Business</a>
+                    </li>
+                    <li class="w-full">
+                        <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">Digital Transformation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="p-1 flex">
+            <form class="flex items-center">
+                <label for="simple-search" class="sr-only">Search</label>
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                        </svg>
+                    </div>
+                    <input type="text" id="simple-search"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  "
+                        placeholder="Search branch name..." required>
+                </div>
+                <button type="submit"
+                    class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </form>
+            <!-- <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center">
+                    <span class="mr-1">Login</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    <li class="">
+                        <a class="rounded-t bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/facebook">Facebook</a>
+                    </li>
+                    <li class="">
+                        <a class="bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/google">Google</a>
+                    </li>
+                    <li class="w-full">
+                        <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
+                            href="/apple">Apple</a>
+                    </li>
+                </ul>
+            </div> -->
+            <div class="flex items-center justify-center ">
+                <div class="mx-5">
+                    <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
+                        alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                </div>
+                <div class="pr-2">
+                    User name
+                    <div class="cursor-pointer">
+                        Log out
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+        <!-- Banner -->
+        <div class="Baner">
+            <h2 class="banner-title">FPTU ACADEMIC BLOG</h2>
+            <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Banner.gif" alt="Baner">
+        </div>
+
+        <!-- FEATURED POSTS -->
+        <div class="FeaturedPosts">
+            <h2>FEATURED POSTS</h2>
+        </div>
+
+        <!-- List Blog -->
+        <div class="ListPost">
+
+            <!-- Column1 -->
+            <div class="Post-Container">
+                <div class="Post-Column">
+
+                    <div class="post">
+                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page Blog/html/Blog1.html">
+                                        <!-- Move To This Blog -->
+                            <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Digital Transformation/1.webp" alt="Post 1 Image">
+                            <h2 class="post-title">A Winning Digital Transformation Recipe: Equal Parts of Speed and Scale & a Spoonful of Vietnam’s Magic</h2>
+                            <p class="post-info">Recipes for successful digital transformation may vary from company to company, industry to industry, and market to market, but certain factors remain key...</p>
+                            <div class="tags">
+                                <div class="icon-tag">
+                                    <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/tag.png" alt="icon-tag">
+                                </div>  
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
+                                    <span class="tag">Digital Transformation</span>
+                                </a>
+                                <!-- <a href="*">
+                                    <span class="tag">ChatGPT</span>
+                                </a> -->
+                                <!-- <a href="*">
+                                    <span class="tag"></span>
+                                </a> -->
+                            </div>
+                        </a>   
+                    </div>
+                
+                    <div class="post">
+                        <a href="*">
+                                        <!-- Move To This Blog -->
+                            <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Digital Transformation/2.webp" alt="Post 2 Image">
+                            <h2 class="post-title">Talk to Expert Episode 04: Harnessing the Power of Digital Transformation for Healthcare Providers</h2>
+                            <p class="post-info">The global healthcare industry is witnessing an intercontinental demand crisis due to the increasing aging population and chronic disease rate. Elderly...</p>
+                            <div class="tags">
+                                <div class="icon-tag">
+                                    <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/tag.png" alt="icon-tag">
+                                </div>  
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
+                                    <span class="tag">Digital Transformation</span>
+                                </a>
+                                <!-- <a href="*">
+                                    <span class="tag">ChatGPT</span>
+                                </a> -->
+                                <!-- <a href="*">
+                                    <span class="tag"></span>
+                                </a> -->
+                            </div>
+                        </a>   
+                    </div>
+                    
+                </div>
+
+                <div class="Post-Column">
+                    <div class="post">
+                        <a href="*">
+                                        <!-- Move To This Blog -->
+                            <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Digital Transformation/3.webp" alt="Post 3 Image">
+                            <h2 class="post-title">The Ideal Operating Model for Digital Delivery</h2>
+                            <p class="post-info">Digital transformation is no longer a "nice to have", but it is now necessary for every business. An organization can only survive in the future if they...</p>
+                            <div class="tags">
+                                <div class="icon-tag">
+                                    <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/tag.png" alt="icon-tag">
+                                </div>  
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
+                                    <span class="tag">Digital Transformation</span>
+                                </a>
+                                <!-- <a href="*">
+                                    <span class="tag">ChatGPT</span>
+                                </a> -->
+                                <!-- <a href="*">
+                                    <span class="tag"></span>
+                                </a> -->
+                            </div>
+                        </a>   
+                    </div>
+        
+                    <div class="post">
+                        <a href="*">
+                                        <!-- Move To This Blog -->
+                            <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Digital Transformation/4.webp" alt="Post 4 Image">
+                            <h2 class="post-title">Empower Digital Transformation in a Disruptive World</h2>
+                            <p class="post-info">For the past two years, the world has been facing global disruptions at scale where two years’ worth of transformation...</p>
+                            <div class="tags">
+                                <div class="icon-tag">
+                                    <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/tag.png" alt="icon-tag">
+                                </div>  
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
+                                    <span class="tag">Digital Transformation</span>
+                                </a>
+                                <!-- <a href="*">
+                                    <span class="tag">ChatGPT</span>
+                                </a> -->
+                                <!-- <a href="*">
+                                    <span class="tag"></span>
+                                </a> -->
+                            </div>
+                        </a>   
+                    </div>
+                </div>
+
+                <div class="Post-Column">
+                    <div class="post">
+                        <a href="*">
+                                        <!-- Move To This Blog -->
+                            <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Digital Transformation/5.webp" alt="Post 5 Image">
+                            <h2 class="post-title">Think Big – Start Smart – Scale Very Fast to Ace Digital Transformation</h2>
+                            <p class="post-info">FPT Digital KaizenTM will act as a viable solution to removing the roadblocks of digital transformation implementation.</p>
+                            <div class="tags">
+                                <div class="icon-tag">
+                                    <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/tag.png" alt="icon-tag">
+                                </div>  
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
+                                    <span class="tag">Digital Transformation</span>
+                                </a>
+                                <!-- <a href="*">
+                                    <span class="tag">ChatGPT</span>
+                                </a> -->
+                                <!-- <a href="*">
+                                    <span class="tag"></span>
+                                </a> -->
+                            </div>
+                        </a>   
+                    </div>
+        
+                    <div class="post">
+                        <a href="*">
+                                        <!-- Move To This Blog -->
+                            <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Digital Transformation/6.webp" alt="Post 6 Image">
+                            <h2 class="post-title">Vietnam as an Emerging IT and Digital Destination</h2>
+                            <p class="post-info">As COVID-19 makes its way across the globe, much of the global economy is likely to be hit by a crisis similar to that of the Great Depression. To date,....</p>
+                            <div class="tags">
+                                <div class="icon-tag">
+                                    <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/tag.png" alt="icon-tag">
+                                </div>  
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
+                                    <span class="tag">Digital Transformation</span>
+                                </a>
+                                <!-- <a href="*">
+                                    <span class="tag">ChatGPT</span>
+                                </a> -->
+                                <!-- <a href="*">
+                                    <span class="tag"></span>
+                                </a> -->
+                            </div>
+                        </a>   
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column2 -->
+            <div class="Post-Container">
+
+                <div class="Post-Column">
+
+                    <div class="post">
+                        <a href="*">
+                                        <!-- Move To This Blog -->
+                            <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Digital Transformation/7.webp" alt="Post 7 Image">
+                            <h2 class="post-title">Digital Kaizen™: An Approach for Large-scale Digital Transformation</h2>
+                            <p class="post-info">Less than 30% of digital transformations succeed at improving a company’s performance. So, how to beat the odds and unlock success in digital transformations?...</p>
+                            <div class="tags">
+                                <div class="icon-tag">
+                                    <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/tag.png" alt="icon-tag">
+                                </div>  
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
+                                    <span class="tag">Digital Transformation</span>
+                                </a>
+                                <!-- <a href="*">
+                                    <span class="tag">ChatGPT</span>
+                                </a> -->
+                                <!-- <a href="*">
+                                    <span class="tag"></span>
+                                </a> -->
+                            </div>
+                        </a>   
+                    </div>
+        
+                    <div class="post">
+                        <a href="*">
+                                        <!-- Move To This Blog -->
+                            <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Digital Transformation/8.webp" alt="Post 8 Image">
+                            <h2 class="post-title">The Need for DX in Logistics amidst COVID-19 Pandemic</h2>
+                            <p class="post-info">The COVID-19 pandemic has created roadblocks for economic activities worldwide. People have avoided the three Cs (closed spaces, crowded places, close-contact...</p>
+                            <div class="tags">
+                                <div class="icon-tag">
+                                    <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/tag.png" alt="icon-tag">
+                                </div>  
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
+                                    <span class="tag">Digital Transformation</span>
+                                </a>
+                                <!-- <a href="*">
+                                    <span class="tag">ChatGPT</span>
+                                </a> -->
+                                <!-- <a href="*">
+                                    <span class="tag"></span>
+                                </a> -->
+                            </div>
+                        </a>   
+                    </div>
+                </div>
+
+                <div class="Post-Column">
+
+                    <div class="post">
+                        <a href="*">
+                                        <!-- Move To This Blog -->
+                            <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Digital Transformation/9.webp" alt="Post 9 Image">
+                            <h2 class="post-title">COVID-19 Wave: Surf or Sink?</h2>
+                            <p class="post-info">With Coronavirus (COVID-19) pandemic escalating every day, millions of lives are affected, and businesses around the world are hit hard. According to the WEF,...</p>
+                            <div class="tags">
+                                <div class="icon-tag">
+                                    <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/tag.png" alt="icon-tag">
+                                </div>  
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
+                                    <span class="tag">Digital Transformation</span>
+                                </a>
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">
+                                    <span class="tag">Technology</span>
+                                </a>
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">
+                                    <span class="tag">Business</span>
+                                </a>
+                            </div>
+                        </a>   
+                    </div>
+                    
+                </div>
+
+                <div class="Post-Column">
+
+                    <div class="post">
+                        <a href="*">
+                                        <!-- Move To This Blog -->
+                            <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Digital Transformation/10.jpg" alt="Post 10 Image">
+                            <h2 class="post-title">Digitalization of Import/Export Procedure using Blockchain</h2>
+                            <p class="post-info">Bill of Lading (B/L) is a freight shipping document made, signed and issued by a carrier to a shipper, in which the carrier acknowledges the receipt of a...</p>
+                            <div class="tags">
+                                <div class="icon-tag">
+                                    <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/tag.png" alt="icon-tag">
+                                </div>  
+                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
+                                    <span class="tag">Digital Transformation</span>
+                                </a>
+                                <!-- <a href="*">
+                                    <span class="tag">ChatGPT</span>
+                                </a> -->
+                                <!-- <a href="*">
+                                    <span class="tag"></span>
+                                </a> -->
+                            </div>
+                        </a>   
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column3 -->
+            <!-- <div class="Post-Container">
+                
+                <div class="Post-Column">
+
+                </div>
+
+                <div class="Post-Column">
+
+                </div>
+
+                <div class="Post-Column">
+
+                </div>
+            </div> -->
+
+        </div>
+
+    <!-- footer  -->
+    <!-- <footer class="bg-white rounded-lg shadow dark:bg-gray-900">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
+                    <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Logo.png" class="h-8 mr-3" alt="Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FPT Blog</span>
+                </a>
+                <ul
+                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a
+                    href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
+        </div>
+    </footer> -->
+</body>
+<script src="tailwind-config.js"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Onest:wght@600;700&display=swap');
+</style>
+</html>

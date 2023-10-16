@@ -1,0 +1,52 @@
+body{
+background: #F3F3F3;
+}
+.title{
+  margin-left: 1300px ;
+  margin-right: 100px auto; 
+  display: inline-flex;
+  padding: 8px 28px 7px 28px;
+  border-radius: 10px;
+  background: #EBB462;
+}
+.title1{
+  display: inline-flex;
+  padding: 8px 18px 7px 17px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+border: 1px solid #000;
+}
+.submit-title{
+  border-bottom: 1px solid #827979;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.input-group{
+  margin-left: 20px;
+}
+.input-group label{
+color: #000;
+font-family: Barlow;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+.input-control{
+display: flex;
+width: 568px;
+padding: 16px 248px 15px 23px;
+align-items: center;
+border-radius: 10px;
+border: 1px solid #000;
+}
+.post-text{
+  display: flex;
+  width: 1500px;
+  height: 300px;
+  padding:16px ;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #000;
+}
