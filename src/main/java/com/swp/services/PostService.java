@@ -1,13 +1,11 @@
 package com.swp.services;
 
+import com.swp.cms.dto.PostDto;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.*;
-import com.swp.repositories.CategoryRepository;
-import com.swp.repositories.PostRepository;
-import com.swp.repositories.UserRepository;
+import com.swp.repositories.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +40,8 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> getAllApprovedPosts() {
-        return postRepository.findAllApprovedPosts();
+    public List<Post> getAll() {
+        return postRepository.findAll();
     }
 
     public Post createPost(PostRequest request) {
@@ -73,31 +71,12 @@ public class PostService {
         return postRepository.save(post); // Save and return the updated post
     }
 
-    //DISPLAY APPROVED POSTS
     public List<Post> searchPosts(String keyword) {
-        return postRepository.searchApprovedPosts(keyword);
+        return postRepository.search(keyword);
     }
 
-    //save media and tag
-    @Transactional
-    public Post savePosts(Post createdPost) {
 
-        List<Media> mediaList = createdPost.getMedias();
-        if (mediaList != null && !mediaList.isEmpty()) {
-            for (Media media : mediaList) {
-                media.setPost(createdPost);
-                entityManager.persist(media);
-            }
-        }
-
-        List<PostTag> tagList = createdPost.getTags();
-        if (tagList != null && !tagList.isEmpty()) {
-            for (PostTag tag : tagList) {
-                tag.setPost(createdPost);
-                entityManager.persist(tag);
-            }
-        }
-
-        return createdPost;
+    public List<Post> getAllApprovedPosts() {
+        return postRepository.getApprovedPosts();
     }
 }

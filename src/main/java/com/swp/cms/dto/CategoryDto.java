@@ -10,12 +10,15 @@ import java.time.OffsetDateTime;
 @Data
 public class CategoryDto {
     private Integer id;
-    public Integer getId(){
-        return this.parentCategory.getCateId();
-    }
     private String content;
-    @JsonIgnore
+//    @JsonIgnore
     private LocalDateTime createdDate;
-    @JsonIgnore
+//    @JsonIgnore
     private Category parentCategory;
+    public Integer getParentCategory() {
+        if (parentCategory != null) {
+            return parentCategory.getCateId();
+        }
+        return null; // Or return a default value
+    }
 }

@@ -11,14 +11,14 @@ public class PostTagDto {
     private Tag tag;
 
     public Integer getPost() {
-        if (post != null && post.getPostsId() != null) {
+        if (post != null) {
             return post.getPostsId();
         }
         return null; // or handle the case when media or mediaUrl is null
     }
 
     public Integer getTag() {
-        if (tag != null && tag.getId() != null) {
+        if (tag != null) {
             return tag.getId();
         }
         return null; // or handle the case when media or mediaUrl is null

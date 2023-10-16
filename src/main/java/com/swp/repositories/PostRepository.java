@@ -10,11 +10,15 @@ import java.util.List;
 
 
 public interface PostRepository extends JpaRepository<Post, Integer>, JpaSpecificationExecutor<Post> {
-    @Query("SELECT p FROM Post p JOIN p.postApprovals pa WHERE pa.status = 'APPROVED' " +
-            "AND (p.title LIKE %:keyword% " +
-            "OR p.postDetail LIKE %:keyword% OR p.belongedToCategory.content LIKE %:keyword%)")
-    List<Post> searchApprovedPosts(@Param("keyword") String keyword);
+    @Query("SELECT p FROM Post p " +
+            "WHERE p.title LIKE %:keyword% " +
+            "OR p.postDetail LIKE %:keyword% " +
+            "OR p.belongedToCategory.content LIKE %:keyword% ")
+    List<Post> search(@Param("keyword") String keyword);
 
-    @Query("SELECT p FROM Post p JOIN p.postApprovals pa WHERE pa.status = 'APPROVED'")
-    List<Post> findAllApprovedPosts();
+    @Query("SELECT DISTINCT p " +
+            "FROM Post p " +
+            "JOIN PostApprovals pa " +
+            "WHERE pa.status = 'approved'")
+    List<Post> getApprovedPosts();
 }
