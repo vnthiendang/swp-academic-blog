@@ -1,0 +1,93 @@
+.tag-name {
+    transition: background-color 0.3s, color 0.3s; /* Add transitions for color changes */
+}
+
+.tag-name:hover {
+    color: red;
+}
+
+.rounded-xl {
+    transition: background-color 1s, color 1s; /* Add transitions for color changes */
+}
+
+.rounded-xl:hover {
+    background-color: red;
+    color: greenyellow;
+}
+
+.icon-tag {
+    width: 16px; /* Adjust the width as needed */
+    height: 16px; /* Adjust the height as needed */
+    margin-right: 10px;
+}
+
+#tag {
+    margin-top: 5px;
+}
+
+/*========================== Tag Name For Div Post ==============================*/
+
+.font-semibold#title{
+    font-size: 30px;
+}
+
+.font-semibold#title:hover {
+    color: red;
+    transition: color 0.5s; /* Transition for color change */
+    animation: colorAppear 0.5s ease-in-out 10s forwards; /* Delayed color animation */
+}
+/* Title */
+
+.grid#post {
+    background-color: whitesmoke;
+    margin-bottom: 20px;
+    /* margin-top: 10px; */
+    margin-left: 5px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+#post:hover {
+    background-color: antiquewhite;
+}
+
+/*========================== Post List ==============================*/
+
+.main {
+    background-color: white;
+}
+
+/*========================== Main ==============================*/
+
+.rounded-2xl {
+    transition: background-color 0.3s, color 0.3s; /* Add transitions for color changes */
+}
+
+.rounded-2xl:hover {
+    background-color: red;
+    color: greenyellow;
+}
+
+/*========================== Tag Name Of Recommend Topics ==============================*/
+
+/* .bg-white .rounded-lg {
+    background-color: red;
+}
+
+#about {
+    background-color: antiquewhite;
+    margin-right: 38%;
+}
+
+#fpt-blog {
+    text-align: center;
+    background-color: antiquewhite;
+}
+
+#footer {
+    background-color: antiquewhite;
+} */
+
+/*========================== Footer ==============================*/
