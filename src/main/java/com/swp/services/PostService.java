@@ -3,21 +3,27 @@ package com.swp.services;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.*;
 import com.swp.repositories.CategoryRepository;
+import com.swp.repositories.PostApprovalsRepository;
 import com.swp.repositories.PostRepository;
 import com.swp.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private PostApprovalsRepository postApprovalsRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -26,7 +32,20 @@ public class PostService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    User userDetails = (User) authentication.getPrincipal();
+    Integer userId = userDetails.getUsId();
+
     public Post getById(Integer id) {
+        List<Post> approvedPosts = postRepository.findAllApprovedPosts();
+        Optional<Post> optionalPost = approvedPosts.stream()
+                .filter(post -> post.getPostsId().equals(id))
+                .findFirst();
+
+        return optionalPost.orElse(null);
+    }
+
+    public Post getPostById(Integer id){
         return postRepository.findById(id).orElseThrow();
     }
 
@@ -44,6 +63,10 @@ public class PostService {
 
     public List<Post> getAllApprovedPosts() {
         return postRepository.findAllApprovedPosts();
+    }
+
+    public List<Post> getAll(){
+        return postRepository.findAll();
     }
 
     public Post createPost(PostRequest request) {
@@ -78,7 +101,7 @@ public class PostService {
         return postRepository.searchApprovedPosts(keyword);
     }
 
-    //save media and tag
+    //SAVE MEDIA AND TAG
     @Transactional
     public Post savePosts(Post createdPost) {
 
@@ -99,5 +122,31 @@ public class PostService {
         }
 
         return createdPost;
+    }
+
+    //approve post
+    public PostApprovals approvePost(Integer id) {
+        User currentUser = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid User"));
+
+        PostApprovals post = new PostApprovals();
+        post.setPost(getById(id));
+        post.setStatus("APPROVE");
+        post.setCreatedDate(LocalDateTime.now());
+        post.setViewedByUser(currentUser);
+        return postApprovalsRepository.save(post);
+    }
+
+    //reject post
+    public PostApprovals rejectPost(Integer id) {
+        User currentUser = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid User"));
+
+        PostApprovals post = new PostApprovals();
+        post.setPost(getById(id));
+        post.setStatus("REJECTED");
+        post.setCreatedDate(LocalDateTime.now());
+        post.setViewedByUser(currentUser);
+        return postApprovalsRepository.save(post);
     }
 }

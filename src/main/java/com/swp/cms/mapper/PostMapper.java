@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PostMapper {
-    @IterableMapping(elementTargetType = PostDto.class, qualifiedByName = "fromEntityToPostDto")
+    @IterableMapping(qualifiedByName = "fromEntityToPostDto")
     @Named(value = "fromEntityToPostDtoList")
     public List<PostDto> fromEntityToPostDtoList(List<Post> input);
 

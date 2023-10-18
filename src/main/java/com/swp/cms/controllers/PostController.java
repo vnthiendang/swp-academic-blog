@@ -1,20 +1,16 @@
 package com.swp.cms.controllers;
 
 import com.swp.cms.dto.MediaDto;
+import com.swp.cms.dto.PostApprovalsDto;
 import com.swp.cms.dto.PostDto;
 import com.swp.cms.dto.PostTagDto;
 import com.swp.cms.mapper.PostMapper;
 import com.swp.cms.reqDto.PostRequest;
-import com.swp.entities.Media;
-import com.swp.entities.Post;
-import com.swp.entities.PostTag;
-import com.swp.entities.Tag;
-import com.swp.services.MediaService;
+import com.swp.entities.*;
 import com.swp.services.PostService;
-import com.swp.services.PostTagService;
-import com.swp.services.TagService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,8 +30,13 @@ public class PostController {
         this.postService = postService;
     }
 
+
+    // ==================================================================================================== //
+
+    // STUDENT ROLE
+
     //create post (upload mediaUrl & tag)
-    @PostMapping()
+    @PostMapping("/create")
     public PostDto addPost(@RequestBody PostRequest postRequest) {
         Post createdPost = postService.createPost(postRequest);
 
@@ -89,7 +90,7 @@ public class PostController {
     }
 
     //get approved posts
-    @GetMapping
+    @GetMapping("/GetAllApproved")
     public List<PostDto> getAllPostDtos() {
         List<Post> posts = postService.getAllApprovedPosts();
         List<PostDto> dtos = postMapper.fromEntityToPostDtoList(posts);
@@ -97,58 +98,44 @@ public class PostController {
     }
 
     //get post detail by post id
-//    @GetMapping("/{id}")
-//    public PostDto getById(@PathVariable Integer id) {
-//        Post post = postService.getById(id);
-//        PostDto dto = modelMapper.map(post, PostDto.class);
-//
-//        List<PostTag> postTagList = postTagService.getAll();
-//        for(PostTag postTag : postTagList){
-//            if(postTag.getPost().getPostsId() == id){
-//                PostTagDto postTagDto = modelMapper.map(postTag, PostTagDto.class);
-//                dto.setPostTag(postTagDto);
-//            }
-//        }
-//
-//        List<Media> mediaList = mediaService.getAll();
-//        for(Media media : mediaList){
-//            if(media.getPost().getPostsId() == id){
-//                MediaDto mediaDto = modelMapper.map(media, MediaDto.class);
-//                dto.setMedia(mediaDto);
-//            }
-//        }
-//        return dto;
-//    }
+    @GetMapping("/GetAllApproved/{id}")
+    public PostDto getById(@PathVariable Integer id) {
+        Post post = postService.getById(id);
+        PostDto dto = modelMapper.map(post, PostDto.class);
+        return dto;
+    }
 
-    //edit post
-//    @PutMapping("/{postId}")
-//    public PostDto updatePost(@PathVariable Integer postId, @RequestBody PostRequest postRequest) {
-//        Post updatedPost = postService.updatePost(postId, postRequest);
-//        PostDto postDto = modelMapper.map(updatedPost, PostDto.class);
-//
-//        String mediaUrl = postRequest.getMedia();
-//        if (mediaUrl != null) {
-//            Media media = new Media();
-//            media.setMediaUrl(mediaUrl);
-//            media.setPost(updatedPost);
-////            mediaService.add(media);
-//            MediaDto mediaDto = modelMapper.map(media, MediaDto.class);
-//            postDto.setMedia(mediaDto);
-//        }
-//
-//        Integer tagId = postRequest.getTag();
-//        if(tagId != null){
-//            PostTag postTag = new PostTag();
-//            Tag tag = tagService.getById(tagId);
-//            tag.setId(tagId);
-//            postTag.setTag(tag);
-//            postTag.setPost(updatedPost);
-//            postTagService.addPostTag(postTag);
-//            PostTagDto postTagDto = modelMapper.map(postTag, PostTagDto.class);
-//            postDto.setPostTag(postTagDto);
-//        }
-//
-//        return postDto;
-//    }
+
+    // ==================================================================================================== //
+
+    // TEACHER ROLE
+
+    @GetMapping("/postRequest")
+    public List<PostDto> getAllPostRequest() {
+        List<PostDto> dtos = postMapper.fromEntityToPostDtoList(postService.getAll());
+        return dtos;
+    }
+    @GetMapping("/postRequest/{id}")
+    public PostDto getRequestDetail(@PathVariable Integer id) {
+        PostDto dto = modelMapper.map(postService.getPostById(id), PostDto.class);
+
+        return dto;
+    }
+    @PostMapping("/postRequest/approve/{id}")
+    public PostApprovalsDto approvePost(@PathVariable Integer id) {
+        PostApprovals requestPost = postService.approvePost(id);
+
+        PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
+
+        return postDto;
+    }
+    @PostMapping("/postRequest/reject/{id}")
+    public PostApprovalsDto rejectPost(@PathVariable Integer id) {
+        PostApprovals requestPost = postService.rejectPost(id);
+
+        PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
+
+        return postDto;
+    }
 
 }

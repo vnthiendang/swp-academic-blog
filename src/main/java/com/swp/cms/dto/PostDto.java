@@ -18,17 +18,11 @@ public class PostDto {
     private MediaDto media;
     private PostTagDto postTag;
 
-    public Integer getBelongedToCategory(){
-        if(belongedToCategory != null){
-            return belongedToCategory.getCateId();
-        }
-        return null;
+    public String getCreatedByUser(){
+        return this.createdByUser.getDisplay_name();
     }
-    public Integer getCreatedByUser() {
-        if (createdByUser != null) {
-            return createdByUser.getUsId();
-        }
-        return null; // or handle the case when createdByUser is null
+    public String getBelongedToCategory(){
+        return this.belongedToCategory.getContent();
     }
     public String getMedia() {
         if (media != null && media.getMediaUrl() != null) {

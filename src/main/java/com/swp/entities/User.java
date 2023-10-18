@@ -27,6 +27,9 @@ public class User implements UserDetails {
     public Integer getUsId() {
         return usId;
     }
+    public User(String name) {
+        this.display_name = name;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)

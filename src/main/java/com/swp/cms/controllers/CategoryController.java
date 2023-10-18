@@ -30,7 +30,7 @@ public class CategoryController {
         this.categoryRepository = categoryRepository;
     }
 
-    @GetMapping()
+    @GetMapping("/GetAll")
     public List<CategoryDto> getAll() {
         List<Category> cate = categoryService.getAll();
         List<CategoryDto> categoryDtos = mapper.fromEntityToCategoryDtoList(cate);
@@ -45,4 +45,5 @@ public class CategoryController {
         CategoryDto categoryDto = mapper.fromEntityToCategoryDto(cate);
         return categoryDto;
     }
+
 }
