@@ -1,8 +1,7 @@
+import { register } from "../js/Services/auth.service.js";
+
 // Get a reference to the form element in your HTML page
 const form = document.getElementById("createUser");
-
-// Define the URL of the API endpoint that can handle the user data
-const api_url = "http://localhost:8080/blog/auth/register";
 
 // Add an event listener to the form element to handle the submit event
 form.addEventListener("submit", async (event) => {
@@ -12,7 +11,6 @@ form.addEventListener("submit", async (event) => {
     // Get the input field values
     const displayName = document.getElementById("display_Name").value;
     const email = document.getElementById("email").value;
-    const role_id = document.getElementById("role_id").value;
     const password = document.getElementById("password").value;
     const passwordConf = document.getElementById("passwordConf").value;
 
@@ -22,7 +20,7 @@ form.addEventListener("submit", async (event) => {
     return;
   }
 
-  if (password !== passwordConf) {
+  if (password != passwordConf) {
     alert("Oops! Your passwords do not match. Please re-enter your password correctly.");
     return;
 }
@@ -31,36 +29,16 @@ form.addEventListener("submit", async (event) => {
     const user = {
       displayName,
       email,
-      role_id,
-      password,
-      passwordConf
-  };
-    // Send the user data to the server
-    try {
-      const response = await fetch(api_url, {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify(user)
-      });
+      password
+    };
 
-      // Check if the response is empty
-      if (!response.ok) {
-          throw new Error("Failed to create the user.");
-      }
-
-      const data = await response.json();
-
+  const response = await register(user);
       // Handle the response data
-      if (data.error) {
-          alert("Sorry! Something went wrong. " + data.error);
+      if (response && response.error) {
+        alert("Sorry! Please check your information! " + response.error);
       } else {
-          alert("You have successfully created your account. " + data.message);
-          window.location.href = "login.html";
+        alert("You have successfully created your account. ");
+        window.location.href = "login.html";
       }
-  } catch (error) {
-      console.error(error);
-      alert("Sorry! Something went wrong. Please try again later.");
-  }
-});
+
+  });
