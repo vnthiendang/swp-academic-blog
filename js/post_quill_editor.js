@@ -1,4 +1,4 @@
-var quill = new Quill("#post-editor", {
+var quill = new Quill("#text-editor", {
     modules: {
       toolbar: [
         [{ header: [1, 2, false] }],
