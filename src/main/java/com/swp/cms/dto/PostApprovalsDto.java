@@ -5,13 +5,27 @@ import com.swp.entities.User;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 @Data
 public class PostApprovalsDto {
     private Integer id;
     private String status;
     private LocalDateTime createdDate;
-    private PostDto post;
-    private UserDto viewedByUser;
+    private Post post;
+    private User viewedByUser;
+    public Integer getViewedByUser() {
+        if (viewedByUser != null) {
+            return viewedByUser.getUsId();
+        }
+        return null; // Or return a default value
+    }
+
+    public Integer getPost() {
+        if (post != null) {
+            return post.getPostsId();
+        }
+        return null; // Or return a default value
+    }
+
+
 }
