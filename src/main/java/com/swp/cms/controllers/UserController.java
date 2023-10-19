@@ -49,6 +49,12 @@ public class UserController {
         UserDto user = mapper.fromEntityToUserDto(us);
         return user;
     }
+    @GetMapping("/profile")
+    public UserDto getCurrentUser() {
+        User us = userService.getById();
+        UserDto user = modelMapper.map(us, UserDto.class);
+        return user;
+    }
 
     @Transactional
     @PostMapping()

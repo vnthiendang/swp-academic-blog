@@ -15,7 +15,7 @@ public class CategoryDto {
     private LocalDateTime createdDate;
     @JsonIgnore
     private Category parentCategory;
-    public Integer getParentCategory() {
+    public Integer getId() {
         if (parentCategory!= null) {
             return parentCategory.getCateId();
         }

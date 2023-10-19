@@ -22,7 +22,7 @@ public class TagController {
         this.tagService = tagService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/GetAll")
     public List<TagDto> getAll() {
         List<Tag> categories = tagService.getAll();
         List<TagDto> tagDtos = categories.stream()
@@ -36,22 +36,12 @@ public class TagController {
     public TagDto getTagById(@PathVariable Integer id) {
 //                    System.out.println(" ID: hellosfdsdddddddddddddddddddddddddddddddddddddddddddddddd");
         Tag tag = tagService.getById(id);
-//                    System.out.println(" ID: " + cate.getCateId());
-//            System.out.println("Post ID: " + cate.getContent());
-//            System.out.println("Status: " + cate.getParentTag());
-//            System.out.println("Created Date: " + cate.getCreatedDate());
-//            System.out.println("sucesssssssssssssssssssssssssssDto");
         TagDto dto = modelMapper.map(tag, TagDto.class);
-//                    System.out.println(" ID: " + dto.getId());
-//            System.out.println("Post ID: " + dto.getContent());
-//            System.out.println("Status: " + dto.getParentTag());
-//            System.out.println("Created Date: " + dto.getCreatedDate());
-//            System.out.println("sucesssssssssssssssssssssssssssDto");
         return dto;
     }
 
     //create a tag
-    @PostMapping("/post")
+    @PostMapping("/create")
     public TagDto addTag(@RequestBody TagRequest tagRequest) {
 //        Tag tag = modelMapper.map(tagRequest, Tag.class);
         Tag createdTag = tagService.createTag(tagRequest);
