@@ -56,6 +56,20 @@ const createPost = async (post) => {
   }
 };
 
+const getPostById = async (id) => {
+  try {
+    const response = await axios.get(`${endpoint}/GetAllApproved/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error retrieving post:', error);
+    throw new Error("An error occurred while retrieving the post. Please try again later.");
+  }
+};
+
 export {
-    getAllApprovedPosts, searchedPosts
+    getAllApprovedPosts, searchedPosts, getPostById
 };

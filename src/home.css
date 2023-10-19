@@ -80,6 +80,11 @@
     line-height: 1.5em; /* Set the line height to control the spacing between lines */
 }
 
+.truncate-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
+  }
 
 /*========================== Tag Name Of Recommend Topics ==============================*/
 

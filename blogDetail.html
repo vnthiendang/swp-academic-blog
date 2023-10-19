@@ -32,18 +32,6 @@
                 Post
             </a>
 
-            <!-- Category  -->
-            <div class="group inline-block relative">
-                <button class="py-2 px-4 rounded inline-flex items-center">
-                    <span class="mr-1">Category</span>
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                </button>
-                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-                    
-                </ul>
-            </div>
         </div>
         <div class="p-1">
             <form class="flex items-center">
@@ -80,7 +68,7 @@
             <div class="mt-4 ml-12 text-3xl font-sans">
               <!-- Title  -->
               <div class="mr-7" id="postTitle"></div>
-              <div class="ml-4" id="postSubtitle"></div>
+              
           
               <!-- content  -->
               <div class="flex justify-between mt-6">
@@ -101,10 +89,10 @@
           <!-- card  -->
           <div class="w-full flex items-center justify-center m-5">
             <div class="flex flex-col justify-between p-4 leading-normal  w-[60%]">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id="postHeading"></h5>
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id="postCategory"></h5>
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" id="postContent"></p>
             </div>
-            <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" id="postImage" src="./img/banner1.png" alt="">
+            <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" id="postMedia" src="#" alt="">
           </div>
 
         <!-- comment -->
@@ -303,9 +291,8 @@
                     href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
         </div>
     </footer>
-    <script type="module" src='./js/home.js'></script>
+    <script type="module" src='./js/postDetail.js'></script>
 </body>
-<script src="/js/tailwind.config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </html>

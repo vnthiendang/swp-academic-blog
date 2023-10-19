@@ -1,6 +1,5 @@
 import { getAllApprovedPosts, searchedPosts } from "../js/Services/post.service.js";
 import { getAllCategory } from "./Services/category.service.js";
-import { getAllTag } from "./Services/tag.service.js";
 
 const options = {
   month: 'short', // Two-digit month (e.g., 01)
@@ -12,7 +11,7 @@ const options = {
 function displayPosts(posts) {
     
     const postContainer = document.querySelector('#post .col-span-5');
-    postContainer.innerHTML = '';
+    //postContainer.innerHTML = '';
 
     if(posts.length === 0){
       const noResultsElement = document.createElement('div');
@@ -98,19 +97,19 @@ function displayPosts(posts) {
       postElement.appendChild(flexElement);
   
       const postLink = document.createElement('a');
-      postLink.href = 'blogDetail.html';
-  
+      postLink.href = `blogDetail.html?postId=${post.postsId}`;
+
       const titleElement = document.createElement('div');
       titleElement.className = 'font-semibold text-2xl px-8';
       titleElement.id = 'title';
       titleElement.textContent = post.title;
       postLink.appendChild(titleElement);
-  
+
       const infoElement = document.createElement('p');
       infoElement.className = 'px-8 py-4 post-detail';
       infoElement.textContent = post.postDetail;
       postLink.appendChild(infoElement);
-  
+
       postElement.appendChild(postLink);
   
       const flexItemsElement = document.createElement('div');
@@ -205,46 +204,29 @@ getAllCategory()
     displayCategories(cates);
 });
 
-  //GET LIST TAGS
-const displayTags = (tags) => {
-  const categoryList = document.querySelector('.grid.grid-cols-2.gap-4.flex-wrap');
-
-  tags.forEach(tag => {
-    const link = document.createElement('a');
-    link.href = tag.url ?? 'http://localhost:8080/blog/tag/tagId';
-    link.innerHTML = `<div class="rounded-2xl bg-gray-300 py-1 text-center">${tag.tagName}</div>`;
-    categoryList.appendChild(link);
-  });
-};
-
-getAllTag()
-  .then((tags) => {
-    displayTags(tags);
-});
-
-  // SEARCH POSTS
-const searchForm = document.querySelector('#search-form');
-searchForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const searchInput = document.querySelector('#simple-search');
-  const searchTerm = searchInput.value;
-
-  if (searchTerm) {
-    searchedPosts(searchTerm)
-      .then((posts) => {
-        displayPosts(posts);
-      })
-      .catch((error) => {
-        console.error(error);
-        // Handle the error as needed
-      });
-  } else {
-    displayAllPosts();
-  }
-
-  searchInput.value = ''; // Clear the search input
-});
-
 // Call the displayAllPosts function when entering the page
 displayAllPosts();
+
+  // SEARCH POSTS
+  const searchForm = document.querySelector('#search-form');
+  searchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+  
+    const searchInput = document.querySelector('#simple-search');
+    const searchTerm = searchInput.value;
+  
+    if (searchTerm) {
+      searchedPosts(searchTerm)
+        .then((posts) => {
+          displayPosts(posts);
+        })
+        .catch((error) => {
+          console.error(error);
+          // Handle the error as needed
+        });
+    } else {
+      displayAllPosts();
+    }
+  
+    searchInput.value = ''; // Clear the search input
+  });
