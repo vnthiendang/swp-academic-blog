@@ -17,18 +17,18 @@
     <!-- Header  -->
     <header class="flex items-center justify-between w-full bg-black text-white">
         <div class="flex items-center">
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/homeafterlogin.html" class="items-start justify-center">
+            <a href="/home.html" class="items-start justify-center">
                 <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
             </a>
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/homeafterlogin.html" class="p-2">
+            <a href="/home.html" class="p-2">
                 FPT BLOG
             </a>
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/homeafterlogin.html" class="p-2">
+            <a href="/home.html" class="p-2">
                 Home
             </a>
 
             <!-- Best Articles -->
-            <a href="/BLOG_UPDATE_VER2.3/blog1.html" class="p-2">
+            <a href="/bestartice.html" class="p-2">
                 Best articles
             </a>
 
@@ -43,19 +43,19 @@
                 <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
                     <li class="">
                         <a class="rounded-t bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">Technoloy</a>
+                            href="#">Technoloy</a>
                     </li>
                     <li class="">
                         <a class="bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">AI</a>
+                            href="#">AI</a>
                     </li>
                     <li class="w-full">
                         <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">Business</a>
+                            href="#">Business</a>
                     </li>
                     <li class="w-full">
                         <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">Digital
+                            href="#">Digital
                             Transformation</a>
                     </li>
                 </ul>
@@ -86,28 +86,7 @@
                     <span class="sr-only">Search</span>
                 </button>
             </form>
-            <!-- <div class="group inline-block relative">
-                <button class="py-2 px-4 rounded inline-flex items-center">
-                    <span class="mr-1">Login</span>
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                </button>
-                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-                    <li class="">
-                        <a class="rounded-t bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/facebook">Facebook</a>
-                    </li>
-                    <li class="">
-                        <a class="bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/google">Google</a>
-                    </li>
-                    <li class="w-full">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/apple">Apple</a>
-                    </li>
-                </ul>
-            </div> -->
+
             <div class="flex items-center justify-center ">
                 <div class="mx-5">
                     <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
@@ -122,87 +101,79 @@
             </div>
         </div>
     </header>
-    <div class="w-full flex items-center flex-col bg-gray-900">
-        <div class="w-full flex flex-row-reverse m-2">
 
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/homeafterlogin.html">
-                <div class="px-2 py-1 rounded-md border border-gray-700 bg-white m-2">
-                    Public
-                </div>
-            </a>
 
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/homeafterlogin.html">
-                <div class="px-2 py-1 rounded-md border border-gray-700 bg-yellow-300 m-2">
-                    Save
+    <!-- CREATE POST -->
+    <form class="form" id="createPost">
+        <div class="w-full flex items-center flex-col bg-gray-900">
+            <div class="w-full flex flex-row-reverse m-2">
+    
+                <div class="px-6 py-3 rounded-md border border-gray-700 bg-yellow-300 m-2">
+                    <button type="submit">Save</button>
                 </div>
-            </a>
-
-        </div>
-        <div class="grid grid-cols-3 gap-4 text-white">
-            <div class="m-8">
-                <div class="flex flex-col">
-                    <label for="">Title</label>
-                    <input type="text" alt="" placeholder="Article title"
-                        class="border border-gray-800 rounded-md p-2 text-black" />
-                </div>
-                <div class="flex flex-col">
-                    <label for="">Allow comment from community
-                        <select id="comment"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                            <option selected>Yes</option>
-                            <option value="DE">No</option>
-                        </select>
-                    </label>
-                </div>
-                <div class="flex flex-col">
-                    <label for="">Content Type
-                        <select id="Category"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+               
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-white">
+                <div class="m-8">
+                    <div class="flex flex-col">
+                        <label for="">Title</label>
+                        <input type="text" alt="" placeholder="Article title"
+                            class="border border-gray-800 rounded-md p-2 text-black" />
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="">Allow comment from community
+                            <select id="comment"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                <option selected>Yes</option>
+                                <option value="DE">No</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="">Category
+                          <select id="Category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option selected>Choose Topics</option>
-                            <option value="SE">Technology</option>
-                            <option value="AI">AI</option>
-                            <option value="BA">Business</option>
-                            <option value="BS">Digital Transformation</option>
-                        </select>
+                          </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-span-2">
+                    <div>
+                        Add article cover image
+                    </div>
+                    <label for="input-file" id="drop-area"
+                        class="flex flex-col items-center justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+                        <div class="flex flex-col items-center justify-center">
+                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                            </svg>
+                            <div id="img-view" class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                    class="font-semibold">Click
+                                    to upload</span> or drag and drop</div>
+                        </div>
+                        <input id="input-file" type="file" class="hidden" />
                     </label>
                 </div>
             </div>
-            <div class="col-span-2">
-                <div>
-                    Add article cover image
-                </div>
-                <label for="input-file" id="drop-area"
-                    class="flex flex-col items-center justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
-                    <div class="flex flex-col items-center justify-center">
-                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                        </svg>
-                        <div id="img-view" class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
-                                class="font-semibold">Click
-                                to upload</span> or drag and drop</div>
+            <div class="flex items-center justify-center w-full">
+                <form class="w-full m-8">
+                    <div
+                        class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+    
+                        <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
+                            <label for="text-editor" class="sr-only">Publish post</label>
+                            <div style="height: 200px;" id="text-editor" rows="8"
+                                class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                                placeholder="Write an article..." required></div>
+                        </div>
                     </div>
-                    <input id="input-file" type="file" class="hidden" />
-                </label>
+                </form>
+    
             </div>
         </div>
-        <div class="flex items-center justify-center w-full">
-            <form class="w-full m-8">
-                <div
-                    class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-
-                    <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
-                        <label for="text-editor" class="sr-only">Publish post</label>
-                        <div style="height: 200px;" id="text-editor" rows="8"
-                            class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                            placeholder="Write an article..." required></div>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-    </div>
+    </form>
 
     <!-- footer  -->
     <footer class="bg-white rounded-lg shadow dark:bg-gray-900">
@@ -233,6 +204,8 @@
                     href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
         </div>
     </footer>
+    <script type="module" src='./js/postDetail.js'></script>
+    <script type="module" src='./js/createPost.js'></script>
 </body>
 <script src="tailwind-config.js"></script>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -326,5 +299,5 @@
 
 
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </html>

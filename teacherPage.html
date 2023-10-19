@@ -17,22 +17,21 @@
     <!-- Header  -->
     <header class="flex items-center justify-between w-full bg-black text-white">
         <div class="flex items-center">
-            <a href="/home.html" class="items-start justify-center">
+            <a href="/teacherPage.html" class="items-start justify-center">
                 <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
             </a>
-
-            <a href="/home.html" class="p-2">
-                FPT BLOG
-            </a>
-
-            <a href="/home.html" class="p-2">
+            <a href="/teacherPage.html" class="p-2">
                 Home
             </a>
-            
-            <a href="/bestartice.html" class="p-2">
-                Best articles
+
+            <a href="#" class="p-2">
+                Give Award
             </a>
-            
+
+            <a href="#" class="p-2">
+                Review Post
+            </a>
+
             <!-- Category  -->
             <div class="group inline-block relative">
                 <button class="py-2 px-4 rounded inline-flex items-center">
@@ -42,12 +41,27 @@
                     </svg>
                 </button>
                 <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-                    
+                    <li class="">
+                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
+                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">Technoloy</a>
+                    </li>
+                    <li class="">
+                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
+                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">AI</a>
+                    </li>
+                    <li class="w-full">
+                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
+                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">Business</a>
+                    </li>
+                    <li class="w-full">
+                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
+                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">Digital Transformation</a>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="p-1 flex">
-            <form class="flex items-center" id="search-form">
+            <form class="flex items-center">
                 <label for="simple-search" class="sr-only">Search</label>
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -59,7 +73,7 @@
                     </div>
                     <input type="text" id="simple-search"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search blog, tag, ..." required>
+                        placeholder="Search branch name..." required>
                 </div>
                 <button type="submit"
                     class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -70,77 +84,60 @@
                     </svg>
                     <span class="sr-only">Search</span>
                 </button>
-            </form>
-            <div class="flex items-center justify-center ">
-                <div class="mx-5">
-                    <a href="profile.html" class="mx-5">
-                    <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
-                        alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
-                    </a>
-                </div>
-                <div class="pr-2">
-                    
-                    <div class="cursor-pointer">
-                        <a href="/login.html">Log Out</a>
+                <div class="flex items-center justify-center ">
+                    <div class="mx-4">
+                        <a href="profile.html" class="mx-10">
+                        <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
+                            alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                        </a>
+                    </div>
+                    <div class="pr-12">
+                        
+                        <div class="cursor-pointer">
+                            <a href="/login.html">Log Out</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </form>
 
+        </div>
     </header>
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-
+            <a href="#"
+                class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+                role="alert">
+                <span class="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <span
+                    class="text-sm font-medium">FPT Blog is out! See what's new</span>
+                <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </a>
             <h1
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                 Welcome to FPT BLOG</h1>
-            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here at
-                Where knowledge meets passion</p>
-            <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-            </div>
+
         </div>
     </section>
+
     <!-- Main  -->
     <Main class="main">
-        <div class="grid grid-cols-4">
+        <div class="grid grid-cols">
 
-            <!--slide left  -->
             <div class="col-span-3">
-                <!-- selection  -->
-                <!-- <div class="w-full pt-0.5 bg-gray-300"></div> -->
-
-                <!-- List Approved Posts | Displayed from home.js -->
-                <div class="grid grid-cols-6 gap-4 bg-white" id="post">
+                <div class="grid grid-cols-4 gap-6 bg-white" id="post">
 
                     <div class="col-span-5">
-                        
+                        <div class="post-container">
+                            
+                        </div>
                     </div>
                 
                 </div>
                 <!-- End Post -->
 
-            </div>
-
-            <!--slide right  -->
-            <div class="bg-white boder border-l-2">
-                <!-- recommend Topics  -->
-                <div class="ml-8 my-4">
-
-                    <div class="font-semibold">
-                        Recommend Topics
-                    </div>
-
-                    <!-- Tag Name -->
-                    <div class="grid grid-cols-2 gap-4 flex-wrap mt-4">
-
-                        
-                    </div>
-
-                    <div class="mt-4 text-green-600">
-                        See more topics
-                    </div>
-
-                </div>
             </div>
         </div>
     </Main>
@@ -174,10 +171,9 @@
                     href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
         </div>
     </footer>
-    <script type="module" src='./js/home.js'></script>
-    <script type="module" src='./js/tag.js'></script>
+
+    <script type="module" src='./js/postRequest.js'></script>
 </body>
-
+<script src="tailwind-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 </html>

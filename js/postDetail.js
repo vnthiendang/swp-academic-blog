@@ -1,3 +1,5 @@
+import { getAllCategory } from "../js/Services/category.service.js";
+
 const token = localStorage.getItem("token");
 
 const options = {
@@ -72,3 +74,46 @@ function displayComments() {
 
 // Call the function to display the post
 displayComments();
+
+//create post
+const displayCategories = (categories) => {
+  const selectElement = document.getElementById('Category');
+
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category.id;
+    option.textContent = category.content;
+
+    selectElement.appendChild(option);
+  });
+};
+
+getAllCategory()
+  .then((cates) => {
+    displayCategories(cates);
+});
+
+
+const createComment = async (model) => {
+  try {
+    const response = await axios.post(`http://localhost:8080/blog/comment/post`, model,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if (response.status === 200) {
+      alert('Your Comment posted!');
+    }
+  } catch (error) {
+    console.error(error);
+    if (error.response) {
+      console.error("Response status:", error.response.status);
+    }
+  }
+};
+
+export{
+  createComment
+}
+

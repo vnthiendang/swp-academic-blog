@@ -1,13 +1,12 @@
-import { getAllApprovedPosts, searchedPosts } from "../js/Services/post.service.js";
-import { getAllCategory } from "./Services/category.service.js";
+import { getPostRequest } from "../js/Services/post.service.js";
 
 const options = {
-  month: 'short', // Two-digit month (e.g., 01)
-  day: '2-digit', // Two-digit day (e.g., 18)
-  hour: '2-digit', // Two-digit hour (e.g., 14)
-};
+    month: 'short', // Two-digit month (e.g., 01)
+    day: '2-digit', // Two-digit day (e.g., 18)
+    hour: '2-digit', // Two-digit hour (e.g., 14)
+  };
 
-// DISPLAY LIST APPROVED POSTS
+// DISPLAY LIST POSTS
 function displayPosts(posts) {
     
     const postContainer = document.querySelector('#post .col-span-5');
@@ -51,11 +50,21 @@ function displayPosts(posts) {
         postTagSpan1.className = 'tag-name';
         postTagSpan1.textContent = post.belongedToCategory;
         postTagLink.appendChild(postTagSpan1);
+    
+        const commaSpan = document.createElement('span');
+        commaSpan.className = 'tag-name';
+        commaSpan.textContent = ' , ';
+        postTagLink.appendChild(commaSpan);
   
         const postTagSpan2 = document.createElement('span');
         postTagSpan2.className = 'tag-name';
         postTagSpan2.textContent = '';
         postTagLink.appendChild(postTagSpan2);
+    
+        const commaSpan2 = document.createElement('span');
+        commaSpan2.className = 'tag-name';
+        commaSpan2.textContent = ' , ';
+        postTagLink.appendChild(commaSpan2);
     
         const postTagSpan3 = document.createElement('span');
         postTagSpan3.className = 'tag-name';
@@ -96,7 +105,7 @@ function displayPosts(posts) {
       postLink.appendChild(titleElement);
 
       const infoElement = document.createElement('p');
-      infoElement.className = 'px-6 py-7 post-detail';
+      infoElement.className = 'px-7 py-7 post-detail';
       infoElement.textContent = post.postDetail;
       postLink.appendChild(infoElement);
 
@@ -122,18 +131,11 @@ function displayPosts(posts) {
       tagLink1.appendChild(tagDiv1);
       flexItemsElement.appendChild(tagLink1);
   
-      const tagLink2 = document.createElement('a');
-      tagLink2.href = '/Page SE SA AI BS/html/pageBusiness.html';
-      const tagDiv2 = document.createElement('div');
-      tagDiv2.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
-      tagDiv2.textContent = post.postTag ?? 'tag';
-      tagLink2.appendChild(tagDiv2);
-      flexItemsElement.appendChild(tagLink2);
-  
       const tagLink3 = document.createElement('a');
       tagLink3.href = '/Page SE SA AI BS/html/pageDigitalTransformation.html';
       const tagDiv3 = document.createElement('div');
       tagDiv3.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+
       tagDiv3.textContent = post.postTag ?? 'tag';
       tagLink3.appendChild(tagDiv3);
       flexItemsElement.appendChild(tagLink3);
@@ -144,79 +146,59 @@ function displayPosts(posts) {
       imgContainer.className = 'm-5';
   
       const imgLink = document.createElement('a');
-      imgLink.href = 'blogDetail.html';
   
       const imgElement = document.createElement('img');
-      imgElement.src = 'img/Business/8.webp';
-      imgElement.alt = 'img-post 4';
-      imgElement.className = 'w-full h-full';
+      imgElement.className = 'w-21 h-20';
   
       imgLink.appendChild(imgElement);
       imgContainer.appendChild(imgLink);
   
       postElement.appendChild(imgContainer);
+
+      const approveButton = document.createElement('button');
+      approveButton.textContent = 'Approve';
+
+      approveButton.classList.add('button', 'approve-button');
+      approveButton.addEventListener('click', () => {
+        approvePost(post.postsId); // Call a function to handle post approval
+      });
+      flexItemsElement.appendChild(approveButton);
+    
+      // Create reject button
+      const rejectButton = document.createElement('button');
+      rejectButton.textContent = 'Reject';
+      rejectButton.classList.add('button', 'reject-button');
+      
+      rejectButton.addEventListener('click', () => {
+        rejectPost(post.postsId); // Call a function to handle post rejection
+      });
+      flexItemsElement.appendChild(rejectButton);
   
       postContainer.appendChild(postElement);
       });
     }
 }
 
-  // Function to display all approved posts
-const displayAllPosts = () => {
-  getAllApprovedPosts()
-    .then((posts) => {
-      displayPosts(posts);
-    })
-    .catch((error) => {
-      console.error(error);
-      // Handle the error as needed
-    });
+const displayPostRequests = () => {
+    getPostRequest()
+      .then((posts) => {
+        displayPosts(posts);
+      })
+      .catch((error) => {
+        console.error(error);
+        // Handle the error as needed
+      });
 };
 
-  //GET LIST CATEGORIES
-const displayCategories = (categories) => {
-    const categoryList = document.querySelector('.absolute.hidden.text-gray-700.pt-1.group-hover\\:block');
-  
-    categories.forEach(category => {
-      const listItem = document.createElement('li');
-      const link = document.createElement('a');
-      link.className = 'rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white';
-      link.href = category.url ?? ''; 
-      link.textContent = category.content;
-  
-      listItem.appendChild(link);
-      categoryList.appendChild(listItem);
-    });
-};
+displayPostRequests();
 
-getAllCategory()
-  .then((cates) => {
-    displayCategories(cates);
-});
 
-// Call the displayAllPosts function when entering the page
-displayAllPosts();
+function approvePost(postId) {
+  // Logic to handle post approval
+  // Redirect or perform any necessary actions
+}
 
-  // SEARCH POSTS
-  const searchForm = document.querySelector('#search-form');
-  searchForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-  
-    const searchInput = document.querySelector('#simple-search');
-    const searchTerm = searchInput.value;
-  
-    if (searchTerm) {
-      searchedPosts(searchTerm)
-        .then((posts) => {
-          displayPosts(posts);
-        })
-        .catch((error) => {
-          console.error(error);
-          // Handle the error as needed
-        });
-    } else {
-      displayAllPosts();
-    }
-  
-    searchInput.value = ''; // Clear the search input
-  });
+function rejectPost(postId) {
+  // Logic to handle post rejection
+  // Redirect or perform any necessary actions
+}

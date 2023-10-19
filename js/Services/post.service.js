@@ -41,18 +41,15 @@ const searchedPosts = async (searchTerm) => {
 
 const createPost = async (post) => {
   try {
-    const response = await axios.get(`${endpoint}/create`, {
+    const response = await axios.post(`${endpoint}/create`, post, {
       headers: {
         Authorization: `Bearer ${token}`
-      },
-      body: {
-        post: post
       }
     });
-    return response.data;
+    console.log(response.data);
+    alert('Your Post created successfully!');
   } catch (error) {
-    console.error('Error searching posts:', error);
-    throw new Error("An error occurred. Please try again later.");
+    console.error('Error creating post:', error);
   }
 };
 
@@ -70,6 +67,40 @@ const getPostById = async (id) => {
   }
 };
 
+//TEACHER GET POST REQUESTS
+const getPostRequest = async () => {
+  try {
+    const response = await axios.get(`${endpoint}/postRequest`, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    if (error.response && error.response.status === 401) {
+      // Token is invalid or expired
+      alert('Please login again!');
+    }
+    throw new Error("An error occurred. Please try again later.");
+  }
+};
+
+const getPostRequestById = async (id) => {
+  try {
+    const response = await axios.get(`${endpoint}/postRequest/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error retrieving post:', error);
+    throw new Error("An error occurred while retrieving the post. Please try again later.");
+  }
+};
+
 export {
-    getAllApprovedPosts, searchedPosts, getPostById
+    getAllApprovedPosts, searchedPosts, getPostById, createPost, getPostRequest, getPostRequestById
 };
