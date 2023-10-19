@@ -1,16 +1,25 @@
 package com.swp.services;
 
+import com.swp.cms.reqDto.AwardRequest;
 import com.swp.entities.Award;
-import com.swp.repositories.AwardRepository;
+import com.swp.entities.Award;
+import com.swp.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
 public class AwardService {
     @Autowired
     private AwardRepository awardRepository;
+    @Autowired
+    private PostRepository postRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private AwardTypeRepository awardTypeRepository;
 
     public Award getById(int id) {
         return awardRepository.findById(id).orElseThrow();
@@ -30,5 +39,22 @@ public class AwardService {
 
     public List<Award> getAll() {
         return awardRepository.findAll();
+    }
+
+    public Award createAward(AwardRequest awardRequest){
+        Award award = new Award();
+        award.setPost(postRepository.findById(awardRequest.getPostID()).
+                orElseThrow(() -> new IllegalArgumentException("Invalid Post")));
+        award.setGivenByUser(userRepository.findById(awardRequest.getGivenByUserID()).
+                orElseThrow(() -> new IllegalArgumentException("Invalid User")));
+        award.setAwardType(awardTypeRepository.findById(awardRequest.getAwardTypeID()).
+                orElseThrow(() -> new IllegalArgumentException("Invalid Award Type")));
+        return awardRepository.save(award);
+    }
+    public Award updateAward(Integer awardID, AwardRequest awardRequest){
+        Award award = getById(awardID);
+        award.setAwardType(awardTypeRepository.findById(awardRequest.getAwardTypeID()).
+                orElseThrow(() -> new IllegalArgumentException("Invalid Award Type")));
+        return awardRepository.save(award);
     }
 }

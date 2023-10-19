@@ -12,4 +12,17 @@ public class CommentDto {
     private Post post;
     private User createdByUser;
     private Comment parentComment;
+    public Integer getCreatedByUser(){
+        return this.createdByUser.getUsId();
+    }
+    public Integer getPost(){
+        return this.post.getPostsId();
+    }
+    public Integer getParentComment() {
+        if (parentComment!= null) {
+            return parentComment.getId();
+        }
+        return null; // or handle the case when media or mediaUrl is null
+    }
+
 }
