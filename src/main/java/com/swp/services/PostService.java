@@ -10,12 +10,14 @@ import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,9 +31,11 @@ public class PostService {
     private UserRepository userRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+//    @PersistenceContext
+//    private EntityManager entityManager;
     private Integer userId;
     @PostConstruct
     public void initialize() {
@@ -74,28 +78,50 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Post createPost(PostRequest request) {
-        User createdByUser = userRepository.findById(request.getUserIdValue())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid User"));
-
-        Category belongedToCategory = categoryRepository.findById(request.getCategoryIdValue())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Category"));
-
+    public Post createPost(PostRequest postRequest) {
         Post post = new Post();
-        post.setTitle(request.getTitle());
-        post.setPostDetail(request.getDetail());
+        post.setCreatedByUser(userRepository.findById(postRequest.getUserID())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid User")));
+        post.setBelongedToCategory(categoryRepository.findById(postRequest.getCategoryID())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Category")));
+        post.setTitle(postRequest.getTitle());
+        post.setPostDetail(postRequest.getDetail());
         post.setCreatedTime(LocalDateTime.now());
-        post.setCreatedByUser(createdByUser);
-        post.setBelongedToCategory(belongedToCategory);
 
+        List<String> mediaUrls = postRequest.getMediaList(); // Change to a list of media URLs
+        if (mediaUrls != null && !mediaUrls.isEmpty()) {
+            List<Media> mediaList = new ArrayList<>();
+            for (String mediaUrl : mediaUrls) {
+                Media media = new Media();
+                media.setMediaUrl(mediaUrl);
+                media.setPost(post);
+                mediaList.add(media);
+            }
+            post.setMedias(mediaList);
+        }
+
+        List<Integer> tagIds = postRequest.getTagList(); // Change to a list of tag IDs
+        if (tagIds != null && !tagIds.isEmpty()) {
+            List<PostTag> postTagList = new ArrayList<>();
+            for (Integer tagId : tagIds) {
+                Tag tag = new Tag();
+                tag.setId(tagId);
+                PostTag postTag = new PostTag();
+                postTag.setTag(tag);
+                postTag.setPost(post);
+                postTagList.add(postTag);
+            }
+            post.setTags(postTagList);
+        }
         return postRepository.save(post);
     }
+
 
     public Post updatePost(Integer postId, PostRequest postRequest) {
         Post post = getById(postId);
         post.setTitle(postRequest.getTitle());
         post.setPostDetail(postRequest.getDetail());
-        post.setBelongedToCategory(categoryRepository.findById(postRequest.getCategoryIdValue())
+        post.setBelongedToCategory(categoryRepository.findById(postRequest.getCategoryID())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Category")));
 
         return postRepository.save(post); // Save and return the updated post
@@ -107,27 +133,27 @@ public class PostService {
     }
 
     //SAVE MEDIA AND TAG
-    @Transactional
-    public Post savePosts(Post createdPost) {
-
-        List<Media> mediaList = createdPost.getMedias();
-        if (mediaList != null && !mediaList.isEmpty()) {
-            for (Media media : mediaList) {
-                media.setPost(createdPost);
-                entityManager.persist(media);
-            }
-        }
-
-        List<PostTag> tagList = createdPost.getTags();
-        if (tagList != null && !tagList.isEmpty()) {
-            for (PostTag tag : tagList) {
-                tag.setPost(createdPost);
-                entityManager.persist(tag);
-            }
-        }
-
-        return createdPost;
-    }
+//    @Transactional
+//    public Post savePosts(Post createdPost) {
+//
+//        List<Media> mediaList = createdPost.getMedias();
+//        if (mediaList != null && !mediaList.isEmpty()) {
+//            for (Media media : mediaList) {
+//                media.setPost(createdPost);
+//                entityManager.persist(media);
+//            }
+//        }
+//
+//        List<PostTag> tagList = createdPost.getTags();
+//        if (tagList != null && !tagList.isEmpty()) {
+//            for (PostTag tag : tagList) {
+//                tag.setPost(createdPost);
+//                entityManager.persist(tag);
+//            }
+//        }
+//
+//        return createdPost;
+//    }
 
     //approve post
     public PostApprovals approvePost(Integer id) {
