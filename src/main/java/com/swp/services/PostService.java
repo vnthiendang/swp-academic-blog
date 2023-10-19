@@ -36,11 +36,9 @@ public class PostService {
     private UserRepository userRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+
     @Autowired
     private ModelMapper modelMapper;
-
-    //    @PersistenceContext
-//    private EntityManager entityManager;
     private Integer userId;
 
     @PostConstruct

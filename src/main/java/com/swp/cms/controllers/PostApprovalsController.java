@@ -11,9 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -31,16 +28,7 @@ public class PostApprovalsController {
         this.postApprovalsService = postApprovalsService;
     }
 
-    //    @RolesAllowed("ADMIN")
-//    @GetMapping("/getall")
-//    public List<PostApprovalsDto> getAll() {
-//        // Check authentication
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        List<PostApprovals> res = postApprovalsService.getAll();
-//        List<PostApprovalsDto> postApprovalsDtos = mapper.fromEntityToPostApprovalsDtoList(res);
-//        return postApprovalsDtos;
-//
-//    }
+
     @RolesAllowed("ADMIN")
     @GetMapping("/getall")
     public List<PostApprovalsDto> getAll() {
@@ -129,4 +117,5 @@ public class PostApprovalsController {
 //        }
 //
 //    }
+
 }
