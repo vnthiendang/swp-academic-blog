@@ -7,6 +7,7 @@ import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Data
@@ -18,6 +19,6 @@ public class PostApprovalsRequest {
     private Integer viewedByUser;
     @NotNull
     private String postApprovalsStatus;
-    private OffsetDateTime createdDate;
+    private LocalDateTime createdDate;
 
 }

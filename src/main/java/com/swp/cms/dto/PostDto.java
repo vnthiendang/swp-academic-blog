@@ -6,35 +6,53 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Data
 public class PostDto {
     private Integer postsId;
-
     private String title;
     private String postDetail;
     private User createdByUser;
     private Category belongedToCategory;
     private LocalDateTime createdTime;
-    private MediaDto media;
-    private PostTagDto postTag;
+    private List<MediaDto> mediaList;
+    private List<PostTagDto> postTagList;
 
     public String getCreatedByUser(){
         return this.createdByUser.getDisplay_name();
     }
+
     public String getBelongedToCategory(){
         return this.belongedToCategory.getContent();
     }
-    public String getMedia() {
-        if (media != null && media.getMediaUrl() != null) {
-            return media.getMediaUrl();
+
+    public List<String> getMediaList() {
+        if (mediaList != null) {
+            List<String> mediaUrls = new ArrayList<>();
+            for (MediaDto media : mediaList) {
+                if (media != null && media.getMediaUrl() != null) {
+                    mediaUrls.add(media.getMediaUrl());
+                }
+            }
+            return mediaUrls;
         }
-        return null; // or handle the case when media or mediaUrl is null
-    }
-    public Integer getPostTag(){
-        if(postTag != null && postTag.getId() != null){
-            return postTag.getId();
-        }
-        return null;
+        return Collections.emptyList(); // or handle the case when mediaList is null
     }
 
+    public List<Integer> getPostTagList(){
+        if (postTagList != null) {
+            List<Integer> tagIds = new ArrayList<>();
+            for (PostTagDto postTag : postTagList) {
+                if (postTag != null && postTag.getId() != null) {
+                    tagIds.add(postTag.getId());
+                }
+            }
+            return tagIds;
+        }
+        return Collections.emptyList(); // or handle the case when postTagList is null
+    }
 }
+

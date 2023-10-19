@@ -18,4 +18,13 @@ public interface PostRepository extends JpaRepository<Post, Integer>, JpaSpecifi
 
     @Query("SELECT p FROM Post p JOIN p.postApprovals pa WHERE pa.status = 'APPROVED'")
     List<Post> findAllApprovedPosts();
+
+//    @Query("SELECT DISTINCT p FROM Post p " +
+//            "JOIN p.tags pt " +
+//            "JOIN p.postApprovals pa " +
+//            "WHERE pa.status = 'APPROVED' " +
+//            "AND (:categoryId IS NULL OR p.belongedToCategory.cateId = :categoryId) " +
+//            "AND (:tagIds IS NULL OR pt.id IN :tagIds)")
+//    List<Post> findAllByCategoryAndTags(@Param("categoryId") Integer categoryId, @Param("tagIds") List<Integer> tagIds);
+
 }
