@@ -39,8 +39,9 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<PostApprovals> postApprovals;
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Media> medias = new ArrayList<>();
-    @OneToMany(mappedBy = "post")
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<PostTag> tags = new ArrayList<>();
 }
