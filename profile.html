@@ -1,0 +1,213 @@
+
+<!--Website: wwww.codingdung.com-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Profile</title>
+    <link rel="stylesheet" href="/BLOG_UPDATE_VER2.3 - Create 4 Page/src/profile.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!--header-->
+    <header class="flex items-center justify-between w-full bg-black text-white">
+        <div class="flex items-center">
+            <a href="home.html" class="items-start justify-center">
+                <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
+            </a>
+
+            <a href="/home.html" class="p-2">
+                FPT BLOG
+            </a>
+
+            <a href="/home.html" class="p-2">
+                Home
+            </a>
+            
+            <a href="/bestartice.html" class="p-2">
+                Best articles
+            </a>
+            
+            <!-- Category  -->
+            <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center">
+                    <span class="mr-1">Category</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="p-1 flex">
+            <form class="flex items-center" id="search-form">
+                <label for="simple-search" class="sr-only">Search</label>
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                        </svg>
+                    </div>
+                    <input type="text" id="simple-search"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search blog, tag, ..." required>
+                </div>
+                <button type="submit"
+                    class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </form>
+            <div class="flex items-center justify-center ">
+                <div class="mx-5">
+                    <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
+                        alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                </div>
+                <div class="pr-2">
+                    
+                    <div class="cursor-pointer">
+                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/login.html">Log out</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!--profile-->
+    <div class="container light-style flex-grow-1 container-p-y">
+        <h4 class="font-weight-bold py-3 mb-4 text-center">
+            Profile
+        </h4>
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list"
+                            href="#account-general">Information</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-change-password">Change password</a>
+
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-notifications">Manage Post</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Role</label>
+                                    <input type="text" class="form-control mb-1" value="Student" readonly>
+                                </div>
+                                <div class="form-group" >
+                                    <label class="form-label">Name</label id="nameField">
+                                    <input type="text" class="form-control" value="team1"readonly >
+                                </div>
+                                <div class="form-group" >
+                                    <label class="form-label">E-mail</label id="emailField">
+                                    <input type="text" class="form-control mb-1" value="team1@fpt.edu.Vietnam" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-change-password">
+                            <div class="card-body pb-2">
+                                <div class="form-group">
+                                    <label class="form-label">Current password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">New password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Repeat new password</label>
+                                    <input type="password" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="account-notifications">
+                            <div class="card-body pb-2">
+
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body pb-2">
+                                <h6 class="page-title">Manage Post</h6>
+                                <div class="form-group">
+                                    <table>
+                                        <thead>
+                                            <th>SN</th>
+                                            <th>Title</th>
+                                            <th>Tag</th>
+                                            <th colspan="3">Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>From Traditional to Tech-abled: The Future of Insurance in Vietnam</td>
+                                                <td>AI</td>
+                                                <td><a href="#" class="update">Update</td>
+                                                <td><a href="#" class="delete">Delete</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Analytics & Decision - Making: Unlock the Power of Data</td>
+                                                <td>Business</td>
+                                                <td><a href="#" class="update">Update</td>
+                                                <td><a href="#" class="delete">Delete</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Three Ways RPA Benefit Bankers</td>
+                                                <td>Technology</td>
+                                                <td><a href="#" class="update">Update</td>
+                                                <td><a href="#" class="delete">Delete</td>
+                                            </tr>
+                                        </tbody>
+  
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-right mt-3">
+            <button type="button" type="editButton" class="btn btn-primary">Edit</button>
+            <button type="button" type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" type="delete"class="btn btn-default">Cancel</button>
+        </div>
+    </div>
+    <script>
+        // Add an event listener to the "Edit" button
+        document.getElementById("editButton").addEventListener("click", function () {
+            // Toggle the readonly attribute for the input fields
+            document.getElementById("nameField").readOnly = !document.getElementById("nameField").readOnly;
+            document.getElementById("emailField").readOnly = !document.getElementById("emailField").readOnly;
+        });
+    </script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+</body>
+
+</html>
