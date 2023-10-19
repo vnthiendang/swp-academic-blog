@@ -15,4 +15,7 @@ public class UserDto {
     private String email;
     private LocalDateTime created_date;
     private Role role_id;
+    public Integer getRoleID(){
+        return this.role_id.getId();
+    }
 }

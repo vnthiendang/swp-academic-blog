@@ -1,14 +1,14 @@
 package com.swp.cms.controllers;
 
 import com.swp.cms.dto.VoteDto;
+import com.swp.cms.dto.VoteDto;
+import com.swp.cms.reqDto.VoteRequest;
+import com.swp.entities.Vote;
 import com.swp.entities.Vote;
 import com.swp.services.VoteService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,5 +42,20 @@ public class   VoteController {
         Vote vote = voteService.getById(id);
         VoteDto dto = modelMapper.map(vote,VoteDto.class);
         return dto;
+    }
+    @PostMapping("/post")
+    public VoteDto addVote(@RequestBody VoteRequest voteRequest) {
+//        Vote vote = modelMapper.map(voteRequest, Vote.class);
+        Vote createdVote = voteService.createVote(voteRequest);
+        VoteDto voteDto = modelMapper.map(createdVote, VoteDto.class);
+        return voteDto;
+    }
+
+    //Update a vote by vote id
+    @PutMapping("/{voteId}")
+    public VoteDto updateVote(@PathVariable Integer voteId, @RequestBody VoteRequest voteRequest) {
+        Vote updatedVote = voteService.updateVote(voteId, voteRequest);
+        VoteDto voteDto = modelMapper.map(updatedVote, VoteDto.class);
+        return voteDto;
     }
 }

@@ -6,6 +6,7 @@ import com.swp.repositories.CategoryRepository;
 import com.swp.repositories.PostApprovalsRepository;
 import com.swp.repositories.PostRepository;
 import com.swp.repositories.UserRepository;
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -31,11 +32,15 @@ public class PostService {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    User userDetails = (User) authentication.getPrincipal();
-    Integer userId = userDetails.getUsId();
-
+    private Integer userId;
+    @PostConstruct
+    public void initialize() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            User userDetails = (User) authentication.getPrincipal();
+            userId = userDetails.getUsId();
+        }
+    }
     public Post getById(Integer id) {
         List<Post> approvedPosts = postRepository.findAllApprovedPosts();
         Optional<Post> optionalPost = approvedPosts.stream()

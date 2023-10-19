@@ -1,6 +1,9 @@
 package com.swp.services;
 
+import com.swp.cms.reqDto.AwardTypeRequest;
 import com.swp.entities.AwardType;
+import com.swp.entities.AwardType;
+import com.swp.repositories.AwardTypeRepository;
 import com.swp.repositories.AwardTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +33,16 @@ public class AwardTypeService {
 
     public List<AwardType> getAll() {
         return awardTypeRepository.findAll();
+    }
+
+    public AwardType createAwardType(AwardTypeRequest awardTypeRequest){
+        AwardType awardType = new AwardType();
+        awardType.setAwardType(awardTypeRequest.getAwardType());
+        return awardTypeRepository.save(awardType);
+    }
+    public AwardType updateAwardType(Integer awardTypeID, AwardTypeRequest awardTypeRequest){
+        AwardType awardType = getById(awardTypeID);
+        awardType.setAwardType(awardTypeRequest.getAwardType());
+        return awardTypeRepository.save(awardType); // Save and return the updated post
     }
 }

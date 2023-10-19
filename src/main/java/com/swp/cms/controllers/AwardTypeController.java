@@ -1,15 +1,15 @@
 package com.swp.cms.controllers;
 import com.swp.cms.dto.AwardTypeDto;
+import com.swp.cms.dto.AwardTypeDto;
 import com.swp.cms.mapper.AwardTypeMapper;
+import com.swp.cms.reqDto.AwardTypeRequest;
+import com.swp.entities.AwardType;
 import com.swp.entities.AwardType;
 import com.swp.repositories.AwardTypeRepository;
 import com.swp.services.AwardTypeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class AwardTypeController {
         this.awardTypeRepository = awardTypeRepository;
     }
 
-    @GetMapping()
+    @GetMapping("/getall")
     public List<AwardTypeDto> getAll() {
         List<AwardType> awardTypes = awardTypeService.getAll();
         List<AwardTypeDto> dto = mapper.fromEntityToAwardTypeDtoList(awardTypes);
@@ -42,5 +42,20 @@ public class AwardTypeController {
         AwardType type = awardTypeService.getById(id);
         AwardTypeDto dto = mapper.fromEntityToAwardTypeDto(type);
         return dto;
+    }
+    @PostMapping("/post")
+    public AwardTypeDto addAwardType(@RequestBody AwardTypeRequest awardTypeRequest) {
+//        AwardType awardType = modelMapper.map(awardTypeRequest, AwardType.class);
+        AwardType createdAwardType = awardTypeService.createAwardType(awardTypeRequest);
+        AwardTypeDto awardTypeDto = modelMapper.map(createdAwardType, AwardTypeDto.class);
+        return awardTypeDto;
+    }
+
+    //Update a awardType by awardType id
+    @PutMapping("/{awardTypeId}")
+    public AwardTypeDto updateAwardType(@PathVariable Integer awardTypeId, @RequestBody AwardTypeRequest awardTypeRequest) {
+        AwardType updatedAwardType = awardTypeService.updateAwardType(awardTypeId, awardTypeRequest);
+        AwardTypeDto awardTypeDto = modelMapper.map(updatedAwardType, AwardTypeDto.class);
+        return awardTypeDto;
     }
 }

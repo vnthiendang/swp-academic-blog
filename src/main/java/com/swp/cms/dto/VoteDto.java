@@ -14,5 +14,14 @@ public class VoteDto {
     private User user;
     private VoteType voteType;
     private OffsetDateTime createdDate;
+    public Integer getPost(){
+        return this.post.getPostsId();
+    }
+    public Integer getUser(){
+        return this.user.getUsId();
+    }
+    public Integer getVoteType(){
+        return this.voteType.getId();
+    }
 
 }

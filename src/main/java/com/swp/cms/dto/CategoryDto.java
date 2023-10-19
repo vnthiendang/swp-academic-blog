@@ -10,12 +10,15 @@ import java.time.OffsetDateTime;
 @Data
 public class CategoryDto {
     private Integer id;
-    public Integer getId(){
-        return this.parentCategory.getCateId();
-    }
     private String content;
     @JsonIgnore
     private LocalDateTime createdDate;
     @JsonIgnore
     private Category parentCategory;
+    public Integer getParentCategory() {
+        if (parentCategory!= null) {
+            return parentCategory.getCateId();
+        }
+        return null; // or handle the case when media or mediaUrl is null
+    }
 }
