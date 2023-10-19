@@ -1,5 +1,8 @@
 package com.swp.services;
 
+import com.swp.cms.dto.MediaDto;
+import com.swp.cms.dto.PostDto;
+import com.swp.cms.dto.PostTagDto;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.*;
 import com.swp.repositories.CategoryRepository;
@@ -11,6 +14,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -34,9 +39,10 @@ public class PostService {
     @Autowired
     private ModelMapper modelMapper;
 
-//    @PersistenceContext
+    //    @PersistenceContext
 //    private EntityManager entityManager;
     private Integer userId;
+
     @PostConstruct
     public void initialize() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -45,6 +51,7 @@ public class PostService {
             userId = userDetails.getUsId();
         }
     }
+
     public Post getById(Integer id) {
         List<Post> approvedPosts = postRepository.findAllApprovedPosts();
         Optional<Post> optionalPost = approvedPosts.stream()
@@ -54,7 +61,7 @@ public class PostService {
         return optionalPost.orElse(null);
     }
 
-    public Post getPostById(Integer id){
+    public Post getPostById(Integer id) {
         return postRepository.findById(id).orElseThrow();
     }
 
@@ -74,7 +81,7 @@ public class PostService {
         return postRepository.findAllApprovedPosts();
     }
 
-    public List<Post> getAll(){
+    public List<Post> getAll() {
         return postRepository.findAll();
     }
 
@@ -180,4 +187,33 @@ public class PostService {
         post.setViewedByUser(currentUser);
         return postApprovalsRepository.save(post);
     }
+
+    public List<PostDto> mapPostsToPostDtos(List<Post> posts) {
+        return posts.stream()
+                .map(post -> {
+                    PostDto postDto = modelMapper.map(post, PostDto.class);
+                    postDto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
+                    }.getType()));
+                    postDto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
+                    }.getType()));
+                    return postDto;
+                })
+                .collect(Collectors.toList());
+    }
+
+    public PostDto mapPostToPostDto(Post post) {
+        PostDto dto = modelMapper.map(post, PostDto.class);
+        // Map mediaList and postTagList
+        dto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
+        }.getType()));
+        dto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
+        }.getType()));
+        return dto;
+    }
+
+//    public List<Post> filterPostsByCategoryAndTag(Integer categoryId, List<Integer> tagIds) {
+//        System.out.println("hellllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll2");
+//        return postRepository.findAllByCategoryAndTags(categoryId, tagIds);
+//    }
+
 }

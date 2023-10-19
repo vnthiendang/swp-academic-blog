@@ -39,29 +39,15 @@ public class PostController {
     @PostMapping("/create")
     public PostDto addPost(@RequestBody PostRequest postRequest) {
         Post post = postService.createPost(postRequest);
+        PostDto dto = postService.mapPostToPostDto(post);
 
-
-//        // Store media & tag
-//        createdPost = postService.savePosts(createdPost);
-
-        // Map the created Post entity to PostDto
-        PostDto dto = modelMapper.map(post, PostDto.class);
+//        // Map the created Post entity to PostDto
+//        PostDto dto = modelMapper.map(post, PostDto.class);
 //
-//        // Map dtos
-//        List<MediaDto> mediaDtoList = createdPost.getMedias().stream()
-//                .map(media -> modelMapper.map(media, MediaDto.class))
-//                .collect(Collectors.toList());
-//        List<PostTagDto> postTagDtoList = createdPost.getTags().stream()
-//                .map(postTag -> modelMapper.map(postTag, PostTagDto.class))
-//                .collect(Collectors.toList());
-//
-//        // Set dtos
-//        postDto.setMediaList(mediaDtoList);
-//        postDto.setPostTagList(postTagDtoList);
-        dto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
-        }.getType()));
-        dto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
-        }.getType()));
+//        dto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
+//        }.getType()));
+//        dto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
+//        }.getType()));
         return dto;
     }
 
@@ -70,20 +56,20 @@ public class PostController {
     @GetMapping("/search")
     public List<PostDto> searchPosts(@RequestParam("keyword") String keyword) {
         List<Post> searchResults = postService.searchPosts(keyword);
-
-        List<PostDto> postDtos = searchResults.stream()
-                .map(post -> {
-                    PostDto postDto = modelMapper.map(post, PostDto.class);
-
-                    // Map mediaList and postTagList using custom TypeMaps
-                    postDto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
-                    }.getType()));
-                    postDto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
-                    }.getType()));
-
-                    return postDto;
-                })
-                .collect(Collectors.toList());
+        List<PostDto> postDtos = postService.mapPostsToPostDtos(searchResults);
+//        List<PostDto> postDtos = searchResults.stream()
+//                .map(post -> {
+//                    PostDto postDto = modelMapper.map(post, PostDto.class);
+//
+//                    // Map mediaList and postTagList using custom TypeMaps
+//                    postDto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
+//                    }.getType()));
+//                    postDto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
+//                    }.getType()));
+//
+//                    return postDto;
+//                })
+//                .collect(Collectors.toList());
 
         return postDtos;
     }
@@ -91,21 +77,24 @@ public class PostController {
     //get approved posts
     @GetMapping("/GetAllApproved")
     public List<PostDto> getAllPostDtos() {
+        System.out.println("hellllllllllllllllllllllllllllllll1");
         List<Post> posts = postService.getAllApprovedPosts();
-
-        List<PostDto> dtos = posts.stream()
-                .map(post -> {
-                    PostDto postDto = modelMapper.map(post, PostDto.class);
-
-                    // Map mediaList and postTagList using custom TypeMaps
-                    postDto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
-                    }.getType()));
-                    postDto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
-                    }.getType()));
-
-                    return postDto;
-                })
-                .collect(Collectors.toList());
+        System.out.println("hellllllllllllllllllllllllllllllll2");
+        List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
+        System.out.println("hellllllllllllllllllllllllllllllll3");
+//        List<PostDto> dtos = posts.stream()
+//                .map(post -> {
+//                    PostDto postDto = modelMapper.map(post, PostDto.class);
+//
+//                    // Map mediaList and postTagList using custom TypeMaps
+//                    postDto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
+//                    }.getType()));
+//                    postDto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
+//                    }.getType()));
+//
+//                    return postDto;
+//                })
+//                .collect(Collectors.toList());
 
         return dtos;
     }
@@ -114,29 +103,43 @@ public class PostController {
     @GetMapping("/GetAllApproved/{id}")
     public PostDto getById(@PathVariable Integer id) {
         Post post = postService.getById(id);
-        PostDto dto = modelMapper.map(post, PostDto.class);
-        // Map mediaList and postTagList
-        dto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
-        }.getType()));
-        dto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
-        }.getType()));
+        PostDto dto = postService.mapPostToPostDto(post);
+//        PostDto dto = modelMapper.map(post, PostDto.class);
+//        // Map mediaList and postTagList
+//        dto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
+//        }.getType()));
+//        dto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
+//        }.getType()));
         return dto;
     }
 
-
+    // Filter posts by Category and Tag
+//    @GetMapping("/filter")
+//    public List<PostDto> filterPosts(@RequestParam(name = "categoryId", required = false) Integer categoryId,
+//                                     @RequestParam(name = "tagIds", required = false) List<Integer> tagIds) {
+//        System.out.println("hellllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll1");
+//        List<Post> filteredPosts = postService.filterPostsByCategoryAndTag(categoryId, tagIds);
+//        List<PostDto> postDtos = postService.mapPostsToPostDtos(filteredPosts);
+//
+//        return postDtos;
+//    }
     // ==================================================================================================== //
 
     // TEACHER ROLE
 
     @GetMapping("/postRequest")
     public List<PostDto> getAllPostRequest() {
-        List<PostDto> dtos = postMapper.fromEntityToPostDtoList(postService.getAll());
+        List<Post> posts = postService.getAll();
+        List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
+//        List<PostDto> dtos = postMapper.fromEntityToPostDtoList(postService.getAll());
         return dtos;
     }
 
     @GetMapping("/postRequest/{id}")
     public PostDto getRequestDetail(@PathVariable Integer id) {
-        PostDto dto = modelMapper.map(postService.getPostById(id), PostDto.class);
+        Post post = postService.getPostById(id);
+        PostDto dto = postService.mapPostToPostDto(post);
+//        PostDto dto = modelMapper.map(postService.getPostById(id), PostDto.class);
 
         return dto;
     }
