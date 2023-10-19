@@ -1,4 +1,6 @@
-// Get the form element by its id
+
+import { login } from "../js/Services/auth.service.js";
+
 const form = document.getElementById("login");
 
 // Add an event listener for the submit event
@@ -13,32 +15,12 @@ form.addEventListener("submit", async (event) => {
   // Create an object with the email and password as properties
   const data = { email, password };
 
-  // Use the Fetch API to send a POST request to the server with the data as JSON
-  try {
-    const response = await fetch("http://localhost:8080/blog/auth/authenticate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    // Check if the response status is OK (200)
-    if (response.ok) {
-      // Parse the response body as JSON and get the token
-      const { token } = await response.json();
-
-      // Store the token in the local storage or cookie
-      localStorage.setItem("token", token);
-
-      // Redirect to the home page or dashboard
-      window.location.href = "/home.html";
-    } else {
-      // If the response status is not OK, throw an error with the status text
-      throw new Error(response.statusText);
-    }
-  } catch (error) {
-    // If there is an error, display it in an alert box
-    alert(error.message);
+  const response = await login(data);
+  // Handle the response data
+  if (response && response.error) {
+    alert("Sorry! Something went wrong. " + response.error);
+  } else {
+    window.location.href = "/home.html";
   }
+
 });

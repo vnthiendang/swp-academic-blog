@@ -21,21 +21,16 @@
                 <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
             </a>
 
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/home.html" class="p-2">
+            <a href="/home.html" class="p-2">
                 FPT BLOG
             </a>
 
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/home.html" class="p-2">
+            <a href="/home.html" class="p-2">
                 Home
             </a>
             
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/bestartice.html" class="p-2">
+            <a href="/bestartice.html" class="p-2">
                 Best articles
-            </a>
-
-            <!-- login  -->
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/login.html" class="p-2">
-                Login
             </a>
             
             <!-- Category  -->
@@ -47,27 +42,12 @@
                     </svg>
                 </button>
                 <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-                    <li class="">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">Technoloy</a>
-                    </li>
-                    <li class="">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">AI</a>
-                    </li>
-                    <li class="w-full">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">Business</a>
-                    </li>
-                    <li class="w-full">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">Digital Transformation</a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
         <div class="p-1 flex">
-            <form class="flex items-center">
+            <form class="flex items-center" id="search-form">
                 <label for="simple-search" class="sr-only">Search</label>
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -79,7 +59,7 @@
                     </div>
                     <input type="text" id="simple-search"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search branch name..." required>
+                        placeholder="Search blog, tag, ..." required>
                 </div>
                 <button type="submit"
                     class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -91,29 +71,20 @@
                     <span class="sr-only">Search</span>
                 </button>
             </form>
-            <!-- <div class="group inline-block relative">
-                <button class="py-2 px-4 rounded inline-flex items-center">
-                    <span class="mr-1">Login</span>
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                </button>
-                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-                    <li class="">
-                        <a class="rounded-t bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/facebook">Facebook</a>
-                    </li>
-                    <li class="">
-                        <a class="bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/google">Google</a>
-                    </li>
-                    <li class="w-full">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-white"
-                            href="/apple">Apple</a>
-                    </li>
-                </ul>
-            </div> -->
+            <div class="flex items-center justify-center ">
+                <div class="mx-5">
+                    <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
+                        alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                </div>
+                <div class="pr-2">
+                    
+                    <div class="cursor-pointer">
+                        Log out
+                    </div>
+                </div>
+            </div>
         </div>
+
     </header>
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
@@ -135,677 +106,12 @@
             <div class="col-span-3">
                 <!-- selection  -->
                 <!-- <div class="w-full pt-0.5 bg-gray-300"></div> -->
-            
-                <!-- Post 1 -->
-                <div class="grid grid-cols-6 gap-4 bg-white" id="post">
+
+                <!-- List Approved Posts | Displayed from home.js -->
+                <div id="post">
 
                     <div class="col-span-5">
 
-                        <div class="flex w-full px-8 py-4 items-center">
-                            <div class="flex"> 
-                                <img src="img/Img For User/User1.jpg"alt="avatar" class="rounded-full w-8">
-                            </div> 
-                            <!-- Icon Avatar For User -->
-
-                            <!-- Tag Name -->
-                            <div class="ml-4">
-                                Le Cong Hung
-                                    <span class="text-gray-400">in</span> 
-                                    <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">
-                                        <span class="tag-name"> Technology </span>
-                                    </a>
-                            </div>
-
-                            <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-
-                            <!-- Date-Time -->
-                            <div> 
-                                October 10, 2023
-                            </div>
-
-                            <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-                            
-                            <!-- Public Or Private -->
-                            <div>
-                                Member only
-                            </div>
-
-                        </div>
-
-                        <a href="blog1.html"> <!-- Move to Post U Want -->
-
-                            <div class="font-semibold text-2xl px-8" id="title">
-                                Are You Ready for QA Automation?
-                            </div> <!-- Title -->
-
-                            <p class="px-8 py-4"> 
-                                As you look across the technology landscape you see the rise of new 
-                                technologies, more processing power, and continued innovation. However, even in this ...
-                            </p> <!-- Infomation -->    
-
-                        </a> 
-
-                        <div class="flex items-center justify-between px-8" id="tag">
-                            <div class="flex items-center">
-
-                                <!-- Icon-Tag -->
-                                <div class="icon-tag">
-                                    <img src="img/tag.png" alt="icon-tag">
-                                </div>
-
-                                <!-- Tag Name -->
-                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Technology
-                                    </div>
-                                </a>
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        AI
-                                    </div>
-                                </a> -->
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Business
-                                    </div>
-                                </a> -->
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Digital Transformation
-                                    </div>
-                                </a> -->
-
-                                <!-- Time Read -->
-                                <!-- <div> 
-                                    4 min read
-                                </div> -->
-
-                            </div>
-
-                            <!-- Function Share Like Infomation -->
-                            <!-- <div class="flex items-center">
-                                <i class="fa-regular fa-bookmark text-xl m-2"></i>
-
-                                <div class="border border-gray-800 px-1 rounded-full m-2">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </div>
-
-                                <i class="fa-solid fa-ellipsis m-2"></i>
-                            </div> -->
-                        </div>
-
-                    </div>
-
-                    <div class="m-5">
-                        <a href="blog1.html"> <!-- Move to Post U Want -->
-                            <img src="img/Technoloy/2.jpg" alt="img-post 1" class="w-full h-full">
-                        </a>
-                    </div>
-
-                </div>
-                <!-- End Post -->
-
-                <!-- Post 2 -->
-                <div class="grid grid-cols-6 gap-4 bg-white" id="post">
-
-                    <div class="col-span-5">
-                        
-                            <div class="flex w-full px-8 py-4 items-center">
-
-                                <div class="flex"> 
-                                    <img src="img/Img For User/User1.jpg"alt="avatar" class="rounded-full w-8">
-                                </div>
-
-                                <div class="ml-4">
-                                    Le Cong Hung
-                                        <span class="text-gray-400">in</span> 
-                                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">
-                                            <span class="tag-name"> Technology </span>
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <!-- <span class="tag-name"> AI </span> -->
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <!-- <span class="tag-name"> Business </span> -->
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <!-- <span class="tag-name"> Digital Transformation </span> -->
-                                        </a>
-                                </div>
-                                
-
-                                <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-                                <div>
-                                    Aug 2
-                                </div>
-                                <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-                                <div>
-                                    Member only
-                                </div>
-                            </div> <!-- Avatar Date-Time Public/Private -->
-
-                            <a href="blog1.html"> <!-- Move to Post U Want -->
-
-                                <div class="font-semibold text-2xl px-8" id="title">
-                                    Augmented Intelligence for LOGISTICS: Humans and Computers Work in Tandem   
-                                </div> <!-- Title -->
-
-                                <p class="px-8 py-4"> 
-                                    In recent years, artificial intelligence was 
-                                    tapped to disrupt and innovate several industries, including logistics. However, technologies alone cannot...
-                                </p> <!-- Infomation -->    
-
-                            </a>
-                        
-                        <div class="flex items-center justify-between px-8">
-                            <div class="flex items-center">
-
-                                <!-- Icon-Tag -->
-                                <div class="icon-tag">
-                                    <img src="img/tag.png" alt="icon-tag">
-                                </div>
-
-                                <!-- Tag Name -->
-                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Technology
-                                    </div>
-                                </a>
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        AI
-                                    </div>
-                                </a> -->
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Business
-                                    </div>
-                                </a> -->
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Digital Transformation
-                                    </div>
-                                </a> -->
-
-                                <!-- Time Read -->
-                                <!-- <div> 
-                                    4 min read
-                                </div> -->
-                            </div>
-
-                            <!-- Function Share Like Infomation -->
-                            <!-- <div class="flex items-center">
-                                <i class="fa-regular fa-bookmark text-xl m-2"></i>
-
-                                <div class="border border-gray-800 px-1 rounded-full m-2">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </div>
-
-                                <i class="fa-solid fa-ellipsis m-2"></i>
-                            </div> -->
-                        </div>
-
-                    </div>
-                    
-                    <div class="m-5">
-                        <a href="blog1.html"> <!-- Move to Post U Want -->
-                            <img src="img/Technoloy/3.jpg" alt="img-post 2" class="w-full h-full">
-                        </a>
-                    </div>
-
-                </div>
-                <!-- End Post -->
-
-                <!-- Post 3 -->
-                <div class="grid grid-cols-6 gap-4 bg-white" id="post">
-
-                    <div class="col-span-5">
-                        
-                            <div class="flex w-full px-8 py-4 items-center">
-
-                                <div class="flex"> 
-                                    <img src="img/Img For User/User1.jpg"alt="avatar" class="rounded-full w-8">
-                                </div>
-
-                                <div class="ml-4">
-                                    Le Cong Hung
-                                        <span class="text-gray-400">in</span> 
-                                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">
-                                            <!-- <span class="tag-name"> Technology </span> -->
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <span class="tag-name"> AI </span>
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <!-- <span class="tag-name"> Business </span> -->
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <!-- <span class="tag-name"> Digital Transformation </span> -->
-                                        </a>
-                                </div>
-                                
-
-                                <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-                                <div>
-                                    Aug 2
-                                </div>
-                                <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-                                <div>
-                                    Member only
-                                </div>
-                            </div> <!-- Avatar Date-Time Public/Private -->
-
-                            <a href="blog1.html"> <!-- Move to Post U Want -->
-
-                                <div class="font-semibold text-2xl px-8" id="title">
-                                    Personalizing Experiences with AI: 
-                                    The Future of Content Delivery
-                                </div> <!-- Title -->
-
-                                <p class="px-8 py-4"> 
-                                    The various ways content can be delivered have become 
-                                    significantly more targeted and technical. In the not-so-distant past, content was delivered physically...
-                                </p> <!-- Infomation -->    
-
-                            </a>
-                        
-                        <div class="flex items-center justify-between px-8">
-                            <div class="flex items-center">
-
-                                <!-- Icon-Tag -->
-                                <div class="icon-tag">
-                                    <img src="img/tag.png" alt="icon-tag">
-                                </div>
-
-                                <!-- Tag Name -->
-                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Technology
-                                    </div>
-                                </a>
-
-                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        AI
-                                    </div>
-                                </a>
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Business
-                                    </div>
-                                </a> -->
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Digital Transformation
-                                    </div>
-                                </a> -->
-
-                                <!-- Time Read -->
-                                <!-- <div> 
-                                    4 min read
-                                </div> -->
-                            </div>
-
-                            <!-- Function Share Like Infomation -->
-                            <!-- <div class="flex items-center">
-                                <i class="fa-regular fa-bookmark text-xl m-2"></i>
-
-                                <div class="border border-gray-800 px-1 rounded-full m-2">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </div>
-
-                                <i class="fa-solid fa-ellipsis m-2"></i>
-                            </div> -->
-                        </div>
-
-                    </div>
-                    
-                    <div class="m-5">
-                        <a href="blog1.html"> <!-- Move to Post U Want -->
-                            <img src="img/AI/4.jpeg" alt="img-post 3" class="w-full h-full">
-                        </a>
-                    </div>
-
-                </div>
-                <!-- End Post -->
-
-                <!-- Post 4 -->
-                <div class="grid grid-cols-6 gap-4 bg-white" id="post">
-
-                    <div class="col-span-5">
-                        
-                            <div class="flex w-full px-8 py-4 items-center">
-
-                                <div class="flex"> 
-                                    <img src="img/Img For User/User1.jpg"alt="avatar" class="rounded-full w-8">
-                                </div>
-
-                                <div class="ml-4">
-                                    Le Cong Hung
-                                        <span class="text-gray-400">in</span> 
-                                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">
-                                            <span class="tag-name"> Technology </span>
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <!-- <span class="tag-name"> AI </span> -->
-                                            <span class="tag-name"> , </span>
-                                            <span class="tag-name"> Business </span>
-                                            <span class="tag-name"> , </span>
-                                            <span class="tag-name"> Digital Transformation </span>
-                                        </a>
-                                </div>
-                                
-
-                                <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-                                <div>
-                                    Aug 2
-                                </div>
-                                <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-                                <div>
-                                    Member only
-                                </div>
-                            </div> <!-- Avatar Date-Time Public/Private -->
-
-                            <a href="blog1.html"> <!-- Move to Post U Want -->
-
-                                <div class="font-semibold text-2xl px-8" id="title">
-                                    COVID-19 Wave: Surf or Sink?
-                                </div> <!-- Title -->
-                                    
-                                <p class="px-8 py-4"> 
-                                    With Coronavirus (COVID-19) pandemic escalating every day,
-                                    millions of lives are affected, and businesses around 
-                                    the world are hit hard. According to the WEF,...
-                                </p> <!-- Infomation -->    
-
-                            </a>
-                        
-                        <div class="flex items-center justify-between px-8">
-                            <div class="flex items-center">
-
-                                <!-- Icon-Tag -->
-                                <div class="icon-tag">
-                                    <img src="img/tag.png" alt="icon-tag">
-                                </div>
-
-                                <!-- Tag Name -->
-                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Technology
-                                    </div>
-                                </a>
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        AI
-                                    </div>
-                                </a> -->
-
-                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Business
-                                    </div>
-                                </a>
-
-                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Digital Transformation
-                                    </div>
-                                </a>
-
-                                <!-- Time Read -->
-                                <!-- <div> 
-                                    4 min read
-                                </div> -->
-                            </div>
-
-                            <!-- Function Share Like Infomation -->
-                            <!-- <div class="flex items-center">
-                                <i class="fa-regular fa-bookmark text-xl m-2"></i>
-
-                                <div class="border border-gray-800 px-1 rounded-full m-2">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </div>
-
-                                <i class="fa-solid fa-ellipsis m-2"></i>
-                            </div> -->
-                        </div>
-
-                    </div>
-                    
-                    <div class="m-5">
-                        <a href="blog1.html"> <!-- Move to Post U Want -->
-                            <img src="img/Business/8.webp" alt="img-post 4" class="w-full h-full">
-                        </a>
-                    </div>
-
-                </div>
-                <!-- End Post -->
-
-                <!-- Post 5 -->
-                <div class="grid grid-cols-6 gap-4 bg-white" id="post">
-
-                    <div class="col-span-5">
-                        
-                            <div class="flex w-full px-8 py-4 items-center">
-
-                                <div class="flex"> 
-                                    <img src="img/Img For User/User1.jpg"alt="avatar" class="rounded-full w-8">
-                                    <!-- <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png" alt="avatar" class="rounded-full w-8"> -->
-                                    
-                                </div>
-
-                                <div class="ml-4">
-                                    Le Cong Hung
-                                        <span class="text-gray-400">in</span> 
-                                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">
-                                            <span class="tag-name"> Technology </span>
-                                            <span class="tag-name"> , </span>
-                                            <!-- <span class="tag-name"> AI </span> -->
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <span class="tag-name"> Business </span>
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <!-- <span class="tag-name"> Digital Transformation </span> -->
-                                        </a>
-                                </div>
-                                
-
-                                <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-                                <div>
-                                    Aug 2
-                                </div>
-                                <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-                                <div>
-                                    Member only
-                                </div>
-                            </div> <!-- Avatar Date-Time Public/Private -->
-
-                            <a href="blog1.html"> <!-- Move to Post U Want -->
-
-                                <div class="font-semibold text-2xl px-8" id="title">
-                                    COVID-19: Impacts across Key Sectors
-                                </div> <!-- Title -->
-                                    
-                                <p class="px-8 py-4"> 
-                                    The COVID-19 outbreak has brought
-                                    upon unprecedented challenges to the world economy, 
-                                    and is expected to have significant impacts on several sectors. This...
-                                </p> <!-- Infomation -->    
-
-                            </a>
-                        
-                        <div class="flex items-center justify-between px-8">
-                            <div class="flex items-center">
-
-                                <!-- Icon-Tag -->
-                                <div class="icon-tag">
-                                    <img src="img/tag.png" alt="icon-tag">
-                                </div>
-
-                                <!-- Tag Name -->
-                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Technology
-                                    </div>
-                                </a>
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        AI
-                                    </div>
-                                </a> -->
-
-                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Business
-                                    </div>
-                                </a>
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Digital Transformation
-                                    </div>
-                                </a> -->
-
-                                <!-- Time Read -->
-                                <!-- <div> 
-                                    4 min read
-                                </div> -->
-                            </div>
-
-                            <!-- Function Share Like Infomation -->
-                            <!-- <div class="flex items-center">
-                                <i class="fa-regular fa-bookmark text-xl m-2"></i>
-
-                                <div class="border border-gray-800 px-1 rounded-full m-2">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </div>
-
-                                <i class="fa-solid fa-ellipsis m-2"></i>
-                            </div> -->
-                        </div>
-
-                    </div>
-                    
-                    <div class="m-5">
-                        <a href="blog1.html"> <!-- Move to Post U Want -->
-                            <img src="img/Business/10.jpg" alt="img-post 5" class="w-full h-full">
-                        </a>
-                    </div>
-
-                </div>
-                <!-- End Post -->
-                
-                <!-- Post 6 -->
-                <div class="grid grid-cols-6 gap-4 bg-white" id="post">
-
-                    <div class="col-span-5">
-                        
-                            <div class="flex w-full px-8 py-4 items-center">
-
-                                <div class="flex"> 
-                                    <img src="img/Img For User/User1.jpg"alt="avatar" class="rounded-full w-8">
-                                    <!-- <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png" alt="avatar" class="rounded-full w-8"> -->
-                                    
-                                </div>
-
-                                <div class="ml-4">
-                                    Le Cong Hung
-                                        <span class="text-gray-400">in</span> 
-                                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">
-                                            <!-- <span class="tag-name"> Technology </span> -->
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <!-- <span class="tag-name"> AI </span> -->
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <!-- <span class="tag-name"> Business </span> -->
-                                            <!-- <span class="tag-name"> , </span> -->
-                                            <span class="tag-name"> Digital Transformation </span>
-                                        </a>
-                                </div>
-                                
-
-                                <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-                                <div>
-                                    Aug 2
-                                </div>
-                                <div class="p-0.5 bg-gray-900 rounded-full mx-4"></div>
-                                <div>
-                                    Member only
-                                </div>
-                            </div> <!-- Avatar Date-Time Public/Private -->
-
-                            <a href="blog1.html"> <!-- Move to Post U Want -->
-
-                                <div class="font-semibold text-2xl px-8" id="title">
-                                    The Ideal Operating Model for Digital Delivery
-                                </div> <!-- Title -->
-                                    
-                                <p class="px-8 py-4"> 
-                                    Digital transformation is no longer a "nice to have", 
-                                    but it is now necessary for every business. An organization 
-                                    can only survive in the future if they...
-                                </p> <!-- Infomation -->    
-
-                            </a>
-                        
-                        <div class="flex items-center justify-between px-8">
-                            <div class="flex items-center">
-
-                                <!-- Icon-Tag -->
-                                <div class="icon-tag">
-                                    <img src="img/tag.png" alt="icon-tag">
-                                </div>
-
-                                <!-- Tag Name -->
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Technology
-                                    </div>
-                                </a> -->
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        AI
-                                    </div>
-                                </a> -->
-
-                                <!-- <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Business
-                                    </div>
-                                </a> -->
-
-                                <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
-                                    <div class="rounded-xl bg-gray-300 text-gray-900 px-2 mr-4">
-                                        Digital Transformation
-                                    </div>
-                                </a>
-
-                                <!-- Time Read -->
-                                <!-- <div> 
-                                    4 min read
-                                </div> -->
-                            </div>
-
-                            <!-- Function Share Like Infomation -->
-                            <!-- <div class="flex items-center">
-                                <i class="fa-regular fa-bookmark text-xl m-2"></i>
-
-                                <div class="border border-gray-800 px-1 rounded-full m-2">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </div>
-
-                                <i class="fa-solid fa-ellipsis m-2"></i>
-                            </div> -->
-                        </div>
-
-                    </div>
-                    
-                    <div class="m-5">
-                        <a href="blog1.html"> <!-- Move to Post U Want -->
-                            <img src="img/Digital Transformation/3.webp" alt="img-post 6" class="w-full h-full">
-                        </a>
                     </div>
 
                 </div>
@@ -824,29 +130,7 @@
 
                     <!-- Tag Name -->
                     <div class="grid grid-cols-2 gap-4 flex-wrap mt-4">
-                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">
-                            <div class="rounded-2xl bg-gray-300 py-1 text-center">
-                                #Technology
-                            </div>
-                        </a>
 
-                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">
-                            <div class="rounded-2xl bg-gray-300 py-1 text-center">
-                                #AI
-                            </div>
-                        </a>
-
-                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">
-                            <div class="rounded-2xl bg-gray-300 py-1 text-center">
-                               #Business
-                            </div>
-                        </a>
-
-                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">
-                            <div class="rounded-2xl bg-gray-300 py-1 text-center">
-                                #Digital Transformation
-                            </div>
-                        </a>
                         
                     </div>
 
@@ -1015,7 +299,9 @@
                     href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
         </div>
     </footer>
+    <script type="module" src='./js/home.js'></script>
 </body>
-<script src="tailwind-config.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </html>
