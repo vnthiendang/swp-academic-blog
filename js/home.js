@@ -1,5 +1,6 @@
-import { getAllApprovedPosts } from "../js/Services/post.service.js";
+import { getAllApprovedPosts, searchedPosts } from "../js/Services/post.service.js";
 import { getAllCategory } from "./Services/category.service.js";
+import { getAllTag } from "./Services/tag.service.js";
 
 const options = {
   month: 'short', // Two-digit month (e.g., 01)
@@ -7,67 +8,77 @@ const options = {
   hour: '2-digit', // Two-digit hour (e.g., 14)
 };
 
-  function displayPosts(posts) {
-    const postContainer = document.getElementById('post');
+// DISPLAY LIST APPROVED POSTS
+function displayPosts(posts) {
+    
+    const postContainer = document.querySelector('#post .col-span-5');
+    postContainer.innerHTML = '';
+
+    if(posts.length === 0){
+      const noResultsElement = document.createElement('div');
+      noResultsElement.className = 'text-center text-4xl font-bold text-gray-500 dark:text-gray-400';
+      noResultsElement.textContent = 'No results related to your search. Please use other keywords.';
+      postContainer.appendChild(noResultsElement);
+    }else{
+      posts.forEach(post => {
+        
+        const postElement = document.createElement('div');
+        postElement.className = 'col-span-5';
   
-    posts.forEach((post) => {
-      const postElement = document.createElement('div');
-      postElement.className = 'col-span-5';
+        const flexElement = document.createElement('div');
+        flexElement.className = 'flex w-full px-8 py-4 items-center';
+    
+        const avatarImage = document.createElement('div');
+        avatarImage.className = 'flex';
+        const avatarImg = document.createElement('img');
+        avatarImg.src = 'img/Img For User/User1.jpg';
+        avatarImg.alt = 'avatar';
+        avatarImg.className = 'rounded-full w-8';
+        avatarImage.appendChild(avatarImg);
+        flexElement.appendChild(avatarImage);
+    
+        const createdByUser = document.createElement('div');
+        createdByUser.className = 'ml-4';
+        createdByUser.textContent = post.createdByUser;
+        const grayTextSpan = document.createElement('span');
+        grayTextSpan.className = 'text-gray-400';
+        grayTextSpan.textContent = ' in ';
+        createdByUser.appendChild(grayTextSpan);
   
-      const flexElement = document.createElement('div');
-      flexElement.className = 'flex w-full px-8 py-4 items-center';
+        const postTagLink = document.createElement('a');
+        postTagLink.href = '/Page SE SA AI BS/html/pageBusiness.html';
+    
+        const postTagSpan1 = document.createElement('span');
+        postTagSpan1.className = 'tag-name';
+        postTagSpan1.textContent = post.belongedToCategory;
+        postTagLink.appendChild(postTagSpan1);
+    
+        const commaSpan = document.createElement('span');
+        commaSpan.className = 'tag-name';
+        commaSpan.textContent = ' , ';
+        postTagLink.appendChild(commaSpan);
   
-      const avatarImage = document.createElement('div');
-      avatarImage.className = 'flex';
-      const avatarImg = document.createElement('img');
-      avatarImg.src = 'img/Img For User/User1.jpg';
-      avatarImg.alt = 'avatar';
-      avatarImg.className = 'rounded-full w-8';
-      avatarImage.appendChild(avatarImg);
-      flexElement.appendChild(avatarImage);
-  
-      const createdByUser = document.createElement('div');
-      createdByUser.className = 'ml-4';
-      createdByUser.textContent = post.createdByUser;
-      const grayTextSpan = document.createElement('span');
-      grayTextSpan.className = 'text-gray-400';
-      grayTextSpan.textContent = ' in ';
-      createdByUser.appendChild(grayTextSpan);
-  
-      const postTagLink = document.createElement('a');
-      postTagLink.href = '/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html';
-  
-      const postTagSpan1 = document.createElement('span');
-      postTagSpan1.className = 'tag-name';
-      postTagSpan1.textContent = post.belongedToCategory;
-      postTagLink.appendChild(postTagSpan1);
-  
-      const commaSpan = document.createElement('span');
-      commaSpan.className = 'tag-name';
-      commaSpan.textContent = ' , ';
-      postTagLink.appendChild(commaSpan);
-  
-      const postTagSpan2 = document.createElement('span');
-      postTagSpan2.className = 'tag-name';
-      postTagSpan2.textContent = '';
-      postTagLink.appendChild(postTagSpan2);
-  
-      const commaSpan2 = document.createElement('span');
-      commaSpan2.className = 'tag-name';
-      commaSpan2.textContent = ' , ';
-      postTagLink.appendChild(commaSpan2);
-  
-      const postTagSpan3 = document.createElement('span');
-      postTagSpan3.className = 'tag-name';
-      postTagSpan3.textContent = '';
-      postTagLink.appendChild(postTagSpan3);
-  
-      createdByUser.appendChild(postTagLink);
-      flexElement.appendChild(createdByUser);
-  
-      const dateTimeElement1 = document.createElement('div');
-      dateTimeElement1.className = 'p-0.5 bg-gray-900 rounded-full mx-4';
-      flexElement.appendChild(dateTimeElement1);
+        const postTagSpan2 = document.createElement('span');
+        postTagSpan2.className = 'tag-name';
+        postTagSpan2.textContent = '';
+        postTagLink.appendChild(postTagSpan2);
+    
+        const commaSpan2 = document.createElement('span');
+        commaSpan2.className = 'tag-name';
+        commaSpan2.textContent = ' , ';
+        postTagLink.appendChild(commaSpan2);
+    
+        const postTagSpan3 = document.createElement('span');
+        postTagSpan3.className = 'tag-name';
+        postTagSpan3.textContent = '';
+        postTagLink.appendChild(postTagSpan3);
+    
+        createdByUser.appendChild(postTagLink);
+        flexElement.appendChild(createdByUser);
+    
+        const dateTimeElement1 = document.createElement('div');
+        dateTimeElement1.className = 'p-0.5 bg-gray-900 rounded-full mx-4';
+        flexElement.appendChild(dateTimeElement1);
   
       const dateTimeElement2 = document.createElement('div');
       dateTimeElement2.className = 'date-time';
@@ -87,7 +98,7 @@ const options = {
       postElement.appendChild(flexElement);
   
       const postLink = document.createElement('a');
-      postLink.href = 'blog1.html';
+      postLink.href = 'blogDetail.html';
   
       const titleElement = document.createElement('div');
       titleElement.className = 'font-semibold text-2xl px-8';
@@ -114,7 +125,7 @@ const options = {
       flexItemsElement.appendChild(iconTagElement);
   
       const tagLink1 = document.createElement('a');
-      tagLink1.href = '/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html';
+      tagLink1.href = '/Page SE SA AI BS/html/pageTechnoloy.html';
       const tagDiv1 = document.createElement('div');
       tagDiv1.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';  
 
@@ -123,7 +134,7 @@ const options = {
       flexItemsElement.appendChild(tagLink1);
   
       const tagLink2 = document.createElement('a');
-      tagLink2.href = '/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html';
+      tagLink2.href = '/Page SE SA AI BS/html/pageBusiness.html';
       const tagDiv2 = document.createElement('div');
       tagDiv2.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
       tagDiv2.textContent = post.postTag ?? 'tag';
@@ -131,7 +142,7 @@ const options = {
       flexItemsElement.appendChild(tagLink2);
   
       const tagLink3 = document.createElement('a');
-      tagLink3.href = '/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html';
+      tagLink3.href = '/Page SE SA AI BS/html/pageDigitalTransformation.html';
       const tagDiv3 = document.createElement('div');
       tagDiv3.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
       tagDiv3.textContent = post.postTag ?? 'tag';
@@ -144,7 +155,7 @@ const options = {
       imgContainer.className = 'm-5';
   
       const imgLink = document.createElement('a');
-      imgLink.href = 'blog1.html';
+      imgLink.href = 'blogDetail.html';
   
       const imgElement = document.createElement('img');
       imgElement.src = 'img/Business/8.webp';
@@ -157,16 +168,24 @@ const options = {
       postElement.appendChild(imgContainer);
   
       postContainer.appendChild(postElement);
-    });
+      });
+    }
   }
 
-// Call the API function and pass the response to displayPosts
-getAllApprovedPosts()
-  .then((posts) => {
-    displayPosts(posts);
-  });
+  // Function to display all approved posts
+const displayAllPosts = () => {
+  getAllApprovedPosts()
+    .then((posts) => {
+      displayPosts(posts);
+    })
+    .catch((error) => {
+      console.error(error);
+      // Handle the error as needed
+    });
+};
 
-  const displayCategories = (categories) => {
+  //GET LIST CATEGORIES
+const displayCategories = (categories) => {
     const categoryList = document.querySelector('.absolute.hidden.text-gray-700.pt-1.group-hover\\:block');
   
     categories.forEach(category => {
@@ -179,9 +198,53 @@ getAllApprovedPosts()
       listItem.appendChild(link);
       categoryList.appendChild(listItem);
     });
-  };
+};
 
-  getAllCategory()
+getAllCategory()
   .then((cates) => {
     displayCategories(cates);
+});
+
+  //GET LIST TAGS
+const displayTags = (tags) => {
+  const categoryList = document.querySelector('.grid.grid-cols-2.gap-4.flex-wrap');
+
+  tags.forEach(tag => {
+    const link = document.createElement('a');
+    link.href = tag.url ?? 'http://localhost:8080/blog/tag/tagId';
+    link.innerHTML = `<div class="rounded-2xl bg-gray-300 py-1 text-center">${tag.tagName}</div>`;
+    categoryList.appendChild(link);
   });
+};
+
+getAllTag()
+  .then((tags) => {
+    displayTags(tags);
+});
+
+  // SEARCH POSTS
+const searchForm = document.querySelector('#search-form');
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const searchInput = document.querySelector('#simple-search');
+  const searchTerm = searchInput.value;
+
+  if (searchTerm) {
+    searchedPosts(searchTerm)
+      .then((posts) => {
+        displayPosts(posts);
+      })
+      .catch((error) => {
+        console.error(error);
+        // Handle the error as needed
+      });
+  } else {
+    displayAllPosts();
+  }
+
+  searchInput.value = ''; // Clear the search input
+});
+
+// Call the displayAllPosts function when entering the page
+displayAllPosts();

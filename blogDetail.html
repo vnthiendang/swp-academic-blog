@@ -16,19 +16,19 @@
     <!-- Header  -->
     <header class="flex items-center justify-between w-full bg-black text-white p-1">
         <div class="flex items-center">
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/homeafterlogin.html" class="items-start justify-center">
-                <img src="/BLOG_UPDATE_VER2.3 - Create 4 Page/img/Logo.png" alt="logo" class="w-16 h-auto">
+            <a href="/homeafterlogin.html" class="items-start justify-center">
+                <img src="/img/Logo.png" alt="logo" class="w-16 h-auto">
             </a>
             
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/homeafterlogin.html" class="p-2">
+            <a href="/homeafterlogin.html" class="p-2">
                 FPT BLOG
             </a>
             
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/homeafterlogin.html" class="p-2">
+            <a href="/homeafterlogin.html" class="p-2">
                 Home
             </a>
 
-            <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/create.html" class="p-2">
+            <a href="/create.html" class="p-2">
                 Post
             </a>
 
@@ -41,22 +41,7 @@
                     </svg>
                 </button>
                 <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-                    <li class="">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageTechnoloy.html">Technoloy</a>
-                    </li>
-                    <li class="">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageAI.html">AI</a>
-                    </li>
-                    <li class="w-full">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageBusiness.html">Business</a>
-                    </li>
-                    <li class="w-full">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/BLOG_UPDATE_VER2.3 - Create 4 Page/Page SE SA AI BS/html/pageDigitalTransformation.html">Digital Transformation</a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -73,7 +58,7 @@
                     </div>
                     <input type="text" id="simple-search"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search branch name..." required>
+                        placeholder="Search blog, tag..." required>
                 </div>
                 <button type="submit"
                     class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -93,44 +78,34 @@
     <Main>
         <div class="p-4 w-full flex items-center justify-start bg-stone-500">
             <div class="mt-4 ml-12 text-3xl font-sans">
-                <!-- Title  -->
-                <div class="mr-7">Solving the Modern Loneliness</div>
-                <div class="ml-4">Epidemic: Say I Do to AI</div>
-
-                <!-- content  -->
-                <div class="flex justify-between mt-6">
-                    <div>by <span class="text-orange-500">user01</span></div>
-                    <div>September 20,2023</div>
-                </div>
-
-                <!-- Reaction -->
-                <div class="flex justify-between mt-6 mx-4">
-                    <i class="fa-regular fa-heart cursor-pointer"></i>
-                    <i class="fa-solid fa-tags flex items-center cursor-pointer">
-                        <div class="text-base m-2">AI</div>
-                    </i>
-                </div>
+              <!-- Title  -->
+              <div class="mr-7" id="postTitle"></div>
+              <div class="ml-4" id="postSubtitle"></div>
+          
+              <!-- content  -->
+              <div class="flex justify-between mt-6">
+                <div>by <span class="text-orange-500" id="postAuthor"></span></div>
+                <div id="postDate"></div>
+              </div>
+          
+              <!-- Reaction -->
+              <div class="flex justify-between mt-6 mx-4">
+                <i class="fa-regular fa-heart cursor-pointer"></i>
+                <i class="fa-solid fa-tags flex items-center cursor-pointer">
+                  <div class="text-base m-2" id="postTag"></div>
+                </i>
+              </div>
             </div>
-        </div>
-
-        <!-- card  -->
-        <div class="w-full flex items-center justify-center m-5">
+          </div>
+          
+          <!-- card  -->
+          <div class="w-full flex items-center justify-center m-5">
             <div class="flex flex-col justify-between p-4 leading-normal  w-[60%]">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Post-COVID-19: How to
-                    Please Fast-Changing Customers with AI?</h5>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The pandemic has triggered a sudden
-                    socioeconomic shift from physical to digital, both for consumers and businesses. Consumers are
-                    rapidly switching to digital channels, as the number of first-time online buyers went up by 76
-                    percent2 and online orders increased by 80 percent in the first quarter3. This is tricky, even for a
-                    trillion-dollar e-commerce company like Amazon, which was overwhelmed by customers’ unpredictable
-                    purchasing patterns and bulk buying that it started nudging customers to shop less. Further, this
-                    pandemic has caused hiccups in many parts of a company’s operations, including inventory management,
-                    sales forecast, customer support, etc. and business leaders need to act fast to adapt to this
-                    ever-changing purchasing behaviour. </p>
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" id="postHeading"></h5>
+              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" id="postContent"></p>
             </div>
-            <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                src="./img/banner1.png" alt="">
-        </div>
+            <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" id="postImage" src="./img/banner1.png" alt="">
+          </div>
 
         <!-- comment -->
         <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
@@ -328,7 +303,9 @@
                     href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
         </div>
     </footer>
+    <script type="module" src='./js/home.js'></script>
 </body>
-<script src="/BLOG_UPDATE_VER2.3 - Create 4 Page/js/tailwind.config.js"></script>
+<script src="/js/tailwind.config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </html>
