@@ -96,7 +96,7 @@ function displayPosts(posts) {
       postElement.appendChild(flexElement);
   
       const postLink = document.createElement('a');
-      postLink.href = `blogDetail.html?postId=${post.postsId}`;
+      postLink.href = `index.html?postId=${post.postsId}`;
 
       const titleElement = document.createElement('div');
       titleElement.className = 'font-semibold text-2xl px-8';
@@ -194,11 +194,44 @@ displayPostRequests();
 
 
 function approvePost(postId) {
-  // Logic to handle post approval
-  // Redirect or perform any necessary actions
+  const baseUrl = 'http://localhost:8080/blog/post/postRequest/approve';
+
+  // Create the request URL by appending the postId to the base URL
+  const requestUrl = `${baseUrl}/${postId}`;
+
+  // Send the POST request using Axios
+  axios.post(requestUrl)
+    .then(response => {
+      // Logic to handle successful approval
+      alert('Post approved successfully.');
+      // Redirect or perform any necessary actions
+    })
+    .catch(error => {
+      // Logic to handle unsuccessful approval
+      alert('Failed to approve post:', error);
+      // Handle the error or display an appropriate message
+    });
 }
 
+// Import Axios library (if using a module bundler like Webpack)
+// import axios from 'axios';
+
 function rejectPost(postId) {
-  // Logic to handle post rejection
-  // Redirect or perform any necessary actions
+  const baseUrl = 'http://localhost:8080/blog/post/postRequest/reject';
+
+  // Create the request URL by appending the postId to the base URL
+  const requestUrl = `${baseUrl}/${postId}`;
+
+  // Send the POST request using Axios
+  axios.post(requestUrl)
+    .then(response => {
+      // Logic to handle successful approval
+      alert('Post rejected successfully.');
+      // Redirect or perform any necessary actions
+    })
+    .catch(error => {
+      // Logic to handle unsuccessful approval
+      console.error('Failed to reject post:', error);
+      // Handle the error or display an appropriate message
+    });
 }

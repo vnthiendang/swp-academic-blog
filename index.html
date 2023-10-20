@@ -121,60 +121,28 @@
     <!-- Main  -->
     <Main>
         <!-- card  -->
-        <div class="w-full flex items-center justify-center  bg-stone-500 ">
-            <div class="flex flex-col justify-between p-4 leading-normal  w-[40%] ">
-                <div class="">
-                    <!-- Title  -->
-                    <div class="">Solving the Modern Loneliness</div>
-                    <div class="ml-4">Epidemic: Say I Do to AI</div>
-
-                    <!-- content  -->
-                    <div class="flex justify-between mt-6">
-                        <div>by <span class="text-orange-500">user01</span></div>
-                        <div>September 20,2023</div>
-                    </div>
-
-                    <!-- Reaction -->
-                    <div class="flex justify-between mt-6 mx-4">
-                        <i class="fa-regular fa-heart cursor-pointer"></i>
-                        <i class="fa-solid fa-tags flex items-center cursor-pointer">
-                            <div class="text-base m-2">AI</div>
-                        </i>
-                    </div>
-                </div>
+        <div class="p-4 w-full flex items-center justify-start bg-stone-500">
+            <div class="mt-4 ml-12 text-3xl font-sans">
+              <!-- Title  -->
+              <div class="mr-7" id="postTitle"></div>
+              
+          
+              <!-- content  -->
+              <div class="flex justify-between mt-6">
+                <div>by <span class="text-orange-500" id="postAuthor"></span></div>
+                <div id="postDate"></div>
+              </div>
+          
+              <!-- Reaction -->
+              <div class="flex justify-between mt-6 mx-4">
+                <i class="fa-regular fa-heart cursor-pointer"></i>
+                <i class="fa-solid fa-tags flex items-center cursor-pointer">
+                  <div class="text-base m-2" id="postTag"></div>
+                </i>
+              </div>
             </div>
-        </div>
-        <div class="w-full flex items-center justify-center ">
-            <div class="flex flex-col justify-between p-4 leading-normal  w-[40%] ">
-                <div class="flex ">
-                    <div>
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Post-COVID-19:
-                            How
-                            to
-                            Please Fast-Changing Customers with AI?</h5>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The pandemic has triggered a sudden
-                            socioeconomic shift from physical to digital, both for consumers and businesses. Consumers
-                            are
-                            rapidly switching to digital channels, as the number of first-time online buyers went up by
-                            76
-                            percent2 and online orders increased by 80 percent in the first quarter3. This is tricky,
-                            even
-                            for a
-                            trillion-dollar e-commerce company like Amazon, which was overwhelmed by customers’
-                            unpredictable
-                            purchasing patterns and bulk buying that it started nudging customers to shop less. Further,
-                            this
-                            pandemic has caused hiccups in many parts of a company’s operations, including inventory
-                            management,
-                            sales forecast, customer support, etc. and business leaders need to act fast to adapt to
-                            this
-                            ever-changing purchasing behaviour. </p>
-                    </div>
-                    <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                        src="./img/banner1.png" alt="">
-                </div>
-            </div>
-        </div>
+          </div>
+
         <!-- comment -->
         <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
             <div class="max-w-2xl mx-auto px-4">
@@ -367,7 +335,10 @@
                     href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
         </div>
     </footer>
+
+    <script type="module" src='./js/postReview.js'></script>
 </body>
-<script src="tailwind-config.js"></script>
+<script src="./js/tailwind.config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </html>

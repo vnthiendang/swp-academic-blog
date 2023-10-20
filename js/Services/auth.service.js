@@ -40,22 +40,7 @@ const login = async (model) => {
         throw new Error("An error occurred. Please try again later.");
       }
   };
-
-const token = localStorage.getItem("token");
-
-const userInfo = async () => {
-  try {
-    const response = await axios.get(`http://localhost:8080/blog/user/profile`, {
-      headers: {
-        Authorization: `Bearer ${token}` 
-      }
-    });
-    return response.data;
-  } catch (error) {
-    alert(response.status);
-  }
-};
   
   export {
-    login, register, userInfo
+    login, register
   }

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Profile</title>
-    <link rel="stylesheet" href="/BLOG_UPDATE_VER2.3 - Create 4 Page/src/profile.css">
+    <link rel="stylesheet" href="/src/profile.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -78,7 +78,7 @@
                 <div class="pr-2">
                     
                     <div class="cursor-pointer">
-                        <a href="/BLOG_UPDATE_VER2.3 - Create 4 Page/login.html">Log out</a>
+                        <a href="/login.html">Log out</a>
                         
                     </div>
                 </div>
@@ -111,16 +111,16 @@
                             <hr class="border-light m-0">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label class="form-label">Role</label>
-                                    <input type="text" class="form-control mb-1" value="Student" readonly>
+                                  <label class="form-label">Role</label>
+                                  <input type="text" id="roleField" class="form-control mb-1" value="" readonly>
                                 </div>
-                                <div class="form-group" >
-                                    <label class="form-label">Name</label id="nameField">
-                                    <input type="text" class="form-control" value="team1"readonly >
+                                <div class="form-group">
+                                  <label class="form-label">Name</label>
+                                  <input type="text" id="nameField" class="form-control" value="" readonly>
                                 </div>
-                                <div class="form-group" >
-                                    <label class="form-label">E-mail</label id="emailField">
-                                    <input type="text" class="form-control mb-1" value="team1@fpt.edu.Vietnam" readonly>
+                                <div class="form-group">
+                                  <label class="form-label">E-mail</label>
+                                  <input type="text" id="emailField" class="form-control mb-1" value="" readonly>
                                 </div>
                             </div>
                         </div>
@@ -189,11 +189,13 @@
             </div>
         </div>
         <div class="text-right mt-3">
-            <button type="button" type="editButton" class="btn btn-primary">Edit</button>
-            <button type="button" type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" type="editButton" id="editButton" class="btn btn-primary">Edit</button>
+            <button type="button" type="submit" id="saveButton" class="btn btn-primary">Save changes</button>
             <button type="button" type="delete"class="btn btn-default">Cancel</button>
         </div>
     </div>
+
+    <!-- handle events -->
     <script>
         // Add an event listener to the "Edit" button
         document.getElementById("editButton").addEventListener("click", function () {
@@ -201,13 +203,59 @@
             document.getElementById("nameField").readOnly = !document.getElementById("nameField").readOnly;
             document.getElementById("emailField").readOnly = !document.getElementById("emailField").readOnly;
         });
+
+
+        // Add an event listener to the "Edit" button
+        document.getElementById("editButton").addEventListener("click", function () {
+        toggleEditableFields(true);
+        });
+
+        // Add an event listener to the "Save changes" button
+        document.getElementById("saveButton").addEventListener("click", function () {
+        saveChanges();
+        });
+
+        function toggleEditableFields(editable) {
+        const nameField = document.getElementById("nameField");
+        const emailField = document.getElementById("emailField");
+
+        nameField.readOnly = !editable;
+        emailField.readOnly = !editable;
+
+        if (editable) {
+            nameField.classList.add("editable");
+            emailField.classList.add("editable");
+        } else {
+            nameField.classList.remove("editable");
+            emailField.classList.remove("editable");
+        }
+        }
+
+        function saveChanges() {
+        const nameField = document.getElementById("nameField");
+        const emailField = document.getElementById("emailField");
+
+        const newName = nameField.value;
+        const newEmail = emailField.value;
+
+        // Perform actions to save the edited information
+        // For example, make an API call or update the database
+
+        // After saving the changes, toggle the fields back to readonly mode
+        toggleEditableFields(false);
+        }
     </script>
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+
+    <!-- <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
 
     </script>
-</body>
 
+    <script type="module" src="./js/profile.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+    
 </html>

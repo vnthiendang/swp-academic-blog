@@ -1,5 +1,6 @@
 
-import { login, userInfo } from "../js/Services/auth.service.js";
+import { login } from "../js/Services/auth.service.js";
+import { userInfo } from "../js/Services/profile.service.js";
 
 const form = document.getElementById("login");
 

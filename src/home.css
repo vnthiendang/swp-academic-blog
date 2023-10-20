@@ -78,6 +78,28 @@
     text-overflow: ellipsis;
 }
 
+/* Button styles */
+.button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Approve button styles */
+  .approve-button {
+    background-color: green;
+    color: white;
+  }
+  
+  /* Reject button styles */
+  .reject-button {
+    background-color: red;
+    color: white;
+  }
+
 /*========================== Tag Name Of Recommend Topics ==============================*/
 
 /* .bg-white .rounded-lg {
