@@ -162,12 +162,16 @@ public class PostService {
 
     //approve post
     public PostApprovals approvePost(Integer id) {
-        User currentUser = userRepository.findById(userId)
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        Integer userIds = userDetails.getUsId();
+
+        User currentUser = userRepository.findById(userIds)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User"));
 
         PostApprovals post = new PostApprovals();
-        post.setPost(getById(id));
-        post.setStatus("APPROVE");
+        post.setPost(getPostById(id));
+        post.setStatus("APPROVED");
         post.setCreatedDate(LocalDateTime.now());
         post.setViewedByUser(currentUser);
         return postApprovalsRepository.save(post);
@@ -175,11 +179,15 @@ public class PostService {
 
     //reject post
     public PostApprovals rejectPost(Integer id) {
-        User currentUser = userRepository.findById(userId)
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        Integer userIds = userDetails.getUsId();
+
+        User currentUser = userRepository.findById(userIds)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User"));
 
         PostApprovals post = new PostApprovals();
-        post.setPost(getById(id));
+        post.setPost(getPostById(id));
         post.setStatus("REJECTED");
         post.setCreatedDate(LocalDateTime.now());
         post.setViewedByUser(currentUser);
