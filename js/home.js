@@ -45,22 +45,12 @@ function displayPosts(posts) {
         createdByUser.appendChild(grayTextSpan);
   
         const postTagLink = document.createElement('a');
-        postTagLink.href = '/Page SE SA AI BS/html/pageBusiness.html';
+        postTagLink.href = '#';
     
-        const postTagSpan1 = document.createElement('span');
-        postTagSpan1.className = 'tag-name';
-        postTagSpan1.textContent = post.belongedToCategory;
-        postTagLink.appendChild(postTagSpan1);
-  
-        const postTagSpan2 = document.createElement('span');
-        postTagSpan2.className = 'tag-name';
-        postTagSpan2.textContent = '';
-        postTagLink.appendChild(postTagSpan2);
-    
-        const postTagSpan3 = document.createElement('span');
-        postTagSpan3.className = 'tag-name';
-        postTagSpan3.textContent = '';
-        postTagLink.appendChild(postTagSpan3);
+        const postTagSpan = document.createElement('span');
+        postTagSpan.className = 'tag-name';
+        postTagSpan.textContent = post.belongedToCategory;
+        postTagLink.appendChild(postTagSpan);
     
         createdByUser.appendChild(postTagLink);
         flexElement.appendChild(createdByUser);
@@ -115,46 +105,35 @@ function displayPosts(posts) {
   
       const tagLink1 = document.createElement('a');
       tagLink1.href = '/Page SE SA AI BS/html/pageTechnoloy.html';
-      const tagDiv1 = document.createElement('div');
-      tagDiv1.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';  
+      
+      const postTagList = document.createElement('div');
+        postTagList.className = 'post-tag-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+        post.postTagList.forEach(tag => {
+            const tagItem = document.createElement('span');
+            tagItem.textContent = tag;
+            postTagList.appendChild(tagItem);
+      });
+      // postElement.appendChild(postTagList);
 
-      tagDiv1.textContent = post.postTag ?? 'tag';
-      tagLink1.appendChild(tagDiv1);
+      tagLink1.appendChild(postTagList);
       flexItemsElement.appendChild(tagLink1);
-  
-      const tagLink2 = document.createElement('a');
-      tagLink2.href = '/Page SE SA AI BS/html/pageBusiness.html';
-      const tagDiv2 = document.createElement('div');
-      tagDiv2.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
-      tagDiv2.textContent = post.postTag ?? 'tag';
-      tagLink2.appendChild(tagDiv2);
-      flexItemsElement.appendChild(tagLink2);
-  
-      const tagLink3 = document.createElement('a');
-      tagLink3.href = '/Page SE SA AI BS/html/pageDigitalTransformation.html';
-      const tagDiv3 = document.createElement('div');
-      tagDiv3.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
-      tagDiv3.textContent = post.postTag ?? 'tag';
-      tagLink3.appendChild(tagDiv3);
-      flexItemsElement.appendChild(tagLink3);
   
       postElement.appendChild(flexItemsElement);
   
-      const imgContainer = document.createElement('div');
-      imgContainer.className = 'm-5';
-  
-      const imgLink = document.createElement('a');
-      imgLink.href = 'blogDetail.html';
-  
-      const imgElement = document.createElement('img');
-      imgElement.src = 'img/Business/8.webp';
-      imgElement.alt = 'img-post 4';
-      imgElement.className = 'w-full h-full';
-  
-      imgLink.appendChild(imgElement);
-      imgContainer.appendChild(imgLink);
-  
-      postElement.appendChild(imgContainer);
+      if(post.mediaList.length > 0){
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'm-5';
+        
+        const mediaList = document.createElement('div');
+        mediaList.className = 'media-list';
+        post.mediaList.forEach(media => {
+              const mediaItem = document.createElement('img');
+              mediaItem.src = media;
+              mediaList.appendChild(mediaItem);
+        });
+        imgContainer.appendChild(mediaList);
+        postElement.appendChild(imgContainer);
+      }
   
       postContainer.appendChild(postElement);
       });

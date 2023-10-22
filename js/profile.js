@@ -1,24 +1,9 @@
+import { userInfo } from '../js/Services/auth.service.js';
 
 
-
-const token = localStorage.getItem("token");
-
-const userInfo = async () => {
-  try {
-    const response = await axios.get(`http://localhost:8080/blog/user/profile`, {
-      headers: {
-        Authorization: `Bearer ${token}` 
-      }
-    });
-    return response.data;
-  } catch (error) {
-    alert(response.status);
-  }
-};
-  // Function to fetch user information from the API
 const getUserInfo = async () => {
 
-    const userInfos = userInfo;
+    const userInfos = await userInfo();
     console.log(userInfos);
   
     // Update the HTML with the user information
@@ -27,6 +12,5 @@ const getUserInfo = async () => {
     document.getElementById('emailField').value = userInfos.email;
 }
     
-  
   // Call the function to fetch and display the user information
   getUserInfo;

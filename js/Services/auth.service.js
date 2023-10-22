@@ -1,46 +1,34 @@
-import {apiUrl} from "./_endpoint.service.js"
+import * as request from '../utils/request.js'
 
-const login = async (model) => {
+export const login = async (model) => {
   try {
-    const response = await axios.post(`${apiUrl}/authenticate`, model, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await request.post('auth/authenticate', model);
+    const token = response.token;
+    localStorage.setItem('token', token);
 
-    if (response.status === 200) {
-      const { token } = response.data;
-      localStorage.setItem("token", token);
-    } else if (response.status === 401) {
-      alert(error.response);
-    } else {
-      throw new Error("An error occurred. Please try again later.");
-    }
+    const user = await userInfo();
+    return user;
   } catch (error) {
-    alert(error.response);
+    // Handle error here
+    throw error;
   }
-  };
+};
+   
+export const register = async (model) => {
+    const response = await request.post('auth/register', model);
+    return response;
+};
 
-  const register = async (model) => {
-      try {
-        const response = await axios.post(`${apiUrl}/register`, model,{
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.status === 200) {
-          const { token } = response.data;
-        }
-      } catch (error) {
-        console.error(error);
-        if (error.response) {
-          console.error("Response status:", error.response.status);
-        }
-        throw new Error("An error occurred. Please try again later.");
+export const userInfo = async () => {
+  try {
+    const response = await request.get(`user/profile`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       }
-  };
-  
-  export {
-    login, register
+    });
+    return response;
+  } catch (error) {
+    throw error;
   }
+};
+  
