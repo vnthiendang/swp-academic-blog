@@ -51,7 +51,6 @@ public class CategoryController {
     }
     @PostMapping("/post")
     public CategoryDto addCategory(@RequestBody CategoryRequest categoryRequest) {
-//        Category category = modelMapper.map(categoryRequest, Category.class);
         Category createdCategory = categoryService.createCategory(categoryRequest);
         CategoryDto categoryDto = modelMapper.map(createdCategory, CategoryDto.class);
         return categoryDto;

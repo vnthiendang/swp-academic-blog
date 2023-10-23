@@ -34,7 +34,6 @@ public class TagController {
 
     @GetMapping("/{id}")
     public TagDto getTagById(@PathVariable Integer id) {
-//                    System.out.println(" ID: hellosfdsdddddddddddddddddddddddddddddddddddddddddddddddd");
         Tag tag = tagService.getById(id);
         TagDto dto = modelMapper.map(tag, TagDto.class);
         return dto;
@@ -43,7 +42,6 @@ public class TagController {
     //create a tag
     @PostMapping("/create")
     public TagDto addTag(@RequestBody TagRequest tagRequest) {
-//        Tag tag = modelMapper.map(tagRequest, Tag.class);
         Tag createdTag = tagService.createTag(tagRequest);
         TagDto tagDto = modelMapper.map(createdTag, TagDto.class);
         return tagDto;

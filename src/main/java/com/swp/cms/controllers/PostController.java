@@ -49,12 +49,6 @@ public class PostController {
     @PutMapping("/edit/{id}")
     public PostDto updatePost(@PathVariable Integer id, @RequestBody PostRequest postRequest){
         Post post = postService.updatePost(id, postRequest);
-          System.out.println(" ID: " + post.getMedias());
-           System.out.println("Post ID: " + post.getAwards());
-           System.out.println("Status: " + post.getPostTags());
-            System.out.println("Created Date: " + post.getTags());
-            System.out.println("Viewed By User: " + post.getPostApprovals());
-            System.out.println("sucesssssssssssssssssssssssssssDto");
         PostDto dto = postService.mapPostToPostDto(post);
         return dto;
     }
@@ -124,7 +118,6 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     public List<PostDto> getAllPostRequest() {
         List<Post> posts = postService.getAll();
         List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
-//        List<PostDto> dtos = postMapper.fromEntityToPostDtoList(postService.getAll());
         return dtos;
     }
 
@@ -132,7 +125,6 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     public PostDto getRequestDetail(@PathVariable Integer id) {
         Post post = postService.getPostById(id);
         PostDto dto = postService.mapPostToPostDto(post);
-//        PostDto dto = modelMapper.map(postService.getPostById(id), PostDto.class);
 
         return dto;
     }

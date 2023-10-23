@@ -36,26 +36,14 @@ public class RoleController {
 
     @GetMapping("/{id}")
     public UserRoleDto getRoleById(@PathVariable Integer id) {
-//                    System.out.println(" ID: hellosfdsdddddddddddddddddddddddddddddddddddddddddddddddd");
         Role role = roleService.getById(id);
-//                    System.out.println(" ID: " + cate.getCateId());
-//            System.out.println("Post ID: " + cate.getContent());
-//            System.out.println("Status: " + cate.getParentRole());
-//            System.out.println("Created Date: " + cate.getCreatedDate());
-//            System.out.println("sucesssssssssssssssssssssssssssDto");
         UserRoleDto dto = modelMapper.map(role, UserRoleDto.class);
-//                    System.out.println(" ID: " + dto.getId());
-//            System.out.println("Post ID: " + dto.getContent());
-//            System.out.println("Status: " + dto.getParentRole());
-//            System.out.println("Created Date: " + dto.getCreatedDate());
-//            System.out.println("sucesssssssssssssssssssssssssssDto");
         return dto;
     }
 
     //create a role
     @PostMapping("/post")
     public UserRoleDto addRole(@RequestBody RoleRequest roleRequest) {
-//        Role role = modelMapper.map(roleRequest, Role.class);
         Role createdRole = roleService.createRole(roleRequest);
         UserRoleDto roleDto = modelMapper.map(createdRole, UserRoleDto.class);
         return roleDto;

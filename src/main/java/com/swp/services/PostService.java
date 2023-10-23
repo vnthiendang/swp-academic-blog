@@ -317,9 +317,4 @@ public class PostService {
     }
 
 
-//    public List<Post> filterPostsByCategoryAndTag(Integer categoryId, List<Integer> tagIds) {
-//        System.out.println("hellllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll2");
-//        return postRepository.findAllByCategoryAndTags(categoryId, tagIds);
-//    }
-
 }

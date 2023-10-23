@@ -47,27 +47,15 @@ public class CommentController {
 
     @GetMapping("/{id}")
     public CommentDto getCommentById(@PathVariable Integer id) {
-//                    System.out.println(" ID: hellosfdsdddddddddddddddddddddddddddddddddddddddddddddddd");
         Comment comment = commentService.getById(id);
-//                    System.out.println(" ID: " + comment.getId());
-//            System.out.println("Post ID: " + comment.getCommentText());
-//            System.out.println("Status: " + comment.getParentComment());
-//            System.out.println("Created Date: " + comment.getPost());
-//            System.out.println("Created Date: " + comment.getCreatedByUser());
-//            System.out.println("sucesssssssssssssssssssssssssssDto");
         CommentDto dto = modelMapper.map(comment, CommentDto.class);
-//        System.out.println("Post ID: " + dto.getCommentText());
-//        System.out.println("Status: " + dto.getParentComment());
-//        System.out.println("Created Date: " + dto.getPost());
-//        System.out.println("Created Date: " + dto.getCreatedByUser());
-            System.out.println("sucesssssssssssssssssssssssssssDto2");
+
         return dto;
     }
 
     //create a comment
     @PostMapping("/post")
     public CommentDto addComment(@RequestBody CommentRequest commentRequest) {
-//        Comment comment = modelMapper.map(commentRequest, Comment.class);
         Comment createdComment = commentService.createComment(commentRequest);
         CommentDto commentDto = modelMapper.map(createdComment, CommentDto.class);
         return commentDto;
