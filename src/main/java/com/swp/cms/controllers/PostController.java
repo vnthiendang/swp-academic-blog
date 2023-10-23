@@ -13,6 +13,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,8 +40,14 @@ public class PostController {
     @PostMapping("/create")
     public PostDto addPost(@RequestBody PostRequest postRequest) {
         Post post = postService.createPost(postRequest);
+//            System.out.println(" ID: " + post.getMedias());
+//            System.out.println("Post ID: " + post.getTags());
+//            System.out.println("Status: " + post.getTitle());
+//            System.out.println("Created Date: " + post.getPostsId());
+//            System.out.println("Viewed By User: " + post.getMedias());
+//            System.out.println("sucesssssssssssssssssssssssssssDto");
         PostDto dto = postService.mapPostToPostDto(post);
-
+        System.out.println("Post ID: " + dto.getTagList());
 //        // Map the created Post entity to PostDto
 //        PostDto dto = modelMapper.map(post, PostDto.class);
 //
@@ -75,30 +82,90 @@ public class PostController {
     }
 
     //get approved posts
-    @GetMapping("/GetAllApproved")
-    public List<PostDto> getAllPostDtos() {
-        System.out.println("hellllllllllllllllllllllllllllllll1");
-        List<Post> posts = postService.getAllApprovedPosts();
-        System.out.println("hellllllllllllllllllllllllllllllll2");
-        List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
-        System.out.println("hellllllllllllllllllllllllllllllll3");
-//        List<PostDto> dtos = posts.stream()
-//                .map(post -> {
-//                    PostDto postDto = modelMapper.map(post, PostDto.class);
+//    @GetMapping("/GetAllApproved")
+//    public List<PostDto> getAllPostDtos() {
+////        System.out.println("hellllllllllllllllllllllllllllllll1");
+//        List<Post> posts = postService.getAllApprovedPosts();
+////        System.out.println("hellllllllllllllllllllllllllllllll2");
+//        List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
+////        System.out.println("hellllllllllllllllllllllllllllllll3");
+////        List<PostDto> dtos = posts.stream()
+////                .map(post -> {
+////                    PostDto postDto = modelMapper.map(post, PostDto.class);
+////
+////                    // Map mediaList and postTagList using custom TypeMaps
+////                    postDto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
+////                    }.getType()));
+////                    postDto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
+////                    }.getType()));
+////
+////                    return postDto;
+////                })
+////                .collect(Collectors.toList());
 //
-//                    // Map mediaList and postTagList using custom TypeMaps
-//                    postDto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
-//                    }.getType()));
-//                    postDto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
-//                    }.getType()));
-//
-//                    return postDto;
-//                })
-//                .collect(Collectors.toList());
+//        return dtos;
+//    }
+//get all approved post by categoryId
+@GetMapping("/GetAllApproved/filter")
+public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
+        @RequestParam(name = "keyword", required = false) String keyword,
+        @RequestParam(name = "categoryId", required = false) Integer categoryId,
+        @RequestParam(name = "tagIds", required = false) List<Integer> tagIds) {
+    List<Post> approvedPosts = postService.getAllApprovedPosts();
 
+    if (categoryId != null) {
+        approvedPosts = postService.filterByCategoryId(approvedPosts, categoryId);
+    }
+
+    if (tagIds != null && !tagIds.isEmpty()) {
+        approvedPosts = postService.filterByTagIds(approvedPosts, tagIds);
+    }
+    if (keyword != null && !keyword.trim().isEmpty()){
+        approvedPosts = postService.GetPostsByKeyword(approvedPosts, keyword);
+    }
+    List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
+    return dtos;
+}
+
+    @GetMapping("/GetAllApproved")
+    public List<PostDto> getAllApprovedPostDtosByCategoryOrTag(
+            @RequestParam(name = "keyword", required = false) String keyword,
+            @RequestParam(name = "categoryId", required = false) Integer categoryId,
+            @RequestParam(name = "tagId", required = false) Integer tagId) {
+        List<Post> approvedPosts = postService.getAllApprovedPosts();
+        if (categoryId != null) {
+            approvedPosts = postService.GetPostsByCategoryId(approvedPosts, categoryId);
+        } else if (tagId != null) {
+            approvedPosts = postService.GetPostsByTagId(approvedPosts, tagId);
+        }
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            approvedPosts = postService.GetPostsByKeyword(approvedPosts, keyword);
+        }
+        List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
         return dtos;
     }
 
+//    @GetMapping("/GetAllApproved")
+//    public List<PostDto> getAllApprovedPostDtosByCategoryId(@RequestParam(name = "categoryId", required = true) Integer categoryId) {
+//        List<Post> approvedPosts = postService.getAllApprovedPosts();
+//
+//        if (categoryId != null) {
+//            approvedPosts = postService.GetPostsByCategoryId(approvedPosts, categoryId);
+//        }
+//        List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
+//        return dtos;
+//    }
+//
+//    @GetMapping("/GetAllApproved")
+//    public List<PostDto> getAllApprovedPostDtosByTagId(@RequestParam(name = "categoryId", required = true) Integer tagId) {
+//        List<Post> approvedPosts = postService.getAllApprovedPosts();
+//
+//        if (tagId != null) {
+//            approvedPosts = postService.GetPostsByTagId(approvedPosts, tagId);
+//        }
+//        List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
+//        return dtos;
+//    }
     //get post detail by post id
     @GetMapping("/GetAllApproved/{id}")
     public PostDto getById(@PathVariable Integer id) {
@@ -113,7 +180,8 @@ public class PostController {
         return dto;
     }
 
-    // Filter posts by Category and Tag
+
+//     //Filter posts by Category and Tag
 //    @GetMapping("/filter")
 //    public List<PostDto> filterPosts(@RequestParam(name = "categoryId", required = false) Integer categoryId,
 //                                     @RequestParam(name = "tagIds", required = false) List<Integer> tagIds) {

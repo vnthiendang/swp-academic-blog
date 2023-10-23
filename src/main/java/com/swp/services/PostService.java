@@ -5,10 +5,7 @@ import com.swp.cms.dto.PostDto;
 import com.swp.cms.dto.PostTagDto;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.*;
-import com.swp.repositories.CategoryRepository;
-import com.swp.repositories.PostApprovalsRepository;
-import com.swp.repositories.PostRepository;
-import com.swp.repositories.UserRepository;
+import com.swp.repositories.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -22,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +34,9 @@ public class PostService {
     private UserRepository userRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private TagRepository tagRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -109,14 +110,14 @@ public class PostService {
         if (tagIds != null && !tagIds.isEmpty()) {
             List<PostTag> postTagList = new ArrayList<>();
             for (Integer tagId : tagIds) {
-                Tag tag = new Tag();
-                tag.setId(tagId);
+                Tag tag = tagRepository.findById(tagId)
+                        .orElseThrow(() -> new IllegalArgumentException("Invalid Tag"));
                 PostTag postTag = new PostTag();
                 postTag.setTag(tag);
                 postTag.setPost(post);
                 postTagList.add(postTag);
             }
-            post.setTags(postTagList);
+            post.setPostTags(postTagList);
         }
         return postRepository.save(post);
     }
@@ -198,10 +199,6 @@ public class PostService {
         return posts.stream()
                 .map(post -> {
                     PostDto postDto = modelMapper.map(post, PostDto.class);
-                    postDto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
-                    }.getType()));
-                    postDto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
-                    }.getType()));
                     return postDto;
                 })
                 .collect(Collectors.toList());
@@ -210,12 +207,75 @@ public class PostService {
     public PostDto mapPostToPostDto(Post post) {
         PostDto dto = modelMapper.map(post, PostDto.class);
         // Map mediaList and postTagList
-        dto.setMediaList(modelMapper.map(post.getMedias(), new TypeToken<List<MediaDto>>() {
-        }.getType()));
-        dto.setPostTagList(modelMapper.map(post.getTags(), new TypeToken<List<PostTagDto>>() {
-        }.getType()));
         return dto;
     }
+
+    public List<Post> filterByCategoryId(List<Post> approvedPosts, Integer categoryId) {
+        if (categoryId == null) {
+            return approvedPosts;
+        } else {
+            Category category = categoryRepository.findById(categoryId)
+                    .orElseThrow(() -> new IllegalArgumentException("Category not found with ID: " + categoryId));
+            return approvedPosts.stream()
+                    .filter(post -> post.getBelongedToCategory().getCateId().equals(categoryId))
+                    .collect(Collectors.toList());
+        }
+    }
+
+    public List<Post> filterByTagIds(List<Post> approvedPosts, List<Integer> tagIds) {
+        if (tagIds == null || tagIds.isEmpty()) {
+            return approvedPosts;
+        } else {
+            for (Integer tagId : tagIds) {
+                if (tagRepository.findById(tagId).isEmpty()) {
+                    throw new IllegalArgumentException("Tag not found with ID: " + tagId);
+                }
+            }
+
+            return approvedPosts.stream()
+                    .filter(post -> new HashSet<>(post.getPostTags().stream()
+                            .map(PostTag::getTag)
+                            .map(Tag::getId)
+                            .collect(Collectors.toList()))
+                            .containsAll(tagIds))
+                    .collect(Collectors.toList());
+        }
+    }
+
+    public List<Post> GetPostsByCategoryId(List<Post> approvedPosts, Integer categoryId) {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Category not found with ID: " + categoryId));
+        return approvedPosts.stream()
+                .filter(post -> post.getBelongedToCategory().getCateId().equals(categoryId))
+                .collect(Collectors.toList());
+    }
+
+    public List<Post> GetPostsByTagId(List<Post> approvedPosts, Integer tagId) {
+        // Check if the tagId is valid
+        if (tagRepository.findById(tagId).isEmpty()) {
+            throw new IllegalArgumentException("Tag not found with ID: " + tagId);
+        }
+
+        return approvedPosts.stream()
+                .filter(post -> post.getPostTags().stream()
+                        .map(PostTag::getTag)
+                        .map(Tag::getId)
+                        .anyMatch(id -> id.equals(tagId))
+                )
+                .collect(Collectors.toList());
+    }
+
+    public List<Post> GetPostsByKeyword(List<Post> approvedPosts, String keyword) {
+        if (keyword != null && !keyword.isEmpty()) {
+            String lowercaseKeyword = keyword.toLowerCase().trim();
+            return approvedPosts.stream()
+                    .filter(post -> post.getTitle().toLowerCase().contains(lowercaseKeyword))
+                    .collect(Collectors.toList());
+        }
+        return approvedPosts; // Return the original list if keyword is not provided
+    }
+
+
 
 //    public List<Post> filterPostsByCategoryAndTag(Integer categoryId, List<Integer> tagIds) {
 //        System.out.println("hellllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll2");

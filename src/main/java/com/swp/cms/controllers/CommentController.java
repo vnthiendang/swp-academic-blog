@@ -33,22 +33,33 @@ public class CommentController {
 
         return commentDtos;
     }
+    //Get comments by postId
+    @GetMapping("/getall/{postId}")
+    public List<CommentDto> getAllByPostId(@PathVariable Integer postId) {
+        List<Comment> comments = commentService.getAll(); // Assuming this method returns all comments
+        List<CommentDto> commentDtos = comments.stream()
+                .filter(comment -> comment.getPost().getPostsId() == postId)
+                .map(comment -> modelMapper.map(comment, CommentDto.class))
+                .collect(Collectors.toList());
+
+        return commentDtos;
+    }
 
     @GetMapping("/{id}")
     public CommentDto getCommentById(@PathVariable Integer id) {
-                    System.out.println(" ID: hellosfdsdddddddddddddddddddddddddddddddddddddddddddddddd");
+//                    System.out.println(" ID: hellosfdsdddddddddddddddddddddddddddddddddddddddddddddddd");
         Comment comment = commentService.getById(id);
-                    System.out.println(" ID: " + comment.getId());
-            System.out.println("Post ID: " + comment.getCommentText());
-            System.out.println("Status: " + comment.getParentComment());
-            System.out.println("Created Date: " + comment.getPost());
-            System.out.println("Created Date: " + comment.getCreatedByUser());
-            System.out.println("sucesssssssssssssssssssssssssssDto");
+//                    System.out.println(" ID: " + comment.getId());
+//            System.out.println("Post ID: " + comment.getCommentText());
+//            System.out.println("Status: " + comment.getParentComment());
+//            System.out.println("Created Date: " + comment.getPost());
+//            System.out.println("Created Date: " + comment.getCreatedByUser());
+//            System.out.println("sucesssssssssssssssssssssssssssDto");
         CommentDto dto = modelMapper.map(comment, CommentDto.class);
-        System.out.println("Post ID: " + dto.getCommentText());
-        System.out.println("Status: " + dto.getParentComment());
-        System.out.println("Created Date: " + dto.getPost());
-        System.out.println("Created Date: " + dto.getCreatedByUser());
+//        System.out.println("Post ID: " + dto.getCommentText());
+//        System.out.println("Status: " + dto.getParentComment());
+//        System.out.println("Created Date: " + dto.getPost());
+//        System.out.println("Created Date: " + dto.getCreatedByUser());
             System.out.println("sucesssssssssssssssssssssssssssDto2");
         return dto;
     }

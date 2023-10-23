@@ -37,11 +37,29 @@ public class Post {
     @JoinColumn(name = "belonged_to_category_id")
     private Category belongedToCategory;
 
-    @OneToMany(mappedBy = "post")
-    private List<PostApprovals> postApprovals;
+    @OneToOne(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private PostApprovals postApprovals;
+
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Media> medias = new ArrayList<>();
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<PostTag> tags = new ArrayList<>();
+    private List<PostTag> postTags = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Award> awards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Vote> votes = new ArrayList<>();
+
+    public List<Tag> getTags() {
+        List<Tag> tags = new ArrayList<>();
+        for (PostTag postTag : postTags) {
+            tags.add(postTag.getTag());
+        }
+        return tags;
+    }
 }
