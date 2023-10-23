@@ -13,22 +13,18 @@ import java.util.List;
 public class PostRequest {
 
     private Integer postID;
-
     private Integer categoryID;
-
     private Integer userID;
-
     private LocalDateTime createdTime;
-
     @NotNull
     private String title;
-
     private String detail;
-
     private List<String> mediaList; // Change to a list of media URLs
     private List<Integer> tagList; // Change to a list of tag IDs
-    private List<Integer> postApprovals;
-
+    private Integer postApprovals;
+    private List<Integer> awardList;
+    private List<Integer> commentList;
+    private List<Integer> voteList;
 
 //    public Integer getUserIdValue() {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

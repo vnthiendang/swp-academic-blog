@@ -1,7 +1,6 @@
 package com.swp.cms.dto;
 
-import com.swp.entities.Category;
-import com.swp.entities.User;
+import com.swp.entities.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -18,21 +17,51 @@ public class PostDto {
     private User createdByUser;
     private Category belongedToCategory;
     private LocalDateTime createdTime;
-    private List<MediaDto> mediaList;
-    private List<PostTagDto> postTagList;
+    private PostApprovals postApprovals;
+    private List<Media> mediaList;
+    private List<Tag> tagList;
+    private List<Award> awardList;
+    private List<Comment> commentList;
+    private List<Vote> voteList;
 
     public String getCreatedByUser(){
         return this.createdByUser.getDisplay_name();
     }
 
     public String getBelongedToCategory(){
-        return this.belongedToCategory.getContent();
+        if (belongedToCategory != null) {
+            return this.belongedToCategory.getContent();
+        } else {
+            return "N/A"; // Or any other appropriate default value
+        }
     }
+
+    public String getPostApprovals() {
+        if (postApprovals != null) {
+            return postApprovals.getStatus();
+        } else {
+            return "N/A"; // Or any other appropriate default value
+        }
+    }
+
+//    public List<String> getMediaList() {
+//        if (mediaList != null) {
+//            List<String> mediaUrls = new ArrayList<>();
+//            for (MediaDto media : mediaList) {
+//                if (media != null && media.getMediaUrl() != null) {
+//                    mediaUrls.add(media.getMediaUrl());
+//                }
+//            }
+//            return mediaUrls;
+//        }
+//        return Collections.emptyList(); // or handle the case when mediaList is null
+//    }
+
 
     public List<String> getMediaList() {
         if (mediaList != null) {
             List<String> mediaUrls = new ArrayList<>();
-            for (MediaDto media : mediaList) {
+            for (Media media : mediaList) {
                 if (media != null && media.getMediaUrl() != null) {
                     mediaUrls.add(media.getMediaUrl());
                 }
@@ -42,17 +71,75 @@ public class PostDto {
         return Collections.emptyList(); // or handle the case when mediaList is null
     }
 
-    public List<Integer> getPostTagList(){
-        if (postTagList != null) {
-            List<Integer> tagIds = new ArrayList<>();
-            for (PostTagDto postTag : postTagList) {
-                if (postTag != null && postTag.getId() != null) {
-                    tagIds.add(postTag.getId());
+//    public List<Integer> getPostTagList(){
+//        if (postTagList != null) {
+//            List<Integer> tagIds = new ArrayList<>();
+//            for (PostTagDto postTag : postTagList) {
+//                if (postTag != null && postTag.getId() != null) {
+//                    tagIds.add(postTag.getId());
+//                }
+//            }
+//            return tagIds;
+//        }
+//        return Collections.emptyList(); // or handle the case when postTagList is null
+//    }
+
+    public List<Integer> getAwardList() {
+        if (awardList != null) {
+            List<Integer> awardIds = new ArrayList<>();
+            for (Award award : awardList) {
+                if (award != null && award.getId() != null) {
+                    awardIds.add(award.getId());
                 }
             }
-            return tagIds;
+            return awardIds;
         }
-        return Collections.emptyList(); // or handle the case when postTagList is null
+        return Collections.emptyList(); // or handle the case when awardList is null
     }
+
+    public List<Integer> getCommentList() {
+        if (commentList != null) {
+            List<Integer> commentIds = new ArrayList<>();
+            for (Comment comment : commentList) {
+                if (comment != null && comment.getId() != null) {
+                    commentIds.add(comment.getId());
+                }
+            }
+            return commentIds;
+        }
+        return Collections.emptyList(); // or handle the case when commentList is null
+    }
+
+    public List<Integer> getVoteList() {
+        if (voteList != null) {
+            List<Integer> voteIds = new ArrayList<>();
+            for (Vote vote : voteList) {
+                if (vote != null && vote.getId() != null) {
+                    voteIds.add(vote.getId());
+                }
+            }
+            return voteIds;
+        }
+        return Collections.emptyList(); // or handle the case when voteList is null
+    }
+public List<String> getTagList(){
+    if (tagList != null) {
+
+        List<String> tags = new ArrayList<>();
+        for (Tag tag : tagList) {
+            if (tag != null && tag.getId() != null) {
+                tags.add(tag.getTagName());
+                System.out.println("konulllllllllllllllllllllllllllllllll");
+                System.out.println(tag.getTagName());
+                System.out.println(tag.getId());
+            }
+        }
+        return tags;
+    }
+    System.out.println("nulllllllllllllllllllllllllllllllll");
+    return Collections.emptyList(); // or handle the case when postTagList is null
+}
+
+
 }
 

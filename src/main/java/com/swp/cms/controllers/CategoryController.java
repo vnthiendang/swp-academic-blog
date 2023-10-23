@@ -2,6 +2,7 @@ package com.swp.cms.controllers;
 
 import com.swp.cms.dto.CategoryDto;
 import com.swp.cms.dto.CategoryDto;
+import com.swp.cms.dto.CommentDto;
 import com.swp.cms.mapper.CategoryMapper;
 import com.swp.cms.reqDto.CategoryRequest;
 import com.swp.entities.Category;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/blog/category")
@@ -33,7 +35,9 @@ public class CategoryController {
     @GetMapping("/GetAll")
     public List<CategoryDto> getAll() {
         List<Category> cate = categoryService.getAll();
-        List<CategoryDto> categoryDtos = mapper.fromEntityToCategoryDtoList(cate);
+        List<CategoryDto> categoryDtos = cate.stream()
+                .map(category -> modelMapper.map(category, CategoryDto.class))
+                .collect(Collectors.toList());
         //return makeResponse(true, testingDto, "Get testing detail successful!");
         return categoryDtos;
     }
@@ -41,8 +45,8 @@ public class CategoryController {
     @GetMapping("/{id}")
     public CategoryDto getCateById(@PathVariable Integer id) {
 
-        Category cate = categoryService.getById(id);
-        CategoryDto categoryDto = mapper.fromEntityToCategoryDto(cate);
+        Category category = categoryService.getById(id);
+        CategoryDto categoryDto = modelMapper.map(category, CategoryDto.class);
         return categoryDto;
     }
     @PostMapping("/post")
