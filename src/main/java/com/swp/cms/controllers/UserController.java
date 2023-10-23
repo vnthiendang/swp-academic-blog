@@ -42,11 +42,11 @@ public class UserController {
         List<UserDto> userDto = mapper.fromEntityToUserDtoList(res);
         return userDto;
     }
-//
+//get user profile
     @GetMapping("/{id}")
     public UserDto getUserById(@PathVariable Integer id) {
         User us = userService.getById(id);
-        UserDto user = mapper.fromEntityToUserDto(us);
+        UserDto user = modelMapper.map(us, UserDto.class);
         return user;
     }
     @GetMapping("/profile")
