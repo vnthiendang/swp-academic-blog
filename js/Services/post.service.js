@@ -1,17 +1,15 @@
-const endpoint = "http://localhost:8080/blog/post";
+import * as request from '../utils/request.js'
 
 const token = localStorage.getItem("token");
 
-const getAllApprovedPosts = async () => {
+export const getAllApprovedPosts = async () => {
   try {
-    const response = await axios.get(`${endpoint}/GetAllApproved`, {
+    const response = await request.get(`post/GetAllApproved`, {
       headers: {
-        Authorization: `Bearer ${token}` // Include the token in the request headers
+        Authorization: `Bearer ${token}` 
       }
     });
-
-    console.log(response.data);
-    return response.data;
+    return response;
   } catch (error) {
     console.error('Error fetching posts:', error);
     if (error.response && error.response.status === 401) {
@@ -22,61 +20,78 @@ const getAllApprovedPosts = async () => {
   }
 };
 
-const searchedPosts = async (searchTerm) => {
+export const searchedPosts = async (keyword) => {
   try {
-    const response = await axios.get(`${endpoint}/search`, {
+    const response = await request.get(`post/search`, {
       headers: {
         Authorization: `Bearer ${token}`
       },
       params: {
-        keyword: searchTerm
+        keyword
       }
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.error('Error searching posts:', error);
     throw new Error("An error occurred. Please try again later.");
   }
 };
 
-const createPost = async (post) => {
+//STUDENT
+export const createPost = async (post) => {
   try {
-    const response = await axios.post(`${endpoint}/create`, post, {
+    const response = await request.post(`post/create`, post, {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${localStorage.getItem("token")}`
       }
     });
-    console.log(response.data);
-    alert('Your Post created successfully!');
+    return response;
+    
   } catch (error) {
     console.error('Error creating post:', error);
   }
 };
 
-const getPostById = async (id) => {
+//STUDENT
+export const getPostById = async (id) => {
   try {
-    const response = await axios.get(`${endpoint}/GetAllApproved/${id}`, {
+    const response = await request.get(`post/GetAllApproved/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.error('Error retrieving post:', error);
     throw new Error("An error occurred while retrieving the post. Please try again later.");
   }
 };
 
-//TEACHER GET POST REQUESTS
-const getPostRequest = async () => {
+//STUDENT
+export const getCommentById = async (postId) => {
   try {
-    const response = await axios.get(`${endpoint}/postRequest`, {
+    const response = await request.get(`comment/getall/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error retrieving comment:', error);
+    throw new Error("An error occurred while retrieving the comment. Please try again later.");
+  }
+};
+
+//TEACHER GET POST REQUESTS
+export const getPostRequest = async () => {
+  try {
+    const response = await request.get(`post/postRequest`, {
       headers: {
         Authorization: `Bearer ${token}` 
       }
     });
 
-    return response.data;
+    return response;
   } catch (error) {
     console.error('Error fetching posts:', error);
     if (error.response && error.response.status === 401) {
@@ -87,20 +102,31 @@ const getPostRequest = async () => {
   }
 };
 
-const getPostRequestById = async (id) => {
+//TEACHER
+export const getPostRequestById = async (id) => {
   try {
-    const response = await axios.get(`${endpoint}/postRequest/${id}`, {
+    const response = await request.get(`post/postRequest/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.error('Error retrieving post:', error);
     throw new Error("An error occurred while retrieving the post. Please try again later.");
   }
 };
 
-export {
-    getAllApprovedPosts, searchedPosts, getPostById, createPost, getPostRequest, getPostRequestById
+//STUDENT, TEACHER
+export const createComment = async (model) => {
+  try {
+    const response = await request.post(`comment/post`, model,{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error creating comment:', error);
+  } 
 };

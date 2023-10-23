@@ -15,11 +15,11 @@ form.addEventListener("submit", async (event) => {
     const userData = await login(data);
     const roleId = userData.role_id;
 
-    if (roleId === 1) {
+    if (roleId === 'Admin') {
       window.location.href = "../managerAdmin.html";
-    } else if (roleId === 2) {
+    } else if (roleId === 'Teacher') {
       window.location.href = "../teacherPage.html";
-    } else if (roleId === 3) {
+    } else if (roleId === 'Student') {
       window.location.href = "../home.html";
     }
   } catch (error) {

@@ -77,7 +77,7 @@ function displayPosts(posts) {
       postElement.appendChild(flexElement);
   
       const postLink = document.createElement('a');
-      postLink.href = `blogDetail.html?postId=${post.postsId}`;
+      postLink.href = `blogDetail.html?belongedToPostID=${post.postsId}`;
 
       const titleElement = document.createElement('div');
       titleElement.className = 'font-semibold text-2xl px-8';
@@ -94,6 +94,19 @@ function displayPosts(posts) {
   
       const flexItemsElement = document.createElement('div');
       flexItemsElement.className = 'flex items-center px-8';
+
+      const voteIcon = document.createElement('i');
+      voteIcon.className = 'fa-solid fa-thumbs-up flex items-center cursor-pointer';
+      flexItemsElement.appendChild(voteIcon);
+
+      const voteList = document.createElement('div');
+      voteList.className = 'vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+      post.voteList.forEach(vote => {
+          const item = document.createElement('span');
+          item.textContent = vote + '  ';
+          voteList.appendChild(item);
+      });
+      flexItemsElement.appendChild(voteList);
   
       const iconTagElement = document.createElement('div');
       iconTagElement.className = 'icon-tag';
@@ -108,7 +121,7 @@ function displayPosts(posts) {
       
       const postTagList = document.createElement('div');
         postTagList.className = 'post-tag-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
-        post.postTagList.forEach(tag => {
+        post.tagList.forEach(tag => {
             const tagItem = document.createElement('span');
             tagItem.textContent = tag;
             postTagList.appendChild(tagItem);

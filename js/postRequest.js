@@ -4,7 +4,7 @@ const options = {
     month: 'short', // Two-digit month (e.g., 01)
     day: '2-digit', // Two-digit day (e.g., 18)
     hour: '2-digit', // Two-digit hour (e.g., 14)
-  };
+};
 
 // DISPLAY LIST POSTS
 function displayPosts(posts) {
