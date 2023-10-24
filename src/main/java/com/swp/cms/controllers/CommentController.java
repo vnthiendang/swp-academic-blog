@@ -47,6 +47,7 @@ public class CommentController {
 
     @GetMapping("/{id}")
     public CommentDto getCommentById(@PathVariable Integer id) {
+
         Comment comment = commentService.getById(id);
         CommentDto dto = modelMapper.map(comment, CommentDto.class);
 

@@ -28,7 +28,9 @@ public class PostDto {
         return this.createdByUser.getDisplay_name();
     }
 
+
     public String getBelongedToCategory() {
+
         if (belongedToCategory != null) {
             return this.belongedToCategory.getContent();
         } else {
@@ -43,6 +45,20 @@ public class PostDto {
             return "N/A"; // Or any other appropriate default value
         }
     }
+
+//    public List<String> getMediaList() {
+//        if (mediaList != null) {
+//            List<String> mediaUrls = new ArrayList<>();
+//            for (MediaDto media : mediaList) {
+//                if (media != null && media.getMediaUrl() != null) {
+//                    mediaUrls.add(media.getMediaUrl());
+//                }
+//            }
+//            return mediaUrls;
+//        }
+//        return Collections.emptyList(); // or handle the case when mediaList is null
+//    }
+
 
     public List<String> getMediaList() {
         if (mediaList != null) {
@@ -63,6 +79,7 @@ public class PostDto {
             for (Award award : awardList) {
                 if (award != null && award.getId() != null) {
                     awardIds.add(award.getAwardType().getAwardType());
+
                 }
             }
             return awardIds;
@@ -81,6 +98,7 @@ public class PostDto {
             return commentIds;
         }
         return Collections.emptyList(); // or handle the case when commentList is null
+
     }
 
     public List<Integer> getVoteList() {
@@ -110,6 +128,7 @@ public class PostDto {
 
         return Collections.emptyList(); // or handle the case when postTagList is null
     }
+
 
 
 }
