@@ -23,16 +23,19 @@ public class PostDto {
     private List<Award> awardList;
     private List<Comment> commentList;
     private List<Vote> voteList;
+
     private Integer vote1Count = 0;
     private Integer vote2Count = 0;
     private Integer wordCount = 0;
     private Integer readingTime = 0;
+
 
     public String getCreatedByUser() {
         return this.createdByUser.getDisplay_name();
     }
 
     public String getBelongedToCategory() {
+
         if (belongedToCategory != null) {
             return this.belongedToCategory.getContent();
         } else {
@@ -47,6 +50,20 @@ public class PostDto {
             return "N/A"; // Or any other appropriate default value
         }
     }
+
+//    public List<String> getMediaList() {
+//        if (mediaList != null) {
+//            List<String> mediaUrls = new ArrayList<>();
+//            for (MediaDto media : mediaList) {
+//                if (media != null && media.getMediaUrl() != null) {
+//                    mediaUrls.add(media.getMediaUrl());
+//                }
+//            }
+//            return mediaUrls;
+//        }
+//        return Collections.emptyList(); // or handle the case when mediaList is null
+//    }
+
 
     public List<String> getMediaList() {
         if (mediaList != null) {
@@ -67,6 +84,7 @@ public class PostDto {
             for (Award award : awardList) {
                 if (award != null && award.getId() != null) {
                     awardIds.add(award.getAwardType().getAwardType());
+
                 }
             }
             return awardIds;
@@ -102,6 +120,7 @@ public class PostDto {
             }
             return voteIds;
         }
+
         return Collections.emptyList(); // or handle the case when voteList is null
     }
 
@@ -119,6 +138,7 @@ public class PostDto {
 
         return Collections.emptyList(); // or handle the case when postTagList is null
     }
+
     public Integer getReadingTime() {
         if (postDetail != null) {
             // Split the postDetail into words by whitespace and count them
@@ -133,6 +153,7 @@ public class PostDto {
            return readingTime = 0;
         }
     }
+
 
 }
 

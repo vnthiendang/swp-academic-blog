@@ -15,7 +15,7 @@
 	<name>swd</name>
 	<description>Table Reservation</description>
 	<properties>
-		<java.version>15</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -104,11 +104,6 @@
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven.surefire</groupId>
-			<artifactId>maven-surefire-common</artifactId>
-			<version>3.0.0</version>
 		</dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
