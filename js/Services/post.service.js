@@ -130,3 +130,36 @@ export const createComment = async (model) => {
     console.error('Error creating comment:', error);
   } 
 };
+
+export const getPostByCategory = async (categoryId) => {
+  try {
+    const response = await request.get('post/GetAllApproved', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      params: {
+        categoryId
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error retrieving post by category:', error);
+    throw new Error("An error occurred while retrieving the post by category. Please try again later.");
+  }
+};
+
+export const getPostByTag = async (tagId) => {
+  try {
+    const response = await request.get('post/GetAllApproved', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      params: {
+        tagId
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error retrieving post by tag:', error);
+  }
+};

@@ -19,10 +19,11 @@ function displayPosts(posts) {
       noResultsElement.textContent = 'No results related to your search. Please use other keywords.';
       postContainer.appendChild(noResultsElement);
     }else{
-      posts.forEach(post => {
-        
+      for (var i = 0; i < posts.length; i++){
+        var post = posts[i];
+
         const postElement = document.createElement('div');
-        postElement.className = 'col-span-5';
+        postElement.className = '';
   
         const flexElement = document.createElement('div');
         flexElement.className = 'flex w-full px-8 py-4 items-center';
@@ -117,7 +118,7 @@ function displayPosts(posts) {
       flexItemsElement.appendChild(iconTagElement);
   
       const tagLink1 = document.createElement('a');
-      tagLink1.href = '/Page SE SA AI BS/html/pageTechnoloy.html';
+      tagLink1.href = '/pageByCategory.html?tagId';
       
       const postTagList = document.createElement('div');
         postTagList.className = 'post-tag-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
@@ -149,7 +150,7 @@ function displayPosts(posts) {
       }
   
       postContainer.appendChild(postElement);
-      });
+      }
     }
 }
 
@@ -173,7 +174,7 @@ const displayCategories = (categories) => {
       const listItem = document.createElement('li');
       const link = document.createElement('a');
       link.className = 'rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white';
-      link.href = category.url ?? ''; 
+      link.href = `postByCategory.html?categoryId=${category.id}`; 
       link.textContent = category.content;
   
       listItem.appendChild(link);

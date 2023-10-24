@@ -34,8 +34,8 @@ form.addEventListener("submit", async (event) => {
 
   const response = await register(user);
       // Handle the response data
-      if (response && response.error) {
-        alert("Sorry! Please check your information! " + response.error);
+      if (response == null) {
+        alert("Sorry! Please check your information! ");
       } else {
         alert("You have successfully created your account. ");
         window.location.href = "login.html";

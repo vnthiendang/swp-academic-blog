@@ -44,7 +44,7 @@
 /*========================== FEATURED POSTS ==============================*/
 
 .post {
-    height: 600px;
+    /* height: 600px; */
     border: 2px solid gray;
     border-radius: 5%;
     padding: 10px;
@@ -138,3 +138,12 @@
 }
 
 /*========================== Tag Name ==============================*/
+
+.post-info.two-line-preview {
+    max-height: 3em; /* Adjust the height as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+  }
