@@ -23,6 +23,10 @@ public class PostDto {
     private List<Award> awardList;
     private List<Comment> commentList;
     private List<Vote> voteList;
+    private Integer vote1Count = 0;
+    private Integer vote2Count = 0;
+    private Integer wordCount = 0;
+    private Integer readingTime = 0;
 
     public String getCreatedByUser() {
         return this.createdByUser.getDisplay_name();
@@ -88,6 +92,11 @@ public class PostDto {
             List<Integer> voteIds = new ArrayList<>();
             for (Vote vote : voteList) {
                 if (vote != null && vote.getId() != null) {
+                    if(vote.getVoteType().getId()==1){
+                        vote1Count +=1;
+                    }else if (vote.getVoteType().getId()==2){
+                        vote2Count +=1;
+                    }
                     voteIds.add(vote.getId());
                 }
             }
@@ -110,7 +119,20 @@ public class PostDto {
 
         return Collections.emptyList(); // or handle the case when postTagList is null
     }
+    public Integer getReadingTime() {
+        if (postDetail != null) {
+            // Split the postDetail into words by whitespace and count them
+            String[] words = postDetail.split("\\s+");
+            wordCount = words.length;
 
+            // Calculate the approximate reading time based on the average reading speed
+            // (e.g., 200 words per minute)
+            return readingTime = (int) Math.ceil(wordCount / 200.0);
+        } else {
+            wordCount = 0;
+           return readingTime = 0;
+        }
+    }
 
 }
 
