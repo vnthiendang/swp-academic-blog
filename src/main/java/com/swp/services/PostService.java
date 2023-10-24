@@ -125,10 +125,51 @@ public class PostService {
 
     public Post updatePost(Integer postId, PostRequest postRequest) {
         Post post = getById(postId);
+        if (post == null) {
+            throw new IllegalArgumentException("Post not found"); // Or handle it as needed
+        }
+
         post.setTitle(postRequest.getTitle());
         post.setPostDetail(postRequest.getDetail());
         post.setBelongedToCategory(categoryRepository.findById(postRequest.getCategoryID())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Category")));
+
+        // Update Medias
+        List<String> mediaUrls = postRequest.getMediaList();
+        if (mediaUrls != null && !mediaUrls.isEmpty()) {
+            // Clear existing media and replace with new ones
+            post.getMedias().clear();
+            List<Media> mediaList = new ArrayList<>();
+            for (String mediaUrl : mediaUrls) {
+                Media media = new Media();
+                media.setMediaUrl(mediaUrl);
+                media.setPost(post);
+                mediaList.add(media);
+            }
+            post.setMedias(mediaList);
+        } else {
+            // If mediaUrls is empty, remove all existing media
+            post.getMedias().clear();
+        }
+        // Update PostTags
+        List<Integer> tagIds = postRequest.getTagList();
+        if (tagIds != null && !tagIds.isEmpty()) {
+            // Clear existing post tags and replace with new ones
+            post.getPostTags().clear();
+            List<PostTag> postTagList = new ArrayList<>();
+            for (Integer tagId : tagIds) {
+                Tag tag = tagRepository.findById(tagId)
+                        .orElseThrow(() -> new IllegalArgumentException("Invalid Tag"));
+                PostTag postTag = new PostTag();
+                postTag.setTag(tag);
+                postTag.setPost(post);
+                postTagList.add(postTag);
+            }
+            post.setPostTags(postTagList);
+        } else {
+            // If tagIds is empty, remove all existing post tags
+            post.getPostTags().clear();
+        }
 
         return postRepository.save(post); // Save and return the updated post
     }
@@ -275,11 +316,5 @@ public class PostService {
         return approvedPosts; // Return the original list if keyword is not provided
     }
 
-
-
-//    public List<Post> filterPostsByCategoryAndTag(Integer categoryId, List<Integer> tagIds) {
-//        System.out.println("hellllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll2");
-//        return postRepository.findAllByCategoryAndTags(categoryId, tagIds);
-//    }
 
 }

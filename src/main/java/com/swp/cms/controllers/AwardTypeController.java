@@ -45,7 +45,6 @@ public class AwardTypeController {
     }
     @PostMapping("/post")
     public AwardTypeDto addAwardType(@RequestBody AwardTypeRequest awardTypeRequest) {
-//        AwardType awardType = modelMapper.map(awardTypeRequest, AwardType.class);
         AwardType createdAwardType = awardTypeService.createAwardType(awardTypeRequest);
         AwardTypeDto awardTypeDto = modelMapper.map(createdAwardType, AwardTypeDto.class);
         return awardTypeDto;

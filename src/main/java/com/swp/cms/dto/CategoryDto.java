@@ -15,9 +15,10 @@ public class CategoryDto {
     private LocalDateTime createdDate;
 
     private Category parentCategory;
-    public Integer getParentCategory() {
+    public String getParentCategory() {
+
         if (parentCategory!= null) {
-            return parentCategory.getCateId();
+            return parentCategory.getContent();
         }
         return null; // or handle the case when media or mediaUrl is null
     }

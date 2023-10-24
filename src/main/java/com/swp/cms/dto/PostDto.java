@@ -24,11 +24,13 @@ public class PostDto {
     private List<Comment> commentList;
     private List<Vote> voteList;
 
-    public String getCreatedByUser(){
+    public String getCreatedByUser() {
         return this.createdByUser.getDisplay_name();
     }
 
-    public String getBelongedToCategory(){
+
+    public String getBelongedToCategory() {
+
         if (belongedToCategory != null) {
             return this.belongedToCategory.getContent();
         } else {
@@ -71,25 +73,13 @@ public class PostDto {
         return Collections.emptyList(); // or handle the case when mediaList is null
     }
 
-//    public List<Integer> getPostTagList(){
-//        if (postTagList != null) {
-//            List<Integer> tagIds = new ArrayList<>();
-//            for (PostTagDto postTag : postTagList) {
-//                if (postTag != null && postTag.getId() != null) {
-//                    tagIds.add(postTag.getId());
-//                }
-//            }
-//            return tagIds;
-//        }
-//        return Collections.emptyList(); // or handle the case when postTagList is null
-//    }
-
-    public List<Integer> getAwardList() {
+    public List<String> getAwardList() {
         if (awardList != null) {
-            List<Integer> awardIds = new ArrayList<>();
+            List<String> awardIds = new ArrayList<>();
             for (Award award : awardList) {
                 if (award != null && award.getId() != null) {
-                    awardIds.add(award.getId());
+                    awardIds.add(award.getAwardType().getAwardType());
+
                 }
             }
             return awardIds;
@@ -108,6 +98,7 @@ public class PostDto {
             return commentIds;
         }
         return Collections.emptyList(); // or handle the case when commentList is null
+
     }
 
     public List<Integer> getVoteList() {
@@ -122,23 +113,22 @@ public class PostDto {
         }
         return Collections.emptyList(); // or handle the case when voteList is null
     }
-public List<String> getTagList(){
-    if (tagList != null) {
 
-        List<String> tags = new ArrayList<>();
-        for (Tag tag : tagList) {
-            if (tag != null && tag.getId() != null) {
-                tags.add(tag.getTagName());
-                System.out.println("konulllllllllllllllllllllllllllllllll");
-                System.out.println(tag.getTagName());
-                System.out.println(tag.getId());
+    public List<String> getTagList() {
+        if (tagList != null) {
+
+            List<String> tags = new ArrayList<>();
+            for (Tag tag : tagList) {
+                if (tag != null && tag.getId() != null) {
+                    tags.add(tag.getTagName());
+                }
             }
+            return tags;
         }
-        return tags;
+
+        return Collections.emptyList(); // or handle the case when postTagList is null
     }
-    System.out.println("nulllllllllllllllllllllllllllllllll");
-    return Collections.emptyList(); // or handle the case when postTagList is null
-}
+
 
 
 }

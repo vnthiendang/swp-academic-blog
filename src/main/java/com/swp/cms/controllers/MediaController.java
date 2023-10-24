@@ -47,7 +47,6 @@ public class MediaController {
     }
     @PostMapping("/post")
     public MediaDto addMedia(@RequestBody MediaRequest mediaRequest) {
-//        Media media = modelMapper.map(mediaRequest, Media.class);
         Media createdMedia = mediaService.createMedia(mediaRequest);
         MediaDto mediaDto = modelMapper.map(createdMedia, MediaDto.class);
         return mediaDto;

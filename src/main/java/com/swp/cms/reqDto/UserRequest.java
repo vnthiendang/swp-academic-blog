@@ -15,6 +15,6 @@ public class UserRequest {
     String email;
     @NotNull
     String password;
-    Integer roleID;
+    String role_id;
     LocalDateTime createdDate;
 }
