@@ -1,10 +1,10 @@
-
+import request from "../utils/request";
 
 const token = localStorage.getItem("token");
 
 const userInfo = async () => {
   try {
-    const response = await axios.get(`http://localhost:8080/blog/user/profile`, {
+    const response = await request.get(`user/profile`, {
       headers: {
         Authorization: `Bearer ${token}` 
       }

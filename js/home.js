@@ -19,10 +19,11 @@ function displayPosts(posts) {
       noResultsElement.textContent = 'No results related to your search. Please use other keywords.';
       postContainer.appendChild(noResultsElement);
     }else{
-      posts.forEach(post => {
-        
+      for (var i = 0; i < posts.length; i++){
+        var post = posts[i];
+
         const postElement = document.createElement('div');
-        postElement.className = 'col-span-5';
+        postElement.className = '';
   
         const flexElement = document.createElement('div');
         flexElement.className = 'flex w-full px-8 py-4 items-center';
@@ -45,22 +46,12 @@ function displayPosts(posts) {
         createdByUser.appendChild(grayTextSpan);
   
         const postTagLink = document.createElement('a');
-        postTagLink.href = '/Page SE SA AI BS/html/pageBusiness.html';
+        postTagLink.href = '#';
     
-        const postTagSpan1 = document.createElement('span');
-        postTagSpan1.className = 'tag-name';
-        postTagSpan1.textContent = post.belongedToCategory;
-        postTagLink.appendChild(postTagSpan1);
-  
-        const postTagSpan2 = document.createElement('span');
-        postTagSpan2.className = 'tag-name';
-        postTagSpan2.textContent = '';
-        postTagLink.appendChild(postTagSpan2);
-    
-        const postTagSpan3 = document.createElement('span');
-        postTagSpan3.className = 'tag-name';
-        postTagSpan3.textContent = '';
-        postTagLink.appendChild(postTagSpan3);
+        const postTagSpan = document.createElement('span');
+        postTagSpan.className = 'tag-name';
+        postTagSpan.textContent = post.belongedToCategory;
+        postTagLink.appendChild(postTagSpan);
     
         createdByUser.appendChild(postTagLink);
         flexElement.appendChild(createdByUser);
@@ -87,7 +78,7 @@ function displayPosts(posts) {
       postElement.appendChild(flexElement);
   
       const postLink = document.createElement('a');
-      postLink.href = `blogDetail.html?postId=${post.postsId}`;
+      postLink.href = `blogDetail.html?belongedToPostID=${post.postsId}`;
 
       const titleElement = document.createElement('div');
       titleElement.className = 'font-semibold text-2xl px-8';
@@ -104,6 +95,19 @@ function displayPosts(posts) {
   
       const flexItemsElement = document.createElement('div');
       flexItemsElement.className = 'flex items-center px-8';
+
+      const voteIcon = document.createElement('i');
+      voteIcon.className = 'fa-solid fa-thumbs-up flex items-center cursor-pointer';
+      flexItemsElement.appendChild(voteIcon);
+
+      const voteList = document.createElement('div');
+      voteList.className = 'vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+      post.voteList.forEach(vote => {
+          const item = document.createElement('span');
+          item.textContent = vote + '  ';
+          voteList.appendChild(item);
+      });
+      flexItemsElement.appendChild(voteList);
   
       const iconTagElement = document.createElement('div');
       iconTagElement.className = 'icon-tag';
@@ -114,50 +118,39 @@ function displayPosts(posts) {
       flexItemsElement.appendChild(iconTagElement);
   
       const tagLink1 = document.createElement('a');
-      tagLink1.href = '/Page SE SA AI BS/html/pageTechnoloy.html';
-      const tagDiv1 = document.createElement('div');
-      tagDiv1.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';  
+      tagLink1.href = '/pageByCategory.html?tagId';
+      
+      const postTagList = document.createElement('div');
+        postTagList.className = 'post-tag-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+        post.tagList.forEach(tag => {
+            const tagItem = document.createElement('span');
+            tagItem.textContent = tag;
+            postTagList.appendChild(tagItem);
+      });
+      // postElement.appendChild(postTagList);
 
-      tagDiv1.textContent = post.postTag ?? 'tag';
-      tagLink1.appendChild(tagDiv1);
+      tagLink1.appendChild(postTagList);
       flexItemsElement.appendChild(tagLink1);
-  
-      const tagLink2 = document.createElement('a');
-      tagLink2.href = '/Page SE SA AI BS/html/pageBusiness.html';
-      const tagDiv2 = document.createElement('div');
-      tagDiv2.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
-      tagDiv2.textContent = post.postTag ?? 'tag';
-      tagLink2.appendChild(tagDiv2);
-      flexItemsElement.appendChild(tagLink2);
-  
-      const tagLink3 = document.createElement('a');
-      tagLink3.href = '/Page SE SA AI BS/html/pageDigitalTransformation.html';
-      const tagDiv3 = document.createElement('div');
-      tagDiv3.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
-      tagDiv3.textContent = post.postTag ?? 'tag';
-      tagLink3.appendChild(tagDiv3);
-      flexItemsElement.appendChild(tagLink3);
   
       postElement.appendChild(flexItemsElement);
   
-      const imgContainer = document.createElement('div');
-      imgContainer.className = 'm-5';
-  
-      const imgLink = document.createElement('a');
-      imgLink.href = 'blogDetail.html';
-  
-      const imgElement = document.createElement('img');
-      imgElement.src = 'img/Business/8.webp';
-      imgElement.alt = 'img-post 4';
-      imgElement.className = 'w-full h-full';
-  
-      imgLink.appendChild(imgElement);
-      imgContainer.appendChild(imgLink);
-  
-      postElement.appendChild(imgContainer);
+      if(post.mediaList.length > 0){
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'm-5';
+        
+        const mediaList = document.createElement('div');
+        mediaList.className = 'media-list';
+        post.mediaList.forEach(media => {
+              const mediaItem = document.createElement('img');
+              mediaItem.src = media;
+              mediaList.appendChild(mediaItem);
+        });
+        imgContainer.appendChild(mediaList);
+        postElement.appendChild(imgContainer);
+      }
   
       postContainer.appendChild(postElement);
-      });
+      }
     }
 }
 
@@ -181,7 +174,7 @@ const displayCategories = (categories) => {
       const listItem = document.createElement('li');
       const link = document.createElement('a');
       link.className = 'rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white';
-      link.href = category.url ?? ''; 
+      link.href = `postByCategory.html?categoryId=${category.id}`; 
       link.textContent = category.content;
   
       listItem.appendChild(link);

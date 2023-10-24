@@ -40,7 +40,7 @@
 
 .grid#post {
     background-color: whitesmoke;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     /* margin-top: 10px; */
     margin-left: 5px;
     margin-right: 10px;
@@ -78,27 +78,10 @@
     text-overflow: ellipsis;
 }
 
-/* Button styles */
-.button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  /* Approve button styles */
-  .approve-button {
-    background-color: green;
-    color: white;
-  }
-  
-  /* Reject button styles */
-  .reject-button {
-    background-color: red;
-    color: white;
-  }
+.col-span-5{
+    border-bottom:1px;
+    margin: 10px;
+}
 
 /*========================== Tag Name Of Recommend Topics ==============================*/
 

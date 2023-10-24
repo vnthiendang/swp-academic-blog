@@ -1,5 +1,5 @@
-
-    const token = localStorage.getItem("token");
+import * as request from './utils/request.js';
+const token = localStorage.getItem("token");
 
     const options = {
         month: 'short', // Two-digit month (e.g., 01)
@@ -13,13 +13,13 @@
 
 function displayPost() {
 
-  axios.get(`http://localhost:8080/blog/post/postRequest/${postId}`, {
+  request.get(`post/postRequest/${postId}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   })
     .then(response => {
-      const post = response.data;
+      const post = response;
 
       const postCreatedTime = new Date(post.createdTime);
       const formattedTime = postCreatedTime.toLocaleString('en-US', options);
@@ -29,9 +29,9 @@ function displayPost() {
       document.getElementById('postAuthor').textContent = post.createdByUser;
       document.getElementById('postDate').textContent = formattedTime;
       document.getElementById('postTag').textContent = post.postTagList ?? 'tag';
-      document.getElementById('postCategory').textContent = post.belongedToCategory;
+      document.getElementById('postCategory').textContent = post.belongedToCategory ?? 'category';
       document.getElementById('postContent').textContent = post.postDetail;
-      document.getElementById('postMedia').src = post.mediaList[0] ?? '#';
+      document.getElementById('postMedia').src = post.mediaList ?? '#';
     })
     .catch(error => {
       console.error('Error retrieving post:', error);
@@ -41,3 +41,59 @@ function displayPost() {
 
 // Call the function to display the post
 displayPost();
+
+const approveButton = document.getElementById("approveButton");
+const rejectButton = document.getElementById("rejectButton");
+
+// Attach an event listener to the button
+approveButton.addEventListener("click", async (event) =>{
+  event.preventDefault();
+
+  const response = await approvePost(postId);
+
+  if(response == null){
+    alert('Fail to approve!');
+  }else{
+    alert('Post approved!');
+  }
+});
+
+rejectButton.addEventListener("click", async (event) =>{
+  event.preventDefault();
+
+  const response = await rejectPost(postId);
+
+  if(response == null){
+    alert('Fail to reject!');
+  }else{
+    alert('Post rejected!');
+  }
+});
+
+
+const approvePost = async (postId) => {
+  try {
+    const response = await request.post(`post/postRequest/approve/${postId}`,{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error approve post:', error);
+  } 
+};
+
+const rejectPost = async (postId) => {
+  try {
+    const response = await request.post(`post/postRequest/reject/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error reject post:', error);
+  }
+  
+}

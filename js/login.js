@@ -1,6 +1,5 @@
 
 import { login } from "../js/Services/auth.service.js";
-import { userInfo } from "../js/Services/profile.service.js";
 
 const form = document.getElementById("login");
 
@@ -12,23 +11,19 @@ form.addEventListener("submit", async (event) => {
 
   const data = { email, password };
 
-  const response = await login(data);
+  try {
+    const userData = await login(data);
+    const roleId = userData.role_id;
 
-    const roleResponse = await userInfo();
-
-    if (roleResponse && roleResponse.role_id) {
-      const userRole = roleResponse.role_id;
-      if (userRole == 1) {
-        window.location.href = "../managerAdmin.html";
-      } else if (userRole == 2) {
-        window.location.href = "../teacherPage.html";
-      } else {
-        // Default redirect if the role is not recognized
-        window.location.href = "../home.html";
-      }
-    } else {
-      // Handle the case when the role cannot be fetched
-      alert("Unable to determine user role. Please try again.");
+    if (roleId === 'Admin') {
+      window.location.href = "../managerAdmin.html";
+    } else if (roleId === 'Teacher') {
+      window.location.href = "../teacherPage.html";
+    } else if (roleId === 'Student') {
+      window.location.href = "../home.html";
     }
-
+  } catch (error) {
+    // Handle login error here
+    console.error(error);
+  }
 });
