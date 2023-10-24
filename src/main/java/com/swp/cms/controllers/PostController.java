@@ -68,8 +68,6 @@ public class PostController {
         return postDtos;
     }
 
-
-
 //get all approved post by categoryId
 @GetMapping("/GetAllApproved/filter")
 public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
@@ -77,7 +75,6 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         @RequestParam(name = "categoryId", required = false) Integer categoryId,
         @RequestParam(name = "tagIds", required = false) List<Integer> tagIds) {
     List<Post> approvedPosts = postService.getAllApprovedPosts();
-
 
     if (categoryId != null) {
         approvedPosts = postService.filterByCategoryId(approvedPosts, categoryId);
@@ -138,8 +135,6 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         PostDto dto = postService.mapPostToPostDto(post);
         return dto;
     }
-
-
 
     // ==================================================================================================== //
 
