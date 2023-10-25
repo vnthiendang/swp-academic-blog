@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com</groupId>
-	<artifactId>SWP Blog</artifactId>
+	<artifactId>swp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>swd</name>
 	<description>Table Reservation</description>
