@@ -16,7 +16,6 @@ public class CategoryDto {
 
     private Category parentCategory;
     public String getParentCategory() {
-
         if (parentCategory!= null) {
             return parentCategory.getContent();
         }
