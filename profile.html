@@ -121,17 +121,17 @@
                                   <label class="form-label">E-mail</label>
                                   <input type="text" id="emailField" class="form-control mb-1" readonly>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" >
                                     <label class="form-label">Current password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" id="currentpass"  class="form-control" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">New password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" id="newpass" class="form-control" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Repeat new password</label>
-                                    <input type="password" class="form-control">
+                                    <input type="password" id="repass" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
@@ -198,6 +198,9 @@
             // Toggle the readonly attribute for the input fields
             document.getElementById("nameField").readOnly = !document.getElementById("nameField").readOnly;
             document.getElementById("emailField").readOnly = !document.getElementById("emailField").readOnly;
+            document.getElementById("currentpass").readOnly = !document.getElementById("currentpass").readOnly;
+            document.getElementById("newpass").readOnly = !document.getElementById("newpass").readOnly;
+            document.getElementById("repass").readOnly = !document.getElementById("repass").readOnly;
         });
 
 
@@ -214,6 +217,9 @@
         function toggleEditableFields(editable) {
         const nameField = document.getElementById("nameField");
         const emailField = document.getElementById("emailField");
+        const currentpass = document.getElementById("currentpass");
+        const newpass = document.getElementById("newpass");
+        const repass = document.getElementById("repass");
 
         nameField.readOnly = !editable;
         emailField.readOnly = !editable;
@@ -221,18 +227,27 @@
         if (editable) {
             nameField.classList.add("editable");
             emailField.classList.add("editable");
+            currentpass.classList.add("editable");
+            newpass.classList.add("editable");
+            repass.classList.add("editable");
         } else {
             nameField.classList.remove("editable");
             emailField.classList.remove("editable");
+            currentpass.classList.remove("editable");
+            newpass.classList.remove("editable");
+            repass.classList.remove("editable");
         }
         }
 
         function saveChanges() {
         const nameField = document.getElementById("nameField");
-        const emailField = document.getElementById("emailField");
+        const emailField = document.getElementById("emailField"); 
+        const newpass = document.getElementById("newpass");
+
 
         const newName = nameField.value;
         const newEmail = emailField.value;
+        const newpassword = newpass.value;
 
         // Perform actions to save the edited information
         // For example, make an API call or update the database
