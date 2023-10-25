@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class Award {
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -23,6 +23,6 @@ public class Award {
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "given_by_user_id")
+    @JoinColumn(name = "\"given_by_user_id\"")
     private User givenByUser;
 }
