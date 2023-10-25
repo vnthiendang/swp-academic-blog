@@ -24,6 +24,7 @@ form.addEventListener("submit", async (event) => {
     }
   } catch (error) {
     // Handle login error here
-    console.error(error);
+    // console.error(error);
+    alert('Invalid email or password!');
   }
 });
