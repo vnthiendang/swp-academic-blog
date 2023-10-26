@@ -1,6 +1,7 @@
 import { createComment, getCommentById } from "./Services/post.service.js";
 import * as request from './utils/request.js';
 import { userInfo } from "./Services/auth.service.js";
+import { getVoteType, votePost } from "./Services/vote.service.js";
 
 const token = localStorage.getItem("token");
 
@@ -35,6 +36,8 @@ function displayPost() {
       document.getElementById('postCategory').textContent = post.belongedToCategory;
       document.getElementById('postContent').textContent = post.postDetail;
       document.getElementById('postMedia').src = post.mediaList ?? '#';
+      document.getElementById('postVote').textContent = post.vote1Count ?? '#';
+      document.getElementById('readingTime').textContent = post.readingTime + ' readed' ?? '#';
     })
     .catch(error => {
       console.error('Error retrieving post:', error);
@@ -103,6 +106,23 @@ function displayComments() {
 // Call the function to display the post
 displayComments();
 
+const displayVoteType = (types) => {
+  const selectElement = document.getElementById('VoteType');
+
+  types.forEach(type => {
+    const option = document.createElement('option');
+    option.value = type.id;
+    option.textContent = type.voteType;
+
+    selectElement.appendChild(option);
+  });
+};
+
+getVoteType()
+  .then((votes) => {
+    displayVoteType(votes);
+});
+
 
 const form = document.getElementById("comment");
 
@@ -123,4 +143,33 @@ form.addEventListener("submit", async (event) => {
     }
 
 });
+
+  //VOTE POST
+async function handleVotePost() {
+    const us = await userInfo();
+    const usId = us.userId;
+
+    const typeSelect = document.querySelector('#VoteType');
+
+
+    var model = {
+      userID: usId,
+      postID: belongedToPostID,
+      voteTypeID: typeSelect.value
+    };
+
+    try {
+      // Call the votePost method passing the model
+      const response = await votePost(model);
+
+      if(response != null){
+        alert('Vote post success!');
+      }
+    } catch (error) {
+      console.error('Error creating vote:', error);
+    }
+}
+
+  // Event listener for the click event on the heart icon
+  document.querySelector(".fa-heart").addEventListener("click", handleVotePost);
 

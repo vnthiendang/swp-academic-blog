@@ -1,20 +1,29 @@
-import request from "../utils/request";
+import * as request from '../utils/request.js'
 
 const token = localStorage.getItem("token");
 
-const userInfo = async () => {
+export const userInfo = async () => {
   try {
     const response = await request.get(`user/profile`, {
       headers: {
         Authorization: `Bearer ${token}` 
       }
     });
-    return response.data;
+    return response;
   } catch (error) {
-    alert(response.status);
+    alert(error);
   }
 };
-  
-  export {
-    userInfo
+
+export const updateProfile = async (model) => {
+  try {
+    const response = await request.put(`user`, model, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    });
+    return response;
+  } catch (error) {
+    alert(error);
   }
+};

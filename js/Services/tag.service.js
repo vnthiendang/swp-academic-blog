@@ -1,23 +1,18 @@
-const endpoint = "http://localhost:8080/blog/tag";
+import * as request from '../utils/request.js'
 
 const token = localStorage.getItem("token");
 
-const getAllTag = async () => {
+export const getAllTag = async () => {
   try {
-    const response = await axios.get(`${endpoint}/GetAll`, {
+    const response = await request.get(`tag/GetAll`, {
       headers: {
         Authorization: `Bearer ${token}` // Include the token in the request headers
       }
     });
 
-    console.log(response.data);
-    return response.data;
+    return response;
   } catch (error) {
     
-    throw new Error("An error occurred. Please try again later.");
+    throw new Error("Error fetching tag!");
   }
-};
-
-export {
-    getAllTag
 };

@@ -210,9 +210,9 @@
         });
 
         // Add an event listener to the "Save changes" button
-        document.getElementById("saveButton").addEventListener("click", function () {
-        saveChanges();
-        });
+        // document.getElementById("saveButton").addEventListener("click", function () {
+        // saveChanges();
+        // });
 
         function toggleEditableFields(editable) {
         const nameField = document.getElementById("nameField");
@@ -239,22 +239,22 @@
         }
         }
 
-        function saveChanges() {
-        const nameField = document.getElementById("nameField");
-        const emailField = document.getElementById("emailField"); 
-        const newpass = document.getElementById("newpass");
+        // function saveChanges() {
+        // const nameField = document.getElementById("nameField");
+        // const emailField = document.getElementById("emailField"); 
+        // const newpass = document.getElementById("newpass");
 
 
-        const newName = nameField.value;
-        const newEmail = emailField.value;
-        const newpassword = newpass.value;
+        // const newName = nameField.value;
+        // const newEmail = emailField.value;
+        // const newpassword = newpass.value;
 
-        // Perform actions to save the edited information
-        // For example, make an API call or update the database
+        // // Perform actions to save the edited information
+        // // For example, make an API call or update the database
 
-        // After saving the changes, toggle the fields back to readonly mode
-        toggleEditableFields(false);
-        }
+        // // After saving the changes, toggle the fields back to readonly mode
+        // toggleEditableFields(false);
+        // }
     </script> 
 
 

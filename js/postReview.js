@@ -1,3 +1,4 @@
+import { userInfo } from './Services/profile.service.js';
 import * as request from './utils/request.js';
 const token = localStorage.getItem("token");
 
@@ -73,9 +74,11 @@ rejectButton.addEventListener("click", async (event) =>{
 
 const approvePost = async (postId) => {
   try {
+    const user = await userInfo();
+    
     const response = await request.post(`post/postRequest/approve/${postId}`,{
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        Authorization: `Bearer ${token}`
       }
     });
     return response;
@@ -88,7 +91,7 @@ const rejectPost = async (postId) => {
   try {
     const response = await request.post(`post/postRequest/reject/${postId}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        Authorization: `Bearer ${token}`
       }
     });
     return response;

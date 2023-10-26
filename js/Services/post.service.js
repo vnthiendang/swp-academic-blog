@@ -52,6 +52,20 @@ export const createPost = async (post) => {
   }
 };
 
+export const updatePost = async (post) => {
+  try {
+    const response = await request.put(`post/edit`, post, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+    
+  } catch (error) {
+    console.error('Error updating post:', error);
+  }
+};
+
 //STUDENT
 export const getPostById = async (id) => {
   try {
