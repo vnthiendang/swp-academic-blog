@@ -81,7 +81,7 @@ public class PostService {
     }
 
     public List<Post> getAll() {
-        return postRepository.findAll();
+        return postRepository.findAllReviewedPosts();
     }
 
     public Post createPost(PostRequest postRequest) {
