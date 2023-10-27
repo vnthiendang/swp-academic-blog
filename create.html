@@ -106,7 +106,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="col-span-2">
+                <!-- <div class="col-span-2">
                     <div>
                         Add article cover image
                     </div>
@@ -123,8 +123,11 @@
                                     to upload</span> or drag and drop</div>
                         </div>
                         <input id="input-file" type="file" class="hidden" />
+                        
                     </label>
-                </div>
+                </div> -->
+
+                <input type="file" id="image-input" accept="image/*"/>
             </div>
             <div class="w-full flex flex-row-reverse m-2">
     
@@ -182,97 +185,9 @@
     </footer>
     <script type="module" src='./js/createPost.js'></script>
 </body>
-<script src="tailwind-config.js"></script>
+
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="js/post_quill_editor.js"></script>
-<script>
-    // Get the input element
-    var input = document.getElementById("input-file");
 
-    // Add an event listener to handle the change event
-    input.addEventListener("change", function () {
-        // Get the selected file
-        var file = this.files[0];
-
-        // Check if the file is an image
-        if (file.type.startsWith("image/")) {
-            // Create a new FileReader object
-            var reader = new FileReader();
-
-            // Add an event listener to handle the load event
-            reader.addEventListener("load", function () {
-                // Get the image data as a base64 encoded string
-                var data = this.result;
-
-                // Create a new Image object
-                var img = new Image();
-
-                // Set the src attribute to the image data
-                img.src = data;
-
-                // Add an event listener to handle the load event
-                img.addEventListener("load", function () {
-                    // Get the image width and height
-                    var width = this.width;
-                    var height = this.height;
-
-                    // Display the image information
-                    console.log("Image name: " + file.name);
-                    console.log("Image size: " + file.size + " bytes");
-                    console.log("Image type: " + file.type);
-                    console.log("Image width: " + width + " pixels");
-                    console.log("Image height: " + height + " pixels");
-
-                    // Get the drop area element
-                    var dropArea = document.getElementById("drop-area");
-
-                    // Remove the default text inside the drop area element
-                    dropArea.innerHTML = "";
-
-                    // Append the image to the drop area element
-                    dropArea.appendChild(img);
-
-                    // Adjust the size and position of the image
-                    img.style.width = "100%";
-                    img.style.height = "100%";
-                    img.style.objectFit = "cover";
-                    img.style.margin = "0";
-                });
-            });
-
-            // Read the file as a data URL
-            reader.readAsDataURL(file);
-        } else {
-            // Display an error message
-            alert("Please select an image file.");
-        }
-    });
-
-    // Create a function that will reset the drop area element
-    function resetDropArea() {
-        // Get the drop area element
-        var dropArea = document.getElementById("drop-area");
-
-        // Clear the content of the drop area element
-        dropArea.innerHTML = "";
-
-        // Create a new div element for the default text
-        var div = document.createElement("div");
-        div.id = "img-view";
-        div.className = "mb-2 text-sm text-gray-500 dark:text-gray-400";
-        div.innerHTML = "<span class='font-semibold'>Click to upload</span> or drag and drop";
-
-        // Append the div element to the drop area element
-        dropArea.appendChild(div);
-
-        // Append the input element to the drop area element
-        dropArea.appendChild(input);
-    }
-
-    // Add an event listener to handle the click event on the drop area element
-    document.getElementById("drop-area").addEventListener("click", resetDropArea);
-
-
-</script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </html>

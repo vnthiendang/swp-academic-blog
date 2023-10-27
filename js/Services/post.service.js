@@ -42,7 +42,7 @@ export const createPost = async (post) => {
   try {
     const response = await request.post(`post/create`, post, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        Authorization: `Bearer ${token}`
       }
     });
     return response;
@@ -108,11 +108,6 @@ export const getPostRequest = async () => {
     return response;
   } catch (error) {
     console.error('Error fetching posts:', error);
-    if (error.response && error.response.status === 401) {
-      // Token is invalid or expired
-      alert('Please login again!');
-    }
-    throw new Error("An error occurred. Please try again later.");
   }
 };
 

@@ -32,7 +32,7 @@ function displayPost() {
       document.getElementById('postTag').textContent = post.postTagList ?? 'tag';
       document.getElementById('postCategory').textContent = post.belongedToCategory ?? 'category';
       document.getElementById('postContent').textContent = post.postDetail;
-      document.getElementById('postMedia').src = post.mediaList ?? '#';
+      document.getElementById('postMedia').src = post.mediaList[0] ?? '#';
     })
     .catch(error => {
       console.error('Error retrieving post:', error);
@@ -50,33 +50,51 @@ const rejectButton = document.getElementById("rejectButton");
 approveButton.addEventListener("click", async (event) =>{
   event.preventDefault();
 
-  const response = await approvePost(postId);
+  const user = await userInfo();
+  const usId = user.userId;
+
+  const post = {
+    post: postId,
+    viewedByUser: usId,
+    postApprovalsStatus: "APPROVED"
+  }
+
+  const response = await approvePost(post);
 
   if(response == null){
     alert('Fail to approve!');
   }else{
     alert('Post approved!');
+    window.location.href = "../teacherPage.html";
   }
 });
 
 rejectButton.addEventListener("click", async (event) =>{
   event.preventDefault();
 
-  const response = await rejectPost(postId);
+  const user = await userInfo();
+  const usId = user.userId;
+
+  const post = {
+    post: postId,
+    viewedByUser: usId,
+    postApprovalsStatus: "REJECTED"
+  }
+
+  const response = await rejectPost(post);
 
   if(response == null){
     alert('Fail to reject!');
   }else{
     alert('Post rejected!');
+    window.location.href = "../teacherPage.html";
   }
 });
 
 
-const approvePost = async (postId) => {
+const approvePost = async (model) => {
   try {
-    const user = await userInfo();
-    
-    const response = await request.post(`post/postRequest/approve/${postId}`,{
+    const response = await request.post(`postapproval/post`, model, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -87,9 +105,9 @@ const approvePost = async (postId) => {
   } 
 };
 
-const rejectPost = async (postId) => {
+const rejectPost = async (model) => {
   try {
-    const response = await request.post(`post/postRequest/reject/${postId}`, {
+    const response = await request.post(`postapproval/post`, model, {
       headers: {
         Authorization: `Bearer ${token}`
       }
