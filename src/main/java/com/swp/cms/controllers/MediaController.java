@@ -9,10 +9,17 @@ import com.swp.entities.Media;
 import com.swp.repositories.MediaRepository;
 import com.swp.services.MediaService;
 import com.swp.services.MediaService;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -38,18 +45,45 @@ public class MediaController {
         return dto;
     }
 
+//    @GetMapping("/{id}")
+//    public MediaDto getTypeById(@PathVariable Integer id) {
+//
+//        Media type = mediaService.getById(id);
+//        MediaDto dto = mapper.fromEntityToMediaDto(type);
+//        return dto;
+//    }
+//    @PostMapping("/post")
+//    public MediaDto addMedia(@RequestBody MediaRequest mediaRequest) {
+//        Media createdMedia = mediaService.createMedia(mediaRequest);
+//        MediaDto mediaDto = modelMapper.map(createdMedia, MediaDto.class);
+//        return mediaDto;
+//    }
     @GetMapping("/{id}")
-    public MediaDto getTypeById(@PathVariable Integer id) {
-
-        Media type = mediaService.getById(id);
-        MediaDto dto = mapper.fromEntityToMediaDto(type);
-        return dto;
+    public ResponseEntity<byte[]> downloadImage(@PathVariable Integer id) {
+        Media media = mediaService.getById(id);
+        if (media != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.parseMediaType(media.getContentType()));
+            return new ResponseEntity<>(media.getData(), headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
+
+//    @PostMapping
+//    public Media uploadImage(@RequestParam String filename, @RequestParam String contentType, @RequestParam("file") MultipartFile file) throws IOException {
+//        byte[] data = file.getBytes();
+//        return mediaService.saveImage(filename, contentType, data);
+//    }
+
     @PostMapping("/post")
-    public MediaDto addMedia(@RequestBody MediaRequest mediaRequest) {
-        Media createdMedia = mediaService.createMedia(mediaRequest);
-        MediaDto mediaDto = modelMapper.map(createdMedia, MediaDto.class);
-        return mediaDto;
+    public ResponseEntity<Media> uploadMedia(@RequestBody @Valid MediaRequest mediaRequest) {
+        try {
+            Media savedMedia = mediaService.createMedia(mediaRequest);
+            return new ResponseEntity<>(savedMedia, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     //Update a media by media id

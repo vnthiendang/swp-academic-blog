@@ -13,9 +13,9 @@ public class PostApprovalsDto {
     private LocalDateTime createdDate;
     private Post post;
     private User viewedByUser;
-    public Integer getViewedByUser() {
+    public String getViewedByUser() {
         if (viewedByUser != null) {
-            return viewedByUser.getUsId();
+            return viewedByUser.getDisplay_name();
         }
         return null; // Or return a default value
     }

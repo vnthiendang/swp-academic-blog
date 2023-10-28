@@ -116,7 +116,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
 
     @GetMapping("/postRequest")
     public List<PostDto> getAllPostRequest() {
-        List<Post> posts = postService.getAll();
+        List<Post> posts = postService.getPostsWithoutApprovals();
         List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
         return dtos;
     }

@@ -12,8 +12,8 @@ public class CommentDto {
     private Post post;
     private User createdByUser;
     private Comment parentComment;
-    public Integer getCreatedByUser(){
-        return this.createdByUser.getUsId();
+    public String getCreatedByUser(){
+        return this.createdByUser.getDisplay_name();
     }
     public Integer getPost(){
         return this.post.getPostsId();

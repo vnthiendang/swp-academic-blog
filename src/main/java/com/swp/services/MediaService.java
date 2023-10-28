@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -41,6 +42,9 @@ public class MediaService {
     public Media createMedia(MediaRequest mediaRequest){
         Media media = new Media();
         media.setMediaUrl(mediaRequest.getMediaURL());
+        media.setContentType(mediaRequest.getContentType());
+        byte[] imageData = Base64.getDecoder().decode(mediaRequest.getData());
+        media.setData(imageData);
         media.setPost(postRepository.findById(mediaRequest.getPostID()).
                 orElseThrow(() -> new IllegalArgumentException("Invalid Post")));
         return mediaRepository.save(media);

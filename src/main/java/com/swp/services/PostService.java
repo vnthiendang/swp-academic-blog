@@ -316,5 +316,17 @@ public class PostService {
         return approvedPosts; // Return the original list if keyword is not provided
     }
 
+    public List<Post> getPostsWithoutApprovals() {
+        List<PostApprovals> postApprovals = postApprovalsRepository.findAll();
 
+        List<Integer> postIdsWithApprovals = postApprovals
+                .stream()
+                .map(postApproval -> postApproval.getPost().getPostsId())
+                .collect(Collectors.toList());
+
+        return postRepository.findAll()
+                .stream()
+                .filter(post -> !postIdsWithApprovals.contains(post.getPostsId()))
+                .collect(Collectors.toList());
+    }
 }
