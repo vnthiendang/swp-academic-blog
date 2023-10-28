@@ -25,13 +25,12 @@
                 FPT BLOG
             </a>
 
-            <a href="/home.html" class="p-2">
-                Home
+            <a href="/create.html" class="p-2">
+                New post
             </a>
-
-            <!-- login  -->
-            <a href="/login.html" class="p-2">
-                Login
+            
+            <a href="/bestartice.html" class="p-2">
+                Best articles
             </a>
             
             <!-- Category  -->
@@ -48,7 +47,7 @@
             </div>
         </div>
         <div class="p-1 flex">
-            <form class="flex items-center">
+            <form class="flex items-center" id="search-form">
                 <label for="simple-search" class="sr-only">Search</label>
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -60,7 +59,7 @@
                     </div>
                     <input type="text" id="simple-search"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search branch name..." required>
+                        placeholder="Search blog, tag, ..." required>
                 </div>
                 <button type="submit"
                     class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -72,48 +71,32 @@
                     <span class="sr-only">Search</span>
                 </button>
             </form>
+            <div class="flex items-center justify-center ">
+                <div class="mx-5">
+                    <a href="profile.html" class="mx-5">
+                    <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
+                        alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                    </a>
+                </div>
+                <div class="pr-2">
+                    
+                    <div class="cursor-pointer">
+                        <a href="/login.html">Log Out</a>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </header>
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-            <a href="#"
-                class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
-                role="alert">
-                <span class="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">New</span> <span
-                    class="text-sm font-medium">FPT Blog is out! See what's new</span>
-                <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clip-rule="evenodd"></path>
-                </svg>
-            </a>
+
             <h1
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                FPT BLOG BEST ARTICLE</h1>
-            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-                MOST LIKED POSTS IN FPT BLOG
-            </p>
+                Welcome to FPT BLOG</h1>
+            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here at
+                Where knowledge meets passion</p>
             <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-                <a href="#"
-                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                    Learn more
-                    <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </a>
-                <a href="#"
-                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                    <svg class="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z">
-                        </path>
-                    </svg>
-                    Watch video
-                </a>
             </div>
         </div>
     </section>
@@ -134,6 +117,7 @@
                         <a href="blog1.html"> <!-- Move to Post U Want -->
 
                             <div class="font-semibold text-2xl px-8" id="title">
+                                <i class="fas fa-crown" style="color: #ffc800;"></i>
                                 Are You Ready for QA Automation?
                             </div> <!-- Title -->
 
@@ -163,13 +147,7 @@
 
                             <!-- Function Share Like Infomation -->
                              <div class="flex items-center">
-                                <i class="fa-regular fa-heart fa-beat-fade fa-xl" style="color: #511f1f;"></i>
-
-                                <div class="border border-gray-800 px-1 rounded-full m-2">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </div>
-
-                                <i class="fa-solid fa-ellipsis m-2"></i>
+                                <button id="heart"><i class="fa-regular fa-heart fa-beat-fade fa-xl" style="color: #511f1f;"></i>1000</button>
                             </div> 
                         </div>
 
@@ -211,6 +189,7 @@
                             <a href="blog1.html"> <!-- Move to Post U Want -->
 
                                 <div class="font-semibold text-2xl px-8" id="title">
+                                    <i class="fas fa-crown" style="color: #babcb3;"></i>
                                     Augmented Intelligence for LOGISTICS: Humans and Computers Work in Tandem   
                                 </div> <!-- Title -->
 
@@ -236,7 +215,11 @@
                                     </div>
                                 </a>
                             </div>
+                            <div class="flex items-center">
+                                <button id="heart"><i class="fa-regular fa-heart fa-beat-fade fa-xl" style="color: #511f1f;"></i>500</button>
+                            </div> 
                         </div>
+                        
 
                     </div>
                     
@@ -288,6 +271,7 @@
                             <a href="blog1.html"> <!-- Move to Post U Want -->
 
                                 <div class="font-semibold text-2xl px-8" id="title">
+                                    <i class="fas fa-crown" style="color: #c45d08;"></i>
                                     Personalizing Experiences with AI: 
                                     The Future of Content Delivery
                                 </div> <!-- Title -->
@@ -337,6 +321,9 @@
                                     4 min read
                                 </div> -->
                             </div>
+                            <div class="flex items-center">
+                                <button id="heart"><i class="fa-regular fa-heart fa-beat-fade fa-xl" style="color: #511f1f;"></i>300</button>
+                            </div> 
 
                             <!-- Function Share Like Infomation -->
                             <!-- <div class="flex items-center">
@@ -449,6 +436,9 @@
                                     4 min read
                                 </div> -->
                             </div>
+                            <div class="flex items-center">
+                                <button id="heart"><i class="fa-regular fa-heart fa-beat-fade fa-xl" style="color: #511f1f;"></i>100</button>
+                            </div> 
 
                             <!-- Function Share Like Infomation -->
                             <!-- <div class="flex items-center">
@@ -563,6 +553,9 @@
                                     4 min read
                                 </div> -->
                             </div>
+                            <div class="flex items-center">
+                                <button id="heart"><i class="fa-regular fa-heart fa-beat-fade fa-xl" style="color: #511f1f;"></i>50</button>
+                            </div> 
 
                             <!-- Function Share Like Infomation -->
                             <!-- <div class="flex items-center">
