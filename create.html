@@ -10,6 +10,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="src/create.css">
     <title>Post Blog</title>
 </head>
 
@@ -105,6 +106,17 @@
                           </select>
                         </label>
                     </div>
+                    <div class="flex flex-col">
+                        <label for="">Tags
+                        <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "> 
+                            <div class="tags-input"> 
+                            <ul id="tags"></ul> 
+                            <input type="text" id="input-tag" 
+                                placeholder="Add a tag" /> 
+                            </div>
+                        </div> 
+                    </label>
+                    </div>
                 </div>
                 <!-- <div class="col-span-2">
                     <div>
@@ -190,4 +202,56 @@
 <script src="js/post_quill_editor.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script> 
+      
+    // Get the tags and input elements from the DOM 
+    const tags = document.getElementById('tags'); 
+    const input = document.getElementById('input-tag'); 
+
+    // Add an event listener for keydown on the input element 
+    input.addEventListener('keydown', function (event) { 
+
+        // Check if the key pressed is 'Enter' 
+        if (event.key === 'Enter') { 
+          
+            // Prevent the default action of the keypress 
+            // event (submitting the form) 
+            event.preventDefault(); 
+          
+            // Create a new list item element for the tag 
+            const tag = document.createElement('li'); 
+          
+            // Get the trimmed value of the input element 
+            const tagContent = input.value.trim(); 
+          
+            // If the trimmed value is not an empty string 
+            if (tagContent !== '') { 
+          
+                // Set the text content of the tag to  
+                // the trimmed value 
+                tag.innerText = tagContent; 
+
+                // Add a delete button to the tag 
+                tag.innerHTML += '<button class="delete-button">X</button>'; 
+                  
+                // Append the tag to the tags list 
+                tags.appendChild(tag); 
+                  
+                // Clear the input element's value 
+                input.value = ''; 
+            } 
+        } 
+    }); 
+
+    // Add an event listener for click on the tags list 
+    tags.addEventListener('click', function (event) { 
+
+        // If the clicked element has the class 'delete-button' 
+        if (event.target.classList.contains('delete-button')) { 
+          
+            // Remove the parent element (the tag) 
+            event.target.parentNode.remove(); 
+        } 
+    }); 
+</script> 
 </html>
