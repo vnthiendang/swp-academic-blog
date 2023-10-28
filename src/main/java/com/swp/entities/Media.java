@@ -18,12 +18,13 @@ public class Media {
     }
 
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "media_url", nullable = false)
     private String mediaUrl;
+
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -36,6 +37,7 @@ public class Media {
     private byte[] data;
 
     @ManyToOne(fetch = FetchType.EAGER)
+
     @JoinColumn(name = "post_id")
     private Post post;
 }

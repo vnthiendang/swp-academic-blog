@@ -23,6 +23,7 @@ public class ModelMapperConfig {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setPropertyCondition(context -> context.getSource() != null);
 
+
         // Define the mapping for the 'tags' property using a TypeMap
         TypeMap<Post, PostDto> typeMap = modelMapper.createTypeMap(Post.class, PostDto.class);
         typeMap.addMapping(src -> src.getMedias(), PostDto::setMediaList);
@@ -34,6 +35,7 @@ public class ModelMapperConfig {
         // Define the mapping for Media to MediaDto
         TypeMap<Media, MediaDto> mediaTypeMap = modelMapper.createTypeMap(Media.class, MediaDto.class);
         mediaTypeMap.addMapping(Media::getData, MediaDto::setData);
+
 
         return modelMapper;
     }

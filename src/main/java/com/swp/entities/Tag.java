@@ -13,14 +13,14 @@ import java.util.Set;
 @Setter
 public class Tag {
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "tag_name", nullable = false)
     private String tagName;
 
-    @Column(name = "tag_description", columnDefinition = "longtext")
+    @Column(name = "tag_description", columnDefinition = "text")
     private String tagDescription;
 
     @Column(name = "created_date")

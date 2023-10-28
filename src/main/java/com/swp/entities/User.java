@@ -15,7 +15,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
-@Table(name = "user", uniqueConstraints = {
+@Table(name = "app_user", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")})
 @Getter
 @Setter
@@ -32,7 +32,7 @@ public class User implements UserDetails {
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     private Integer usId;
 
     @Column(name = "display_name", nullable = false)
@@ -50,7 +50,7 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "\"role_id\"")
     private Role role_id;
 
     @Column(name = "created_date")
@@ -95,14 +95,14 @@ public class User implements UserDetails {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return usId != null && Objects.equals(usId, user.usId);
+        return Objects.equals(usId, user.usId);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(usId);
     }
 
 

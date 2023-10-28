@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
+
 import java.util.List;
 
 @RestController
@@ -59,6 +61,7 @@ public class MediaController {
 //        MediaDto mediaDto = modelMapper.map(createdMedia, MediaDto.class);
 //        return mediaDto;
 //    }
+
 //    @GetMapping("/{id}")
 //    public ResponseEntity<byte[]> downloadImage(@PathVariable Integer id) {
 //        Media media = mediaService.getById(id);
@@ -71,11 +74,13 @@ public class MediaController {
 //        }
 //    }
 
+
 //    @PostMapping
 //    public Media uploadImage(@RequestParam String filename, @RequestParam String contentType, @RequestParam("file") MultipartFile file) throws IOException {
 //        byte[] data = file.getBytes();
 //        return mediaService.saveImage(filename, contentType, data);
 //    }
+
 
 //    @PostMapping("/post")
 //    public ResponseEntity<Media> uploadMedia(@RequestBody @Valid MediaRequest mediaRequest) {
@@ -100,6 +105,7 @@ public class MediaController {
         String uploadImage = mediaService.uploadImage(file, postId);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(uploadImage);
+
     }
 
     @GetMapping("/{fileName}")

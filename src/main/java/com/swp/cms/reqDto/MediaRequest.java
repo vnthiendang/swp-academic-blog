@@ -10,6 +10,7 @@ public class MediaRequest {
     String mediaURL;
     Integer postID;
     String name;
+
     String contentType;
     String data;
 }

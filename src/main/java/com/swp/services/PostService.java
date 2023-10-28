@@ -81,7 +81,7 @@ public class PostService {
     }
 
     public List<Post> getAll() {
-        return postRepository.findAll();
+        return postRepository.findAllReviewedPosts();
     }
 
     public Post createPost(PostRequest postRequest) {
@@ -283,6 +283,7 @@ public class PostService {
         }
     }
 
+
     public List<Post> GetPostsByCategoryId(List<Post> approvedPosts, Integer categoryId) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Category not found with ID: " + categoryId));
@@ -323,6 +324,7 @@ public class PostService {
                 .stream()
                 .map(postApproval -> postApproval.getPost().getPostsId())
                 .collect(Collectors.toList());
+
 
         return postRepository.findAll()
                 .stream()
