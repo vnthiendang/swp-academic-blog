@@ -13,11 +13,11 @@ import java.util.Set;
 @Setter
 public class Comment {
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "comment_text", columnDefinition = "longtext")
+    @Column(name = "comment_text", columnDefinition = "text")
     private String commentText;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,7 +25,7 @@ public class Comment {
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by_user_id")
+    @JoinColumn(name = "\"created_by_user_id\"")
     private User createdByUser;
 
     @JsonIgnore

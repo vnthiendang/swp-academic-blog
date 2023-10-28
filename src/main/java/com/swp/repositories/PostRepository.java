@@ -10,21 +10,17 @@ import java.util.List;
 
 
 public interface PostRepository extends JpaRepository<Post, Integer>, JpaSpecificationExecutor<Post> {
-    @Query("SELECT p FROM Post p JOIN p.postApprovals pa WHERE pa.status = 'APPROVED' " +
-            "AND (TRIM(p.title) LIKE CONCAT('%', TRIM(:keyword), '%') " +
-            "OR TRIM(p.postDetail) LIKE CONCAT('%', TRIM(:keyword), '%') OR " +
-            "TRIM(p.belongedToCategory.content) LIKE CONCAT('%', TRIM(:keyword), '%'))")
+    @Query("SELECT p FROM Post p JOIN p.postApprovals pa " +
+            "WHERE pa.status = 'APPROVED' " +
+            "AND (TRIM(p.title) ILIKE '%' || TRIM(:keyword) || '%' " +
+            "OR TRIM(p.postDetail) ILIKE '%' || TRIM(:keyword) || '%' " +
+            "OR TRIM(p.belongedToCategory.content) ILIKE '%' || TRIM(:keyword) || '%')")
     List<Post> searchApprovedPosts(@Param("keyword") String keyword);
 
     @Query("SELECT p FROM Post p JOIN p.postApprovals pa WHERE pa.status = 'APPROVED'")
     List<Post> findAllApprovedPosts();
 
-//    @Query("SELECT DISTINCT p FROM Post p " +
-//            "JOIN p.tags pt " +
-//            "JOIN p.postApprovals pa " +
-//            "WHERE pa.status = 'APPROVED' " +
-//            "AND (:categoryId IS NULL OR p.belongedToCategory.cateId = :categoryId) " +
-//            "AND (:tagIds IS NULL OR pt.id IN :tagIds)")
-//    List<Post> findAllByCategoryAndTags(@Param("categoryId") Integer categoryId, @Param("tagIds") List<Integer> tagIds);
+    @Query("SELECT p FROM Post p LEFT JOIN p.postApprovals pa WHERE pa.post IS NULL")
+    List<Post> findAllReviewedPosts();
 
 }

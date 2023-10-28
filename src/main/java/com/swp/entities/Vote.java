@@ -12,7 +12,7 @@ import java.time.OffsetDateTime;
 @Setter
 public class Vote {
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -24,7 +24,7 @@ public class Vote {
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "\"user_id\"")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)

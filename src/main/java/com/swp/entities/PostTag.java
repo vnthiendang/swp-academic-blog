@@ -17,7 +17,7 @@ public class PostTag {
         this.id = tagId;
     }
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

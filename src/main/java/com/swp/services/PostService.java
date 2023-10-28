@@ -81,7 +81,7 @@ public class PostService {
     }
 
     public List<Post> getAll() {
-        return postRepository.findAll();
+        return postRepository.findAllReviewedPosts();
     }
 
     public Post createPost(PostRequest postRequest) {
@@ -316,6 +316,7 @@ public class PostService {
         return approvedPosts; // Return the original list if keyword is not provided
     }
 
+
     public List<Post> getPostsWithoutApprovals() {
         List<PostApprovals> postApprovals = postApprovalsRepository.findAll();
 
@@ -323,6 +324,7 @@ public class PostService {
                 .stream()
                 .map(postApproval -> postApproval.getPost().getPostsId())
                 .collect(Collectors.toList());
+
 
         return postRepository.findAll()
                 .stream()

@@ -16,21 +16,21 @@ import java.util.Set;
 @Setter
 public class Post {
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer postsId;
 
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "post_detail", columnDefinition = "longtext")
+    @Column(name = "post_detail", columnDefinition = "text")
     private String postDetail;
 
     @Column(name = "created_date")
     private LocalDateTime createdTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by_user_id")
+    @JoinColumn(name = "\"created_by_user_id\"")
     private User createdByUser;
 
     @ManyToOne(fetch = FetchType.LAZY)

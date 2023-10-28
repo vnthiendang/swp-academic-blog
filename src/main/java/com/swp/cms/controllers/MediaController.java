@@ -77,6 +77,7 @@ public class MediaController {
 //    }
 
     @PostMapping("/post")
+
     public ResponseEntity<Media> uploadMedia(@RequestBody @Valid MediaRequest mediaRequest) {
         try {
             Media savedMedia = mediaService.createMedia(mediaRequest);

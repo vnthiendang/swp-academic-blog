@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 @Setter
 public class PostApprovals {
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -28,6 +28,6 @@ public class PostApprovals {
     private Post post;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "viewed_by_user_id")
+    @JoinColumn(name = "\"viewed_by_user_id\"")
     private User viewedByUser;
 }
