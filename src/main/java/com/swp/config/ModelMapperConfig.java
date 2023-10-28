@@ -2,6 +2,8 @@ package com.swp.config;
 
 import com.swp.cms.dto.MediaDto;
 import com.swp.cms.dto.PostDto;
+import com.swp.entities.Media;
+
 import com.swp.entities.Post;
 import com.swp.entities.PostTag;
 import com.swp.entities.Tag;
@@ -28,21 +30,15 @@ public class ModelMapperConfig {
         typeMap.addMapping(src -> src.getAwards(), PostDto::setAwardList);
         typeMap.addMapping(src -> src.getComments(), PostDto::setCommentList);
         typeMap.addMapping(src -> src.getVotes(), PostDto::setVoteList);
-        // Add mapping for the 'tags' property
+
         typeMap.addMapping(src -> src.getTags(), PostDto::setTagList);
+
+        // Define the mapping for Media to MediaDto
+        TypeMap<Media, MediaDto> mediaTypeMap = modelMapper.createTypeMap(Media.class, MediaDto.class);
+        mediaTypeMap.addMapping(Media::getData, MediaDto::setData);
+
 
         return modelMapper;
     }
 }
-
-
-
-
-
-//        // Add your custom mapping configurations here
-//        Type listMediaType = new TypeToken<List<MediaDto>>() {}.getType();
-//        modelMapper.addConverter(ctx -> ctx.getSource() == null ? null : modelMapper.map(ctx.getSource(), listMediaType));
-//
-//        Type listPostTagType = new TypeToken<List<PostTagDto>>() {}.getType();
-//        modelMapper.addConverter(ctx -> ctx.getSource() == null ? null : modelMapper.map(ctx.getSource(), listPostTagType));
 

@@ -79,6 +79,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     if (categoryId != null) {
         approvedPosts = postService.filterByCategoryId(approvedPosts, categoryId);
     }
+
     if (tagIds != null && !tagIds.isEmpty()) {
         approvedPosts = postService.filterByTagIds(approvedPosts, tagIds);
     }
@@ -88,6 +89,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
     return dtos;
 }
+
 
     @GetMapping("/GetAllApproved")
     public List<PostDto> getAllApprovedPostDtosByCategoryOrTag(
@@ -142,7 +144,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
 
     @GetMapping("/postRequest")
     public List<PostDto> getAllPostRequest() {
-        List<Post> posts = postService.getAll();
+        List<Post> posts = postService.getPostsWithoutApprovals();
         List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
         return dtos;
     }

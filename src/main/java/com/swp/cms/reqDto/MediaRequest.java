@@ -9,4 +9,6 @@ public class MediaRequest {
     @NotNull
     String mediaURL;
     Integer postID;
+    String contentType;
+    String data;
 }

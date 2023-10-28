@@ -17,11 +17,11 @@ public class VoteDto {
     public Integer getPost(){
         return this.post.getPostsId();
     }
-    public Integer getUser(){
-        return this.user.getUsId();
+    public String getUser(){
+        return this.user.getDisplay_name();
     }
-    public Integer getVoteType(){
-        return this.voteType.getId();
+    public String getVoteType(){
+        return this.voteType.getVoteType();
     }
 
 }

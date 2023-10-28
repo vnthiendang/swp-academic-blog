@@ -11,13 +11,13 @@ public class AwardDto {
     private AwardType awardType;
     private Post post;
     private User givenByUser;
-    public Integer getAwardType(){
-        return this.awardType.getId();
+    public String getAwardType(){
+        return this.awardType.getAwardType();
     }
     public Integer getPost(){
         return this.post.getPostsId();
     }
-    public Integer getGivenByUser(){
-        return this.givenByUser.getUsId();
+    public String getGivenByUser(){
+        return this.givenByUser.getDisplay_name();
     }
 }

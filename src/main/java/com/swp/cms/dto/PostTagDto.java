@@ -17,9 +17,9 @@ public class PostTagDto {
         return null; // or handle the case when media or mediaUrl is null
     }
 
-    public Integer getTag() {
+    public String getTag() {
         if (tag != null && tag.getId() != null) {
-            return tag.getId();
+            return tag.getTagName();
         }
         return null; // or handle the case when media or mediaUrl is null
     }
