@@ -52,14 +52,6 @@ public class PostDto {
 
     }
 
-    public String getPostApprovals() {
-        if (postApprovals != null) {
-            return postApprovals.getStatus();
-        } else {
-            return "N/A"; // Or any other appropriate default value
-        }
-    }
-
 //    public List<String> getMediaList() {
 //        if (mediaList != null) {
 //            List<String> mediaUrls = new ArrayList<>();

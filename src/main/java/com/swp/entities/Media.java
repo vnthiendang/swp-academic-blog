@@ -25,11 +25,11 @@ public class Media {
     @Column(name = "media_url", nullable = false)
     private String mediaUrl;
 
-    @Column(name = "content_type", nullable = false)
+    @Column(name = "content_type")
     private String contentType;
 
     @Lob
-    @Column(name = "data", nullable = false, columnDefinition = "longblob")
+    @Column(name = "data")
     private byte[] data;
 
     @ManyToOne(fetch = FetchType.LAZY)
