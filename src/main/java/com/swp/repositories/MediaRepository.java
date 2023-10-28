@@ -9,4 +9,6 @@ import java.util.Optional;
 
 
 public interface MediaRepository extends JpaRepository<Media, Integer>, JpaSpecificationExecutor<Media> {
+    Optional<Media> findByName(String filename);
+    List<Media> findByPostPostsId(Integer postId);
 }
