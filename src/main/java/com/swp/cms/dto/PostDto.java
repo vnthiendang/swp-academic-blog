@@ -24,11 +24,11 @@ public class PostDto {
     private List<Comment> commentList;
     private List<Vote> voteList;
 
-
     private Integer vote1Count = 0;
     private Integer vote2Count = 0;
     private Integer wordCount = 0;
     private Integer readingTime = 0;
+
 
     public String getCreatedByUser() {
         return this.createdByUser.getDisplay_name();
@@ -40,8 +40,15 @@ public class PostDto {
         } else {
             return "N/A"; // Or any other appropriate default value
         }
-
     }
+
+//     public String getPostApprovals() {
+//         if (postApprovals != null) {
+//             return postApprovals.getStatus();
+//         } else {
+//             return "N/A"; // Or any other appropriate default value
+//         }
+//     }
 
     public String getPostApprovals() {
         if (postApprovals != null) {
@@ -85,7 +92,6 @@ public class PostDto {
             for (Award award : awardList) {
                 if (award != null && award.getId() != null) {
                     awardIds.add(award.getAwardType().getAwardType());
-
                 }
             }
             return awardIds;
@@ -103,6 +109,7 @@ public class PostDto {
             }
             return commentIds;
         }
+
         return Collections.emptyList(); // or handle the case when commentList is null
     }
 

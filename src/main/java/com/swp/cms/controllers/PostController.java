@@ -76,9 +76,11 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         @RequestParam(name = "tagIds", required = false) List<Integer> tagIds) {
     List<Post> approvedPosts = postService.getAllApprovedPosts();
 
+
     if (categoryId != null) {
         approvedPosts = postService.filterByCategoryId(approvedPosts, categoryId);
     }
+
 
     if (tagIds != null && !tagIds.isEmpty()) {
         approvedPosts = postService.filterByTagIds(approvedPosts, tagIds);
@@ -89,7 +91,6 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
     return dtos;
 }
-
 
     @GetMapping("/GetAllApproved")
     public List<PostDto> getAllApprovedPostDtosByCategoryOrTag(

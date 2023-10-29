@@ -283,6 +283,7 @@ public class PostService {
         }
     }
 
+
     public List<Post> GetPostsByCategoryId(List<Post> approvedPosts, Integer categoryId) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Category not found with ID: " + categoryId));
@@ -315,7 +316,6 @@ public class PostService {
         }
         return approvedPosts; // Return the original list if keyword is not provided
     }
-
 
     public List<Post> getPostsWithoutApprovals() {
         List<PostApprovals> postApprovals = postApprovalsRepository.findAll();
