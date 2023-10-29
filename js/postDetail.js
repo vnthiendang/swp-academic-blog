@@ -32,12 +32,12 @@ function displayPost() {
       document.getElementById('postTitle').textContent = post.title;
       document.getElementById('postAuthor').textContent = post.createdByUser;
       document.getElementById('postDate').textContent = formattedTime;
-      document.getElementById('postTag').textContent = post.tagList ?? 'tag';
+      document.getElementById('postTag').textContent = post.tagList ?? '';
       document.getElementById('postCategory').textContent = post.belongedToCategory;
       document.getElementById('postContent').textContent = post.postDetail;
       document.getElementById('postMedia').src = post.mediaList ?? '#';
       document.getElementById('postVote').textContent = post.vote1Count ?? '#';
-      document.getElementById('readingTime').textContent = post.readingTime + ' readed' ?? '#';
+      document.getElementById('readingTime').textContent = post.readingTime + ' readed' ?? '';
     })
     .catch(error => {
       console.error('Error retrieving post:', error);

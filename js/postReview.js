@@ -29,8 +29,8 @@ function displayPost() {
       document.getElementById('postTitle').textContent = post.title;
       document.getElementById('postAuthor').textContent = post.createdByUser;
       document.getElementById('postDate').textContent = formattedTime;
-      document.getElementById('postTag').textContent = post.postTagList ?? 'tag';
-      document.getElementById('postCategory').textContent = post.belongedToCategory ?? 'category';
+      document.getElementById('postTag').textContent = post.postTagList ?? '';
+      document.getElementById('postCategory').textContent = post.belongedToCategory ?? '';
       document.getElementById('postContent').textContent = post.postDetail;
       document.getElementById('postMedia').src = post.mediaList[0] ?? '#';
     })

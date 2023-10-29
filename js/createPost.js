@@ -29,13 +29,14 @@ function handleImageUpload(event) {
   const file = event.target.files[0];
 
   if (file) {
+    const imageURL = URL.createObjectURL(file);
     const reader = new FileReader();
 
     reader.onload = function () {
       const imageData = reader.result;
       const binaryData = imageData.split(',')[1];
       
-      console.log("Image data:", binaryData);
+      // console.log("Image data:", binaryData);
       const form = document.getElementById('createPost');
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -44,6 +45,8 @@ function handleImageUpload(event) {
         //const allowCommentSelect = document.querySelector('#comment');
         const categorySelect = document.querySelector('#Category');
         const textEditor = document.querySelector('#text-editor');
+        const tagList = Array.from(document.querySelectorAll("#tags li")).map(li => parseInt(li.textContent));
+        console.log(tagList);
     
         const us = await userInfo();
         const userId = us.userId;
@@ -53,8 +56,8 @@ function handleImageUpload(event) {
           title: titleInput.value,
           userID: userId,
           detail: textEditor.innerHTML,
-          mediaList: [binaryData],
-          tagList: []
+          mediaList: [imageURL],
+          tagList: tagList
         }
     
           const response = await createPost(post);

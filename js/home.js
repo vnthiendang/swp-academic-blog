@@ -124,7 +124,7 @@ function displayPosts(posts) {
       flexItemsElement.appendChild(iconTagElement);
 
       const tagLink1 = document.createElement("a");
-      tagLink1.href = "/pageByCategory.html?tagId";
+      tagLink1.href = "/pageByTag.html?tagId";
 
       const postTagList = document.createElement("div");
       postTagList.className =
