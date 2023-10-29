@@ -17,43 +17,14 @@
     <!-- Header  -->
     <header class="flex items-center justify-between w-full bg-black text-white">
         <div class="flex items-center">
-            <a href="/home.html" class="items-start justify-center">
+            <a href="/managerAdmin.html" class="items-start justify-center">
                 <img src="/img/Logo.png" alt="logo" class="w-16 h-auto">
             </a>
-            <a href="/homeafterlogin.html" class="p-2">
-                FPT BLOG
-            </a>
-            <a href="/homeafterlogin.html" class="p-2">
+            
+            <a href="/managerAdmin.html" class="p-2">
                 Home
             </a>
 
-            <!-- Category  -->
-            <div class="group inline-block relative">
-                <button class="py-2 px-4 rounded inline-flex items-center">
-                    <span class="mr-1">Category</span>
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                </button>
-                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-                    <li class="">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/Page SE SA AI BS/html/pageTechnoloy.html">Technoloy</a>
-                    </li>
-                    <li class="">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/Page SE SA AI BS/html/pageAI.html">AI</a>
-                    </li>
-                    <li class="w-full">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/Page SE SA AI BS/html/pageBusiness.html">Business</a>
-                    </li>
-                    <li class="w-full">
-                        <a class="rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white"
-                            href="/Page SE SA AI BS/html/pageDigitalTransformation.html">Digital Transformation</a>
-                    </li>
-                </ul>
-            </div>
         </div>
         <div class="p-1 flex">
             <form class="flex items-center">
@@ -93,44 +64,44 @@
     <Main class="main">
             <!-- Left Side -->
             <div class="left">
-                <a href="/managerAdminTest.html">
+                <a href="#">
                     <h2>
                         <i class="fa-regular fa-rectangle-list fa-xl" style="color: #151313;"></i>
                         System Functions
                     </h2>
                 </a>
 
-                <div class="content" onclick="toggleContent(this)">
+                <div class="content" onclick="showContent('content1')">
                     <h5 class="title-text">
                         Article Management
                     </h5>
-                    <div class="content-children">
+                    <!-- <div class="content-children">
                         <div class="content-child" onclick="showContent('content1')">Technoloy</div>
                         <div class="content-child" onclick="showContent('content2')">AI</div>
                         <div class="content-child" onclick="showContent('content3')">Business</div>
                         <div class="content-child" onclick="showContent('content4')">Digital Transformation</div>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="content" onclick="toggleContent(this)">
+                <div class="content" onclick="showContent('content8')">
                     <h5 class="title-text">
                         User Management
                     </h5>
-                    <div class="content-children">
+                    <!-- <div class="content-children">
                         <div class="content-child" onclick="showContent('content5')">Gr1</div>
                         <div class="content-child" onclick="showContent('content6')">Gr2</div>
                         <div class="content-child" onclick="showContent('content7')">Gr3</div>
                         <div class="content-child" onclick="showContent('content8')">Boss</div>
-                    </div>
+                    </div> -->
                 </div>
                 
             </div>
     
             <!-- Right Side -->
             <div class="right">
-                <!-- Manager Post -->
 
-                    <!-- Funciton1 -->
-                    <div id="content1Content" style="display: none;">
+                <!-- Manager Post -->
+                <!-- Funciton -->
+                <div id="content1Content" style="display: none;">
                         
                         <div class="frame">
                             <div class="title">
@@ -179,370 +150,28 @@
                             </div>
                         </div>
 
-                    </div>
-                    
-                    <!-- Funciton2 -->
-                    <div id="content2Content" style="display: none;">
-                        
-                        <div class="frame">
-                            <div class="title">
-                                <h1>Title</h1>
-                            </div>
-                            <div class="article-management">
-                                <div class="search-bar">
-                                    <input type="text" placeholder="Search Articles" id="searchInput">
-                                    <button onclick="searchArticles()">Search</button>
-                                </div>
-                                <div class="grid-container">
-                                    <!-- Task Bar -->
-                                    <div class="grid-item header">ID</div>
-                                    <div class="grid-item header">Name Post</div>
-                                    <div class="grid-item header">User Name</div>
-                                    <div class="grid-item header">Email</div>
-                                    <div class="grid-item header">Img</div>
-                                    <div class="grid-item header">Option</div>
-                    
-                                    <!-- No1: -->
-                                    <div class="grid-item">1</div>
-                                    <div class="grid-item">Article 1</div>
-                                    <div class="grid-item">User 1</div>
-                                    <div class="grid-item">user1@example.com</div>
-                                    <div class="grid-item"><img src="/img/AI/1.jpg" alt=""></div>
-                                    <div class="grid-item" id="bt-option">
-                                        <div class="button-column">
-                                            <button onclick="deleteArticle(1)">Delete</button>
-                                            <button onclick="designArticle(1)">Design</button>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- No2: -->
-                                    <div class="grid-item">2</div>
-                                    <div class="grid-item">Article 2</div>
-                                    <div class="grid-item">User 2</div>
-                                    <div class="grid-item">user1@example.com</div>
-                                    <div class="grid-item">image.jpg</div>
-                                    <div class="grid-item" id="bt-option">
-                                        <div class="button-column">
-                                            <button onclick="deleteArticle(1)">Delete</button>
-                                            <button onclick="designArticle(1)">Design</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Funciton3 -->
-                    <div id="content3Content" style="display: none;">
-                        
-                        <div class="frame">
-                            <div class="title">
-                                <h1>Title</h1>
-                            </div>
-                            <div class="article-management">
-                                <div class="search-bar">
-                                    <input type="text" placeholder="Search Articles" id="searchInput">
-                                    <button onclick="searchArticles()">Search</button>
-                                </div>
-                                <div class="grid-container">
-                                    <!-- Task Bar -->
-                                    <div class="grid-item header">ID</div>
-                                    <div class="grid-item header">Name Post</div>
-                                    <div class="grid-item header">User Name</div>
-                                    <div class="grid-item header">Email</div>
-                                    <div class="grid-item header">Img</div>
-                                    <div class="grid-item header">Option</div>
-                    
-                                    <!-- No1: -->
-                                    <div class="grid-item">1</div>
-                                    <div class="grid-item">Article 1</div>
-                                    <div class="grid-item">User 1</div>
-                                    <div class="grid-item">user1@example.com</div>
-                                    <div class="grid-item"><img src="/img/AI/1.jpg" alt=""></div>
-                                    <div class="grid-item" id="bt-option">
-                                        <div class="button-column">
-                                            <button onclick="deleteArticle(1)">Delete</button>
-                                            <button onclick="designArticle(1)">Design</button>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- No2: -->
-                                    <div class="grid-item">2</div>
-                                    <div class="grid-item">Article 2</div>
-                                    <div class="grid-item">User 2</div>
-                                    <div class="grid-item">user1@example.com</div>
-                                    <div class="grid-item">image.jpg</div>
-                                    <div class="grid-item" id="bt-option">
-                                        <div class="button-column">
-                                            <button onclick="deleteArticle(1)">Delete</button>
-                                            <button onclick="designArticle(1)">Design</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Funciton4 -->
-                    <div id="content4Content" style="display: none;">
-                        
-                        <div class="frame">
-                            <div class="title">
-                                <h1>Title</h1>
-                            </div>
-                            <div class="article-management">
-                                <div class="search-bar">
-                                    <input type="text" placeholder="Search Articles" id="searchInput">
-                                    <button onclick="searchArticles()">Search</button>
-                                </div>
-                                <div class="grid-container">
-                                    <!-- Task Bar -->
-                                    <div class="grid-item header">ID</div>
-                                    <div class="grid-item header">Name Post</div>
-                                    <div class="grid-item header">User Name</div>
-                                    <div class="grid-item header">Email</div>
-                                    <div class="grid-item header">Img</div>
-                                    <div class="grid-item header">Option</div>
-                    
-                                    <!-- No1: -->
-                                    <div class="grid-item">1</div>
-                                    <div class="grid-item">Article 1</div>
-                                    <div class="grid-item">User 1</div>
-                                    <div class="grid-item">user1@example.com</div>
-                                    <div class="grid-item"><img src="/img/AI/1.jpg" alt=""></div>
-                                    <div class="grid-item" id="bt-option">
-                                        <div class="button-column">
-                                            <button onclick="deleteArticle(1)">Delete</button>
-                                            <button onclick="designArticle(1)">Design</button>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- No2: -->
-                                    <div class="grid-item">2</div>
-                                    <div class="grid-item">Article 2</div>
-                                    <div class="grid-item">User 2</div>
-                                    <div class="grid-item">user1@example.com</div>
-                                    <div class="grid-item">image.jpg</div>
-                                    <div class="grid-item" id="bt-option">
-                                        <div class="button-column">
-                                            <button onclick="deleteArticle(1)">Delete</button>
-                                            <button onclick="designArticle(1)">Design</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                </div>
 
                 <!-- Manager User -->
-
-                <!-- Funciton1 -->
-                <div id="content5Content" style="display: none;">
-                        
-                    <div class="frame">
-                        <div class="title">
-                            <h1>Title</h1>
-                        </div>
-                        <div class="article-management">
-                            <div class="search-bar">
-                                <input type="text" placeholder="Search Articles" id="searchInput">
-                                <button onclick="searchArticles()">Search</button>
-                            </div>
-                            <div class="grid-container">
-                                <!-- Task Bar -->
-                                <div class="grid-item header">ID</div>
-                                <div class="grid-item header">Name Post</div>
-                                <div class="grid-item header">User Name</div>
-                                <div class="grid-item header">Email</div>
-                                <div class="grid-item header">Img</div>
-                                <div class="grid-item header">Option</div>
-                
-                                <!-- No1: -->
-                                <div class="grid-item">1</div>
-                                <div class="grid-item">Article 1</div>
-                                <div class="grid-item">User 1</div>
-                                <div class="grid-item">user1@example.com</div>
-                                <div class="grid-item"><img src="/img/AI/1.jpg" alt=""></div>
-                                <div class="grid-item" id="bt-option">
-                                    <div class="button-column">
-                                        <button onclick="deleteArticle(1)">Delete</button>
-                                        <button onclick="designArticle(1)">Design</button>
-                                    </div>
-                                </div>
-                                
-                                <!-- No2: -->
-                                <div class="grid-item">2</div>
-                                <div class="grid-item">Article 2</div>
-                                <div class="grid-item">User 2</div>
-                                <div class="grid-item">user1@example.com</div>
-                                <div class="grid-item">image.jpg</div>
-                                <div class="grid-item" id="bt-option">
-                                    <div class="button-column">
-                                        <button onclick="deleteArticle(1)">Delete</button>
-                                        <button onclick="designArticle(1)">Design</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                
-                <!-- Funciton2 -->
-                <div id="content6Content" style="display: none;">
-                    
-                    <div class="frame">
-                        <div class="title">
-                            <h1>Title</h1>
-                        </div>
-                        <div class="article-management">
-                            <div class="search-bar">
-                                <input type="text" placeholder="Search Articles" id="searchInput">
-                                <button onclick="searchArticles()">Search</button>
-                            </div>
-                            <div class="grid-container">
-                                <!-- Task Bar -->
-                                <div class="grid-item header">ID</div>
-                                <div class="grid-item header">Name Post</div>
-                                <div class="grid-item header">User Name</div>
-                                <div class="grid-item header">Email</div>
-                                <div class="grid-item header">Img</div>
-                                <div class="grid-item header">Option</div>
-                
-                                <!-- No1: -->
-                                <div class="grid-item">1</div>
-                                <div class="grid-item">Article 1</div>
-                                <div class="grid-item">User 1</div>
-                                <div class="grid-item">user1@example.com</div>
-                                <div class="grid-item"><img src="/img/AI/1.jpg" alt=""></div>
-                                <div class="grid-item" id="bt-option">
-                                    <div class="button-column">
-                                        <button onclick="deleteArticle(1)">Delete</button>
-                                        <button onclick="designArticle(1)">Design</button>
-                                    </div>
-                                </div>
-                                
-                                <!-- No2: -->
-                                <div class="grid-item">2</div>
-                                <div class="grid-item">Article 2</div>
-                                <div class="grid-item">User 2</div>
-                                <div class="grid-item">user1@example.com</div>
-                                <div class="grid-item">image.jpg</div>
-                                <div class="grid-item" id="bt-option">
-                                    <div class="button-column">
-                                        <button onclick="deleteArticle(1)">Delete</button>
-                                        <button onclick="designArticle(1)">Design</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Funciton3 -->
-                <div id="content7Content" style="display: none;">
-                    
-                    <div class="frame">
-                        <div class="title">
-                            <h1>Title</h1>
-                        </div>
-                        <div class="article-management">
-                            <div class="search-bar">
-                                <input type="text" placeholder="Search Articles" id="searchInput">
-                                <button onclick="searchArticles()">Search</button>
-                            </div>
-                            <div class="grid-container">
-                                <!-- Task Bar -->
-                                <div class="grid-item header">ID</div>
-                                <div class="grid-item header">Name Post</div>
-                                <div class="grid-item header">User Name</div>
-                                <div class="grid-item header">Email</div>
-                                <div class="grid-item header">Img</div>
-                                <div class="grid-item header">Option</div>
-                
-                                <!-- No1: -->
-                                <div class="grid-item">1</div>
-                                <div class="grid-item">Article 1</div>
-                                <div class="grid-item">User 1</div>
-                                <div class="grid-item">user1@example.com</div>
-                                <div class="grid-item"><img src="/img/AI/1.jpg" alt=""></div>
-                                <div class="grid-item" id="bt-option">
-                                    <div class="button-column">
-                                        <button onclick="deleteArticle(1)">Delete</button>
-                                        <button onclick="designArticle(1)">Design</button>
-                                    </div>
-                                </div>
-                                
-                                <!-- No2: -->
-                                <div class="grid-item">2</div>
-                                <div class="grid-item">Article 2</div>
-                                <div class="grid-item">User 2</div>
-                                <div class="grid-item">user1@example.com</div>
-                                <div class="grid-item">image.jpg</div>
-                                <div class="grid-item" id="bt-option">
-                                    <div class="button-column">
-                                        <button onclick="deleteArticle(1)">Delete</button>
-                                        <button onclick="designArticle(1)">Design</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Funciton4 -->
+                <!-- Funciton -->
                 <div id="content8Content" style="display: none;">
                     
                     <div class="frame">
                         <div class="title">
                             <h1>Title</h1>
                         </div>
-                        <div class="article-management">
+                        <div class="user-management">
                             <div class="search-bar">
-                                <input type="text" placeholder="Search Articles" id="searchInput">
-                                <button onclick="searchArticles()">Search</button>
+                              <input type="text" placeholder="Search Users" id="searchInput">
+                              <button onclick="searchUsers()">Search</button>
                             </div>
-                            <div class="grid-container">
-                                <!-- Task Bar -->
-                                <div class="grid-item header">ID</div>
-                                <div class="grid-item header">Name Post</div>
-                                <div class="grid-item header">User Name</div>
-                                <div class="grid-item header">Email</div>
-                                <div class="grid-item header">Img</div>
-                                <div class="grid-item header">Option</div>
-                
-                                <!-- No1: -->
-                                <div class="grid-item">1</div>
-                                <div class="grid-item">Article 1</div>
-                                <div class="grid-item">User 1</div>
-                                <div class="grid-item">user1@example.com</div>
-                                <div class="grid-item"><img src="/img/AI/1.jpg" alt=""></div>
-                                <div class="grid-item" id="bt-option">
-                                    <div class="button-column">
-                                        <button onclick="deleteArticle(1)">Delete</button>
-                                        <button onclick="designArticle(1)">Design</button>
-                                    </div>
-                                </div>
-                                
-                                <!-- No2: -->
-                                <div class="grid-item">2</div>
-                                <div class="grid-item">Article 2</div>
-                                <div class="grid-item">User 2</div>
-                                <div class="grid-item">user1@example.com</div>
-                                <div class="grid-item">image.jpg</div>
-                                <div class="grid-item" id="bt-option">
-                                    <div class="button-column">
-                                        <button onclick="deleteArticle(1)">Delete</button>
-                                        <button onclick="designArticle(1)">Design</button>
-                                    </div>
-                                </div>
-                            </div>
+                          
+                              <!-- Rows -->
+                            <div id="userTable"></div>
+       
                         </div>
+                        <button class="styled-button">Update</button>
+                        <button class="styled-button">Ban user</button>
                     </div>
 
                 </div>
@@ -583,32 +212,8 @@
     </footer>
 </body>
 <script src="/js/tailwind.config.js"></script>
-<script src="/js/manager.js"></script>
+<script type="module" src="/js/manager.js"></script>
 
-<!-- <script>
-    
-    function showContent(contentId) {
-        // Hide all content sections on the right side
-        const rightContents = document.querySelectorAll('.right div[id$="Content"]');
-        rightContents.forEach(content => content.style.display = 'none');
-
-        // Show the selected content
-        document.getElementById(contentId + 'Content').style.display = 'block';
-    }
-
-</script> -->
-
-<script>
-    function toggleContent(contentElement) {
-    const contentChildren = contentElement.querySelector('.content-children');
-    if (contentChildren.style.display === 'block') {
-        contentChildren.style.display = 'none';
-    } else {
-        contentChildren.style.display = 'block';
-    }
-}
-
-</script>
 <script>
     function showContent(contentId) {
         console.log('Function called'); // Debugging line
@@ -623,7 +228,5 @@
 </script>
 
 
-<script>
-    
-</script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </html>
