@@ -33,11 +33,10 @@ public class Media {
     private String contentType;
 
     @Lob
-    @Column(name = "data", nullable = false, columnDefinition = "longblob")
+    @Column(name = "data", nullable = false, columnDefinition = "oid")
     private byte[] data;
 
     @ManyToOne(fetch = FetchType.EAGER)
-
     @JoinColumn(name = "post_id")
     private Post post;
 }

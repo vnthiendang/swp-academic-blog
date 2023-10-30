@@ -106,11 +106,11 @@ public class PostService {
             post.setMedias(mediaList);
         }
 
-        List<Integer> tagIds = postRequest.getTagList(); // Change to a list of tag IDs
-        if (tagIds != null && !tagIds.isEmpty()) {
+        List<String> tagNames = postRequest.getTagList(); // Change to a list of tag IDs
+        if (tagNames != null && !tagNames.isEmpty()) {
             List<PostTag> postTagList = new ArrayList<>();
-            for (Integer tagId : tagIds) {
-                Tag tag = tagRepository.findById(tagId)
+            for (String tagName : tagNames) {
+                Tag tag = tagRepository.findByTagName(tagName)
                         .orElseThrow(() -> new IllegalArgumentException("Invalid Tag"));
                 PostTag postTag = new PostTag();
                 postTag.setTag(tag);
@@ -152,13 +152,13 @@ public class PostService {
             post.getMedias().clear();
         }
         // Update PostTags
-        List<Integer> tagIds = postRequest.getTagList();
-        if (tagIds != null && !tagIds.isEmpty()) {
+        List<String> tagNames = postRequest.getTagList();
+        if (tagNames != null && !tagNames.isEmpty()) {
             // Clear existing post tags and replace with new ones
             post.getPostTags().clear();
             List<PostTag> postTagList = new ArrayList<>();
-            for (Integer tagId : tagIds) {
-                Tag tag = tagRepository.findById(tagId)
+            for (String tagName : tagNames) {
+                Tag tag = tagRepository.findByTagName(tagName)
                         .orElseThrow(() -> new IllegalArgumentException("Invalid Tag"));
                 PostTag postTag = new PostTag();
                 postTag.setTag(tag);
