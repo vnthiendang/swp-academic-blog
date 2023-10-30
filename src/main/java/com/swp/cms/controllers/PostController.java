@@ -12,8 +12,11 @@ import com.swp.services.PostService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,22 +75,28 @@ public class PostController {
 @GetMapping("/GetAllApproved/filter")
 public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         @RequestParam(name = "keyword", required = false) String keyword,
-        @RequestParam(name = "categoryId", required = false) Integer categoryId,
-        @RequestParam(name = "tagIds", required = false) List<Integer> tagIds) {
+        @RequestParam(name = "categoryName", required = false) String categoryName,
+        @RequestParam(name = "tagNames", required = false) List<String> tagNames,
+        @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
+        @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
+        @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
+        @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection) {
+
     List<Post> approvedPosts = postService.getAllApprovedPosts();
-
-
-    if (categoryId != null) {
-        approvedPosts = postService.filterByCategoryId(approvedPosts, categoryId);
+    if (startDate != null && endDate != null) {
+        approvedPosts = postService.filterPostsByDateRange(approvedPosts, startDate, endDate);
+    }
+    if (categoryName != null && !categoryName.trim().isEmpty()) {
+        approvedPosts = postService.filterByCategoryName(approvedPosts, categoryName);
     }
 
-
-    if (tagIds != null && !tagIds.isEmpty()) {
-        approvedPosts = postService.filterByTagIds(approvedPosts, tagIds);
+    if (tagNames != null && !tagNames.isEmpty()) {
+        approvedPosts = postService.filterByTagNames(approvedPosts, tagNames);
     }
     if (keyword != null && !keyword.trim().isEmpty()){
         approvedPosts = postService.GetPostsByKeyword(approvedPosts, keyword);
     }
+    approvedPosts = postService.sortPosts(approvedPosts, sortBy, sortDirection);
     List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
     return dtos;
 }
@@ -95,17 +104,26 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     @GetMapping("/GetAllApproved")
     public List<PostDto> getAllApprovedPostDtosByCategoryOrTag(
             @RequestParam(name = "keyword", required = false) String keyword,
-            @RequestParam(name = "categoryId", required = false) Integer categoryId,
-            @RequestParam(name = "tagId", required = false) Integer tagId) {
+            @RequestParam(name = "categoryName", required = false) String categoryName,
+            @RequestParam(name = "tagName", required = false) String tagName,
+            @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
+            @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection
+    ) {
         List<Post> approvedPosts = postService.getAllApprovedPosts();
-        if (categoryId != null) {
-            approvedPosts = postService.GetPostsByCategoryId(approvedPosts, categoryId);
-        } else if (tagId != null) {
-            approvedPosts = postService.GetPostsByTagId(approvedPosts, tagId);
+        if (startDate != null && endDate != null) {
+            approvedPosts = postService.filterPostsByDateRange(approvedPosts, startDate, endDate);
+        }
+        if (categoryName != null && !categoryName.trim().isEmpty()) {
+            approvedPosts = postService.GetPostsByCategoryName(approvedPosts, categoryName);
+        } else if (tagName != null) {
+            approvedPosts = postService.GetPostsByTagName(approvedPosts, tagName);
         }
         if (keyword != null && !keyword.trim().isEmpty()) {
             approvedPosts = postService.GetPostsByKeyword(approvedPosts, keyword);
         }
+        approvedPosts = postService.sortPosts(approvedPosts, sortBy, sortDirection);
         List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
         return dtos;
     }
@@ -137,6 +155,13 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         Post post = postService.getById(id);
         PostDto dto = postService.mapPostToPostDto(post);
         return dto;
+    }
+
+    @GetMapping("/mostVotedPost")
+    public List<PostDto> findMostVotedPostInCategory(@RequestParam("categoryId") int categoryId) {
+        List<Post> mostVotedPost = postService.findMostVotedPostInCategory(categoryId);
+        List<PostDto> dtos = postService.mapPostsToPostDtos(mostVotedPost);
+        return dtos;
     }
 
     // ==================================================================================================== //

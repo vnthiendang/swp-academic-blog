@@ -41,12 +41,12 @@ public class MediaController {
         this.mediaRepository = mediaRepository;
     }
 
-    @GetMapping("/getall")
-    public List<MediaDto> getAll() {
-        List<Media> medias = mediaService.getAll();
-        List<MediaDto> dto = mapper.fromEntityToMediaDtoList(medias);
-        return dto;
-    }
+//    @GetMapping("/getall")
+//    public List<MediaDto> getAll() {
+//        List<Media> medias = mediaService.getAll();
+//        List<MediaDto> dto = mapper.fromEntityToMediaDtoList(medias);
+//        return dto;
+//    }
 
 //    @GetMapping("/{id}")
 //    public MediaDto getTypeById(@PathVariable Integer id) {
