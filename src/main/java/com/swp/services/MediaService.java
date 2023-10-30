@@ -5,12 +5,18 @@ import com.swp.cms.reqDto.MediaRequest;
 import com.swp.entities.Media;
 import com.swp.repositories.MediaRepository;
 import com.swp.repositories.PostRepository;
+import org.postgresql.largeobject.LargeObject;
+import org.postgresql.largeobject.LargeObjectManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.postgresql.largeobject.LargeObject;
+import org.postgresql.largeobject.LargeObjectManager;
+import javax.sql.DataSource;
 import java.io.IOException;
-import java.time.OffsetDateTime;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.util.Base64;
@@ -74,18 +80,52 @@ public class MediaService {
         }
         return null;
     }
-
+@Transactional
     public byte[] downloadImage(String fileName){
         Optional<Media> media = mediaRepository.findByName(fileName);
         byte[] images = ImageUtils.decompressImage(media.get().getData());
         return images;
     }
 
-    public byte[] downloadImage(Integer id){
-        Optional<Media> media = mediaRepository.findById(id);
-        byte[] images = ImageUtils.decompressImage(media.get().getData());
-        return images;
-    }
+//@Autowired
+//private DataSource dataSource; // Autowire your data source
+//
+//    @Transactional
+//    public byte[] downloadImage(String fileName) {
+//        Optional<Media> mediaOptional = mediaRepository.findByName(fileName);
+//
+//        if (mediaOptional.isPresent()) {
+//            try (Connection connection = dataSource.getConnection()) {
+//                int oid = mediaOptional.get().getOid();
+//                LargeObject largeObject = null;
+//
+//                try {
+//                    // Create a LargeObject
+//                    LargeObjectManager largeObjectManager = LargeObjectManager.open(connection);
+//                    largeObject = largeObjectManager.open(oid, LargeObjectManager.READ);
+//
+//                    byte[] data = largeObject.read(largeObject.size());
+//
+//                    return data;
+//                } catch (SQLException e) {
+//                    // Handle the exception as needed
+//                    e.printStackTrace();
+//                    return null; // or throw a custom exception
+//                } finally {
+//                    if (largeObject != null) {
+//                        largeObject.close();
+//                    }
+//                }
+//            } catch (SQLException e) {
+//                // Handle the exception as needed
+//                e.printStackTrace();
+//                return null; // or throw a custom exception
+//            }
+//        } else {
+//            // Handle the case where the media is not found
+//            return null;
+//        }
+//    }
 
     public List<byte[]> downloadImagesOfaPostId(Integer postId) {
         List<byte[]> imagesList = new ArrayList<>();

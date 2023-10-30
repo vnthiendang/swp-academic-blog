@@ -20,7 +20,7 @@ public class PostRequest {
     private String title;
     private String detail;
     private List<String> mediaList; // Change to a list of media URLs
-    private List<Integer> tagList; // Change to a list of tag IDs
+    private List<String> tagList; // Change to a list of tag IDs
     private Integer postApprovals;
     private List<Integer> awardList;
     private List<Integer> commentList;
