@@ -1,5 +1,6 @@
 package com.swp.repositories;
 
+import com.swp.entities.Category;
 import com.swp.entities.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -23,4 +24,5 @@ public interface PostRepository extends JpaRepository<Post, Integer>, JpaSpecifi
     @Query("SELECT p FROM Post p LEFT JOIN p.postApprovals pa WHERE pa.post IS NULL")
     List<Post> findAllReviewedPosts();
 
+    List<Post> findByBelongedToCategory(Category category);
 }

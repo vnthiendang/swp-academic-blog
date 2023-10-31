@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -29,6 +30,9 @@ public class Category {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_category_id")
     private Category parentCategory;
+
+    @OneToMany(mappedBy = "belongedToCategory", fetch = FetchType.LAZY)
+    private List<Post> posts;
 
     public Category(int cateId) {
         this.cateId = cateId;

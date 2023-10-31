@@ -18,10 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,11 +72,11 @@ public class PostService {
     public Post add(Post post) {
         return postRepository.save(post);
     }
-
+    @Transactional
     public List<Post> getAllApprovedPosts() {
         return postRepository.findAllApprovedPosts();
     }
-
+    @Transactional
     public List<Post> getAll() {
         return postRepository.findAllReviewedPosts();
     }
@@ -173,6 +170,21 @@ public class PostService {
 
         return postRepository.save(post); // Save and return the updated post
     }
+@Transactional
+    public List<Post> findMostVotedPostInCategory(int categoryId) {
+        // Step 1: Fetch all posts in the desired category
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Tag"));
+        List<Post> postsInCategory = postRepository.findByBelongedToCategory(category);
+        System.out.println("helllllllllllllllllllllllllllllllllllllllllllllllll");
+        // Step 2: Find the post with the most votes
+        postsInCategory.sort((post1, post2) -> Integer.compare(
+            post2.getVotes().size(),
+            post1.getVotes().size()));
+
+        return postsInCategory;
+    }
+
 
     //DISPLAY APPROVED POSTS
     public List<Post> searchPosts(String keyword) {
@@ -283,14 +295,30 @@ public class PostService {
         }
     }
 
+    public List<Post> filterByTagNames(List<Post> approvedPosts, List<String> tagNames) {
+        if (tagNames == null || tagNames.isEmpty()) {
+            return approvedPosts;
+        } else {
+            for (String tagName : tagNames) {
+                if (tagRepository.findByTagName(tagName).isEmpty()) {
+                    throw new IllegalArgumentException("Tag not found with ID: " + tagName);
+                }
+            }
 
-    public List<Post> GetPostsByCategoryId(List<Post> approvedPosts, Integer categoryId) {
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new IllegalArgumentException("Category not found with ID: " + categoryId));
-        return approvedPosts.stream()
-                .filter(post -> post.getBelongedToCategory().getCateId().equals(categoryId))
-                .collect(Collectors.toList());
+            return approvedPosts.stream()
+                    .filter(post -> postContainsAllTagNames(post, tagNames))
+                    .collect(Collectors.toList());
+        }
     }
+    private boolean postContainsAllTagNames(Post post, List<String> tagNames) {
+        Set<String> postTags = post.getPostTags().stream()
+                .map(PostTag::getTag)
+                .map(Tag::getTagName)
+                .collect(Collectors.toSet());
+
+        return postTags.containsAll(tagNames);
+    }
+
 
     public List<Post> GetPostsByTagId(List<Post> approvedPosts, Integer tagId) {
         // Check if the tagId is valid
@@ -331,4 +359,81 @@ public class PostService {
                 .filter(post -> !postIdsWithApprovals.contains(post.getPostsId()))
                 .collect(Collectors.toList());
     }
+
+    public List<Post> filterPostsByDateRange(List<Post> approvedPosts, LocalDateTime startDate, LocalDateTime endDate) {
+        return approvedPosts.stream()
+                .filter(post -> post.getCreatedTime().isAfter(startDate) && post.getCreatedTime().isBefore(endDate))
+                .collect(Collectors.toList());
+    }
+
+    public List<Post> sortPosts(List<Post> approvedPosts, String sortBy, String sortDirection) {
+        List<Post> sortedPosts = new ArrayList<>(approvedPosts);
+
+        switch (sortBy) {
+            case "likeCount":
+                sortedPosts.sort(Comparator.comparingInt(post -> (int) post.getVotes().stream().filter(vote -> vote.getVoteType().getId() == 1).count()));
+                break;
+            case "dislikeCount":
+                sortedPosts.sort(Comparator.comparingInt(post -> (int) post.getVotes().stream().filter(vote -> vote.getVoteType().getId() == 2).count()));
+                break;
+            case "createdDate":
+                sortedPosts.sort(Comparator.comparing(Post::getCreatedTime));
+                break;
+            case "awardCount":
+                sortedPosts.sort(Comparator.comparingInt(post -> post.getAwards().size()));
+                break;
+            default:
+                // Handle unsupported sortBy criteria.
+                return approvedPosts;
+        }
+
+        if ("desc".equalsIgnoreCase(sortDirection)) {
+            Collections.reverse(sortedPosts);
+        }
+
+        return sortedPosts;
+    }
+
+    public List<Post> filterByCategoryName(List<Post> approvedPosts, String categoryName) {
+        if (categoryName == null) {
+            return approvedPosts;
+        } else {
+            Category category = categoryRepository.findByContent(categoryName)
+                    .orElseThrow(() -> new IllegalArgumentException("Category not found with name: " + categoryName));
+            return approvedPosts.stream()
+                    .filter(post -> post.getBelongedToCategory().getContent().equals(categoryName))
+                    .collect(Collectors.toList());
+        }
+    }
+
+    public List<Post> GetPostsByCategoryId(List<Post> approvedPosts, Integer categoryId) {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new IllegalArgumentException("Category not found with ID: " + categoryId));
+        return approvedPosts.stream()
+                .filter(post -> post.getBelongedToCategory().getCateId().equals(categoryId))
+                .collect(Collectors.toList());
+    }
+    public List<Post> GetPostsByCategoryName(List<Post> approvedPosts, String categoryName) {
+        Category category = categoryRepository.findByContent(categoryName)
+                .orElseThrow(() -> new IllegalArgumentException("Category not found with Name: " + categoryName));
+        return approvedPosts.stream()
+                .filter(post -> post.getBelongedToCategory().getContent().equals(categoryName))
+                .collect(Collectors.toList());
+    }
+
+    public List<Post> GetPostsByTagName(List<Post> approvedPosts, String tagName) {
+        // Check if the tagName is valid
+        if (tagRepository.findByTagName(tagName).isEmpty()) {
+            throw new IllegalArgumentException("Tag not found with name: " + tagName);
+        }
+
+        return approvedPosts.stream()
+                .filter(post -> post.getPostTags().stream()
+                        .map(PostTag::getTag)
+                        .map(Tag::getTagName)
+                        .anyMatch(name -> name.equals(tagName))
+                )
+                .collect(Collectors.toList());
+    }
+
 }
