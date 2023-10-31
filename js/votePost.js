@@ -80,6 +80,26 @@ function displayPosts(posts) {
       memberOnlyElement.textContent = "Member only";
       flexElement.appendChild(memberOnlyElement);
 
+      if(post.awardList != null && post.awardList.length > 0){
+        const elm4 = document.createElement("div");
+        elm4.className = "p-0.5 bg-gray-900 rounded-full mx-4";
+        flexElement.appendChild(elm4);
+
+        const awardIcon = document.createElement("i");
+        awardIcon.className = "fas fa-crown";
+        awardIcon.style = "color: #c45d08;";
+        flexElement.appendChild(awardIcon);
+  
+        const awardList = document.createElement("div");
+        awardList.className = "award-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
+        post.awardList.forEach((award) => {
+          const items = document.createElement("span");
+          items.textContent = award;
+          awardList.appendChild(items);
+        });
+        flexElement.appendChild(awardList);
+      }
+
       postElement.appendChild(flexElement);
 
       const postLink = document.createElement("a");
@@ -101,29 +121,27 @@ function displayPosts(posts) {
       const flexItemsElement = document.createElement("div");
       flexItemsElement.className = "flex items-center px-8";
 
-      const iconTagElement = document.createElement("div");
-      iconTagElement.className = "icon-tag";
-      const iconTagImg = document.createElement("img");
-      iconTagImg.src = "img/tag.png";
-      iconTagImg.alt = "icon-tag";
-      iconTagElement.appendChild(iconTagImg);
-      flexItemsElement.appendChild(iconTagElement);
+      if(post.tagList != null && post.tagList.length > 0){
+        const iconTagElement = document.createElement("div");
+        iconTagElement.className = "icon-tag";
+        const iconTagImg = document.createElement("img");
+        iconTagImg.src = "img/tag.png";
+        iconTagImg.alt = "icon-tag";
+        iconTagElement.appendChild(iconTagImg);
+        flexItemsElement.appendChild(iconTagElement);
 
-      const tagLink1 = document.createElement("a");
-      tagLink1.href = "/pageByTag.html?tagId";
-
-      
-      post.tagList.forEach((tag) => {
-        const postTagList = document.createElement("div");
-        postTagList.className = "rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-        //const tagItem = document.createElement("span");
-        postTagList.textContent = tag;
-        tagLink1.appendChild(postTagList);
-        //postTagList.appendChild(tagItem);
-      });
-      // postElement.appendChild(postTagList);
-
-      flexItemsElement.appendChild(tagLink1);
+        const tagLink1 = document.createElement("a");
+        tagLink1.href = "/pageByTag.html?tagId";
+        post.tagList.forEach((tag) => {
+          const postTagList = document.createElement("div");
+          postTagList.className = "rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
+          //const tagItem = document.createElement("span");
+          postTagList.textContent = tag;
+          tagLink1.appendChild(postTagList);
+          //postTagList.appendChild(tagItem);
+          flexItemsElement.appendChild(tagLink1);
+        });
+      }
 
       const voteIcon = document.createElement("i");
       voteIcon.className =

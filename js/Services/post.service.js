@@ -175,7 +175,7 @@ export const getPostByTag = async (tagId) => {
 
 export const getPostByVoteCount = async (categoryId) => {
   try {
-    const response = await request.get(`post/mostVotedPost`, {
+    const response = await request.get(`post/GetAllApproved/filter`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       },

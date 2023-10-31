@@ -1,4 +1,4 @@
-import { getAllAwardType } from './Services/award.service.js';
+import { createAward, getAllAwardType } from './Services/award.service.js';
 import { userInfo } from './Services/profile.service.js';
 import * as request from './utils/request.js';
 const token = localStorage.getItem("token");
@@ -136,3 +136,35 @@ const displayAwardType = (types) => {
 getAllAwardType().then((types) => {
   displayAwardType(types);
 });
+
+//Give Award
+const handleCreateAward = async (event) => {
+  event.preventDefault();
+
+  const awardTypeSelect = document.querySelector("#AwardType");
+  const us = await userInfo();
+  const usId = us.userId;
+
+  var model ={
+      awardTypeID : awardTypeSelect.value,
+      postID: postId,
+      givenByUserID: usId
+  }
+  try {
+      const response = await createAward(model);
+
+      if(response != null){
+        alert('Give Award successfully!');
+      }
+    } catch (error) {
+      console.error(error);
+      // Handle the error as needed
+    }
+
+};
+
+// Find the form element
+const createAwardForm = document.querySelector("#createAward");
+
+// Attach the event listener to the form submission
+createAwardForm.addEventListener("submit", handleCreateAward);
