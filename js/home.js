@@ -12,7 +12,7 @@ const options = {
 
 // DISPLAY LIST APPROVED POSTS
 function displayPosts(posts) {
-  const postContainer = document.querySelector("#post .col-span-5");
+  const postContainer = document.querySelector("#post .col-span-6");
   postContainer.innerHTML = "";
 
   if (posts.length === 0) {
@@ -27,7 +27,14 @@ function displayPosts(posts) {
       var post = posts[i];
 
       const postElement = document.createElement("div");
-      postElement.className = "";
+
+      postElement.className = "post-container";
+      postElement.style.marginBottom = "25px";
+
+      // postElement.className = "post-border";
+      // postElement.style.border = "1px solid #000";
+      postContainer.appendChild(postElement);
+      // Bodrer For Post
 
       const flexElement = document.createElement("div");
       flexElement.className = "flex w-full px-8 py-4 items-center";
@@ -95,10 +102,26 @@ function displayPosts(posts) {
       infoElement.textContent = post.postDetail;
       postLink.appendChild(infoElement);
 
+
       postElement.appendChild(postLink);
 
       const flexItemsElement = document.createElement("div");
-      flexItemsElement.className = "flex items-center px-8";
+      flexItemsElement.className = "flex items-center px-8 mb-1";
+
+      const voteIcon = document.createElement("i");
+      voteIcon.className =
+        "fa-solid fa-thumbs-up flex items-center cursor-pointer";
+      flexItemsElement.appendChild(voteIcon);
+
+      const voteList = document.createElement("div");
+      voteList.className =
+        "vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
+      post.voteList.forEach((vote) => {
+        const item = document.createElement("span");
+        item.textContent = vote + "  ";
+        voteList.appendChild(item);
+      });
+      flexItemsElement.appendChild(voteList);
 
       const iconTagElement = document.createElement("div");
       iconTagElement.className = "icon-tag";
@@ -109,38 +132,23 @@ function displayPosts(posts) {
       flexItemsElement.appendChild(iconTagElement);
 
       const tagLink1 = document.createElement("a");
-      tagLink1.href = "/pageByTag.html?tagId";
+      tagLink1.href = "/pageByCategory.html?tagId";
 
-      
+      const postTagList = document.createElement("div");
+      postTagList.className =
+        "post-tag-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
       post.tagList.forEach((tag) => {
-        const postTagList = document.createElement("div");
-        postTagList.className = "rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-        //const tagItem = document.createElement("span");
-        postTagList.textContent = tag;
-        tagLink1.appendChild(postTagList);
-        //postTagList.appendChild(tagItem);
+        const tagItem = document.createElement("span");
+        tagItem.textContent = tag;
+        postTagList.appendChild(tagItem);
       });
       // postElement.appendChild(postTagList);
 
+      tagLink1.appendChild(postTagList);
       flexItemsElement.appendChild(tagLink1);
 
-      const voteIcon = document.createElement("i");
-      voteIcon.className =
-        "fa-regular fa-heart fa-beat-fade fa-xl";
-      flexItemsElement.appendChild(voteIcon); 
-
-      const voteList = document.createElement("div");
-      voteList.className =
-        "vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-        voteList.textContent = post.vote1Count;
-      // post.voteList.forEach((vote) => {
-      //   const item = document.createElement("span");
-      //   item.textContent = vote + "  ";
-      //   voteList.appendChild(item);
-      // });
-      flexItemsElement.appendChild(voteList);
-
       postElement.appendChild(flexItemsElement);
+
 
       // if(post.mediaList.length > 0){
       //   const imgContainer = document.createElement('div');
@@ -159,12 +167,12 @@ function displayPosts(posts) {
 
       postContainer.appendChild(postElement);
 
-      const hr = document.createElement("hr");
-      hr.style.border = "none"; // Remove the default border
-      hr.style.backgroundColor = "grey"; // Set the background color to create a solid line
-      hr.style.height = "2px";
-      hr.style.margin="10px " // Set the thickness of the line to 2 pixels/ Increase the line height to 4 pixels
-      postContainer.appendChild(hr);
+      // const hr = document.createElement("hr");
+      // hr.style.border = "none"; // Remove the default border
+      // hr.style.backgroundColor = "red"; // Set the background color to create a solid line
+      // hr.style.height = "10px";
+      // hr.style.marginBottom="30px" // Set the thickness of the line to 2 pixels/ Increase the line height to 4 pixels
+      // postContainer.appendChild(hr);
     }
   }
 }

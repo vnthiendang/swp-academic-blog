@@ -18,11 +18,18 @@
 .icon-tag {
     width: 16px; /* Adjust the width as needed */
     height: 16px; /* Adjust the height as needed */
-    margin-right: 10px;
+    margin-right: 0.3%;
 }
-
 #tag {
     margin-top: 5px;
+}
+.vote-list {
+    /* background-color: aqua; */
+    text-align: center;
+    margin-left: 5px;
+}
+.vote-list span {
+    display: inline-block;
 }
 
 /*========================== Tag Name For Div Post ==============================*/
@@ -38,19 +45,25 @@
 }
 /* Title */
 
-.grid#post {
-    background-color: whitesmoke;
-    margin-bottom: 50px;
+.grid #post {
+    /* background-color: whitesmoke; */
+    /* margin-bottom: 50px; */
     /* margin-top: 10px; */
-    margin-left: 5px;
+    /* margin-left: -10px; */
     margin-right: 10px;
-    border-radius: 10px;
-    border: 1px solid gray;
-    padding: 10px;
+    /* border-radius: 10px; */
+    /* border: 2px solid gray; */
+    /* background-color: red; */
+    padding: 1px;
 }
 
 #post:hover {
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
+}
+
+.px-6 {
+    /* background-color: red; */
+    margin-bottom: 1%;
 }
 
 /*========================== Post List ==============================*/
@@ -59,6 +72,12 @@
     background-color: white;
 }
 
+#header {
+    height: 50px;
+}
+/* #baner {
+    background-color: red;
+} */
 /*========================== Main ==============================*/
 
 .rounded-2xl {
@@ -81,6 +100,29 @@
 .col-span-3{
     border-bottom:1px;
     margin: 10px;
+}
+
+/* .col-span-5 div {
+    background-color: red;
+} */
+
+/* .post-border {
+    border: 1px solid #000;
+} */
+
+.post-container {
+    background-color: whitesmoke;
+    /* margin-bottom: 20px; */
+    margin-top: 1%;
+    margin-left: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+.post-container:hover {
+    background-color: antiquewhite;
 }
 
 
