@@ -36,7 +36,7 @@ function handleImageUpload(event) {
       const imageData = reader.result;
       const binaryData = imageData.split(',')[1];
       
-      // console.log("Image data:", binaryData);
+      console.log("Image data:", imageURL);
       const form = document.getElementById('createPost');
       form.addEventListener('submit', async (event) => {
         event.preventDefault();

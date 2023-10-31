@@ -172,3 +172,19 @@ export const getPostByTag = async (tagId) => {
     console.error('Error retrieving post by tag:', error);
   }
 };
+
+export const getPostByVoteCount = async (categoryId) => {
+  try {
+    const response = await request.get(`post/mostVotedPost`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      },
+      params: {
+        categoryId
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error retrieving post by vote count:', error);
+  }
+};

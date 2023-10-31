@@ -1,7 +1,8 @@
 import {
   getAllApprovedPosts,
+  getPostByVoteCount,
   searchedPosts,
-} from "../js/Services/post.service.js";
+} from "./Services/post.service.js";
 import { getAllCategory } from "./Services/category.service.js";
 
 const options = {
@@ -181,25 +182,6 @@ const displayAllPosts = () => {
     });
 };
 
-//GET LIST CATEGORIES
-const displayCategories = (categories) => {
-  const categoryList = document.querySelector(
-    ".absolute.hidden.text-gray-700.pt-1.group-hover\\:block"
-  );
-
-  categories.forEach((category) => {
-    const listItem = document.createElement("li");
-    const link = document.createElement("a");
-    link.className =
-      "rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white";
-    link.href = `postByCategory.html?categoryId=${category.id}`;
-    link.textContent = category.content;
-
-    listItem.appendChild(link);
-    categoryList.appendChild(listItem);
-  });
-};
-
 getAllCategory().then((cates) => {
   displayCategories(cates);
 });
@@ -230,3 +212,25 @@ searchForm.addEventListener("submit", (event) => {
 
   searchInput.value = ""; // Clear the search input
 });
+
+
+//GET LIST CATEGORIES
+const displayCategories = async (categories) => {
+  const categoryList = document.querySelector(".absolute.hidden.text-gray-700.pt-1.group-hover\\:block");
+
+  categories.forEach((category) => {
+    const listItem = document.createElement("li");
+    const link = document.createElement("a");
+    link.className = "rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white";
+    link.textContent = category.content;
+
+    listItem.appendChild(link);
+    categoryList.appendChild(listItem);
+
+    link.addEventListener("click", async () => {
+    const posts = await getPostByVoteCount(category.id);
+    displayPosts(posts);
+      
+    });
+  });
+};

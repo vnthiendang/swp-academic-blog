@@ -1,3 +1,4 @@
+import { getAllAwardType } from './Services/award.service.js';
 import { userInfo } from './Services/profile.service.js';
 import * as request from './utils/request.js';
 const token = localStorage.getItem("token");
@@ -29,7 +30,7 @@ function displayPost() {
       document.getElementById('postTitle').textContent = post.title;
       document.getElementById('postAuthor').textContent = post.createdByUser;
       document.getElementById('postDate').textContent = formattedTime;
-      document.getElementById('postTag').textContent = post.postTagList ?? '';
+      document.getElementById('postTag').textContent = post.tagList ?? '';
       document.getElementById('postCategory').textContent = post.belongedToCategory ?? '';
       document.getElementById('postContent').textContent = post.postDetail;
       document.getElementById('postMedia').src = post.mediaList[0] ?? '#';
@@ -118,3 +119,20 @@ const rejectPost = async (model) => {
   }
   
 }
+
+//GET LIST AWARD TYPE
+const displayAwardType = (types) => {
+  const selectElement = document.getElementById('AwardType');
+
+  types.forEach(type => {
+    const option = document.createElement('option');
+    option.value = type.id;
+    option.textContent = type.awardType;
+
+    selectElement.appendChild(option);
+  });
+};
+
+getAllAwardType().then((types) => {
+  displayAwardType(types);
+});

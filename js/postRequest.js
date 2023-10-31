@@ -127,18 +127,9 @@ function displayPosts(posts) {
       const tagDiv1 = document.createElement('div');
       tagDiv1.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';  
 
-      tagDiv1.textContent = post.postTag ?? 'tag';
+      tagDiv1.textContent = post.tagList ?? 'tag';
       tagLink1.appendChild(tagDiv1);
       flexItemsElement.appendChild(tagLink1);
-  
-      const tagLink3 = document.createElement('a');
-      tagLink3.href = '/Page SE SA AI BS/html/pageDigitalTransformation.html';
-      const tagDiv3 = document.createElement('div');
-      tagDiv3.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
-
-      tagDiv3.textContent = post.postTag ?? 'tag';
-      tagLink3.appendChild(tagDiv3);
-      flexItemsElement.appendChild(tagLink3);
   
       postElement.appendChild(flexItemsElement);
   
