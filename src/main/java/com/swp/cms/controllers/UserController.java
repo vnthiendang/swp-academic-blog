@@ -7,10 +7,12 @@ import com.swp.services.UserService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +28,13 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -65,16 +72,32 @@ public class UserController {
         return usDto;
     }
 
-    @PutMapping()
-    public UserDto updateUser(@Valid @RequestBody UserDto userDto) {
-        User users = userService.getById(userDto.getUserId());
-        users.setEmail(userDto.getEmail());
-        users.setDisplay_name(userDto.getDisplay_name());
-        users.setAdditional_info(userDto.getAdditional_info());
-        users.setPassword(userDto.getPassword());
+//    @PutMapping()
+//    public UserDto updateUser(@Valid @RequestBody UserDto userDto) {
+//        User users = userService.getById(userDto.getUserId());
+//        users.setEmail(userDto.getEmail());
+//        users.setDisplay_name(userDto.getDisplay_name());
+//        users.setAdditional_info(userDto.getAdditional_info());
+//        users.setPassword(userDto.getPassword());
+//
+//        User userUpdate= userService.addUser(users);
+//        UserDto usersDto = modelMapper.map(userUpdate, UserDto.class);
+//        return usersDto;
+//    }
 
-        User userUpdate= userService.addUser(users);
-        UserDto usersDto = modelMapper.map(userUpdate, UserDto.class);
-        return usersDto;
+    @PutMapping("/update")
+    public UserDto updateUser(@Valid @RequestBody UserDto userDto) {
+        User user = userService.getById(userDto.getUserId());
+        user.setEmail(userDto.getEmail());
+        user.setDisplay_name(userDto.getDisplay_name());
+        user.setAdditional_info(userDto.getAdditional_info());
+
+        // Encode and set the new password
+        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+        user.setPassword(encodedPassword);
+
+        User updatedUser = userService.addUser(user);
+        UserDto updatedUserDto = modelMapper.map(updatedUser, UserDto.class);
+        return updatedUserDto;
     }
 }
