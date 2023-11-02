@@ -2,6 +2,7 @@ import { createComment, getCommentById } from "./Services/post.service.js";
 import * as request from './utils/request.js';
 import { userInfo } from "./Services/auth.service.js";
 import { getVoteType, votePost } from "./Services/vote.service.js";
+import { createAward, getAllAwardType } from './Services/award.service.js';
 
 const token = localStorage.getItem("token");
 
@@ -24,6 +25,9 @@ function displayPost() {
   })
     .then(response => {
       const post = response;
+
+      // Store the post data in session storage
+      sessionStorage.setItem('postData', JSON.stringify(post));
 
       const postCreatedTime = new Date(post.createdTime);
       const formattedTime = postCreatedTime.toLocaleString('en-US', options);
@@ -59,7 +63,7 @@ function displayComments() {
       commentContainer.innerHTML = '';
 
       // Iterate over comments and create HTML elements
-      comments.forEach((comment) => {
+      comments.forEach(async (comment) => {
         const article = document.createElement('article');
         article.classList.add('p-6', 'mb-3', 'text-base', 'bg-white', 'border-t', 'border-gray-200', 'dark:border-gray-700', 'dark:bg-gray-900');
 
@@ -69,6 +73,7 @@ function displayComments() {
         const commentByUser = document.createElement('p');
         commentByUser.classList.add('inline-flex', 'items-center', 'mr-3', 'text-sm', 'text-gray-900', 'dark:text-white', 'font-semibold');
         commentByUser.textContent = 'User ' + comment.createdByUser;
+        
         footer.appendChild(commentByUser);
 
         article.appendChild(footer);
@@ -86,12 +91,6 @@ function displayComments() {
         replyButton.classList.add('flex', 'items-center', 'text-sm', 'text-gray-500', 'hover:underline', 'dark:text-gray-400', 'font-medium');
         replyButton.innerHTML = '<i class="fa-regular fa-comment px-2"></i>Reply';
         buttonContainer.appendChild(replyButton);
-
-        const voteButton = document.createElement('button');
-        voteButton.type = 'button';
-        voteButton.classList.add('flex', 'items-center', 'text-sm', 'text-gray-500', 'hover:underline', 'dark:text-gray-400', 'font-medium');
-        voteButton.innerHTML = '<i class="fa-regular fa-thumbs-up mx-2"></i> Vote';
-        buttonContainer.appendChild(voteButton);
 
         article.appendChild(buttonContainer);
 
@@ -144,7 +143,26 @@ form.addEventListener("submit", async (event) => {
 
 });
 
-  //VOTE POST
+//STUDENT VOTE POST
+const showFormForStudent = async () => {
+  try {
+    const usersInfo = await userInfo();
+    const userRole = usersInfo.role_id; // Assuming the role is accessible as `userInfo.role`
+
+    if (userRole === 'Student') {
+      // Display the form
+      document.getElementById('createVote').style.display = 'block';
+    } else {
+      // Hide the form
+      document.getElementById('createVote').style.display = 'none';
+    }
+  } catch (error) {
+    console.error('Error retrieving user info:', error);
+  }
+};
+
+showFormForStudent();
+
 async function handleVotePost() {
     const us = await userInfo();
     const usId = us.userId;
@@ -169,7 +187,111 @@ async function handleVotePost() {
       console.error('Error creating vote:', error);
     }
 }
+document.querySelector(".fa-heart").addEventListener("click", handleVotePost);
 
-  // Event listener for the click event on the heart icon
-  document.querySelector(".fa-heart").addEventListener("click", handleVotePost);
+
+//TEACHER GIVE AWARD
+const showFormForTeacher = async () => {
+  try {
+    const usersInfo = await userInfo();
+    const userRole = usersInfo.role_id; 
+
+    if (userRole === 'Teacher') {
+      // Display the form
+      document.getElementById('createAward').style.display = 'block';
+    } else {
+      // Hide the form
+      document.getElementById('createAward').style.display = 'none';
+    }
+  } catch (error) {
+    console.error('Error retrieving user info:', error);
+  }
+};
+
+showFormForTeacher();
+
+//GET LIST AWARD TYPE
+const displayAwardType = (types) => {
+  const selectElement = document.getElementById('AwardType');
+
+  types.forEach(type => {
+    const option = document.createElement('option');
+    option.value = type.id;
+    option.textContent = type.awardType;
+
+    selectElement.appendChild(option);
+  });
+};
+
+getAllAwardType().then((types) => {
+  displayAwardType(types);
+});
+
+//Give Award
+const handleCreateAward = async (event) => {
+  event.preventDefault();
+
+  const awardTypeSelect = document.querySelector("#AwardType");
+  const us = await userInfo();
+  const usId = us.userId;
+
+  var model ={
+      awardTypeID : awardTypeSelect.value,
+      postID: belongedToPostID,
+      givenByUserID: usId
+  }
+  try {
+      const response = await createAward(model);
+
+      if(response != null){
+        alert('Give Award successfully!');
+      }
+    } catch (error) {
+      console.error(error);
+      // Handle the error as needed
+    }
+
+};
+
+const createAwardForm = document.querySelector("#createAward");
+createAwardForm.addEventListener("submit", handleCreateAward);
+
+
+//STUDENT EDIT POST
+const showFormEditPost = async () => {
+  try {
+    const usersInfo = await userInfo();
+    const userRole = usersInfo.role_id; 
+
+    if (userRole === 'Student') {
+      // Display the form
+      document.getElementById('editPost').style.display = 'block';
+    } else {
+      // Hide the form
+      document.getElementById('editPost').style.display = 'none';
+    }
+  } catch (error) {
+    console.error('Error retrieving user info:', error);
+  }
+};
+
+showFormEditPost();
+
+
+function openEditPostPopup() {
+
+  const postData = JSON.parse(sessionStorage.getItem('postData'));
+  
+  const width = 600;
+  const height = 400;
+  const left = (window.innerWidth - width) / 2;
+  const top = (window.innerHeight - height) / 2;
+  const url = "editPost.html"; 
+  
+  window.open(url, "Edit Post", `width=${width}, height=${height}, left=${left}, top=${top}`);
+}
+
+// Add event listener to the button
+const editButton = document.querySelector("#editPost button");
+editButton.addEventListener("click", openEditPostPopup);
 

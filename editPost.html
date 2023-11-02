@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
+    <title>Edit Post</title>
+    <style>
+        /* Add the following CSS code to your HTML file or external CSS file */
+        form {
+          max-width: 400px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #f5f5f5;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+      
+        form label {
+          display: block;
+          margin-bottom: 10px;
+          font-weight: bold;
+        }
+      
+        form input[type="text"],
+        form textarea {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+          margin-bottom: 10px;
+        }
+      
+        form button[type="submit"] {
+          background-color: green;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+      </style>
+</head>
+
+<body class="w-screen h-screen bg-slate-700">
+    <!-- Header  -->
+    <header class="flex items-center justify-between w-full bg-black text-white p-1">
+        <div class="flex items-center">
+            <a href="/home.html" class="items-start justify-center">
+                <img src="/img/Logo.png" alt="logo" class="w-16 h-auto">
+            </a>
+            
+            <a href="/home.html" class="p-2">
+                FPT BLOG
+            </a>
+            
+            <a href="/home.html" class="p-2">
+                Home
+            </a>
+
+        </div>
+        <div class="p-1">
+
+        </div>
+    </header>
+
+    <!-- Main  -->
+    <Main>
+        <form id="updatePostForm">
+            <div>
+              <label for="categoryID">Category:</label>
+              <input type="text" id="categoryID" name="categoryID" value="sample">
+            </div>
+            <div>
+              <label for="title">Title:</label>
+              <input type="text" id="title" name="title" value="Sample Data">
+            </div>
+            <div>
+              <label for="detail">Detail:</label>
+              <textarea id="detail" name="detail">Sample data</textarea>
+            </div>
+            <div>
+              <label for="mediaList">Media:</label>
+              <input type="file" id="mediaList" name="mediaList">
+            </div>
+            <div class="flex flex-col">
+                <label for="">Tags
+                <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "> 
+                    <div class="tags-input"> 
+                    <ul id="tags"></ul> 
+                    <input type="text" id="input-tag" 
+                        placeholder="Add a tag" /> 
+                    </div>
+                </div> 
+            </label>
+            </div>
+            <div>
+              <button type="submit">Update Post</button>
+            </div>
+          </form>
+    </Main>
+
+    <!-- footer  -->
+    <footer class="bg-white rounded-lg shadow dark:bg-gray-900">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
+                    <img src="./img/Logo.png" class="h-8 mr-3" alt="Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FPT Blog</span>
+                </a>
+                <ul
+                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a
+                    href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+    <script type="module" src='./js/postDetail.js'></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script> 
+      
+    // Get the tags and input elements from the DOM 
+    const tags = document.getElementById('tags'); 
+    const input = document.getElementById('input-tag'); 
+
+    // Add an event listener for keydown on the input element 
+    input.addEventListener('keydown', function (event) { 
+
+        // Check if the key pressed is 'Enter' 
+        if (event.key === 'Enter') { 
+          
+            // Prevent the default action of the keypress 
+            // event (submitting the form) 
+            event.preventDefault(); 
+          
+            // Create a new list item element for the tag 
+            const tag = document.createElement('li'); 
+          
+            // Get the trimmed value of the input element 
+            const tagContent = input.value.trim(); 
+          
+            // If the trimmed value is not an empty string 
+            if (tagContent !== '') { 
+          
+                // Set the text content of the tag to  
+                // the trimmed value 
+                tag.innerText = tagContent; 
+
+                // Add a delete button to the tag 
+                tag.innerHTML += '<button class="delete-button">________x</button>'; 
+                  
+                // Append the tag to the tags list 
+                tags.appendChild(tag); 
+                  
+                // Clear the input element's value 
+                input.value = ''; 
+            } 
+        } 
+    }); 
+
+    // Add an event listener for click on the tags list 
+    tags.addEventListener('click', function (event) { 
+
+        // If the clicked element has the class 'delete-button' 
+        if (event.target.classList.contains('delete-button')) { 
+          
+            // Remove the parent element (the tag) 
+            event.target.parentNode.remove(); 
+        } 
+    }); 
+</script> 
+
+</html>

@@ -52,9 +52,9 @@ export const createPost = async (post) => {
   }
 };
 
-export const updatePost = async (post) => {
+export const updatePost = async (postId, post) => {
   try {
-    const response = await request.put(`post/edit`, post, {
+    const response = await request.put(`post/edit/${postId}`, post, {
       headers: {
         Authorization: `Bearer ${token}`
       }

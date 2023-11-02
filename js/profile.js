@@ -19,34 +19,33 @@ getUserInfo();
   const updateUserProfile = async () =>{
     // Get the input field values
     const userInfos = await userInfo();
-    var usId = userInfos.id; 
+    var usId = userInfos.userId; 
     var name = document.getElementById("nameField").value;
     var email = document.getElementById("emailField").value;
     var currentPassword = document.getElementById("currentpass").value;
     var newPassword = document.getElementById("newpass").value;
     var repeatPassword = document.getElementById("repass").value;
 
+    // if(currentPassword !== userInfos.password){
+    //   alert('Please check your current password!');
+    //   return;
+    // }
+
     if(newPassword !== repeatPassword){
       alert('Repeat password does not match!');
       return;
     }
 
-    var data = {
+    var model = {
       userId:usId,
       display_name: name,
       email: email,
-      password: newPassword
+      password: repeatPassword
     };
 
-    for (var prop in data) {
-      if (typeof data[prop] === "function") {
-        delete data[prop];
-      }
-    }
-
     try {
-      const response = await updateProfile(data);
-      if(response.error){
+      const response = await updateProfile(model);
+      if(response == null){
         alert('Please check your information!');
       }else{
         alert('Update successfully!');

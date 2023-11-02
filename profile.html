@@ -187,7 +187,7 @@
         <div class="text-right mt-3">
             <button type="button" type="editButton" id="editButton" class="btn btn-primary">Edit</button>
             <button type="button" type="submit" id="saveButton" class="btn btn-primary">Save changes</button>
-            <button type="button" type="delete"class="btn btn-default">Cancel</button>
+            <button type="button" type="cancel"class="btn btn-default">Cancel</button>
         </div>
     </div>
 
@@ -205,55 +205,33 @@
 
 
         // Add an event listener to the "Edit" button
-        document.getElementById("editButton").addEventListener("click", function () {
-        toggleEditableFields(true);
-        });
-
-        // Add an event listener to the "Save changes" button
-        // document.getElementById("saveButton").addEventListener("click", function () {
-        // saveChanges();
+        // document.getElementById("cancel").addEventListener("click", function () {
+        // toggleEditableFields(true);
         // });
 
-        function toggleEditableFields(editable) {
-        const nameField = document.getElementById("nameField");
-        const emailField = document.getElementById("emailField");
-        const currentpass = document.getElementById("currentpass");
-        const newpass = document.getElementById("newpass");
-        const repass = document.getElementById("repass");
+        // function toggleEditableFields(editable) {
+        //     const nameField = document.getElementById("nameField");
+        //     const emailField = document.getElementById("emailField");
+        //     const currentpass = document.getElementById("currentpass");
+        //     const newpass = document.getElementById("newpass");
+        //     const repass = document.getElementById("repass");
 
-        nameField.readOnly = !editable;
-        emailField.readOnly = !editable;
+        //     //nameField.readOnly = !editable;
+        //     //emailField.readOnly = !editable;
 
-        if (editable) {
-            nameField.classList.add("editable");
-            emailField.classList.add("editable");
-            currentpass.classList.add("editable");
-            newpass.classList.add("editable");
-            repass.classList.add("editable");
-        } else {
-            nameField.classList.remove("editable");
-            emailField.classList.remove("editable");
-            currentpass.classList.remove("editable");
-            newpass.classList.remove("editable");
-            repass.classList.remove("editable");
-        }
-        }
-
-        // function saveChanges() {
-        // const nameField = document.getElementById("nameField");
-        // const emailField = document.getElementById("emailField"); 
-        // const newpass = document.getElementById("newpass");
-
-
-        // const newName = nameField.value;
-        // const newEmail = emailField.value;
-        // const newpassword = newpass.value;
-
-        // // Perform actions to save the edited information
-        // // For example, make an API call or update the database
-
-        // // After saving the changes, toggle the fields back to readonly mode
-        // toggleEditableFields(false);
+        //     if (editable) {
+        //         nameField.classList.add("editable");
+        //         emailField.classList.add("editable");
+        //         currentpass.classList.add("editable");
+        //         newpass.classList.add("editable");
+        //         repass.classList.add("editable");
+        //     } else {
+        //         nameField.classList.remove("editable");
+        //         emailField.classList.remove("editable");
+        //         currentpass.classList.remove("editable");
+        //         newpass.classList.remove("editable");
+        //         repass.classList.remove("editable");
+        //     }
         // }
     </script> 
 
