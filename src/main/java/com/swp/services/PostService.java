@@ -1,17 +1,12 @@
 package com.swp.services;
 
-import com.swp.cms.dto.MediaDto;
 import com.swp.cms.dto.PostDto;
-import com.swp.cms.dto.PostTagDto;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.*;
 import com.swp.repositories.*;
 import jakarta.annotation.PostConstruct;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
