@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,7 +33,8 @@ public class PostService {
     private UserRepository userRepository;
     @Autowired
     private CategoryRepository categoryRepository;
-
+    @Autowired
+    private MediaRepository mediaRepository;
     @Autowired
     private TagRepository tagRepository;
 
@@ -47,7 +50,7 @@ public class PostService {
             userId = userDetails.getUsId();
         }
     }
-
+@Transactional
     public Post getById(Integer id) {
         List<Post> approvedPosts = postRepository.findAllApprovedPosts();
         Optional<Post> optionalPost = approvedPosts.stream()
@@ -91,14 +94,32 @@ public class PostService {
         post.setPostDetail(postRequest.getDetail());
         post.setCreatedTime(LocalDateTime.now());
 
-        List<String> mediaUrls = postRequest.getMediaList(); // Change to a list of media URLs
-        if (mediaUrls != null && !mediaUrls.isEmpty()) {
+        List<MultipartFile> medias = postRequest.getMediaList(); // Change to a list of media URLs
+        if (medias != null && !medias.isEmpty()) {
             List<Media> mediaList = new ArrayList<>();
-            for (String mediaUrl : mediaUrls) {
-                Media media = new Media();
-                media.setMediaUrl(mediaUrl);
-                media.setPost(post);
-                mediaList.add(media);
+            for (MultipartFile media : medias) {
+                if (!media.isEmpty()){
+                    Media media1 = new Media();
+                    media1.setPost(post);
+                    media1.setMediaUrl("chua co tinh nang nay");
+                    media1.setName(media.getOriginalFilename()); // Set the name from the uploaded file
+                    media1.setContentType(media.getContentType());
+                    try {
+                        // Read the bytes from the uploaded file and compress the image
+                        byte[] compressedImageData = ImageUtils.compressImage(media.getBytes());
+
+                        // Set the compressed image data
+                        media1.setData(compressedImageData);
+
+                        // Save the media object to the repository
+//                        media1 = mediaRepository.save(media1);
+
+                        mediaList.add(media1);
+                    } catch (IOException e) {
+                        // Handle any potential IO errors
+                        e.printStackTrace(); // You might want to log or handle the exception appropriately
+                    }
+                }
             }
             post.setMedias(mediaList);
         }
@@ -132,22 +153,41 @@ public class PostService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Category")));
 
         // Update Medias
-        List<String> mediaUrls = postRequest.getMediaList();
-        if (mediaUrls != null && !mediaUrls.isEmpty()) {
-            // Clear existing media and replace with new ones
+        List<MultipartFile> medias = postRequest.getMediaList();
+        if (medias != null) {
+            // Clear existing media
             post.getMedias().clear();
+
             List<Media> mediaList = new ArrayList<>();
-            for (String mediaUrl : mediaUrls) {
-                Media media = new Media();
-                media.setMediaUrl(mediaUrl);
-                media.setPost(post);
-                mediaList.add(media);
+
+            for (MultipartFile media : medias) {
+                if (!media.isEmpty()) {
+                    Media media1 = new Media();
+                    media1.setPost(post);
+                    media1.setName(media.getOriginalFilename()); // Set the name from the uploaded file
+                    media1.setContentType(media.getContentType());
+                    try {
+                        // Read the bytes from the uploaded file and compress the image
+                        byte[] compressedImageData = ImageUtils.compressImage(media.getBytes());
+
+                        // Set the compressed image data
+                        media1.setData(compressedImageData);
+
+                        // Save the media object to the repository
+                        //media1 = mediaRepository.save(media1);
+
+                        mediaList.add(media1);
+                    } catch (IOException e) {
+                        // Handle any potential IO errors
+                        e.printStackTrace(); // You might want to log or handle the exception appropriately
+                    }
+                }
             }
-            post.setMedias(mediaList);
-        } else {
-            // If mediaUrls is empty, remove all existing media
-            post.getMedias().clear();
+
+            // Add the new media to the post
+            post.getMedias().addAll(mediaList);
         }
+
         // Update PostTags
         List<String> tagNames = postRequest.getTagList();
         if (tagNames != null && !tagNames.isEmpty()) {
@@ -176,7 +216,6 @@ public class PostService {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Tag"));
         List<Post> postsInCategory = postRepository.findByBelongedToCategory(category);
-        System.out.println("helllllllllllllllllllllllllllllllllllllllllllllllll");
         // Step 2: Find the post with the most votes
         postsInCategory.sort((post1, post2) -> Integer.compare(
             post2.getVotes().size(),
