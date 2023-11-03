@@ -4,14 +4,10 @@ import com.swp.cms.dto.UserDto;
 import com.swp.cms.mapper.UserMapper;
 import com.swp.entities.User;
 import com.swp.services.UserService;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,17 +34,13 @@ public class UserController {
     }
 
 
-    @GetMapping
-    @RolesAllowed("ADMIN")
-    //@Secured("ADMIN") // Requires ROLE_ADMIN authority
+    @GetMapping("/GetAll")
     public List<UserDto> getAll() {
-        // Check authentication
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         List<User> res = userService.getAllUsers();
         List<UserDto> userDto = mapper.fromEntityToUserDtoList(res);
         return userDto;
     }
+
 //get user profile
     @GetMapping("/{id}")
     public UserDto getUserById(@PathVariable Integer id) {
@@ -64,26 +56,13 @@ public class UserController {
     }
 
     @Transactional
-    @PostMapping()
+    @PostMapping("/add")
     public UserDto addUser(@RequestBody UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         User userCreate = userService.addUser(user);
         UserDto usDto = modelMapper.map(userCreate, UserDto.class);
         return usDto;
     }
-
-//    @PutMapping()
-//    public UserDto updateUser(@Valid @RequestBody UserDto userDto) {
-//        User users = userService.getById(userDto.getUserId());
-//        users.setEmail(userDto.getEmail());
-//        users.setDisplay_name(userDto.getDisplay_name());
-//        users.setAdditional_info(userDto.getAdditional_info());
-//        users.setPassword(userDto.getPassword());
-//
-//        User userUpdate= userService.addUser(users);
-//        UserDto usersDto = modelMapper.map(userUpdate, UserDto.class);
-//        return usersDto;
-//    }
 
     @PutMapping("/update")
     public UserDto updateUser(@Valid @RequestBody UserDto userDto) {

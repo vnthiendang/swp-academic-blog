@@ -6,6 +6,7 @@ import com.swp.entities.VoteType;
 import com.swp.services.VoteTypeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class VoteTypeController {
         this.voteTypeService = voteTypeService;
     }
 
+    @PreAuthorize("hasRole('Student')")
     @GetMapping("/getall")
     public List<VoteTypeDto> getAll() {
         List<VoteType> categories = voteTypeService.getAll();

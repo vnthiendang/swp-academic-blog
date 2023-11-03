@@ -1,25 +1,18 @@
 package com.swp.cms.controllers;
 
-import com.swp.cms.dto.MediaDto;
 import com.swp.cms.dto.PostApprovalsDto;
 import com.swp.cms.dto.PostDto;
-import com.swp.cms.dto.PostTagDto;
 import com.swp.cms.mapper.PostMapper;
-import com.swp.cms.reqDto.CommentRequest;
 import com.swp.cms.reqDto.PostRequest;
-import com.swp.entities.*;
+import com.swp.entities.Post;
+import com.swp.entities.PostApprovals;
 import com.swp.services.PostService;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/blog/post")

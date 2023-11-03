@@ -1,9 +1,9 @@
 package com.swp.cms.controllers;
-import com.swp.cms.dto.*;
+
+import com.swp.cms.dto.PostApprovalsDto;
 import com.swp.cms.reqDto.PostApprovalsRequest;
-import com.swp.entities.*;
-import com.swp.services.*;
-import jakarta.annotation.security.RolesAllowed;
+import com.swp.entities.PostApprovals;
+import com.swp.services.PostApprovalsService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -28,8 +29,6 @@ public class PostApprovalsController {
         this.postApprovalsService = postApprovalsService;
     }
 
-
-    @RolesAllowed("ADMIN")
     @GetMapping("/getall")
     public List<PostApprovalsDto> getAll() {
         // Check authentication

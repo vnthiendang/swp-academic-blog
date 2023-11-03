@@ -1,11 +1,7 @@
 package com.swp.cms.controllers;
 
 import com.swp.cms.dto.VoteDto;
-import com.swp.cms.dto.VoteDto;
-import com.swp.cms.dto.VoteDto;
 import com.swp.cms.reqDto.VoteRequest;
-import com.swp.entities.Vote;
-import com.swp.entities.Vote;
 import com.swp.entities.Vote;
 import com.swp.services.VoteService;
 import org.modelmapper.ModelMapper;
@@ -56,6 +52,7 @@ public class   VoteController {
         VoteDto dto = modelMapper.map(vote,VoteDto.class);
         return dto;
     }
+
     @PostMapping("/post")
     public VoteDto addVote(@RequestBody VoteRequest voteRequest) {
 //        Vote vote = modelMapper.map(voteRequest, Vote.class);

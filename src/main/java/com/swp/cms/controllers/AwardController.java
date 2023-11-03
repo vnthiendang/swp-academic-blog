@@ -1,19 +1,12 @@
 package com.swp.cms.controllers;
 
 import com.swp.cms.dto.AwardDto;
-import com.swp.cms.dto.AwardDto;
-import com.swp.cms.dto.AwardDto;
-import com.swp.cms.mapper.AwardMapper;
 import com.swp.cms.reqDto.AwardRequest;
 import com.swp.entities.Award;
-import com.swp.entities.Award;
-import com.swp.entities.Award;
-import com.swp.repositories.AwardRepository;
 import com.swp.services.AwardService;
-import com.swp.services.AwardService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

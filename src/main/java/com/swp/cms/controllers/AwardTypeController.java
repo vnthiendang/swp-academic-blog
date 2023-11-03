@@ -1,9 +1,8 @@
 package com.swp.cms.controllers;
-import com.swp.cms.dto.AwardTypeDto;
+
 import com.swp.cms.dto.AwardTypeDto;
 import com.swp.cms.mapper.AwardTypeMapper;
 import com.swp.cms.reqDto.AwardTypeRequest;
-import com.swp.entities.AwardType;
 import com.swp.entities.AwardType;
 import com.swp.repositories.AwardTypeRepository;
 import com.swp.services.AwardTypeService;
@@ -43,6 +42,7 @@ public class AwardTypeController {
         AwardTypeDto dto = mapper.fromEntityToAwardTypeDto(type);
         return dto;
     }
+
     @PostMapping("/post")
     public AwardTypeDto addAwardType(@RequestBody AwardTypeRequest awardTypeRequest) {
         AwardType createdAwardType = awardTypeService.createAwardType(awardTypeRequest);

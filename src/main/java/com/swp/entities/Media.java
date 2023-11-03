@@ -26,14 +26,14 @@ public class Media {
     private String mediaUrl;
 
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "content_type", nullable = false)
+    @Column(name = "content_type")
     private String contentType;
 
     @Lob
-    @Column(name = "data", nullable = false, columnDefinition = "oid")
+    @Column(name = "data")
     private byte[] data;
 
     @ManyToOne(fetch = FetchType.EAGER)

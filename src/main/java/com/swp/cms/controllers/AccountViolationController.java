@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -34,6 +33,7 @@ public class AccountViolationController {
 
         return accountViolationDtos;
     }
+
     @GetMapping("/{id}")
     public AccountViolationDto getAccountViolationById(@PathVariable Integer id) {
         AccountViolation accountViolation = accountViolationService.getById(id);

@@ -1,11 +1,8 @@
 package com.swp.cms.controllers;
 
 import com.swp.cms.dto.CategoryDto;
-import com.swp.cms.dto.CategoryDto;
-import com.swp.cms.dto.CommentDto;
 import com.swp.cms.mapper.CategoryMapper;
 import com.swp.cms.reqDto.CategoryRequest;
-import com.swp.entities.Category;
 import com.swp.entities.Category;
 import com.swp.repositories.CategoryRepository;
 import com.swp.services.CategoryService;

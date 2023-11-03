@@ -1,18 +1,10 @@
 package com.swp.cms.controllers;
 
-import com.swp.cms.dto.MediaDto;
-import com.swp.cms.dto.MediaDto;
 import com.swp.cms.mapper.MediaMapper;
-import com.swp.cms.reqDto.MediaRequest;
-import com.swp.entities.Media;
-import com.swp.entities.Media;
 import com.swp.repositories.MediaRepository;
 import com.swp.services.MediaService;
-import com.swp.services.MediaService;
-import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-
-import java.util.ArrayList;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/blog/media")
