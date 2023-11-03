@@ -40,7 +40,8 @@ public class Post {
     @OneToOne(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private PostApprovals postApprovals;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Media> medias = new ArrayList<>();
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
