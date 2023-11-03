@@ -1,6 +1,7 @@
 package com.swp.cms.dto;
 
 import com.swp.entities.*;
+import com.swp.services.ImageUtils;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -73,18 +74,32 @@ public class PostDto {
 //    }
 
 
-    public List<String> getMediaList() {
+//    public List<String> getMediaList() {
+//        if (mediaList != null) {
+//            List<String> mediaUrls = new ArrayList<>();
+//            for (Media media : mediaList) {
+//                if (media != null && media.getMediaUrl() != null) {
+//                    mediaUrls.add(media.getMediaUrl());
+//                }
+//            }
+//            return mediaUrls;
+//        }
+//        return Collections.emptyList(); // or handle the case when mediaList is null
+//    }
+
+    public List<byte[]> getMediaList() {
         if (mediaList != null) {
-            List<String> mediaUrls = new ArrayList<>();
+            List<byte[]> medias = new ArrayList<>();
             for (Media media : mediaList) {
-                if (media != null && media.getMediaUrl() != null) {
-                    mediaUrls.add(media.getMediaUrl());
+                if (media != null && media.getData() != null) {
+                    medias.add(ImageUtils.decompressImage(media.getData()));
                 }
             }
-            return mediaUrls;
+            return medias;
         }
         return Collections.emptyList(); // or handle the case when mediaList is null
     }
+
 
     public List<String> getAwardList() {
         if (awardList != null) {
