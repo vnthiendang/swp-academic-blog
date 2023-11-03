@@ -26,41 +26,40 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function handleImageUpload(event) {
-  const file = event.target.files[0];
+  const file = event.target.files;
 
-  if (file) {
-    const imageURL = URL.createObjectURL(file);
-    const reader = new FileReader();
+  if (file.length > 0) {
 
-    reader.onload = function () {
-      const imageData = reader.result;
-      const binaryData = imageData.split(',')[1];
-      
-      console.log("Image data:", imageURL);
-      const form = document.getElementById('createPost');
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+    const form = document.getElementById('createPost');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
     
-        const titleInput = document.querySelector('#createPost input[type="text"]');
+      const titleInput = document.querySelector('#createPost input[type="text"]');
         //const allowCommentSelect = document.querySelector('#comment');
-        const categorySelect = document.querySelector('#Category');
-        const textEditor = document.querySelector('#text-editor');
-        const tagList = Array.from(document.querySelectorAll("#tags li")).map(li => parseInt(li.textContent));
-        console.log(tagList);
-    
-        const us = await userInfo();
-        const userId = us.userId;
+      const categorySelect = document.querySelector('#Category');
+      const textEditor = document.querySelector('#text-editor');
+      const tagList = Array.from(document.querySelectorAll("#tags li")).map(li => parseInt(li.textContent));
+        
+      const us = await userInfo();
+      const userId = us.userId;
+
+      const config = {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      };
 
         const post = {
           categoryID: parseInt(categorySelect.value),
           title: titleInput.value,
           userID: userId,
           detail: textEditor.innerHTML,
-          mediaList: [imageURL],
+          mediaList: file[0],
           tagList: tagList
         }
     
-          const response = await createPost(post);
+          const response = await createPost(post, config);
           if (response == null) {
             alert("Sorry! Please check your input! ");
             
@@ -69,8 +68,5 @@ function handleImageUpload(event) {
             window.location.href = '/home.html';
           }
       });
-    };
-
-    reader.readAsDataURL(file);
   }
 }

@@ -1,9 +1,13 @@
 import {
   getAllApprovedPosts,
-  getPostByVoteCount,
+  getMostVotePost,
+  getPostByCate,
+  getPostByTags,
+  getPostSortBy,
   searchedPosts,
 } from "./Services/post.service.js";
 import { getAllCategory } from "./Services/category.service.js";
+import { getAllTag } from "./Services/tag.service.js";
 
 const options = {
   month: "short", // Two-digit month (e.g., 01)
@@ -204,6 +208,10 @@ getAllCategory().then((cates) => {
   displayCategories(cates);
 });
 
+getAllTag().then((tags) => {
+  displayTags(tags);
+});
+
 // Call the displayAllPosts function when entering the page
 displayAllPosts();
 
@@ -246,9 +254,56 @@ const displayCategories = async (categories) => {
     categoryList.appendChild(listItem);
 
     link.addEventListener("click", async () => {
-    const posts = await getPostByVoteCount(category.id);
+    const posts = await getPostByCate(category.id);
     displayPosts(posts);
       
     });
   });
 };
+
+const displayTags = async (tags) => {
+  const categoryList = document.querySelector(".absolute.hidden.text-gray-700.pt-2.group-hover\\:block");
+
+  tags.forEach((tag) => {
+    const listItem = document.createElement("li");
+    const link = document.createElement("a");
+    link.className = "rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white";
+    link.textContent = tag.tagName;
+
+    listItem.appendChild(link);
+    categoryList.appendChild(listItem);
+
+    link.addEventListener("click", async () => {
+    const posts = await getPostByTags(tag.id);
+    displayPosts(posts);
+      
+    });
+  });
+};
+
+const sortButton = document.getElementById("sort-button");
+sortButton.addEventListener("click", async () => {
+  const posts = await getPostSortBy();
+  displayPosts(posts);
+});
+
+const sortByVote = document.getElementById("sortByVote");
+sortByVote.addEventListener("click", async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/blog/post/mostVotedPost?categoryId=1', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log(response.data);
+    displayPosts(response.data);
+  } catch (error) {
+    alert('An error occurred!');
+    console.error(error);
+  }
+  
+});
+
+// const posts = await getMostVotePost(1);
+// displayPosts(posts);
