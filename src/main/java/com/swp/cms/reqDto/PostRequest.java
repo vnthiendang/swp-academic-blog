@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,22 +20,11 @@ public class PostRequest {
     @NotNull
     private String title;
     private String detail;
-    private List<String> mediaList; // Change to a list of media URLs
-    private List<String> tagList; // Change to a list of tag IDs
+    private List<MultipartFile> mediaList;
+    private List<String> tagList;
     private Integer postApprovals;
     private List<Integer> awardList;
     private List<Integer> commentList;
     private List<Integer> voteList;
 
-//    public Integer getUserIdValue() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication != null && authentication.getPrincipal() instanceof User) {
-//            User userDetails = (User) authentication.getPrincipal();
-//            // Assuming your User class has a getUserId() method
-//            return userDetails.getUsId();
-//        }
-//        return null; // or handle the case when the userId is not available
-//    }
-
 }
-

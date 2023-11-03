@@ -42,7 +42,7 @@ public class PostController {
 
     //create post (upload mediaUrl & tag)
     @PostMapping("/create")
-    public PostDto addPost(@RequestBody PostRequest postRequest) {
+    public PostDto addPost(@ModelAttribute PostRequest postRequest) {
         Post post = postService.createPost(postRequest);
 //            System.out.println(" ID: " + post.getMedias());
 //            System.out.println("Post ID: " + post.getTags());

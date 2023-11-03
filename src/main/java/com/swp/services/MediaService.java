@@ -66,6 +66,21 @@ public class MediaService {
         return mediaRepository.save(media); // Save and return the updated post
     }
 
+    public void upLoadImage(MultipartFile file, Integer postId) throws IOException {
+        Media media = mediaRepository.save(Media.builder()
+                .post(postRepository.findById(postId)
+                        .orElseThrow(() -> new IllegalArgumentException("Invalid Post")))
+                .mediaUrl("chua co tinh nang nay")
+                .name(file.getOriginalFilename())
+                .contentType(file.getContentType())
+                .data(ImageUtils.compressImage(file.getBytes()))
+                .build());
+        if (media!= null){
+            System.out.println("file uploaded successfully: " + file.getOriginalFilename());
+        } else {
+
+        }
+    }
     public String uploadImage(MultipartFile file, Integer postId) throws IOException {
         Media media = mediaRepository.save(Media.builder()
                 .post(postRepository.findById(postId)
