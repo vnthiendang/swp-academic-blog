@@ -2,15 +2,14 @@ import { userInfo } from './Services/profile.service.js';
 import * as request from './utils/request.js';
 const token = localStorage.getItem("token");
 
-    const options = {
-        month: 'short', // Two-digit month (e.g., 01)
-        day: '2-digit', // Two-digit day (e.g., 18)
-        hour: '2-digit', // Two-digit hour (e.g., 14)
-      };
+const options = {
+  month: 'short', 
+  day: '2-digit', 
+  hour: '2-digit', 
+};
 
-  // Get the postId from the URL query parameters
-  const urlParams = new URLSearchParams(window.location.search);
-  const postId = urlParams.get('postId');
+const urlParams = new URLSearchParams(window.location.search);
+const postId = urlParams.get('postId');
 
 function displayPost() {
 
@@ -31,8 +30,15 @@ function displayPost() {
       document.getElementById('postDate').textContent = formattedTime;
       document.getElementById('postTag').textContent = post.tagList ?? '';
       document.getElementById('postCategory').textContent = post.belongedToCategory ?? '';
-      document.getElementById('postContent').textContent = post.postDetail;
-      document.getElementById('postMedia').src = post.mediaList[0] ?? '#';
+      document.getElementById('postContent').innerHTML = post.postDetail;
+      const mediaList = post.mediaList;
+      if (mediaList && mediaList.length > 0) {
+        const imageData = mediaList[0];
+        const imageElement = document.getElementById('postMedia');
+        imageElement.src = imageData;
+      } else {
+        document.getElementById('postMedia').src = '#';
+      }
     })
     .catch(error => {
       console.error('Error retrieving post:', error);

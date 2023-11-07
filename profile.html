@@ -106,9 +106,9 @@
                 <div class="col-md-9">
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="account-general">
-
                             <hr class="border-light m-0">
-                            <div class="card-body">
+                            <form id="update-form" method="POST">
+                              <div class="card-body">
                                 <div class="form-group">
                                   <label class="form-label">Role</label>
                                   <input type="text" id="roleField" class="form-control mb-1" readonly>
@@ -121,20 +121,22 @@
                                   <label class="form-label">E-mail</label>
                                   <input type="text" id="emailField" class="form-control mb-1" readonly>
                                 </div>
-                                <div class="form-group" >
-                                    <label class="form-label">Current password</label>
-                                    <input type="password" id="currentpass"  class="form-control" readonly>
+                                <div class="form-group">
+                                  <label class="form-label">Current password</label>
+                                  <input type="password" id="currentpass" name="currentpass" class="form-control" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">New password</label>
-                                    <input type="password" id="newpass" class="form-control" readonly>
+                                  <label class="form-label">New password</label>
+                                  <input type="password" id="newpass" name="newpass" class="form-control" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Repeat new password</label>
-                                    <input type="password" id="repass" class="form-control" readonly>
+                                  <label class="form-label">Repeat new password</label>
+                                  <input type="password" id="repass" name="repass" class="form-control" readonly>
                                 </div>
-                            </div>
-                        </div>
+                              </div>
+                              <button type="submit" id="saveButtons" class="btn btn-primary">Save changes</button>
+                            </form>
+                          </div>
 
 
                         <div class="tab-pane fade" id="account-notifications">
@@ -186,7 +188,7 @@
         </div>
         <div class="text-right mt-3">
             <button type="button" type="editButton" id="editButton" class="btn btn-primary">Edit</button>
-            <button type="button" type="submit" id="saveButton" class="btn btn-primary">Save changes</button>
+            <button type="button" id="saveButton" class="btn btn-primary">Save changes</button>
             <button type="button" type="cancel"class="btn btn-default">Cancel</button>
         </div>
     </div>

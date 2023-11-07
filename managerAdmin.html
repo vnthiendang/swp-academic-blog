@@ -75,23 +75,12 @@
                     <h5 class="title-text">
                         Article Management
                     </h5>
-                    <!-- <div class="content-children">
-                        <div class="content-child" onclick="showContent('content1')">Technoloy</div>
-                        <div class="content-child" onclick="showContent('content2')">AI</div>
-                        <div class="content-child" onclick="showContent('content3')">Business</div>
-                        <div class="content-child" onclick="showContent('content4')">Digital Transformation</div>
-                    </div> -->
+                   
                 </div>
                 <div class="content" onclick="showContent('content8')">
                     <h5 class="title-text">
                         User Management
                     </h5>
-                    <!-- <div class="content-children">
-                        <div class="content-child" onclick="showContent('content5')">Gr1</div>
-                        <div class="content-child" onclick="showContent('content6')">Gr2</div>
-                        <div class="content-child" onclick="showContent('content7')">Gr3</div>
-                        <div class="content-child" onclick="showContent('content8')">Boss</div>
-                    </div> -->
                 </div>
 
                 <div class="content" onclick="showContent('content10')">
@@ -186,140 +175,29 @@
                 <!-- Manage Violation Accounts -->
                 <div id="content10Content" style="display: none;">
                     
-                    <div class="Film-table">
+                    <div class="frame">
+                        <div class="violation-management">
                         
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Violation</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>6</td>
-                                    <td>
-                                        <img src="https://loremflickr.com/640/480/sports" alt="6">
-                                    </td>
-                                    <td>Direct Infrastructure Liaison</td>
-                                    <td>1968-03-28T04:21:15.649Z</td>
-                                    <td>Gambia</td>
-                                    <td>
-                                        <a href="/update/6">
-                                            <button>Edit</button>
-                                        </a>
-                                        <button onclick="showDeletePopup()">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>
-                                        <img src="https://loremflickr.com/640/480/sports" alt="6">
-                                    </td>
-                                    <td>Direct Infrastructure Liaison</td>
-                                    <td>1968-03-28T04:21:15.649Z</td>
-                                    <td>Gambia</td>
-                                    <td>
-                                        <a href="/update/6">
-                                            <button>Edit</button>
-                                        </a>
-                                        <button onclick="showDeletePopup()">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>
-                                        <img src="https://loremflickr.com/640/480/sports" alt="6">
-                                    </td>
-                                    <td>Direct Infrastructure Liaison</td>
-                                    <td>1968-03-28T04:21:15.649Z</td>
-                                    <td>Gambia</td>
-                                    <td>
-                                        <a href="/update/6">
-                                            <button>Edit</button>
-                                        </a>
-                                        <button onclick="showDeletePopup()">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>
-                                        <img src="https://loremflickr.com/640/480/sports" alt="6">
-                                    </td>
-                                    <td>Direct Infrastructure Liaison</td>
-                                    <td>1968-03-28T04:21:15.649Z</td>
-                                    <td>Gambia</td>
-                                    <td>
-                                        <a href="/update/6">
-                                            <button>Edit</button>
-                                        </a>
-                                        <button onclick="showDeletePopup()">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>
-                                        <img src="https://loremflickr.com/640/480/sports" alt="6">
-                                    </td>
-                                    <td>Direct Infrastructure Liaison</td>
-                                    <td>1968-03-28T04:21:15.649Z</td>
-                                    <td>Gambia</td>
-                                    <td>
-                                        <a href="/update/6">
-                                            <button>Edit</button>
-                                        </a>
-                                        <button onclick="showDeletePopup()">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>
-                                        <img src="https://loremflickr.com/640/480/sports" alt="6">
-                                    </td>
-                                    <td>Direct Infrastructure Liaison</td>
-                                    <td>1968-03-28T04:21:15.649Z</td>
-                                    <td>Gambia</td>
-                                    <td>
-                                        <a href="/update/6">
-                                            <button>Edit</button>
-                                        </a>
-                                        <button onclick="showDeletePopup()">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>
-                                        <img src="https://loremflickr.com/640/480/sports" alt="6">
-                                    </td>
-                                    <td>Direct Infrastructure Liaison</td>
-                                    <td>1968-03-28T04:21:15.649Z</td>
-                                    <td>Gambia</td>
-                                    <td>
-                                        <a href="/update/6">
-                                            <button>Edit</button>
-                                        </a>
-                                        <button onclick="showDeletePopup()">Delete</button>
-                                    </td>
-                                </tr>
-                                <!-- Các dòng phim khác ở đây -->
-                            </tbody>
-                        </table>
-                    </div>
-                
-                    <div id="deletePopup" class="popup">
-                        <div class="popup-content">
-                            <h2>Confirm Delete</h2>
-                            <p>Are you sure to delete?</p>
-                            <button onclick="handleConfirmDelete()">Yes</button>
-                            <button onclick="handleCancelDelete()">No</button>
-                            <span class="close" onclick="handleCancelDelete()">&times;</span>
+                              <!-- Rows -->
+                            <div id="violationTable"></div>
+       
+                        </div>
+                        
+                        <a href="#">
+                            <button>Edit</button>
+                        </a>
+                        <button onclick="showDeletePopup()">Remove</button>
+                    
+                        <div id="deletePopup" class="popup">
+                            <div class="popup-content">
+                                <h2>Confirm Remove</h2>
+                                <p>Are you sure to remove?</p>
+                                <button onclick="handleConfirmDelete()">Yes</button>
+                                <button onclick="handleCancelDelete()">No</button>
+                                <span class="close" onclick="handleCancelDelete()">&times;</span>
+                            </div>
                         </div>
                     </div>
-                
                     <script>
                         function showDeletePopup() {
                             var popup = document.getElementById("deletePopup");
@@ -327,7 +205,7 @@
                         }
                 
                         function handleConfirmDelete() {
-                            // Xử lý xóa ở đây
+                            
                         }
                 
                         function handleCancelDelete() {

@@ -119,9 +119,8 @@ function displayPosts(posts) {
 
       const infoElement = document.createElement("p");
       infoElement.className = "px-6 py-7 post-detail";
-      infoElement.textContent = post.postDetail;
+      infoElement.innerHTML = post.postDetail;
       postLink.appendChild(infoElement);
-
 
       postElement.appendChild(postLink);
 

@@ -37,16 +37,10 @@ export const searchedPosts = async (keyword) => {
   }
 };
 
-//STUDENT
-export const createPost = async (post) => {
+export const createPost = async (post, config) => {
   try {
-    const response = await request.post(`post/create`, post, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const response = await request.post(`post/create`, post, config);
     return response;
-    
   } catch (error) {
     console.error('Error creating post:', error);
   }
@@ -173,9 +167,56 @@ export const getPostByTag = async (tagId) => {
   }
 };
 
-export const getPostByVoteCount = async (categoryId) => {
+
+// FILTER
+export const getPostByCate = async (categoryId) => {
   try {
     const response = await request.get(`post/GetAllApproved/filter`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      },
+      params: {
+        categoryId
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error retrieving post by vote count:', error);
+  }
+};
+
+export const getPostByTags = async (tagIds) => {
+  try {
+    const response = await request.get(`post/GetAllApproved/filter`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      },
+      params: {
+        tagIds
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error retrieving post:', error);
+  }
+};
+
+export const getPostSortBy = async () => {
+  try {
+    const response = await request.get(`post/GetAllApproved/filter?sortDirection`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error retrieving post:', error);
+  }
+};
+
+export const getMostVotePost = async (categoryId) => {
+  try {
+    const response = await request.get(`post/mostVotedPost`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       },
