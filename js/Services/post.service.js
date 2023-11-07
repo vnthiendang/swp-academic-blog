@@ -37,7 +37,6 @@ export const searchedPosts = async (keyword) => {
   }
 };
 
-//STUDENT
 export const createPost = async (post, config) => {
   try {
     const response = await request.post(`post/create`, post, config);

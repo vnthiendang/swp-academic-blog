@@ -38,8 +38,15 @@ function displayPost() {
       document.getElementById('postDate').textContent = formattedTime;
       document.getElementById('postTag').textContent = post.tagList ?? '';
       document.getElementById('postCategory').textContent = post.belongedToCategory;
-      document.getElementById('postContent').textContent = post.postDetail;
-      document.getElementById('postMedia').src = post.mediaList ?? '#';
+      document.getElementById('postContent').innerHTML = post.postDetail;
+      const mediaList = post.mediaList;
+      if (mediaList && mediaList.length > 0) {
+        const imageData = mediaList[0];
+        const imageElement = document.getElementById('postMedia');
+        imageElement.src = imageData;
+      } else {
+        document.getElementById('postMedia').src = '#';
+      }
       document.getElementById('postVote').textContent = post.vote1Count ?? '#';
       document.getElementById('readingTime').textContent = post.readingTime + ' readed' ?? '';
     })
