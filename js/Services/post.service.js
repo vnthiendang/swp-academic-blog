@@ -52,9 +52,9 @@ export const createPost = async (post) => {
   }
 };
 
-export const updatePost = async (post) => {
+export const updatePost = async (postId, post) => {
   try {
-    const response = await request.put(`post/edit`, post, {
+    const response = await request.put(`post/edit/${postId}`, post, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -175,7 +175,7 @@ export const getPostByTag = async (tagId) => {
 
 export const getPostByVoteCount = async (categoryId) => {
   try {
-    const response = await request.get(`post/mostVotedPost`, {
+    const response = await request.get(`post/GetAllApproved/filter`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       },

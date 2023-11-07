@@ -86,6 +86,26 @@ function displayPosts(posts) {
       memberOnlyElement.textContent = "Member only";
       flexElement.appendChild(memberOnlyElement);
 
+      if(post.awardList != null && post.awardList.length > 0){
+        const elm4 = document.createElement("div");
+        elm4.className = "p-0.5 bg-gray-900 rounded-full mx-4";
+        flexElement.appendChild(elm4);
+
+        const awardIcon = document.createElement("i");
+        awardIcon.className = "fas fa-crown";
+        awardIcon.style = "color: #c45d08;";
+        flexElement.appendChild(awardIcon);
+  
+        const awardList = document.createElement("div");
+        awardList.className = "award-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
+        post.awardList.forEach((award) => {
+          const items = document.createElement("span");
+          items.textContent = award;
+          awardList.appendChild(items);
+        });
+        flexElement.appendChild(awardList);
+      }
+
       postElement.appendChild(flexElement);
 
       const postLink = document.createElement("a");
@@ -116,11 +136,7 @@ function displayPosts(posts) {
       const voteList = document.createElement("div");
       voteList.className =
         "vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-      post.voteList.forEach((vote) => {
-        const item = document.createElement("span");
-        item.textContent = vote + "  ";
-        voteList.appendChild(item);
-      });
+        voteList.textContent = post.vote1Count;
       flexItemsElement.appendChild(voteList);
 
       const iconTagElement = document.createElement("div");

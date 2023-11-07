@@ -1,4 +1,3 @@
-import { getAllAwardType } from './Services/award.service.js';
 import { userInfo } from './Services/profile.service.js';
 import * as request from './utils/request.js';
 const token = localStorage.getItem("token");
@@ -119,20 +118,3 @@ const rejectPost = async (model) => {
   }
   
 }
-
-//GET LIST AWARD TYPE
-const displayAwardType = (types) => {
-  const selectElement = document.getElementById('AwardType');
-
-  types.forEach(type => {
-    const option = document.createElement('option');
-    option.value = type.id;
-    option.textContent = type.awardType;
-
-    selectElement.appendChild(option);
-  });
-};
-
-getAllAwardType().then((types) => {
-  displayAwardType(types);
-});

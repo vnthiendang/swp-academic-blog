@@ -17,13 +17,13 @@ export const userInfo = async () => {
 
 export const updateProfile = async (model) => {
   try {
-    const response = await request.put(`user`, model, {
+    const response = await request.put(`user/update`, model, {
       headers: {
         Authorization: `Bearer ${token}` 
       }
     });
     return response;
   } catch (error) {
-    alert(error);
+    console.error('Error updating profile:', error);
   }
 };
