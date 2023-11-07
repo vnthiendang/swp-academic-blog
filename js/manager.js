@@ -1,10 +1,62 @@
-import {userList, violationList} from './Services/admin.service.js';
+import {approvedPostList, userList, violationList} from './Services/admin.service.js';
 
 const options = {
   month: "short",
   day: "2-digit", 
   hour: "2-digit", 
 };
+
+const renderPostTable = (posts) => {
+  const tab = document.getElementById('postTable');
+  tab.innerHTML = ''; // Clear previous content
+
+  // Create table
+  const table = document.createElement('table');
+  table.classList.add('post-table');
+
+  const thead = document.createElement('thead');
+  const headerRow = document.createElement('tr');
+  const headers = ['Post Status', 'Teacher Review', 'Created Date', 'Post'];
+
+  headers.forEach(headerText => {
+    const th = document.createElement('th');
+    th.textContent = headerText;
+    headerRow.appendChild(th);
+  });
+
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  // Create table body
+  const tbody = document.createElement('tbody');
+
+  posts.forEach(post => {
+    const row = document.createElement('tr');
+
+    const displayNameCell = document.createElement('td');
+    displayNameCell.textContent = post.status;
+    row.appendChild(displayNameCell);
+
+    const additionalInfoCell = document.createElement('td');
+    additionalInfoCell.textContent = post.viewedByUser || '-';
+    row.appendChild(additionalInfoCell);
+
+    const createdDateCell = document.createElement('td');
+    const createdTime = new Date(post.createdDate);
+    const formattedTime = createdTime.toLocaleString("en-US", options);
+    createdDateCell.textContent = formattedTime || '-';
+    row.appendChild(createdDateCell);
+
+    const roleIdCell = document.createElement('td');
+    roleIdCell.textContent = post.post;
+    row.appendChild(roleIdCell);
+
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  tab.appendChild(table);
+}
 
 const renderUserTable = (users) => {
     const userTable = document.getElementById('userTable');
@@ -122,6 +174,10 @@ const renderviolationTable = (users) => {
   userTable.appendChild(table);
 }
   
+approvedPostList()
+  .then((posts) => {
+    renderPostTable(posts);
+});
 
 userList()
   .then((users) => {
