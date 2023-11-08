@@ -17,7 +17,7 @@ const options = {
 
 // DISPLAY LIST APPROVED POSTS
 function displayPosts(posts) {
-  const postContainer = document.querySelector("#post .col-span-5");
+  const postContainer = document.querySelector(".col-span-5");
   postContainer.innerHTML = "";
 
   if (posts.length === 0) {
@@ -32,7 +32,10 @@ function displayPosts(posts) {
       var post = posts[i];
 
       const postElement = document.createElement("div");
-      postElement.className = "";
+      postElement.className = 'col-span-5';
+
+      postElement.className = "post-container";
+      postElement.style.width = "1350px"
 
       const flexElement = document.createElement("div");
       flexElement.className = "flex w-full px-8 py-4 items-center";
@@ -182,12 +185,12 @@ function displayPosts(posts) {
 
       postContainer.appendChild(postElement);
 
-      const hr = document.createElement("hr");
-      hr.style.border = "none"; // Remove the default border
-      hr.style.backgroundColor = "grey"; // Set the background color to create a solid line
-      hr.style.height = "2px";
-      hr.style.margin="10px " // Set the thickness of the line to 2 pixels/ Increase the line height to 4 pixels
-      postContainer.appendChild(hr);
+      // const hr = document.createElement("hr");
+      // hr.style.border = "none"; // Remove the default border
+      // hr.style.backgroundColor = "grey"; // Set the background color to create a solid line
+      // hr.style.height = "2px";
+      // hr.style.margin="10px " // Set the thickness of the line to 2 pixels/ Increase the line height to 4 pixels
+      // postContainer.appendChild(hr);
     }
   }
 }

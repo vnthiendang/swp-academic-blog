@@ -9,7 +9,7 @@ const options = {
 // DISPLAY LIST POSTS
 function displayPosts(posts) {
     
-    const postContainer = document.querySelector('#post .col-span-5');
+    const postContainer = document.querySelector('.col-span-5');
     postContainer.innerHTML = '';
 
     if(posts.length === 0){
@@ -22,6 +22,8 @@ function displayPosts(posts) {
         
         const postElement = document.createElement('div');
         postElement.className = 'col-span-5';
+
+        postElement.className = "post-container";
   
         const flexElement = document.createElement('div');
         flexElement.className = 'flex w-full px-8 py-4 items-center';
@@ -44,7 +46,7 @@ function displayPosts(posts) {
         createdByUser.appendChild(grayTextSpan);
   
         const postTagLink = document.createElement('a');
-        postTagLink.href = '#';
+        postTagLink.href = '/Page SE SA AI BS/html/pageBusiness.html';
     
         const postTagSpan1 = document.createElement('span');
         postTagSpan1.className = 'tag-name';
@@ -106,7 +108,7 @@ function displayPosts(posts) {
 
       const infoElement = document.createElement('p');
       infoElement.className = 'px-7 py-7 post-detail';
-      infoElement.innerHTML = post.postDetail;
+      infoElement.innerHTML = post.postDetail; 
       postLink.appendChild(infoElement);
 
       postElement.appendChild(postLink);
@@ -123,7 +125,7 @@ function displayPosts(posts) {
       flexItemsElement.appendChild(iconTagElement);
   
       const tagLink1 = document.createElement('a');
-      tagLink1.href = '#';
+      tagLink1.href = '/Page SE SA AI BS/html/pageTechnoloy.html';
       const tagDiv1 = document.createElement('div');
       tagDiv1.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';  
 
@@ -144,7 +146,7 @@ function displayPosts(posts) {
       imgLink.appendChild(imgElement);
       imgContainer.appendChild(imgLink);
   
-      postElement.appendChild(imgContainer);
+      // postElement.appendChild(imgContainer);
   
       postContainer.appendChild(postElement);
       });

@@ -10,12 +10,12 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
-    <title>Home</title>
+    <title>FPTU ACADEMIC BLOG | Best Article</title>
 </head>
 
 <body class=" bg-slate-700">
     <!-- Header  -->
-    <header class="flex items-center justify-between w-full bg-black text-white">
+    <header class="flex items-center justify-between w-full bg-black text-white" id="header">
         <div class="flex items-center">
             <a href="/home.html" class="items-start justify-center">
                 <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
@@ -32,6 +32,19 @@
             <a href="/bestartice.html" class="p-2">
                 Best articles
             </a>
+
+            <!-- Category  -->
+            <!-- <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center">
+                    <span class="mr-1">Category</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    
+                </ul>
+            </div> -->
         </div>
         <div class="p-1 flex">
             <form class="flex items-center" id="search-form">
@@ -94,16 +107,16 @@
             <!--slide left  -->
             <div class="col-span-3">
                 <div class="group inline-block relative">
-                    <button class="py-2 px-4 rounded inline-flex items-center">
-                        <span class="mr-1">Category</span>
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                    </button>
-                    <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-
-                    </ul>
-                </div>
+                <button class="py-2 px-4 rounded inline-flex items-center">
+                    <span class="mr-1">Category</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    
+                </ul>
+            </div>
 
                 <div class="group inline-block relative">
                     <button class="py-2 px-4 rounded inline-flex items-center">
@@ -200,6 +213,9 @@
         </div>
     </footer>
     <script type="module" src='./js/votePost.js'></script>
+    <script type="module" src='./js/tag.js'></script>
+    <!-- <script type="module" src='./js/home.js'></script> -->
+    
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="./js/tailwind.config.js"></script>

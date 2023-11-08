@@ -32,6 +32,10 @@
     display: inline-block;
 }
 
+.award-list {
+    margin-left: 1%;
+    background-color: red;
+}
 /*========================== Tag Name For Div Post ==============================*/
 
 .font-semibold#title{
@@ -68,6 +72,17 @@
 
 /*========================== Post List ==============================*/
 
+.p-2 {
+    color: #007bff;
+}
+
+.p-2:hover {
+    color: #4c71a1 !important;
+    background-color: transparent;
+    text-decoration: underline;
+}
+/*========================== Header ==============================*/
+
 .main {
     background-color: white;
 }
@@ -89,10 +104,10 @@
     color: greenyellow;
 }
 
-.post-detail {
+.post-detail p {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -100,6 +115,7 @@
 .col-span-3{
     border-bottom:1px;
     margin: 10px;
+    /* background-color: red; */
 }
 
 /* .col-span-5 div {
@@ -112,6 +128,7 @@
 
 .post-container {
     background-color: whitesmoke;
+    /* background-color: #007bff; */
     /* margin-bottom: 20px; */
     margin-top: 1%;
     margin-left: 5px;
@@ -124,9 +141,22 @@
 .post-container:hover {
     background-color: antiquewhite;
 }
+.ql-editor p img {
+    /* background-color: red; */
+    width: 500px;
+    height: 300px;
+}
 
-
+.ql-editor {
+    display: flex;
+    justify-content: space-between;
+}
 /*========================== Tag Name Of Recommend Topics ==============================*/
+.group {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+/*========================== Best Article ==============================*/
 
 /* .bg-white .rounded-lg {
     background-color: red;
