@@ -33,9 +33,11 @@ function displayPost() {
       document.getElementById('postContent').innerHTML = post.postDetail;
       const mediaList = post.mediaList;
       if (mediaList && mediaList.length > 0) {
-        const imageData = mediaList[0];
+        const imageData = mediaList[0]; // Assuming you want to display the first image
+        const base64String = arrayBufferToBase64(imageData);
+        console.log(base64String);
         const imageElement = document.getElementById('postMedia');
-        imageElement.src = imageData;
+        imageElement.src = 'data:image/jpeg;base64,' + base64String;
       } else {
         document.getElementById('postMedia').src = '#';
       }
@@ -46,13 +48,12 @@ function displayPost() {
     });
 }
 
-// Call the function to display the post
+// Display the post
 displayPost();
 
 const approveButton = document.getElementById("approveButton");
 const rejectButton = document.getElementById("rejectButton");
 
-// Attach an event listener to the button
 approveButton.addEventListener("click", async (event) =>{
   event.preventDefault();
 
@@ -123,4 +124,14 @@ const rejectPost = async (model) => {
     console.error('Error reject post:', error);
   }
   
+}
+
+function arrayBufferToBase64(buffer) {
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  const len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
 }

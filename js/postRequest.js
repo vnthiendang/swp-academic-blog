@@ -1,9 +1,9 @@
 import { getPostRequest } from "../js/Services/post.service.js";
 
 const options = {
-    month: 'short', // Two-digit month (e.g., 01)
-    day: '2-digit', // Two-digit day (e.g., 18)
-    hour: '2-digit', // Two-digit hour (e.g., 14)
+    month: 'short', 
+    day: '2-digit',
+    hour: '2-digit',
 };
 
 // DISPLAY LIST POSTS
@@ -44,7 +44,7 @@ function displayPosts(posts) {
         createdByUser.appendChild(grayTextSpan);
   
         const postTagLink = document.createElement('a');
-        postTagLink.href = '/Page SE SA AI BS/html/pageBusiness.html';
+        postTagLink.href = '#';
     
         const postTagSpan1 = document.createElement('span');
         postTagSpan1.className = 'tag-name';
@@ -123,7 +123,7 @@ function displayPosts(posts) {
       flexItemsElement.appendChild(iconTagElement);
   
       const tagLink1 = document.createElement('a');
-      tagLink1.href = '/Page SE SA AI BS/html/pageTechnoloy.html';
+      tagLink1.href = '#';
       const tagDiv1 = document.createElement('div');
       tagDiv1.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';  
 
