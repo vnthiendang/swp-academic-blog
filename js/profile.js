@@ -1,5 +1,5 @@
 import { userInfo } from '../js/Services/auth.service.js';
-
+import { updateProfile } from './Services/profile.service.js';
 
 const getUserInfo = async () => {
 
@@ -14,16 +14,13 @@ const getUserInfo = async () => {
     
 getUserInfo();
 
-  //document.getElementById("saveButton").addEventListener("click", updateUserProfile);
+  const saveButton = document.getElementById('saveButton');
 
-  const form = document.getElementById("update-form");
+  saveButton.addEventListener('click', async () => {
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-  
     const userInfos = await userInfo();
     var usId = userInfos.userId; 
-    
+  
     const name = document.getElementById("nameField").value;
     const email = document.getElementById("emailField").value;
     const currentPassword = document.getElementById("currentpass").value;
@@ -43,21 +40,15 @@ getUserInfo();
     };
 
     try {
-      const response = await axios.put('http://localhost:8080/blog/user/update', model, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem("token")}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      const res = await updateProfile(model);
   
-      if (response.status === 200) {
+      if (res != null) {
         alert('Update successfully!');
         location.reload();
       } else {
         alert('Failed to update profile.');
       }
     } catch (error) {
-      alert('An error occurred during the update process.');
       console.error(error);
     }
   });

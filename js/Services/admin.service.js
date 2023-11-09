@@ -17,12 +17,12 @@ export const userList = async () => {
   try {
     const response = await request.get(`user/GetAll`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${token}`
       }
     });
     return response;
   } catch (error) {
-    throw error;
+    console.error('Error get user lists:', error);
   }
 };
 

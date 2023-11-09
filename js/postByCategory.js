@@ -19,13 +19,7 @@ function displayPosts(response) {
 
     // Create the anchor element
     var anchorElement = document.createElement('a');
-    anchorElement.href = '#';
-
-    // Create the image element
-    var imgElement = document.createElement('img');
-    imgElement.src = '#' + (i + 1) + '.jpg';
-    imgElement.alt = 'Post ' + (i + 1) + ' Image';
-    anchorElement.appendChild(imgElement);
+    anchorElement.href = `blogDetail.html?belongedToPostID=${post.postsId}`;
 
     // Create the title element
     var titleElement = document.createElement('h2');
@@ -38,7 +32,7 @@ function displayPosts(response) {
     var infoElement = document.createElement('p');
     infoElement.classList.add('post-info');
     infoElement.classList.add('two-line-preview');
-    infoElement.textContent = post.postDetail;
+    infoElement.innerHTML = post.postDetail;
     anchorElement.appendChild(infoElement);
 
     // Create the tags element

@@ -1,4 +1,5 @@
-import { getPostRequest } from "../js/Services/post.service.js";
+import { getPostRequest } from "./Services/request.service.js";
+
 
 const options = {
     month: 'short', 
@@ -134,19 +135,6 @@ function displayPosts(posts) {
       flexItemsElement.appendChild(tagLink1);
   
       postElement.appendChild(flexItemsElement);
-  
-      const imgContainer = document.createElement('div');
-      imgContainer.className = 'm-5';
-  
-      const imgLink = document.createElement('a');
-  
-      const imgElement = document.createElement('img');
-      imgElement.className = 'w-21 h-20';
-  
-      imgLink.appendChild(imgElement);
-      imgContainer.appendChild(imgLink);
-  
-      // postElement.appendChild(imgContainer);
   
       postContainer.appendChild(postElement);
       });

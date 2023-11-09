@@ -6,13 +6,27 @@ export const getAllAwardType = async () => {
   try {
     const response = await request.get(`award_type/getall`, {
       headers: {
-        Authorization: `Bearer ${token}` // Include the token in the request headers
+        Authorization: `Bearer ${token}` 
       }
     });
     return response;
   } catch (error) {
     
-    throw new Error("An error occurred. Please try again later.");
+    throw new Error(error);
+  }
+};
+
+export const getAllAward = async () => {
+  try {
+    const response = await request.get(`award/getall`, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    });
+    return response;
+  } catch (error) {
+    
+    throw new Error(error);
   }
 };
 

@@ -8,11 +8,12 @@ import {
 } from "./Services/post.service.js";
 import { getAllCategory } from "./Services/category.service.js";
 import { getAllTag } from "./Services/tag.service.js";
+import { getMostVotePosts } from "./Services/vote.service.js";
 
 const options = {
-  month: "short", // Two-digit month (e.g., 01)
-  day: "2-digit", // Two-digit day (e.g., 18)
-  hour: "2-digit", // Two-digit hour (e.g., 14)
+  month: "short",
+  day: "2-digit", 
+  hour: "2-digit", 
 };
 
 // DISPLAY LIST APPROVED POSTS
@@ -107,6 +108,23 @@ function displayPosts(posts) {
         flexElement.appendChild(awardList);
       }
 
+      if(post.voteList != null && post.voteList.length > 0){
+        const voteIcon = document.createElement("i");
+        voteIcon.className =
+        "fa-regular fa-heart fa-beat-fade fa-xl";
+        flexElement.appendChild(voteIcon); 
+
+        const voteList = document.createElement("div");
+        voteList.className = "vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
+        voteList.textContent = post.vote1Count;
+      // post.voteList.forEach((vote) => {
+      //   const item = document.createElement("span");
+      //   item.textContent = vote + "  ";
+      //   voteList.appendChild(item);
+      // });
+        flexElement.appendChild(voteList);
+      }
+
       postElement.appendChild(flexElement);
 
       const postLink = document.createElement("a");
@@ -118,10 +136,10 @@ function displayPosts(posts) {
       titleElement.textContent = post.title;
       postLink.appendChild(titleElement);
 
-      const infoElement = document.createElement("p");
-      infoElement.className = "px-6 py-7 post-detail";
-      infoElement.textContent = post.postDetail;
-      postLink.appendChild(infoElement);
+      // const infoElement = document.createElement("p");
+      // infoElement.className = "px-6 py-7 post-detail";
+      // infoElement.innerHTML = post.postDetail;
+      // postLink.appendChild(infoElement);
 
       postElement.appendChild(postLink);
 
@@ -149,22 +167,6 @@ function displayPosts(posts) {
           flexItemsElement.appendChild(tagLink1);
         });
       }
-
-      const voteIcon = document.createElement("i");
-      voteIcon.className =
-        "fa-regular fa-heart fa-beat-fade fa-xl";
-      flexItemsElement.appendChild(voteIcon); 
-
-      const voteList = document.createElement("div");
-      voteList.className =
-        "vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-        voteList.textContent = post.vote1Count;
-      // post.voteList.forEach((vote) => {
-      //   const item = document.createElement("span");
-      //   item.textContent = vote + "  ";
-      //   voteList.appendChild(item);
-      // });
-      flexItemsElement.appendChild(voteList);
 
       postElement.appendChild(flexItemsElement);
 
@@ -293,20 +295,11 @@ sortButton.addEventListener("click", async () => {
 const sortByVote = document.getElementById("sortByVote");
 sortByVote.addEventListener("click", async () => {
   try {
-    const response = await axios.get('http://localhost:8080/blog/post/mostVotedPost?categoryId=1', {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem("token")}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    console.log(response.data);
-    displayPosts(response.data);
+    const response = await getMostVotePosts();
+    displayPosts(response);
   } catch (error) {
     alert('An error occurred!');
     console.error(error);
   }
   
 });
-
-// const posts = await getMostVotePost(1);
-// displayPosts(posts);

@@ -1,4 +1,4 @@
-import { getPostByTag } from "./Services/post.service.js";
+import { getPostByTags } from "./Services/post.service.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const tagId = urlParams.get('tagId');
@@ -18,13 +18,17 @@ function displayPosts(response) {
   
       // Create the anchor element
       var anchorElement = document.createElement('a');
-      anchorElement.href = '#';
+      anchorElement.href = `blogDetail.html?belongedToPostID=${post.postsId}`;
   
-      // Create the image element
-      var imgElement = document.createElement('img');
-      imgElement.src = '#' + (i + 1) + '.jpg';
-      imgElement.alt = 'Post ' + (i + 1) + ' Image';
-      anchorElement.appendChild(imgElement);
+      // var imgElement = document.createElement('img');
+      post.mediaList.forEach(media => {
+        const mediaItem = document.createElement('img');
+        mediaItem.src = `data:image/jpeg;base64, ${media}`;
+        mediaItem.style.width = '240px'; 
+        mediaItem.style.height = 'auto';
+        anchorElement.appendChild(mediaItem);
+      });
+      
   
       // Create the title element
       var titleElement = document.createElement('h2');
@@ -37,7 +41,7 @@ function displayPosts(response) {
       var infoElement = document.createElement('p');
       infoElement.classList.add('post-info');
       infoElement.classList.add('two-line-preview');
-      infoElement.textContent = post.postDetail;
+      infoElement.innerHTML = post.postDetail;
       anchorElement.appendChild(infoElement);
   
       // Create the tags element
@@ -72,7 +76,7 @@ function displayPosts(response) {
 }
 
   const displayAllPosts = () => {
-    getPostByTag(tagId)
+    getPostByTags(tagId)
       .then((posts) => {
         displayPosts(posts);
       })
