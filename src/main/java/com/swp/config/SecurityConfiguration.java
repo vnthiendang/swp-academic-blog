@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .requestMatchers("/blog/auth/**", "/blog/category/**", "/blog/comment/**", "/blog/media/**", "/blog/postapproval/getall", "/blog/postapproval/{id}", "/blog/post/create", "/blog/post/GetAllApproved/**", "/blog/post/mostVotedPost", "/blog/posttag/**", "/blog/role/**", "/blog/tag/**", "/blog/user/update", "/blog/user/profile", "/blog/user/{id}", "/blog/vote/getall/{postId}", "/blog/vote/GetAll", "/blog/violationRule/**").permitAll()
+                .requestMatchers("/blog/auth/**", "/blog/category/**", "/blog/award/getall/**", "/blog/comment/**", "/blog/media/**", "/blog/postapproval/getall", "/blog/postapproval/{id}", "/blog/post/create", "/blog/post/GetAllApproved/**", "/blog/post/mostVotedPost", "/blog/posttag/**", "/blog/role/**", "/blog/tag/**", "/blog/user/update", "/blog/user/profile", "/blog/user/{id}", "/blog/vote/getall/{postId}", "/blog/vote/GetAll", "/blog/violationRule/**").permitAll()
                 .requestMatchers("/blog/vote/post", "/blog/votetype/getall", "/blog/postapproval/{postApprovalsId}", "/blog/post/edit/{id}", "/blog/vote/{voteId}").hasAuthority("Student")
                 .requestMatchers("/blog/postapproval/post", "/blog/award/post", "/blog/award_type/**", "/blog/post/postRequest/**").hasAuthority("Teacher")
                 .requestMatchers("/blog/accountViolation/**", "/blog/user/GetAll", "/blog/user/add").hasAuthority("Admin")
@@ -61,6 +61,15 @@ public class SecurityConfiguration {
 
     @Bean
     public CorsFilter corsFilter() {
-        return new CorsFilter(corsConfigurationSource());
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("*"); // Allow requests from any origin
+        configuration.addAllowedMethod("*"); // Allow all HTTP methods
+        configuration.addAllowedHeader("*"); // Allow all headers
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return new CorsFilter(source);
     }
 }
