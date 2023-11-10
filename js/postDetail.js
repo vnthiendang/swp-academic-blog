@@ -38,15 +38,19 @@ function displayPost() {
       document.getElementById('postDate').textContent = formattedTime;
       document.getElementById('postTag').textContent = post.tagList ?? '';
       document.getElementById('postCategory').textContent = post.belongedToCategory;
-      document.getElementById('postContent').innerHTML = post.postDetail;
-      const mediaList = post.mediaList;
-      if (mediaList && mediaList.length > 0) {
-        const imageData = mediaList[0];
-        const imageElement = document.getElementById('postMedia');
-        imageElement.src = imageData;
-      } else {
-        document.getElementById('postMedia').src = '#';
-      }
+
+      const postContentElement = document.getElementById('postContent');
+      postContentElement.contentEditable = false;
+      postContentElement.innerHTML = post.postDetail;
+
+      // post.mediaList.forEach(media => {
+      //   const mediaItem = document.getElementById('postMedia');
+      //   mediaItem.src = `data:image/jpeg;base64, ${media}`;
+      //   mediaItem.style.width = '240px'; 
+      //   mediaItem.style.height = 'auto';
+      //   //mediaList.appendChild(mediaItem);
+      // });
+      
       document.getElementById('postVote').textContent = post.vote1Count ?? '#';
       document.getElementById('readingTime').textContent = post.readingTime + ' readed' ?? '';
     })
@@ -79,7 +83,7 @@ function displayComments() {
 
         const commentByUser = document.createElement('p');
         commentByUser.classList.add('inline-flex', 'items-center', 'mr-3', 'text-sm', 'text-gray-900', 'dark:text-white', 'font-semibold');
-        commentByUser.textContent = 'User ' + comment.createdByUser;
+        commentByUser.textContent = comment.createdByUser;
         
         footer.appendChild(commentByUser);
 

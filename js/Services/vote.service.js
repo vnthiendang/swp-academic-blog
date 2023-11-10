@@ -46,3 +46,18 @@ export const votePost = async (model) => {
       console.error('Error creating vote:', error);
     } 
 };
+
+export const getMostVotePosts = async () => {
+  try {
+    const response = await request.get(`post/mostVotedPost?categoryId=1`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    return response;
+  } catch (error) {
+    
+    throw new Error("Error fetching most vote posts!");
+  }
+};

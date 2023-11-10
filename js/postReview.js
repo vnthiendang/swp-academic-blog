@@ -34,8 +34,8 @@ function displayPost() {
       const mediaList = post.mediaList;
       if (mediaList && mediaList.length > 0) {
         const imageData = mediaList[0]; // Assuming you want to display the first image
-        const base64String = arrayBufferToBase64(imageData);
-        console.log(base64String);
+        //const base64String = arrayBufferToBase64(imageData);
+        console.log(imageData);
         const imageElement = document.getElementById('postMedia');
         imageElement.src = 'data:image/jpeg;base64,' + base64String;
       } else {

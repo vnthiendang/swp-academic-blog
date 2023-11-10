@@ -90,36 +90,6 @@ export const getCommentById = async (postId) => {
   }
 };
 
-//TEACHER GET POST REQUESTS
-export const getPostRequest = async () => {
-  try {
-    const response = await request.get(`post/postRequest`, {
-      headers: {
-        Authorization: `Bearer ${token}` 
-      }
-    });
-
-    return response;
-  } catch (error) {
-    console.error('Error fetching posts:', error);
-  }
-};
-
-//TEACHER
-export const getPostRequestById = async (id) => {
-  try {
-    const response = await request.get(`post/postRequest/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    return response;
-  } catch (error) {
-    console.error('Error retrieving post:', error);
-    throw new Error("An error occurred while retrieving the post. Please try again later.");
-  }
-};
-
 //STUDENT, TEACHER
 export const createComment = async (model) => {
   try {
@@ -151,22 +121,6 @@ export const getPostByCategory = async (categoryId) => {
   }
 };
 
-export const getPostByTag = async (tagId) => {
-  try {
-    const response = await request.get('post/GetAllApproved', {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-      params: {
-        tagId
-      }
-    });
-    return response;
-  } catch (error) {
-    console.error('Error retrieving post by tag:', error);
-  }
-};
-
 
 // FILTER
 export const getPostByCate = async (categoryId) => {
@@ -187,7 +141,7 @@ export const getPostByCate = async (categoryId) => {
 
 export const getPostByTags = async (tagIds) => {
   try {
-    const response = await request.get(`post/GetAllApproved/filter`, {
+    const response = await request.get(`post/GetAllApproved`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       },

@@ -106,6 +106,23 @@ function displayPosts(posts) {
         flexElement.appendChild(awardList);
       }
 
+      if(post.voteList != null && post.voteList.length > 0){
+        const voteIcon = document.createElement("i");
+        voteIcon.className =
+        "fa-regular fa-heart fa-beat-fade fa-xl";
+        flexElement.appendChild(voteIcon); 
+
+        const voteList = document.createElement("div");
+        voteList.className = "vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
+        voteList.textContent = post.vote1Count;
+      // post.voteList.forEach((vote) => {
+      //   const item = document.createElement("span");
+      //   item.textContent = vote + "  ";
+      //   voteList.appendChild(item);
+      // });
+        flexElement.appendChild(voteList);
+      }
+
       postElement.appendChild(flexElement);
 
       const postLink = document.createElement("a");
@@ -117,68 +134,60 @@ function displayPosts(posts) {
       titleElement.textContent = post.title;
       postLink.appendChild(titleElement);
 
-      const infoElement = document.createElement("p");
-      infoElement.className = "px-6 py-7 post-detail";
-      infoElement.innerHTML = post.postDetail;
-      postLink.appendChild(infoElement);
+      // const infoElement = document.createElement("p");
+      // infoElement.className = "px-6 py-7 post-detail";
+      // infoElement.innerHTML = post.postDetail;
+      // postLink.appendChild(infoElement);
 
       postElement.appendChild(postLink);
 
       const flexItemsElement = document.createElement("div");
       flexItemsElement.className = "flex items-center px-8 mb-1";
 
-      const voteIcon = document.createElement("i");
-      voteIcon.className =
-        "fa-solid fa-thumbs-up flex items-center cursor-pointer";
-      flexItemsElement.appendChild(voteIcon);
+      if(post.mediaList.length > 0){
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'm-5';
 
-      const voteList = document.createElement("div");
-      voteList.className =
-        "vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-        voteList.textContent = post.vote1Count;
-      flexItemsElement.appendChild(voteList);
+        const mediaList = document.createElement('div');
+        mediaList.className = 'media-list';
+        post.mediaList.forEach(media => {
+          const mediaItem = document.createElement('img');
+          mediaItem.src = `data:image/jpeg;base64, ${media}`;
+          mediaItem.style.width = '240px'; 
+          mediaItem.style.height = 'auto';
+          mediaList.appendChild(mediaItem);
+        });
 
-      const iconTagElement = document.createElement("div");
-      iconTagElement.className = "icon-tag";
-      const iconTagImg = document.createElement("img");
-      iconTagImg.src = "img/tag.png";
-      iconTagImg.alt = "icon-tag";
-      iconTagElement.appendChild(iconTagImg);
-      flexItemsElement.appendChild(iconTagElement);
+        imgContainer.appendChild(mediaList);
+        flexItemsElement.appendChild(imgContainer);
+      }
 
-      const tagLink1 = document.createElement("a");
-      tagLink1.href = "/pageByCategory.html?tagId";
+      if(post.tagList.length > 0){
+        const iconTagElement = document.createElement("div");
+        iconTagElement.className = "icon-tag";
+        const iconTagImg = document.createElement("img");
+        iconTagImg.src = "img/tag.png";
+        iconTagImg.alt = "icon-tag";
+        iconTagElement.appendChild(iconTagImg);
+        flexItemsElement.appendChild(iconTagElement);
 
-      const postTagList = document.createElement("div");
-      postTagList.className =
-        "post-tag-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-      post.tagList.forEach((tag) => {
-        const tagItem = document.createElement("span");
-        tagItem.textContent = tag;
-        postTagList.appendChild(tagItem);
-      });
-      // postElement.appendChild(postTagList);
+        const tagLink1 = document.createElement("a");
+        tagLink1.href = "/pageByCategory.html?tagId";
 
-      tagLink1.appendChild(postTagList);
-      flexItemsElement.appendChild(tagLink1);
+        const postTagList = document.createElement("div");
+        postTagList.className =
+          "post-tag-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
+        post.tagList.forEach((tag) => {
+          const tagItem = document.createElement("span");
+          tagItem.textContent = tag;
+          postTagList.appendChild(tagItem);
+        });
+
+        tagLink1.appendChild(postTagList);
+        flexItemsElement.appendChild(tagLink1);
+      }
 
       postElement.appendChild(flexItemsElement);
-
-
-      // if(post.mediaList.length > 0){
-      //   const imgContainer = document.createElement('div');
-      //   imgContainer.className = 'm-5';
-
-      //   const mediaList = document.createElement('div');
-      //   mediaList.className = 'media-list';
-      //   post.mediaList.forEach(media => {
-      //         const mediaItem = document.createElement('img');
-      //         mediaItem.src = media;
-      //         mediaList.appendChild(mediaItem);
-      //   });
-      //   imgContainer.appendChild(mediaList);
-      //   postElement.appendChild(imgContainer);
-      // }
 
       postContainer.appendChild(postElement);
 
