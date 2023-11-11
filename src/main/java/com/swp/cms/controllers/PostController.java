@@ -47,6 +47,7 @@ public class PostController {
         return dto;
     }
 
+
     //update a post by postId
     @PutMapping("/edit/{id}")
     public PostDto updatePost(@PathVariable Integer id, @RequestBody PostRequest postRequest){
@@ -54,7 +55,6 @@ public class PostController {
         PostDto dto = postService.mapPostToPostDto(post);
         return dto;
     }
-
 
     //search posts by title, detail, postgory
     @GetMapping("/search")
@@ -73,6 +73,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
         @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
         @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
+        @RequestParam(name = "userId", required = false) Integer userId,
         @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection) {
 
     List<Post> approvedPosts = postService.getAllApprovedPosts();
@@ -89,6 +90,9 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     if (keyword != null && !keyword.trim().isEmpty()){
         approvedPosts = postService.GetPostsByKeyword(approvedPosts, keyword);
     }
+    if (userId != null){
+        approvedPosts = postService.GetPostsByUserId(approvedPosts, userId);
+    }
     approvedPosts = postService.sortPosts(approvedPosts, sortBy, sortDirection);
     List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
     return dtos;
@@ -102,7 +106,8 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
             @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
             @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
             @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
-            @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection,
+            @RequestParam(name = "userId", required = false) Integer userId
     ) {
         List<Post> approvedPosts = postService.getAllApprovedPosts();
         if (startDate != null && endDate != null) {
@@ -115,6 +120,9 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         }
         if (keyword != null && !keyword.trim().isEmpty()) {
             approvedPosts = postService.GetPostsByKeyword(approvedPosts, keyword);
+        }
+        if (userId != null){
+            approvedPosts = postService.GetPostsByUserId(approvedPosts, userId);
         }
         approvedPosts = postService.sortPosts(approvedPosts, sortBy, sortDirection);
         List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
