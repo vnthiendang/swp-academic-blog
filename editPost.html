@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
     <title>Edit Post</title>
     <style>
@@ -72,7 +73,7 @@
 
     <!-- Main  -->
     <Main>
-        <form class="form" id="updatePost">
+        <form class="form" id="updatePost" >
             <div>
               <label for="categoryID">Category:</label>
 
@@ -85,18 +86,18 @@
               <input type="text" id="title" name="title">
             </div>
             <div>
-              <form class="w-full m-8">
-                <div
-                    class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                
+                    <div class="w-full  mb-4 border border-gray-200 rounded-lg bg-gray-50  dark:border-gray-600">
 
-                    <div id="text-editor" rows="8" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" 
-                    placeholder="Write an article..." required></div>
-                </div>
-              </form>
+                        <div id="text-editor" rows="8"
+                            class="block w-full px-0 text-sm text-gray-800 bg-white border-0 focus:ring-0 dark:text-grey dark:placeholder-gray-400">
+                        </div>
+                    </div>
+                
             </div>
             <div>
-              <!-- <label for="mediaList">Media:</label> -->
-              <input type="file" id="mediaList" name="mediaList" class="hidden">
+              <!-- <label for="mediaList">Media:</label >
+              <input type="file" id="mediaList" name="mediaList" > -->
               <label for="mediaList" id="drop-area"
               class="flex flex-col items-center justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
               <div class="flex flex-col items-center justify-center">
@@ -109,7 +110,7 @@
                           class="font-semibold">Click
                           to upload</span> or drag and drop</div>
               </div>
-              <!-- <input id="mediaList" type="file" class="hidden" /> -->
+              <input type="file" id="mediaList" accept="image/*" multiple/>
               
           </label>
             </div>
@@ -162,6 +163,8 @@
     <script type="module" src='./js/editPost.js'></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="js/post_quill_editor.js"></script>
 
 <script> 
       
