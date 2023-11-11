@@ -96,7 +96,7 @@ public class PostService {
                 if (!media.isEmpty()){
                     Media media1 = new Media();
                     media1.setPost(post);
-                    media1.setMediaUrl("chua co tinh nang nay");
+                    media1.setMediaUrl("ko co URL");
                     media1.setName(media.getOriginalFilename()); // Set the name from the uploaded file
                     media1.setContentType(media.getContentType());
                     try {
@@ -119,7 +119,7 @@ public class PostService {
             post.setMedias(mediaList);
         }
 
-        List<String> tagNames = postRequest.getTagList(); // Change to a list of tag IDs
+        List<String> tagNames = postRequest.getTagList();
         if (tagNames != null && !tagNames.isEmpty()) {
             List<PostTag> postTagList = new ArrayList<>();
             for (String tagName : tagNames) {
@@ -471,4 +471,11 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
+    public List<Post> GetPostsByUserId(List<Post> approvedPosts, Integer userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userId));
+        return approvedPosts.stream()
+                .filter(post -> post.getCreatedByUser().getUsId().equals(userId))
+                .collect(Collectors.toList());
+    }
 }
