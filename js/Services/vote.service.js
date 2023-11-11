@@ -61,3 +61,17 @@ export const getMostVotePosts = async () => {
     throw new Error("Error fetching most vote posts!");
   }
 };
+
+export const updateVote = async (postId, model) => {
+  try {
+    const response = await request.put(`vote/${postId}`, model, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+    
+  } catch (error) {
+    console.error('Error edit your vote:', error);
+  }
+};

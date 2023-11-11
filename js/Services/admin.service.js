@@ -77,3 +77,17 @@ export const addAccountViolation = async (model) => {
     console.error('Error ban user:', error);
   } 
 };
+
+export const updatePostStatus = async (postId, post) => {
+  try {
+    const response = await request.put(`postapproval/${postId}`, post, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+    
+  } catch (error) {
+    console.error('Error updating post status:', error);
+  }
+};

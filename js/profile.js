@@ -1,4 +1,5 @@
 import { userInfo } from '../js/Services/auth.service.js';
+import { getPostByUserId } from './Services/post.service.js';
 import { updateProfile } from './Services/profile.service.js';
 
 const getUserInfo = async () => {
@@ -53,5 +54,58 @@ getUserInfo();
     }
   });
 
+// Retrieve posts by userId
+const displayPosts = async() => {
+  try {
+      const userInfos = await userInfo();
+      var usId = userInfos.userId;
+      const posts = await getPostByUserId(usId); 
+      const tableBody = document.querySelector('#postTable tbody');
+      tableBody.innerHTML = '';
+
+      posts.forEach((post, index) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+              <td>${index + 1}</td>
+              <td>${post.title}</td>
+              <td>${post.belongedToCategory}</td>
+              <td>${post.postApprovals}</td>
+              <td>
+              <form class="form"> 
+                  <div class="flex flex-col" >
+                      <label for="">
+                          <button class="editPostButton" style="background-color: green;color: white;" 
+                          class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-55 p-2.5" data-post-id="${post.postsId}">Edit
+                          </button>
+                      </label>
+                  </div>
+              </form></td>
+              <td><a href="#" class="delete">Delete</a></td>
+          `;
+          tableBody.appendChild(row);
+      });
+
+      const editPostButtons = document.querySelectorAll('.editPostButton');
+      editPostButtons.forEach(button => {
+        button.addEventListener('click', openEditPostPopup(posts.postsId));
+      });
+  } catch (error) {
+      console.error('Error retrieving and displaying posts:', error);
+  }
+}
+
+displayPosts();
+
+
+function openEditPostPopup(postId) {
+  
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const left = 0;
+  const top = 0;
+  const url = `editPost.html?belongedToPostID=${postId}`; 
+  
+  window.open(url, "Edit Post", `width=${width}, height=${height}, left=${left}, top=${top}`);
+}
 
 

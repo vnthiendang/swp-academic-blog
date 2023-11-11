@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //const allowCommentSelect = document.querySelector('#comment');
     const categorySelect = document.querySelector('#Category');
     const textEditor = document.querySelector('#text-editor');
-    const tagList = Array.from(document.querySelectorAll("#tags li")).map(li => parseInt(li.textContent));
+    const tagList = Array.from(document.querySelectorAll("#tags li")).map(li => li.textContent);
       
     const us = await userInfo();
     const userId = us.userId;
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let i = 0; i < imageInput.files.length; i++) {
       formData.append('mediaList', imageInput.files[i]);
     }
-    formData.append('tagList', []);
+    formData.append('tagList', tagList);
 
     const config = {
       headers: {

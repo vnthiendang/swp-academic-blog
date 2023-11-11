@@ -2,6 +2,8 @@ import * as request from '../utils/request.js'
 
 const token = localStorage.getItem("token");
 
+
+//POST
 export const getAllApprovedPosts = async () => {
   try {
     const response = await request.get(`post/GetAllApproved`, {
@@ -60,7 +62,6 @@ export const updatePost = async (postId, post) => {
   }
 };
 
-//STUDENT
 export const getPostById = async (id) => {
   try {
     const response = await request.get(`post/GetAllApproved/${id}`, {
@@ -75,7 +76,21 @@ export const getPostById = async (id) => {
   }
 };
 
-//STUDENT
+export const getPostByUserId = async (userId) => {
+  try {
+    const response = await request.get(`post/GetAllApproved?userId=${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error retrieving post:', error);
+  }
+};
+//POST
+
+//COMMENT
 export const getCommentById = async (postId) => {
   try {
     const response = await request.get(`comment/getall/${postId}`, {
@@ -90,7 +105,6 @@ export const getCommentById = async (postId) => {
   }
 };
 
-//STUDENT, TEACHER
 export const createComment = async (model) => {
   try {
     const response = await request.post(`comment/post`, model,{
@@ -104,6 +118,22 @@ export const createComment = async (model) => {
   } 
 };
 
+export const editComment = async (postId, model) => {
+  try {
+    const response = await request.put(`comment/${postId}`, model, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+    
+  } catch (error) {
+    console.error('Error edit comment:', error);
+  }
+};
+//COMMENT
+
+// FILTER
 export const getPostByCategory = async (categoryId) => {
   try {
     const response = await request.get('post/GetAllApproved', {
@@ -121,8 +151,6 @@ export const getPostByCategory = async (categoryId) => {
   }
 };
 
-
-// FILTER
 export const getPostByCate = async (categoryId) => {
   try {
     const response = await request.get(`post/GetAllApproved/filter`, {
@@ -183,3 +211,4 @@ export const getMostVotePost = async (categoryId) => {
     console.error('Error retrieving post by vote count:', error);
   }
 };
+//FILTER

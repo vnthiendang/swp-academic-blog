@@ -11,30 +11,34 @@
     <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
     <title>Edit Post</title>
     <style>
-        /* Add the following CSS code to your HTML file or external CSS file */
+        
         form {
-          max-width: 400px;
-          margin: 0 auto;
-          padding: 20px;
-          background-color: #f5f5f5;
-          border: 1px solid #ccc;
-          border-radius: 5px;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f5f5f5;
         }
       
         form label {
-          display: block;
-          margin-bottom: 10px;
-          font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
       
         form input[type="text"],
         form textarea {
-          width: 100%;
-          padding: 8px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          box-sizing: border-box;
-          margin-bottom: 10px;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        form input[type="file"] {
+            margin-top: 5px;
         }
       
         form button[type="submit"] {
@@ -45,7 +49,7 @@
           border-radius: 4px;
           cursor: pointer;
         }
-      </style>
+    </style>
 </head>
 
 <body class="w-screen h-screen bg-slate-700">
@@ -54,10 +58,6 @@
         <div class="flex items-center">
             <a href="/home.html" class="items-start justify-center">
                 <img src="/img/Logo.png" alt="logo" class="w-16 h-auto">
-            </a>
-            
-            <a href="/home.html" class="p-2">
-                FPT BLOG
             </a>
             
             <a href="/home.html" class="p-2">
@@ -72,22 +72,31 @@
 
     <!-- Main  -->
     <Main>
-        <form id="updatePostForm">
+        <form class="form" id="updatePost">
             <div>
               <label for="categoryID">Category:</label>
-              <input type="text" id="categoryID" name="categoryID" value="sample">
+
+              <select id="categoryID" name="categoryID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                <option selected>Choose Category</option>
+              </select>
             </div>
             <div>
               <label for="title">Title:</label>
-              <input type="text" id="title" name="title" value="Sample Data">
+              <input type="text" id="title" name="title">
             </div>
             <div>
-              <label for="detail">Detail:</label>
-              <textarea id="detail" name="detail">Sample data</textarea>
+              <form class="w-full m-8">
+                <div
+                    class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+
+                    <div id="text-editor" rows="8" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" 
+                    placeholder="Write an article..." required></div>
+                </div>
+              </form>
             </div>
             <div>
               <label for="mediaList">Media:</label>
-              <input type="file" id="mediaList" name="mediaList">
+              <input type="file" id="mediaList" name="mediaList" accept="image/*" multiple>
             </div>
             <div class="flex flex-col">
                 <label for="">Tags
@@ -103,7 +112,7 @@
             <div>
               <button type="submit">Update Post</button>
             </div>
-          </form>
+        </form>
     </Main>
 
     <!-- footer  -->
@@ -135,7 +144,7 @@
                     href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
         </div>
     </footer>
-    <script type="module" src='./js/postDetail.js'></script>
+    <script type="module" src='./js/editPost.js'></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
