@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
       //const response = await axios.post('http://localhost:8080/blog/post/create', formData, config);
       const res = await createPost(formData, config);
 
-      if (res !== null) {
+      if (res != null) {
         alert('Your Post created successfully!');
         window.location.href = '/home.html';
       } else {

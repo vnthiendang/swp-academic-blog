@@ -31,16 +31,21 @@ function displayPost() {
       document.getElementById('postTag').textContent = post.tagList ?? '';
       document.getElementById('postCategory').textContent = post.belongedToCategory ?? '';
       document.getElementById('postContent').innerHTML = post.postDetail;
-      const mediaList = post.mediaList;
-      if (mediaList && mediaList.length > 0) {
-        const imageData = mediaList[0]; // Assuming you want to display the first image
-        //const base64String = arrayBufferToBase64(imageData);
-        console.log(imageData);
+      
+      if(post.mediaList.length > 0){
+
+        // post.mediaList.forEach(media => {
+        // const mediaList = post.mediaList;
+          
+        //   mediaList.appendChild(mediaItem);
+        // });
+
         const imageElement = document.getElementById('postMedia');
-        imageElement.src = 'data:image/jpeg;base64,' + base64String;
-      } else {
-        document.getElementById('postMedia').src = '#';
+        imageElement.src = `data:image/jpeg;base64, ${post.mediaList[0]}`;
+        // imageElement.style.width = '240px'; 
+        // imageElement.style.height = 'auto';
       }
+
     })
     .catch(error => {
       console.error('Error retrieving post:', error);

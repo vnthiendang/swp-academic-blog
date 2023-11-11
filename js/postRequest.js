@@ -116,6 +116,24 @@ function displayPosts(posts) {
   
       const flexItemsElement = document.createElement('div');
       flexItemsElement.className = 'flex items-center px-8';
+
+      if(post.mediaList.length > 0){
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'm-5';
+
+        const mediaList = document.createElement('div');
+        mediaList.className = 'media-list';
+        post.mediaList.forEach(media => {
+          const mediaItem = document.createElement('img');
+          mediaItem.src = `data:image/jpeg;base64, ${media}`;
+          mediaItem.style.width = '240px'; 
+          mediaItem.style.height = 'auto';
+          mediaList.appendChild(mediaItem);
+        });
+
+        imgContainer.appendChild(mediaList);
+        flexItemsElement.appendChild(imgContainer);
+      }
   
       const iconTagElement = document.createElement('div');
       iconTagElement.className = 'icon-tag';
