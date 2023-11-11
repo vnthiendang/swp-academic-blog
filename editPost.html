@@ -86,8 +86,23 @@
               <textarea id="detail" name="detail">Sample data</textarea>
             </div>
             <div>
-              <label for="mediaList">Media:</label>
-              <input type="file" id="mediaList" name="mediaList">
+              <!-- <label for="mediaList">Media:</label> -->
+              <input type="file" id="mediaList" name="mediaList" class="hidden">
+              <label for="mediaList" id="drop-area"
+              class="flex flex-col items-center justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+              <div class="flex flex-col items-center justify-center">
+                  <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                  </svg>
+                  <div id="img-view" class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                          class="font-semibold">Click
+                          to upload</span> or drag and drop</div>
+              </div>
+              <!-- <input id="mediaList" type="file" class="hidden" /> -->
+              
+          </label>
             </div>
             <div class="flex flex-col">
                 <label for="">Tags
@@ -191,5 +206,94 @@
         } 
     }); 
 </script> 
+<script>
+    // Get the input element
+        var img = document.getElementById("mediaList"); 
+    
+        // Add an event listener to handle the change event
+        img.addEventListener("change", function () {
+            // Get the selected file
+            var file = this.files[0];
+    
+            // Check if the file is an image
+            if (file.type.startsWith("image/")) {
+                // Create a new FileReader object
+                var reader = new FileReader();
+    
+                // Add an event listener to handle the load event
+                reader.addEventListener("load", function () {
+                    // Get the image data as a base64 encoded string
+                    var data = this.result;
+    
+                    // Create a new Image object
+                    var img = new Image();
+    
+                    // Set the src attribute to the image data
+                    img.src = data;
+    
+                    // Add an event listener to handle the load event
+                    img.addEventListener("load", function () {
+                        // Get the image width and height
+                        var width = this.width;
+                        var height = this.height;
+    
+                        // Display the image information
+                        console.log("Image name: " + file.name);
+                        console.log("Image size: " + file.size + " bytes");
+                        console.log("Image type: " + file.type);
+                        console.log("Image width: " + width + " pixels");
+                       console.log("Image height: " + height + " pixels");
+    
+                        // Get the drop area element
+                        var dropArea = document.getElementById("drop-area");
+    
+                    // Remove the default text inside the drop area element
+                        dropArea.innerHTML = "";
+    
+                        // Append the image to the drop area element
+                        dropArea.appendChild(img);
+    
+                        // Adjust the size and position of the image
+                        img.style.width = "100%";
+                        img.style.height = "100%";
+                        img.style.objectFit = "cover";
+                        img.style.margin = "0";
+                    });
+                });
+    
+                // Read the file as a data URL
+                reader.readAsDataURL(file);
+            } else {
+                // Display an error message
+                alert("Please select an image file.");
+            }
+        });
+    
+        // Create a function that will reset the drop area element
+        function resetDropArea() {
+            // Get the drop area element
+            var dropArea = document.getElementById("drop-area");
+    
+            // Clear the content of the drop area element
+            dropArea.innerHTML = "";
+    
+            // Create a new div element for the default text
+            var div = document.createElement("div");
+            div.id = "img-view";
+            div.className = "mb-2 text-sm text-gray-500 dark:text-gray-400";
+            div.innerHTML = "<span class='font-semibold'>Click to upload</span> or drag and drop";
+    
+            // Append the div element to the drop area element
+            dropArea.appendChild(div);
+    
+            // Append the input element to the drop area element
+            dropArea.appendChild(img);
+        }
+    
+        // Add an event listener to handle the click event on the drop area element
+        document.getElementById("drop-area").addEventListener("click", resetDropArea);
+    
+    
+    </script> 
 
 </html>
