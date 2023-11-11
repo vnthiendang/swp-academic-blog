@@ -5,9 +5,9 @@ import {
 import { getAllCategory } from "./Services/category.service.js";
 
 const options = {
-  month: "short", // Two-digit month (e.g., 01)
-  day: "2-digit", // Two-digit day (e.g., 18)
-  hour: "2-digit", // Two-digit hour (e.g., 14)
+  month: "short", 
+  day: "2-digit",
+  hour: "2-digit", 
 };
 
 // DISPLAY LIST APPROVED POSTS
@@ -134,10 +134,15 @@ function displayPosts(posts) {
       titleElement.textContent = post.title;
       postLink.appendChild(titleElement);
 
-      // const infoElement = document.createElement("p");
-      // infoElement.className = "px-6 py-7 post-detail";
-      // infoElement.innerHTML = post.postDetail;
-      // postLink.appendChild(infoElement);
+      const infoElement = document.createElement("p");
+      infoElement.className = "px-6 py-7 post-detail";
+      //infoElement.innerHTML = post.postDetail;
+      infoElement.textContent = extractTextFromHTML(post.postDetail);
+      infoElement.style.maxWidth = "300px"; 
+      infoElement.style.overflow = "hidden";
+      infoElement.style.textOverflow = "ellipsis";
+      infoElement.style.whiteSpace = "nowrap";
+      postLink.appendChild(infoElement);
 
       postElement.appendChild(postLink);
 
@@ -199,6 +204,12 @@ function displayPosts(posts) {
       // postContainer.appendChild(hr);
     }
   }
+}
+
+function extractTextFromHTML(html) {
+  const tempElement = document.createElement("div");
+  tempElement.innerHTML = html;
+  return tempElement.textContent || tempElement.innerText || "";
 }
 
 // Function to display all approved posts

@@ -109,7 +109,12 @@ function displayPosts(posts) {
 
       const infoElement = document.createElement('p');
       infoElement.className = 'px-7 py-7 post-detail';
-      infoElement.innerHTML = post.postDetail; 
+      //infoElement.innerHTML = post.postDetail; 
+      infoElement.textContent = extractTextFromHTML(post.postDetail);
+      infoElement.style.maxWidth = "300px"; 
+      infoElement.style.overflow = "hidden";
+      infoElement.style.textOverflow = "ellipsis";
+      infoElement.style.whiteSpace = "nowrap";
       postLink.appendChild(infoElement);
 
       postElement.appendChild(postLink);
@@ -134,29 +139,37 @@ function displayPosts(posts) {
         imgContainer.appendChild(mediaList);
         flexItemsElement.appendChild(imgContainer);
       }
-  
-      const iconTagElement = document.createElement('div');
-      iconTagElement.className = 'icon-tag';
-      const iconTagImg = document.createElement('img');
-      iconTagImg.src = 'img/tag.png';
-      iconTagImg.alt = 'icon-tag';
-      iconTagElement.appendChild(iconTagImg);
-      flexItemsElement.appendChild(iconTagElement);
-  
-      const tagLink1 = document.createElement('a');
-      tagLink1.href = '/Page SE SA AI BS/html/pageTechnoloy.html';
-      const tagDiv1 = document.createElement('div');
-      tagDiv1.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';  
 
-      tagDiv1.textContent = post.tagList ?? 'tag';
-      tagLink1.appendChild(tagDiv1);
-      flexItemsElement.appendChild(tagLink1);
+      if(post.tagList.length > 0){
+        const iconTagElement = document.createElement('div');
+        iconTagElement.className = 'icon-tag';
+        const iconTagImg = document.createElement('img');
+        iconTagImg.src = 'img/tag.png';
+        iconTagImg.alt = 'icon-tag';
+        iconTagElement.appendChild(iconTagImg);
+        flexItemsElement.appendChild(iconTagElement);
+    
+        const tagLink1 = document.createElement('a');
+        tagLink1.href = '/Page SE SA AI BS/html/pageTechnoloy.html';
+        const tagDiv1 = document.createElement('div');
+        tagDiv1.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';  
+  
+        tagDiv1.textContent = post.tagList ?? 'tag';
+        tagLink1.appendChild(tagDiv1);
+        flexItemsElement.appendChild(tagLink1);
+      }
   
       postElement.appendChild(flexItemsElement);
   
       postContainer.appendChild(postElement);
       });
     }
+}
+
+function extractTextFromHTML(html) {
+  const tempElement = document.createElement("div");
+  tempElement.innerHTML = html;
+  return tempElement.textContent || tempElement.innerText || "";
 }
 
 const displayPostRequests = () => {
