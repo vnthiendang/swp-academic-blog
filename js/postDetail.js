@@ -36,7 +36,25 @@ function displayPost() {
       document.getElementById('postTitle').textContent = post.title;
       document.getElementById('postAuthor').textContent = post.createdByUser;
       document.getElementById('postDate').textContent = formattedTime;
-      document.getElementById('postTag').textContent = post.tagList ?? '';
+      if(post.tagList.length > 0){
+        const iconTagElement = document.createElement("div");
+        iconTagElement.className = "icon-tag";
+        const iconTagImg = document.createElement("img");
+        iconTagImg.src = "img/tag.png";
+        iconTagImg.alt = "icon-tag";
+        iconTagElement.appendChild(iconTagImg);
+
+        const tagLink1 = document.createElement("a");
+        tagLink1.href = "#";
+
+        post.tagList.forEach((tag) => {
+          //const tagItem = document.createElement("span");
+          //tagItem.textContent = tag;
+          document.getElementById('postTag').textContent = tag;
+          
+        });
+      }
+      
       document.getElementById('postCategory').textContent = post.belongedToCategory;
 
       const postContentElement = document.getElementById('postContent');

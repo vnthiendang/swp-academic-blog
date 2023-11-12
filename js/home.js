@@ -86,6 +86,10 @@ function displayPosts(posts) {
       memberOnlyElement.textContent = "Member only";
       flexElement.appendChild(memberOnlyElement);
 
+      const dateTimeElement4 = document.createElement("div");
+      dateTimeElement4.className = "p-0.5 bg-gray-900 rounded-full mx-4";
+      flexElement.appendChild(dateTimeElement4);
+
       if(post.awardList != null && post.awardList.length > 0){
         const elm4 = document.createElement("div");
         elm4.className = "p-0.5 bg-gray-900 rounded-full mx-4";
