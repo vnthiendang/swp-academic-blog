@@ -78,7 +78,7 @@
               <label for="categoryID">Category:</label>
 
               <select id="categoryID" name="categoryID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option selected>Choose Category</option>
+                <option id="opt" selected>Choose Category</option>
               </select>
             </div>
             <div>
@@ -110,7 +110,11 @@
                           class="font-semibold">Click
                           to upload</span> or drag and drop</div>
               </div>
+<<<<<<< HEAD
               <input type="file" id="mediaList" accept="image/*" multiple class="hidden"/>
+=======
+              <input type="file" id="mediaList" accept="image/*" class="hidden" multiple/>
+>>>>>>> 6d2eb90d150068375ca11993489fa21eb4c2caca
               
           </label>
             </div>
@@ -196,7 +200,7 @@
                 tag.innerText = tagContent; 
 
                 // Add a delete button to the tag 
-                tag.innerHTML += '<button class="delete-button">________x</button>'; 
+                tag.innerHTML += '<button class="delete-button"></button>'; 
                   
                 // Append the tag to the tags list 
                 tags.appendChild(tag); 

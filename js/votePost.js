@@ -88,6 +88,11 @@ function displayPosts(posts) {
       memberOnlyElement.textContent = "Member only";
       flexElement.appendChild(memberOnlyElement);
 
+      const dateTimeElement4 = document.createElement("div");
+      dateTimeElement4.className = "p-0.5 bg-gray-900 rounded-full mx-4";
+      flexElement.appendChild(dateTimeElement4);
+
+
       if(post.awardList != null && post.awardList.length > 0){
         const elm4 = document.createElement("div");
         elm4.className = "p-0.5 bg-gray-900 rounded-full mx-4";
@@ -170,20 +175,23 @@ function displayPosts(posts) {
 
       postElement.appendChild(flexItemsElement);
 
-      // if(post.mediaList.length > 0){
-      //   const imgContainer = document.createElement('div');
-      //   imgContainer.className = 'm-5';
+      if(post.mediaList.length > 0){
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'm-5';
 
-      //   const mediaList = document.createElement('div');
-      //   mediaList.className = 'media-list';
-      //   post.mediaList.forEach(media => {
-      //         const mediaItem = document.createElement('img');
-      //         mediaItem.src = media;
-      //         mediaList.appendChild(mediaItem);
-      //   });
-      //   imgContainer.appendChild(mediaList);
-      //   postElement.appendChild(imgContainer);
-      // }
+        const mediaList = document.createElement('div');
+        mediaList.className = 'media-list';
+        post.mediaList.forEach(media => {
+          const mediaItem = document.createElement('img');
+          mediaItem.src = `data:image/jpeg;base64, ${media}`;
+          mediaItem.style.width = '240px'; 
+          mediaItem.style.height = 'auto';
+          mediaList.appendChild(mediaItem);
+        });
+        imgContainer.appendChild(mediaList);
+        postElement.appendChild(imgContainer);
+
+      }
 
       postContainer.appendChild(postElement);
 

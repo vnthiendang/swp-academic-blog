@@ -111,7 +111,7 @@ function displayPosts(posts) {
       infoElement.className = 'px-7 py-7 post-detail';
       //infoElement.innerHTML = post.postDetail; 
       infoElement.textContent = extractTextFromHTML(post.postDetail);
-      infoElement.style.maxWidth = "300px"; 
+      infoElement.style.maxWidth = "1600px"; 
       infoElement.style.overflow = "hidden";
       infoElement.style.textOverflow = "ellipsis";
       infoElement.style.whiteSpace = "nowrap";

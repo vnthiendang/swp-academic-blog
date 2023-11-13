@@ -86,6 +86,10 @@ function displayPosts(posts) {
       memberOnlyElement.textContent = "Member only";
       flexElement.appendChild(memberOnlyElement);
 
+      const dateTimeElement4 = document.createElement("div");
+      dateTimeElement4.className = "p-0.5 bg-gray-900 rounded-full mx-4";
+      flexElement.appendChild(dateTimeElement4);
+
       if(post.awardList != null && post.awardList.length > 0){
         const elm4 = document.createElement("div");
         elm4.className = "p-0.5 bg-gray-900 rounded-full mx-4";
@@ -138,7 +142,7 @@ function displayPosts(posts) {
       infoElement.className = "px-6 py-7 post-detail";
       //infoElement.innerHTML = post.postDetail;
       infoElement.textContent = extractTextFromHTML(post.postDetail);
-      infoElement.style.maxWidth = "300px"; 
+      infoElement.style.maxWidth = "1200px"; 
       infoElement.style.overflow = "hidden";
       infoElement.style.textOverflow = "ellipsis";
       infoElement.style.whiteSpace = "nowrap";

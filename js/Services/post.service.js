@@ -72,7 +72,6 @@ export const getPostById = async (id) => {
     return response;
   } catch (error) {
     console.error('Error retrieving post:', error);
-    throw new Error("An error occurred while retrieving the post. Please try again later.");
   }
 };
 
