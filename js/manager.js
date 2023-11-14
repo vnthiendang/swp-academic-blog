@@ -181,6 +181,7 @@ approvedPostList()
 
 userList()
   .then((users) => {
+    console.log(users);
     renderUserTable(users);
 });
 
