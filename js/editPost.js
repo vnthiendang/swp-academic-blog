@@ -1,8 +1,14 @@
+<<<<<<< HEAD
+import { createPost } from "../js/Services/post.service.js";
+import { userInfo } from "./Services/auth.service.js";
+import { getAllCategory } from "./Services/category.service.js";
+=======
 import { getAllCategory } from "./Services/category.service.js";
 import { updatePost } from "./Services/post.service.js";
 import * as request from './utils/request.js';
 
 const token = localStorage.getItem("token");
+>>>>>>> 6d2eb90d150068375ca11993489fa21eb4c2caca
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('belongedToPostID');
