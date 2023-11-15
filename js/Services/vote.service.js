@@ -7,7 +7,7 @@ export const getVoteType = async () => {
     try {
       const response = await request.get(`votetype/getall`, {
         headers: {
-          Authorization: `Bearer ${token}` // Include the token in the request headers
+          Authorization: `Bearer ${token}`
         }
       });
   
@@ -22,7 +22,7 @@ export const getVoteByPostId = async (id) => {
   try {
     const response = await request.get(`vote/getall/${id}`, {
       headers: {
-        Authorization: `Bearer ${token}` // Include the token in the request headers
+        Authorization: `Bearer ${token}`
       }
     });
 
@@ -49,9 +49,12 @@ export const votePost = async (model) => {
 
 export const getMostVotePosts = async () => {
   try {
-    const response = await request.get(`post/mostVotedPost?categoryId=1`, {
+    const response = await request.get(`post/GetAllApproved/filter`, {
       headers: {
         Authorization: `Bearer ${token}`
+      },
+      params: {
+        sortDirection
       }
     });
 

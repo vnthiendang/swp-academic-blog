@@ -63,7 +63,7 @@ function displayEditPost() {
   
     categories.forEach(category => {
       const option = document.createElement('option');
-      option.value = category.id;
+      option.value = category.content;
       option.textContent = category.content;
   
       selectElement.appendChild(option);
@@ -108,7 +108,7 @@ function displayEditPost() {
       }
 
       const model = {
-        categoryID: parseInt(categorySelect.value),
+        categoryID: parseInt(categorySelect.textContent),
         title: titleInput.value,
         detail: textEditor.innerHTML,
         mediaList: [],
