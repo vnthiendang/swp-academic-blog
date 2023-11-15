@@ -102,11 +102,9 @@ function displayPosts(posts) {
   
         const awardList = document.createElement("div");
         awardList.className = "award-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-        post.awardList.forEach((award) => {
-          const items = document.createElement("span");
-          items.textContent = award;
-          awardList.appendChild(items);
-        });
+        const items = document.createElement("span");
+        items.textContent = post.awardList.slice(0, 1)[0];
+        awardList.appendChild(items);
         flexElement.appendChild(awardList);
       }
 
@@ -159,10 +157,11 @@ function displayPosts(posts) {
 
         const mediaList = document.createElement('div');
         mediaList.className = 'media-list';
+        
         post.mediaList.forEach(media => {
           const mediaItem = document.createElement('img');
           mediaItem.src = `data:image/jpeg;base64, ${media}`;
-          mediaItem.style.width = '240px'; 
+          mediaItem.style.width = '50%'; 
           mediaItem.style.height = 'auto';
           mediaList.appendChild(mediaItem);
         });

@@ -80,7 +80,7 @@
 /*========================== Post List ==============================*/
 
 .p-2 {
-    color: #007bff;
+    /* color: #007bff; */
 }
 
 .p-2:hover {
@@ -89,17 +89,19 @@
     text-decoration: underline;
 }
 /*========================== Header ==============================*/
-
-.main {
+  
+  /* Main section */
+  .main {
     background-color: white;
-}
-
-#header {
+  }
+  
+  /* Header section */
+  #header {
     height: 50px;
-}
-/* #baner {
-    background-color: red;
-} */
+    background-color: black;
+    color: white;
+  }
+  
 /*========================== Main ==============================*/
 
 .rounded-2xl {
@@ -165,23 +167,34 @@
 }
 /*========================== Best Article ==============================*/
 
-/* .bg-white .rounded-lg {
+.bg-white .rounded-lg {
     background-color: red;
 }
+#baner {
+    background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+}
 
+#baner h1 {
+    color: white;
+}
 #about {
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
+    background-color: white;
     margin-right: 38%;
 }
 
 #fpt-blog {
     text-align: center;
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
+    background-color: white;
 }
 
 #footer {
-    background-color: antiquewhite;
-} */
+    /* background-color: antiquewhite; */
+    background-color: white;
+    border-top: 1px solid gray;
+    border-radius: 0%;
+}
 
 /*========================== phân trang ==============================*/
 .center {
@@ -210,3 +223,6 @@
   
   .pagination a:hover:not(.active) {background-color: #ddd;}
 
+  #header{
+    position: fixed !important;
+}

@@ -15,13 +15,13 @@
 
 <body>
     <!-- Header  -->
-    <header class="flex items-center justify-between w-full bg-black text-white p-1">
+    <header class="flex items-center justify-between w-full bg-black text-white p-1" id="header">
         <div class="flex items-center">
-            <a href="/home.html" class="items-start justify-center">
+            <!-- <a href="/home.html" class="items-start justify-center">
                 <img src="/img/Logo.png" alt="logo" class="w-16 h-auto">
-            </a>
+            </a> -->
             
-            <a href="/home.html" class="p-2">
+            <a href="/home.html" class="p-2" style="font-size: 40px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque;">
                 FPT BLOG
             </a>
             
@@ -145,8 +145,14 @@
                                     <option selected>Vote Type</option>
                                 </select>
                             </label>
+
+                            <!-- <i class="fa-regular fa-heart cursor-pointer"></i> -->
                         </div>
                     </form>
+
+                    <div class="inner-column">
+                        <button style="background-color: green;color: white;" class="fa bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">Vote</button>
+                    </div>
                 </div>
             </div>
 
@@ -165,18 +171,23 @@
                         </div>  
                     </form>
                 </div>
+
+                <!-- Button For Vote Post -->
+                <!-- <div class="inner-column">
+                    <button style="background-color: green;color: white;" class="fa bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">Vote</button>
+                </div> -->
             </div>
 
         </div>
 
         <!-- IMG Bên Ngoài Mang Vào -->
-        <div class="wapper-title-img">
+        <!-- <div class="wapper-title">
             <div class="column-img">
-                <div class="img">
+                <div class="media-laist">
                     <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" id="postMedia" src="#" alt="">
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
         <!-- Post Content -->
@@ -201,7 +212,7 @@
                         <form class="mb-6" id="comment">
                             <div
                                 class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                                <label for="comment" class="sr-only">Your comment</label>
+                                <label for="comment" class="sr-only">Your comment</label >
                   
                                 <input class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800" 
                                 type="text" name="comment" placeholder="Write a comment..." id="cmt" rows class="input-control" required>
@@ -211,83 +222,7 @@
                                 Post comment
                             </button>
                         </form>
-                        <!-- <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
-                            <footer class="flex justify-between items-center mb-2">
-                                <div class="flex items-center">
-                                    <p
-                                        class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
-                                        <img class="mr-2 w-6 h-6 rounded-full"
-                                            src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                                            alt="Michael Gough">Michael Gough
-                                    </p>
-                                    
-                                </div>
-                                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
-                                    class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                    type="button">
-                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor" viewBox="0 0 16 3">
-                                        <path
-                                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                                    </svg>
-                                    <span class="sr-only">Comment settings</span>
-                                </button>
-                            </footer>
-                            <p class="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really worth time
-                                reading. Thank you! But tools are just the
-                                instruments for the UX designers. The knowledge of the design tools are as important as the
-                                creation of the design strategy.</p>
-                            <div class="flex items-center mt-4 space-x-4">
-                                <button type="button"
-                                    class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
-                                    <i class="fa-regular fa-comment px-2"></i>Rep
-                                    Reply
-        
-                                </button>
-                                <button type="button"
-                                    class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
-                                    <i class="fa-regular fa-thumbs-up mx-2"></i> Vote
-                                </button>
-                            </div>
-                        </article>
-        
-                        <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900">
-                            <footer class="flex justify-between items-center mb-2">
-                                <div class="flex items-center">
-                                    <p
-                                        class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
-                                        <img class="mr-2 w-6 h-6 rounded-full"
-                                            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                            alt="Jese Leos">Jese Leos
-                                    </p>
-                                </div>
-                                <button id="dropdownComment2Button" data-dropdown-toggle="dropdownComment2"
-                                    class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                    type="button">
-                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor" viewBox="0 0 16 3">
-                                        <path
-                                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                                    </svg>
-                                    <span class="sr-only">Comment settings</span>
-                                </button>
-                            </footer>
-                            <p class="text-gray-500 dark:text-gray-400">Much appreciated! Glad you liked it ☺️</p>
-                            <div class="flex items-center mt-4 space-x-4">
-                                <button type="button"
-                                    class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
-                                    <i class="fa-regular fa-comment px-2"></i>Rep
-                                    Reply
-        
-                                </button>
-                                <button type="button"
-                                    class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
-                                    <i class="fa-regular fa-thumbs-up mx-2"></i> Like
-                                </button>
-                            </div>
-                        </article> -->
-        
-                        <div id="commentContainer">
+                        <div id="commentContainer" >
                             <article
                             class="p-6 mb-3 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                             <footer class="flex justify-between items-center mb-2">
@@ -318,7 +253,7 @@
     </Main>
 
     <!-- footer  -->
-    <footer class="bg-white rounded-lg shadow dark:bg-gray-900">
+    <footer class="bg-white rounded-lg shadow dark:bg-gray-900" id="footer">
         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
             <div class="sm:flex sm:items-center sm:justify-between">
                 <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">

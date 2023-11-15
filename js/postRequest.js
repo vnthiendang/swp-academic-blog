@@ -16,7 +16,7 @@ function displayPosts(posts) {
     if(posts.length === 0){
       const noResultsElement = document.createElement('div');
       noResultsElement.className = 'text-center text-4xl font-bold text-gray-500 dark:text-gray-400';
-      noResultsElement.textContent = 'No results related to your search. Please use other keywords.';
+      noResultsElement.textContent = 'No requested posts';
       postContainer.appendChild(noResultsElement);
     }else{
       posts.forEach(post => {

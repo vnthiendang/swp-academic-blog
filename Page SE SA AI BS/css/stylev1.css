@@ -107,7 +107,7 @@
 
 .post-info {
     display: inline;
-    color: black;
+    /* color: black; */
     font-size: 20px;
 }
 
@@ -154,10 +154,14 @@
 /*========================== Tag Name ==============================*/
 
 .post-info.two-line-preview {
-    max-height: 3em; /* Adjust the height as needed */
+    max-height: 10em; /* Adjust the height as needed */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-line-clamp: 5; /* Number of lines to show */
     -webkit-box-orient: vertical;
   }
+
+  #header{
+    position: fixed !important;
+}
