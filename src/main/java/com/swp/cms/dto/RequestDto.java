@@ -23,10 +23,16 @@ public class RequestDto {
     }
 
     public String getRequestedByUser() {
+        if (requestedByUser != null) {
         return this.requestedByUser.getDisplay_name();
+        }
+        return "N/A";
     }
 
     public String getReviewedByAdmin() {
-        return this.reviewedByAdmin.getDisplay_name();
+        if (reviewedByAdmin != null) {
+            return this.reviewedByAdmin.getDisplay_name();
+        }
+        return null;
     }
 }
