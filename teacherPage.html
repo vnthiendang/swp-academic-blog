@@ -16,36 +16,31 @@
 <body class=" bg-slate-700">
     <!-- Header  -->
     <header class="flex items-center justify-between w-full bg-black text-white" id="header">
-        <div class="flex items-center">
+        <div class="flex items-center" id="taskbar">
             <!-- <a href="/home.html" class="items-start justify-center">
                 <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
             </a> -->
-
-            <a href="/home.html" class="p-2" style="font-size: 40px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque;">
+            
+            <a href="/home.html" class="p-logo" style="font-size: 35px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque; margin-right: 10px;">
                 FPT BLOG
             </a>
-
-            <a href="award.html" class="p-2">
-                Give Award
-            </a>
             
-            <a href="home.html" class="p-2">
-                Approved Post
+            <a href="/home.html" class="p-2" style="border-left: 1px solid white;">
+                Home
             </a>
 
-            <a href="/create.html" class="p-2">
-                New post
+            <a href="bestartice.html" class="p-2">
+                Best Article
             </a>
-            
+
             <!-- Category  -->
             <div class="group inline-block relative">
-                <button class="py-2 px-4 rounded inline-flex items-center">
-                    <span class="mr-1">Category</span>
+                <button class="py-2 px-4 rounded inline-flex items-center" id="category">
+                    <span class="mr-1" style="font-weight: 500;">Category</span>
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
                 </button>
-                <!-- Form Data -->
                 <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
                     
                 </ul>
@@ -92,6 +87,25 @@
 
                 </div>
             </div>
+
+            <script>
+                var prevScrollPos = window.pageYOffset;
+                var header = document.getElementById("header");
+        
+                window.onscroll = function() {
+                    var currentScrollPos = window.pageYOffset;
+                    
+                    if (prevScrollPos > currentScrollPos) {
+                        // Scrolling up
+                        header.style.top = "0";
+                    } else {
+                        // Scrolling down
+                        header.style.top = "-100px"; // Adjust the value based on your header height
+                    }
+        
+                    prevScrollPos = currentScrollPos;
+                }
+            </script>
         </div>
 
     </header>
@@ -99,8 +113,8 @@
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
             <h1
                 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                Welcome to FPT BLOG</h1>
-            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here at
+                Welcome to Review Page</h1>
+            <p class="mb-8 text-lg font-normal text-white lg:text-2xl sm:px-16 xl:px-48 dark:text-gray-400">Here at
                 Where We Can Approve Or Reject Posts</p>
             <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             </div>

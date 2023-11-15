@@ -16,23 +16,39 @@
 <body>
     <!-- Header  -->
     <header class="flex items-center justify-between w-full bg-black text-white p-1" id="header">
-        <div class="flex items-center">
+        <div class="flex items-center" id="taskbar">
             <!-- <a href="/home.html" class="items-start justify-center">
-                <img src="/img/Logo.png" alt="logo" class="w-16 h-auto">
+                <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
             </a> -->
             
-            <a href="/home.html" class="p-2" style="font-size: 40px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque;">
+            <a href="/home.html" class="p-logo" style="font-size: 35px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque; margin-right: 10px;">
                 FPT BLOG
             </a>
             
-            <a href="/home.html" class="p-2">
+            <a href="/home.html" class="p-2" style="border-left: 1px solid white;">
                 Home
             </a>
 
-            <a href="/create.html" class="p-2">
-                Post
+            <a href="create.html" class="p-2">
+                New Post
             </a>
 
+            <a href="bestartice.html" class="p-2">
+                Best Article
+            </a>
+
+            <!-- Category  -->
+            <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center" id="category">
+                    <span class="mr-1" style="font-weight: 500;">Category</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    
+                </ul>
+            </div>
         </div>
         <div class="p-1">
             <form class="flex items-center">
@@ -61,6 +77,25 @@
             </form>
 
         </div>
+
+        <script>
+            var prevScrollPos = window.pageYOffset;
+            var header = document.getElementById("header");
+    
+            window.onscroll = function() {
+                var currentScrollPos = window.pageYOffset;
+                
+                if (prevScrollPos > currentScrollPos) {
+                    // Scrolling up
+                    header.style.top = "0";
+                } else {
+                    // Scrolling down
+                    header.style.top = "-100px"; // Adjust the value based on your header height
+                }
+    
+                prevScrollPos = currentScrollPos;
+            }
+        </script>
     </header>
 
     <!-- Main  -->
@@ -80,7 +115,7 @@
                 <div class="inner-column">
                     <div class="container-user">
                         <div class="by-user">
-                            <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
+                            <i class="fa-solid fa-user fa-sm" style="color: #000000;" title="Name User"></i>
                         </div>
                         <div class="by-user" id="postAuthor">
                             <!-- By User -->
@@ -91,7 +126,7 @@
                 <div class="inner-column">
                     <div class="container-datetime">
                         <div class="date-time">
-                            <i class="fa-regular fa-calendar-days" style="color: #000000;"></i>
+                            <i class="fa-regular fa-calendar-days" style="color: #000000;" title="Date Time"></i>
                         </div>
                         <div class="date-time" id="postDate">
                             <!-- Date Time -->
@@ -102,18 +137,19 @@
                 <div class="inner-column">
                     <div class="container-read">
                         <div class="number-read">
-                            <i class="fa-brands fa-readme fa-bounce" style="color: #000000;"></i>
+                            <i class="fa-regular fa-clock" style="color: #000000;" title="Reading Time"></i>
                         </div>
                         <div class="number-read" id="readingTime">
-                            <!-- Number Read -->
+                            <!-- Times Read -->
                         </div>
                     </div>
+                    
                 </div>
 
                 <div class="inner-column">
                     <div class="container-vote">
                         <div class="number-vote">
-                            <i class="fa-regular fa-heart fa-beat-fade" style="color: #ca68a6;"></i>
+                            <i class="fa-regular fa-thumbs-up" style="color: #000000;" title="Like" id="likeIcon" onclick="toggleLikeIcon()"></i>
                         </div>
                         <div class="number-vote" id="postVote">
                             <!-- Number Of Vote Like -->
@@ -122,21 +158,70 @@
                 </div>
                 
                 <div class="inner-column">
-                    <div class="container-tag">
-                        <div class="tag-category">
-                            <i class="fa-solid fa-hashtag" style="color: #ff0000;"></i>
+                    <div class="container-vote">
+                        <div class="number-vote">
+                            <i class="fa-regular fa-thumbs-down" style="color: #000000;" title="Dislike" id="dislikeIcon" onclick="toggleDislikeIcon()"></i>
                         </div>
-                        <div class="tag-category" id="postCategory">
-                            <!-- Tag Category -->
+                        <div class="number-vote" id="postVote2">
+                            <!-- Number Of Vote Dislike -->
                         </div>
                     </div>
+                </div>
+                
+                <script>
+                    function toggleLikeIcon() {
+                        var likeIcon = document.getElementById('likeIcon');
+                        
+                        // Toggle between the regular and solid thumbs-up icons
+                        if (likeIcon.classList.contains('fa-regular')) {
+                            likeIcon.classList.remove('fa-regular');
+                            likeIcon.classList.add('fa-solid');
+                            likeIcon.style.color = '#000000'; // Set the color as needed
+                        } else {
+                            likeIcon.classList.remove('fa-solid');
+                            likeIcon.classList.add('fa-regular');
+                            likeIcon.style.color = '#000000'; // Set the color as needed
+                        }
+                    }
+                
+                    function toggleDislikeIcon() {
+                        var dislikeIcon = document.getElementById('dislikeIcon');
+                        
+                        // Toggle between the regular and solid thumbs-down icons
+                        if (dislikeIcon.classList.contains('fa-regular')) {
+                            dislikeIcon.classList.remove('fa-regular');
+                            dislikeIcon.classList.add('fa-solid');
+                            dislikeIcon.style.color = '#0c0d0d'; // Set the color as needed
+                        } else {
+                            dislikeIcon.classList.remove('fa-solid');
+                            dislikeIcon.classList.add('fa-regular');
+                            dislikeIcon.style.color = '#000000'; // Set the color as needed
+                        }
+                    }
+                </script>
+                
+                
+                <div class="inner-column">
+                    <div class="container-tag">
+                        <div class="tag-category" title="Category">
+                            <h2 >
+                                Category: 
+                            </h2>
+                        </div>
+                        <div class="container-tag-hover">
+                            <div class="tag-category">
+                                <i class="fa-solid fa-hashtag";></i>
+                            </div>
+                            <div class="tag-category" id="postCategory">
+                                <!-- Tag Category -->
+                            </div>
+                        </div>
                 </div>
 
             </div>
             
             <!-- Vote Type . Give Award . Button Give Award -->
-            <div class="column">
-                <!-- Create Vote -->
+            <!-- <div class="column">
                 <div class="inner-column">
                     <form class="form" id="createVote">
                         <div class="flex flex-col">
@@ -145,8 +230,6 @@
                                     <option selected>Vote Type</option>
                                 </select>
                             </label>
-
-                            <!-- <i class="fa-regular fa-heart cursor-pointer"></i> -->
                         </div>
                     </form>
 
@@ -154,10 +237,9 @@
                         <button style="background-color: green;color: white;" class="fa bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">Vote</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="column">
-                <!-- Create Award -->
+            <!-- <div class="column">
                 <div class="inner-column">
                     <form class="form" id="createAward">
                         <div class="flex flex-col" >
@@ -166,17 +248,11 @@
                                     <option selected>Award Type</option>
                                 </select>
                             </label>
-                            <!-- Button For Give Award -->
                             <button id="button-give-award" style="background-color: green;color: white;" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">Give Award</button>
                         </div>  
                     </form>
                 </div>
-
-                <!-- Button For Vote Post -->
-                <!-- <div class="inner-column">
-                    <button style="background-color: green;color: white;" class="fa bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">Vote</button>
-                </div> -->
-            </div>
+            </div> -->
 
         </div>
 
@@ -358,7 +434,7 @@
         </div>
     </footer>
 
-    <!-- <script type="module" src='./js/home.js'></script> -->
+    <script type="module" src='./js/home.js'></script>
     <script type="module" src='./js/postDetail.js'></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

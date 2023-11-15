@@ -20,7 +20,7 @@ form.addEventListener("submit", async (event) => {
     if (roleId === 'Admin') {
       window.location.href = "../managerAdmin.html";
     } else if (roleId === 'Teacher') {
-      window.location.href = "../teacherPage.html";
+      window.location.href = "../home.html";
     } else if (roleId === 'Student') {
       window.location.href = "../home.html";
     }

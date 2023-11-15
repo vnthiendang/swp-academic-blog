@@ -11,6 +11,7 @@ Main {
     display: flex;
     flex-direction: column; /* Change to column layout */
     align-items: center; /* Center the columns horizontally */
+    margin-top: 50px;
 }
 
 .wapper-title {
@@ -26,7 +27,7 @@ Main {
 }
 
 .wapper-title-post {
-    width: 70%;
+    width: 100%;
     /* padding: 20px; */
     box-sizing: border-box;
     /* background-color: white; */
@@ -150,22 +151,59 @@ Main {
 .container-tag {
     display: flex;
 }
+.container-tag-hover {
+    display: flex;
+}
 .tag-category {
-    color: red;
+    color: black;
     font-size: 20px;
     font-weight: 600;
     margin: 1px;
+}
+
+.container-tag-hover:hover {
+    border-radius: 10px;
+    background-color: antiquewhite;
 }
 /* ================================================================ */
 
 #header {
     height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    transition: top 0.3s;
+}
+#category {
+    /* background-color: #4CAF50; */
+    border-right: 1px solid white;
+    /* border-left: 1px solid white; */
 }
 
-/* #header{
-    position: fixed !important;
-} */
+#category:hover {
+    background-color: #4CAF50;
+}
 
+.p-2 {
+    border-right: 1px solid white;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-weight: 500;
+}
+
+.p-logo {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.p-2:hover {
+    color: black;
+    background-color: white;
+    text-decoration: underline;
+}
+/*========================== Header ==============================*/
 #footer {
     /* background-color: antiquewhite; */
     background-color: white;

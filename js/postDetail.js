@@ -69,8 +69,11 @@ function displayPost() {
       //   //mediaList.appendChild(mediaItem);
       // });
       
+      const readingTimeElement = document.getElementById('readingTime');
+      const minuteText = post.readingTime === 1 ? 'minute' : 'minutes';
+      readingTimeElement.textContent = post.readingTime + ' ' + minuteText + '' || '';
       document.getElementById('postVote').textContent = post.vote1Count ?? '#';
-      document.getElementById('readingTime').textContent = post.readingTime + ' readed' ?? '';
+      document.getElementById('postVote2').textContent = post.vote2Count ?? '#';
     })
     .catch(error => {
       console.error('Error retrieving post:', error);
