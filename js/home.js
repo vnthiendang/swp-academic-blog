@@ -102,11 +102,9 @@ function displayPosts(posts) {
   
         const awardList = document.createElement("div");
         awardList.className = "award-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-        post.awardList.forEach((award) => {
-          const items = document.createElement("span");
-          items.textContent = award;
-          awardList.appendChild(items);
-        });
+        const items = document.createElement("span");
+        items.textContent = post.awardList.slice(0, 1)[0];
+        awardList.appendChild(items);
         flexElement.appendChild(awardList);
       }
 

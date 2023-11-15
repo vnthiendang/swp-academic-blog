@@ -216,7 +216,7 @@ async function handleVotePost() {
       console.error('Error creating vote:', error);
     }
 }
-document.querySelector(".fa-heart").addEventListener("click", handleVotePost);
+document.querySelector(".fa").addEventListener("click", handleVotePost);
 
 
 //TEACHER GIVE AWARD
