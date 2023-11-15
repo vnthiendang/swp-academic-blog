@@ -98,8 +98,8 @@
   /* Header section */
   #header {
     height: 50px;
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: white;
   }
   
 /*========================== Main ==============================*/
@@ -223,3 +223,6 @@
   
   .pagination a:hover:not(.active) {background-color: #ddd;}
 
+  #header{
+    position: fixed !important;
+}

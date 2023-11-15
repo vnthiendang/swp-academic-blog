@@ -161,3 +161,7 @@
     -webkit-line-clamp: 5; /* Number of lines to show */
     -webkit-box-orient: vertical;
   }
+
+  #header{
+    position: fixed !important;
+}

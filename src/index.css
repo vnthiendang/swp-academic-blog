@@ -170,3 +170,7 @@ Main {
 #header {
     height: 50px;
 }
+
+/* #header{
+    position: fixed !important;
+} */
