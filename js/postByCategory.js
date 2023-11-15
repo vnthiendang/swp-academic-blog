@@ -2,7 +2,7 @@
 import { getPostByCategory } from './Services/post.service.js';
 
 const urlParams = new URLSearchParams(window.location.search);
-const categoryId = urlParams.get('categoryId');
+const categoryName = urlParams.get('categoryId');
 
 function displayPosts(response) {
 
@@ -67,7 +67,7 @@ function displayPosts(response) {
 }
 
   const displayAllPosts = () => {
-    getPostByCategory(categoryId)
+    getPostByCategory(categoryName)
       .then((posts) => {
         displayPosts(posts);
       })

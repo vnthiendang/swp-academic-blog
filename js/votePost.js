@@ -2,6 +2,7 @@ import {
   getAllApprovedPosts,
   getMostVotePost,
   getPostByCate,
+  getPostByCategory,
   getPostByTags,
   getPostSortBy,
   searchedPosts,
@@ -267,7 +268,7 @@ const displayCategories = async (categories) => {
     categoryList.appendChild(listItem);
 
     link.addEventListener("click", async () => {
-    const posts = await getPostByCate(category.id);
+    const posts = await getPostByCategory(category.content);
     displayPosts(posts);
       
     });
@@ -287,7 +288,7 @@ const displayTags = async (tags) => {
     categoryList.appendChild(listItem);
 
     link.addEventListener("click", async () => {
-    const posts = await getPostByTags(tag.id);
+    const posts = await getPostByTags(tag.tagNames);
     displayPosts(posts);
       
     });
