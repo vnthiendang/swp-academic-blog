@@ -36,12 +36,12 @@ public class ReportTypeService {
 
     public ReportType createReportType(ReportTypeRequest reportTypeRequest){
         ReportType reportType = new ReportType();
-        reportType.setReportTypeInfo(reportTypeRequest.getRequestTypeInfo());
+        reportType.setReportTypeInfo(reportTypeRequest.getReportTypeInfo());
         return reportTypeRepository.save(reportType);
     }
     public ReportType updateReportType(Integer reportTypeID, ReportTypeRequest reportTypeRequest){
         ReportType reportType = getById(reportTypeID);
-        reportType.setReportTypeInfo(reportTypeRequest.getRequestTypeInfo());
+        reportType.setReportTypeInfo(reportTypeRequest.getReportTypeInfo());
         return reportTypeRepository.save(reportType);
     }
 }

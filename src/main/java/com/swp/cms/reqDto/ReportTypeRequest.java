@@ -10,6 +10,6 @@ public class ReportTypeRequest {
 
     private Integer id;
     @NotNull
-    private String requestTypeInfo;
+    private String reportTypeInfo;
 
 }
