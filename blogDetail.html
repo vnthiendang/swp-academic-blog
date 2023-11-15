@@ -161,9 +161,9 @@
                                 <select id="AwardType" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">
                                     <option selected>Award Type</option>
                                 </select>
-            
-                                <button style="background-color: green;color: white;" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">Give award</button>
                             </label>
+                            <!-- Button For Give Award -->
+                            <button id="button-give-award" style="background-color: green;color: white;" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">Give Award</button>
                         </div>  
                     </form>
                 </div>
@@ -180,7 +180,7 @@
         <!-- <div class="wapper-title">
             <div class="column-img">
                 <div class="img">
-                    <img src="img/AI/1.jpg" alt="">
+                    <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" id="postMedia" src="#" alt="">
                 </div>
             </div>
         </div> -->
@@ -193,7 +193,6 @@
             </div>
             <div>
                 <h5 id="postCategory"></h5>
-                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" id="postMedia" src="#" alt="">
             </div>
         </div>
 
@@ -313,7 +312,6 @@
                                     class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
                                     <i class="fa-regular fa-comment px-2"></i>
                                     Reply
-        
                                 </button>
                             </div>
                         </article>

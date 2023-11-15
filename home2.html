@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="src/home2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
+    <title>Home</title>
+</head>
+
+<body class=" bg-slate-700">
+    <!-- Header  -->
+    <header class="flex items-center justify-between w-full bg-black text-white" id="header">
+        <div class="flex items-center">
+            <a href="/home.html" class="items-start justify-center">
+                <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
+            </a>
+
+            <a href="/home.html" class="p-2">
+                FPT BLOG
+            </a>
+
+            <a href="/create.html" class="p-2">
+                New post
+            </a>
+            
+            <a href="/bestartice.html" class="p-2">
+                Best articles
+            </a>
+            
+            <!-- Category  -->
+            <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center">
+                    <span class="mr-1">Category</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="p-1 flex">
+            <form class="flex items-center" id="search-form">
+                <label for="simple-search" class="sr-only">Search</label>
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                        </svg>
+                    </div>
+                    <input type="text" id="simple-search"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search blog, tag, ..." required>
+                </div>
+                <button type="submit"
+                    class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </form>
+            <div class="flex items-center justify-center">
+                <div class="mx-5">
+                    <a href="profile.html" class="mx-5">
+                    <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
+                        alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                    </a>
+                </div>
+
+                <div class="pr-2">
+
+                    <div class="cursor-pointer">
+                        <a href="/login.html">Log Out</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <section class="bg-white dark:bg-gray-900" id="baner">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+
+            <h1
+                class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+                Welcome to FPT BLOG</h1>
+            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here at
+                Where knowledge meets passion</p>
+            <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main  -->
+    <Main>
+        <div class="grid grid-cols-4">
+            <!-- Slide Left -->
+            <div class="col-span-3">
+
+                <!-- Here Html For Background Of Post -->
+                <div class="main-blog">
+                    
+                    <!-- Here Html For 1 Post -->
+                    <div class="wapper-title">
+
+                        <!-- ByUser DateTime NumberRead -->
+                        <div class="column">
+
+                            <div class="inner-column">
+                                <div class="container-user">
+                                    <div class="by-user">
+                                        <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
+                                    </div>
+                                    <div class="by-user-logo">
+                                        <!-- By User Logo -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inner-column">
+                                <div class="container-user">
+                                    <div class="by-user">
+                                        <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
+                                    </div>
+                                    <div class="by-user">
+                                        <!-- By User -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inner-column">
+                                <div class="container-datetime">
+                                    <div class="date-time">
+                                        <i class="fa-regular fa-calendar-days" style="color: #000000;"></i>
+                                    </div>
+                                    <div class="date-time" id="postDate">
+                                        <!-- Date Time -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inner-column">
+                                <div class="container-tag">
+                                    <div class="tag-category">
+                                        <i class="fa-solid fa-hashtag" style="color: #ff0000;"></i>
+                                    </div>
+                                    <div class="tag-category" id="postCategory">
+                                        <!-- Tag Category -->
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                        
+                        <!-- Title Content Img -->
+                        <div class="container-post-img">
+                            <div class="post-title-content">
+                                <!-- Title -->
+                                <div class="column-title">
+                                    <div class="postTitle">
+                                        <h2> DIT ME MAY DYA LA TITLE</h2>
+                                    </div>
+                                </div>
+
+                                <!-- Content -->
+                                <div class="column-content">
+                                    <div class="postContent">
+                                        <h2> DIT ME MAY DYA LA Content
+                                            asdasjdaijsdpaksopd
+                                            sfhaosfjpasfj
+                                            oiahfoihaoisf
+                                            [hoiafsfiphaipsfhiaopsfiphjasf
+                                            ]asifjpasfjpasfposafpoas
+                                            ]asipfipasfjpjasfpjafspo
+                                            asfjipaifsjpajsfpajsf
+                                            asfiasfjpajsfpjfanfaspfapsfpiasfijaspifjsapfjapf
+                                            asfjiaipsfjpajspfjapfjpas
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Img -->
+                            <div class="container-img">
+                                <img src="img/AI/1.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <!-- Category NumberRead -->
+                        <div class="column">
+
+                            <div class="inner-column">
+                                <div class="container-user">
+                                    <div class="by-user">
+                                        <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
+                                    </div>
+                                    <div class="by-user-logo">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inner-column">
+                                <div class="container-read">
+                                    <div class="number-read">
+                                        <i class="fa-brands fa-readme fa-bounce" style="color: #000000;"></i>
+                                    </div>
+                                    <div class="number-read" id="readingTime">
+                                        <!-- Number Read -->
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+
+                    </div>
+
+                    <div class="wapper-title">
+                        <h2>DIR ME</h2>
+                    </div>
+
+                    <div class="wapper-title">
+                        <h2>DIR ME</h2>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Slide Right -->
+            <div class="bg-white boder border-l-2">
+                <!-- recommend Topics  -->
+                <div class="ml-8 my-4">
+
+                    <div class="font-semibold">
+                        Recommend Topics
+                    </div>
+
+                    <!-- Tag Name -->
+                    <div class="grid grid-cols-2 gap-4 flex-wrap mt-4">
+
+                        
+                    </div>
+
+                    <div class="mt-4 text-green-600">
+                        See more topics
+                    </div>
+
+                </div>
+            </div>
+        </div>        
+    </Main>
+    <!-- footer  -->
+    <footer class="bg-white rounded-lg shadow dark:bg-gray-900" id="footer">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
+                    <img src="./img/Logo.png" class="h-8 mr-3" alt="Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FPT Blog</span>
+                </a>
+                <ul id="about"
+                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400" id="fpt-blog">© 2023 <a
+                    href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+    <script type="module" src='./js/home.js'></script>
+    <script type="module" src='./js/tag.js'></script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</html>
