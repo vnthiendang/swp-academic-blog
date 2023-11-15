@@ -14,7 +14,7 @@ import java.util.List;
 public class PostRequest {
 
     private Integer postID;
-    private Integer categoryID;
+    private String categoryName;
     private Integer userID;
     private LocalDateTime createdTime;
     @NotNull

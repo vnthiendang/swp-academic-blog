@@ -83,7 +83,7 @@ public class PostService {
         Post post = new Post();
         post.setCreatedByUser(userRepository.findById(postRequest.getUserID())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User")));
-        post.setBelongedToCategory(categoryRepository.findById(postRequest.getCategoryID())
+        post.setBelongedToCategory(categoryRepository.findByContent(postRequest.getCategoryName())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Category")));
         post.setTitle(postRequest.getTitle());
         post.setPostDetail(postRequest.getDetail());
@@ -144,7 +144,7 @@ public class PostService {
 
         post.setTitle(postRequest.getTitle());
         post.setPostDetail(postRequest.getDetail());
-        post.setBelongedToCategory(categoryRepository.findById(postRequest.getCategoryID())
+        post.setBelongedToCategory(categoryRepository.findByContent(postRequest.getCategoryName())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Category")));
 
         // Update Medias
