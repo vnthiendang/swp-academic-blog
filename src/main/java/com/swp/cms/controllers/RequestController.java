@@ -57,4 +57,10 @@ public class RequestController {
         RequestDto requestDto = modelMapper.map(updatedRequest, RequestDto.class);
         return requestDto;
     }
+    @PutMapping("/review/{requestId}")
+    public RequestDto reviewRequest(@PathVariable Integer requestId, @RequestBody RequestRequest requestRequest) {
+        Request reviewedRequest = requestService.reviewRequest(requestId, requestRequest);
+        RequestDto requestDto = modelMapper.map(reviewedRequest, RequestDto.class);
+        return requestDto;
+    }
 }
