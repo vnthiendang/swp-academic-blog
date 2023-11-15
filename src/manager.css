@@ -337,3 +337,8 @@ footer {
 .violation-table tr:hover {
   background-color: #e6e6e6;
 }
+
+
+#header {
+  height: 50px;
+}

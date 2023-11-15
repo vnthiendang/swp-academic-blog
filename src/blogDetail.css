@@ -157,3 +157,18 @@ Main {
     margin: 1px;
 }
 /* ================================================================ */
+
+#header {
+    height: 50px;
+}
+
+/* #header{
+    position: fixed !important;
+} */
+
+#footer {
+    /* background-color: antiquewhite; */
+    background-color: white;
+    border-top: 1px solid gray;
+    border-radius: 0%;
+}

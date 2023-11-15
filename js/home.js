@@ -157,10 +157,11 @@ function displayPosts(posts) {
 
         const mediaList = document.createElement('div');
         mediaList.className = 'media-list';
+        
         post.mediaList.forEach(media => {
           const mediaItem = document.createElement('img');
           mediaItem.src = `data:image/jpeg;base64, ${media}`;
-          mediaItem.style.width = '240px'; 
+          mediaItem.style.width = '50%'; 
           mediaItem.style.height = 'auto';
           mediaList.appendChild(mediaItem);
         });

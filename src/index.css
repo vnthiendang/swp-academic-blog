@@ -133,8 +133,14 @@ Main {
     display: flex;
 }
 .by-user {
-    margin: 1px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 2.5px;
 }
+.by-user:hover {
+    text-decoration: underline;
+    color: crimson;
+}
+
 
 .container-datetime {
     display: flex;
@@ -152,8 +158,19 @@ Main {
     font-weight: 600;
     margin: 1px;
 }
-
+/* ================================================================ */
 .button {
     margin-right: 85%;
 }
+.button-reject {
+    margin-right: 120%;
+}
 /* ================================================================ */
+
+#header {
+    height: 50px;
+}
+
+/* #header{
+    position: fixed !important;
+} */
