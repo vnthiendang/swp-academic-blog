@@ -8,4 +8,6 @@ var quill = new Quill('#text-editor', {
   },
   placeholder: 'Compose an epic...',
   theme: 'snow'  // or 'bubble'
+  
 });
+

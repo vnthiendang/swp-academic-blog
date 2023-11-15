@@ -133,14 +133,14 @@ export const editComment = async (postId, model) => {
 //COMMENT
 
 // FILTER
-export const getPostByCategory = async (categoryId) => {
+export const getPostByCategory = async (categoryName) => {
   try {
     const response = await request.get('post/GetAllApproved', {
       headers: {
         Authorization: `Bearer ${token}`
       },
       params: {
-        categoryId
+        categoryName
       }
     });
     return response;

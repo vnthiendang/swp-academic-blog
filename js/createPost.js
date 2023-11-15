@@ -28,6 +28,22 @@ document.addEventListener("DOMContentLoaded", function() {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
   
+      // Get the text content of the editor
+  const text = quill.getText();
+
+  // Split the text into words using a space as a delimiter
+  const words = text.split(/\s+/);
+
+  // Get the word count
+  const wordCount = words.length;
+
+  // Check if the word count is less than 100
+  if (wordCount < 100) {
+    // Display an alert
+    alert('Your post detail should have at least 100 words.');
+    return; // Stop further execution
+  }
+  
     const titleInput = document.querySelector('#createPost input[type="text"]');
     //const allowCommentSelect = document.querySelector('#comment');
     const categorySelect = document.querySelector('#Category');
@@ -69,3 +85,4 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+

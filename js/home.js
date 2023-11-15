@@ -238,7 +238,7 @@ const displayCategories = (categories) => {
     const link = document.createElement("a");
     link.className =
       "rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white";
-    link.href = `postByCategory.html?categoryId=${category.id}`;
+    link.href = `postByCategory.html?categoryName=${category.content}`;
     link.textContent = category.content;
 
     listItem.appendChild(link);

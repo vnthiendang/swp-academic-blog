@@ -160,20 +160,31 @@ const form = document.getElementById("comment");
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const commentText = document.getElementById("cmt").value;
+  const commentText = document.getElementById("cmt").value.trim();
+
+  if (commentText === "") {
+    // Display an alert
+    alert("Please enter a valid comment.");
+    return; // Stop further execution
+  }
+
   const us = await userInfo();
   const createdByUserID = us.userId;
 
   const data = { commentText, belongedToPostID, createdByUserID };
 
-    const res = await createComment(data);
-    if(res == null){
-      alert("Sorry! Please check your comment! ");
-    }else{
-      location.reload();
+    try {
+      const res = await createComment(data);
+      if (res == null) {
+        alert("Sorry! Please check your comment! ");
+      } else {
+        location.reload();
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while posting the comment.");
     }
-
-});
+  });
 
 //STUDENT VOTE POST
 const showFormForStudent = async () => {
