@@ -2,10 +2,8 @@ package com.swp.config;
 
 import com.swp.cms.dto.MediaDto;
 import com.swp.cms.dto.PostDto;
-import com.swp.entities.Media;
-import com.swp.entities.Post;
-import com.swp.entities.PostTag;
-import com.swp.entities.Tag;
+import com.swp.cms.dto.ReportDto;
+import com.swp.entities.*;
 import org.modelmapper.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +34,9 @@ public class ModelMapperConfig {
         TypeMap<Media, MediaDto> mediaTypeMap = modelMapper.createTypeMap(Media.class, MediaDto.class);
         mediaTypeMap.addMapping(Media::getData, MediaDto::setData);
 
-
+        // Define the mapping for Report to ReportDto
+        TypeMap<Report, ReportDto> reportTypeMap = modelMapper.createTypeMap(Report.class, ReportDto.class);
+        reportTypeMap.addMapping(src -> src.getViolationRules(), ReportDto::setViolationRuleList);
         return modelMapper;
     }
 }
