@@ -25,7 +25,7 @@ public class Request {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "\"requested_by_user_id\"")
-    private User requestByUser;
+    private User requestedByUser;
 
     @Column(name = "request_detail")
     private String requestDetail;

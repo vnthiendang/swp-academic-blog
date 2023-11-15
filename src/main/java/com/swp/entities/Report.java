@@ -25,13 +25,14 @@ public class Report {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "\"created_by_user_id\"")
-    private User reportByUser;
+    private User reportedByUser;
 
     @Column(name = "report_detail")
     private String reportDetail;
 
     @Column(name = "created_date")
     private LocalDateTime createdTime;
+
     @OneToMany(mappedBy = "report", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ReportViolation> reportViolations = new ArrayList<>();
 

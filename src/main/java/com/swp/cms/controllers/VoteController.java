@@ -20,7 +20,6 @@ public class   VoteController {
     private ModelMapper modelMapper;
 
     @Autowired
-
     public VoteController(VoteService voteService) {
         this.voteService = voteService;
     }
