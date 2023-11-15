@@ -21,13 +21,13 @@ function displayPosts(response) {
       anchorElement.href = `blogDetail.html?belongedToPostID=${post.postsId}`;
   
       // var imgElement = document.createElement('img');
-      post.mediaList.forEach(media => {
-        const mediaItem = document.createElement('img');
-        mediaItem.src = `data:image/jpeg;base64, ${media}`;
-        mediaItem.style.width = '240px'; 
-        mediaItem.style.height = 'auto';
-        anchorElement.appendChild(mediaItem);
-      });
+      // post.mediaList.forEach(media => {
+      //   const mediaItem = document.createElement('img');
+      //   mediaItem.src = `data:image/jpeg;base64, ${media}`;
+      //   mediaItem.style.width = '240px'; 
+      //   mediaItem.style.height = 'auto';
+      //   anchorElement.appendChild(mediaItem);
+      // });
       
   
       // Create the title element

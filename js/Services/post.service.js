@@ -152,13 +152,13 @@ export const getPostByCategory = async (categoryId) => {
 
 export const getPostByCate = async (categoryId) => {
   try {
-    const response = await request.get(`post/GetAllApproved/filter`, {
+    const response = await request.get(`post/GetAllApproved/filter?categoryId=${categoryId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
-      },
-      params: {
-        categoryId
       }
+      // params: {
+      //   categoryId
+      // }
     });
     return response;
   } catch (error) {
@@ -168,13 +168,13 @@ export const getPostByCate = async (categoryId) => {
 
 export const getPostByTags = async (tagIds) => {
   try {
-    const response = await request.get(`post/GetAllApproved`, {
+    const response = await request.get(`post/GetAllApproved?tagIds=${tagIds}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
-      },
-      params: {
-        tagIds
       }
+      // params: {
+      //   tagIds
+      // }
     });
     return response;
   } catch (error) {

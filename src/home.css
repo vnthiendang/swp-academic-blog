@@ -89,17 +89,19 @@
     text-decoration: underline;
 }
 /*========================== Header ==============================*/
-
-.main {
+  
+  /* Main section */
+  .main {
     background-color: white;
-}
-
-#header {
+  }
+  
+  /* Header section */
+  #header {
     height: 50px;
-}
-/* #baner {
-    background-color: red;
-} */
+    background-color: white;
+    color: black;
+  }
+  
 /*========================== Main ==============================*/
 
 .rounded-2xl {
