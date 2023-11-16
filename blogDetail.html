@@ -40,7 +40,7 @@
             <!-- Category  -->
             <div class="group inline-block relative">
                 <button class="py-2 px-4 rounded inline-flex items-center" id="category">
-                    <span class="mr-1" style="font-weight: 500;">Category</span>
+                    <span class="mr-1" style="font-weight: 600;">Category</span>
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
@@ -113,9 +113,9 @@
                 <div id="postTag"></div>
 
                 <div class="inner-column">
-                    <div class="container-user">
+                    <div class="container-user" title="Name User">
                         <div class="by-user">
-                            <i class="fa-solid fa-user fa-sm" style="color: #000000;" title="Name User"></i>
+                            <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
                         </div>
                         <div class="by-user" id="postAuthor">
                             <!-- By User -->
@@ -124,9 +124,9 @@
                 </div>
 
                 <div class="inner-column">
-                    <div class="container-datetime">
+                    <div class="container-datetime" title="Date Time">
                         <div class="date-time">
-                            <i class="fa-regular fa-calendar-days" style="color: #000000;" title="Date Time"></i>
+                            <i class="fa-regular fa-calendar-days" style="color: #000000;"></i>
                         </div>
                         <div class="date-time" id="postDate">
                             <!-- Date Time -->
@@ -135,9 +135,9 @@
                 </div>
 
                 <div class="inner-column">
-                    <div class="container-read">
+                    <div class="container-read" title="Reading Time">
                         <div class="number-read">
-                            <i class="fa-regular fa-clock" style="color: #000000;" title="Reading Time"></i>
+                            <i class="fa-regular fa-clock" style="color: #000000;"></i>
                         </div>
                         <div class="number-read" id="readingTime">
                             <!-- Times Read -->
@@ -147,9 +147,9 @@
                 </div>
 
                 <div class="inner-column">
-                    <div class="container-vote">
+                    <div class="container-vote" title="Like">
                         <div class="number-vote">
-                            <i class="fa-regular fa-thumbs-up" style="color: #000000;" title="Like" id="likeIcon" onclick="toggleLikeIcon()"></i>
+                            <i class="fa-regular fa-thumbs-up" style="color: #000000;" id="likeIcon" onclick="toggleLikeIcon()"></i>
                         </div>
                         <div class="number-vote" id="postVote">
                             <!-- Number Of Vote Like -->
@@ -158,9 +158,9 @@
                 </div>
                 
                 <div class="inner-column">
-                    <div class="container-vote">
+                    <div class="container-vote" title="Dislike">
                         <div class="number-vote">
-                            <i class="fa-regular fa-thumbs-down" style="color: #000000;" title="Dislike" id="dislikeIcon" onclick="toggleDislikeIcon()"></i>
+                            <i class="fa-regular fa-thumbs-down" style="color: #000000;" id="dislikeIcon" onclick="toggleDislikeIcon()"></i>
                         </div>
                         <div class="number-vote" id="postVote2">
                             <!-- Number Of Vote Dislike -->
@@ -202,8 +202,8 @@
                 
                 
                 <div class="inner-column">
-                    <div class="container-tag">
-                        <div class="tag-category" title="Category">
+                    <div class="container-tag" title="Category">
+                        <div class="tag-category">
                             <h2 >
                                 Category: 
                             </h2>
@@ -216,7 +216,7 @@
                                 <!-- Tag Category -->
                             </div>
                         </div>
-                </div>
+                    </div>
 
             </div>
             
