@@ -135,7 +135,7 @@ public class PostService {
         return postRepository.save(post);
     }
 
-
+@Transactional
     public Post updatePost(Integer postId, PostRequest postRequest) {
         Post post = getById(postId);
         if (post == null) {
@@ -203,8 +203,16 @@ public class PostService {
             post.getPostTags().clear();
         }
 
+        Optional<PostApprovals> postApprovals = postApprovalsRepository.findByPostPostsId(postId);
+
+        if (postApprovals.isPresent()){
+            postApprovalsRepository.deleteById(postApprovals.get().getId());
+            post.setPostApprovals(null);
+        }
         return postRepository.save(post); // Save and return the updated post
+
     }
+
 @Transactional
     public List<Post> findMostVotedPostInCategory(int categoryId) {
         // Step 1: Fetch all posts in the desired category

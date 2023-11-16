@@ -37,12 +37,6 @@ public class PostController {
     @PostMapping("/create")
     public PostDto addPost(@ModelAttribute PostRequest postRequest) {
         Post post = postService.createPost(postRequest);
-//            System.out.println(" ID: " + post.getMedias());
-//            System.out.println("Post ID: " + post.getTags());
-//            System.out.println("Status: " + post.getTitle());
-//            System.out.println("Created Date: " + post.getPostsId());
-//            System.out.println("Viewed By User: " + post.getMedias());
-//            System.out.println("sucesssssssssssssssssssssssssssDto");
         PostDto dto = postService.mapPostToPostDto(post);
         return dto;
     }
@@ -129,27 +123,6 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         return dtos;
     }
 
-//    @GetMapping("/GetAllApproved")
-//    public List<PostDto> getAllApprovedPostDtosByCategoryId(@RequestParam(name = "categoryId", required = true) Integer categoryId) {
-//        List<Post> approvedPosts = postService.getAllApprovedPosts();
-//
-//        if (categoryId != null) {
-//            approvedPosts = postService.GetPostsByCategoryId(approvedPosts, categoryId);
-//        }
-//        List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
-//        return dtos;
-//    }
-//
-//    @GetMapping("/GetAllApproved")
-//    public List<PostDto> getAllApprovedPostDtosByTagId(@RequestParam(name = "categoryId", required = true) Integer tagId) {
-//        List<Post> approvedPosts = postService.getAllApprovedPosts();
-//
-//        if (tagId != null) {
-//            approvedPosts = postService.GetPostsByTagId(approvedPosts, tagId);
-//        }
-//        List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
-//        return dtos;
-//    }
     //get post detail by post id
     @GetMapping("/GetAllApproved/{id}")
     public PostDto getById(@PathVariable Integer id) {
