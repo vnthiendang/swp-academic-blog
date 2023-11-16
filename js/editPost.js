@@ -81,21 +81,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById('updatePost');
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    // Get the text content of the editor
-    const text = quill.getText();
+    
 
-    // Split the text into words using a space as a delimiter
-    const words = text.split(/\s+/);
+// const delta = quill.getContents();
+// const text = quill.getText();
+// const wordCount = text.split(/\s+/).filter(function (word) {
+//   return word.length > 0;
+// }).length;
 
-    // Get the word count
-    const wordCount = words.length;
+// console.log('Word Count:', wordCount);
 
-    // Check if the word count is less than 100
-    // if (wordCount < 100) {
-    //   // Display an alert
-    //   alert('Your post detail should have at least 100 words.');
-    //   return; // Stop further execution
-    // }
+// alert(wordCount);
+//     // Check if the word count is less than 100
+//     if (wordCount < 100) {
+//       alert('Your post detail should have at least 100 words.');
+//       return; // Stop further execution
+//     }
+
 
     const titleInput = document.querySelector('#updatePost input[type="text"]');
     //const allowCommentSelect = document.querySelector('#comment');
