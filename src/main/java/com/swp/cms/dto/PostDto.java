@@ -43,14 +43,6 @@ public class PostDto {
         }
     }
 
-//     public String getPostApprovals() {
-//         if (postApprovals != null) {
-//             return postApprovals.getStatus();
-//         } else {
-//             return "N/A"; // Or any other appropriate default value
-//         }
-//     }
-
     public String getPostApprovals() {
         if (postApprovals != null) {
             return postApprovals.getStatus();
@@ -59,33 +51,6 @@ public class PostDto {
         }
 
     }
-
-//    public List<String> getMediaList() {
-//        if (mediaList != null) {
-//            List<String> mediaUrls = new ArrayList<>();
-//            for (MediaDto media : mediaList) {
-//                if (media != null && media.getMediaUrl() != null) {
-//                    mediaUrls.add(media.getMediaUrl());
-//                }
-//            }
-//            return mediaUrls;
-//        }
-//        return Collections.emptyList(); // or handle the case when mediaList is null
-//    }
-
-
-//    public List<String> getMediaList() {
-//        if (mediaList != null) {
-//            List<String> mediaUrls = new ArrayList<>();
-//            for (Media media : mediaList) {
-//                if (media != null && media.getMediaUrl() != null) {
-//                    mediaUrls.add(media.getMediaUrl());
-//                }
-//            }
-//            return mediaUrls;
-//        }
-//        return Collections.emptyList(); // or handle the case when mediaList is null
-//    }
 
     public List<byte[]> getMediaList() {
         if (mediaList != null) {

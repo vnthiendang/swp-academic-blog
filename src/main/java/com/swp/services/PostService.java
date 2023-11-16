@@ -265,13 +265,18 @@ public class PostService {
 
         User currentUser = userRepository.findById(userIds)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User"));
-
-        PostApprovals post = new PostApprovals();
-        post.setPost(getPostById(id));
-        post.setStatus("APPROVED");
-        post.setCreatedDate(LocalDateTime.now());
-        post.setViewedByUser(currentUser);
-        return postApprovalsRepository.save(post);
+        Optional<Post> post = postRepository.findById(id);
+        if (post.isPresent()){
+            if (post.get().getCreatedByUser().getUsId() == userIds ){
+                throw new IllegalStateException("Cannot review your own post");
+            }
+        }
+        PostApprovals postApprovals = new PostApprovals();
+        postApprovals.setPost(getPostById(id));
+        postApprovals.setStatus("APPROVED");
+        postApprovals.setCreatedDate(LocalDateTime.now());
+        postApprovals.setViewedByUser(currentUser);
+        return postApprovalsRepository.save(postApprovals);
     }
 
     //reject post
@@ -282,13 +287,18 @@ public class PostService {
 
         User currentUser = userRepository.findById(userIds)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User"));
-
-        PostApprovals post = new PostApprovals();
-        post.setPost(getPostById(id));
-        post.setStatus("REJECTED");
-        post.setCreatedDate(LocalDateTime.now());
-        post.setViewedByUser(currentUser);
-        return postApprovalsRepository.save(post);
+        Optional<Post> post = postRepository.findById(id);
+        if (post.isPresent()){
+            if (post.get().getCreatedByUser().getUsId() == userIds ){
+                throw new IllegalStateException("Cannot review your own post");
+            }
+        }
+        PostApprovals postApprovals = new PostApprovals();
+        postApprovals.setPost(getPostById(id));
+        postApprovals.setStatus("REJECTED");
+        postApprovals.setCreatedDate(LocalDateTime.now());
+        postApprovals.setViewedByUser(currentUser);
+        return postApprovalsRepository.save(postApprovals);
     }
 
     public List<PostDto> mapPostsToPostDtos(List<Post> posts) {

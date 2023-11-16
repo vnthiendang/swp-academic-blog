@@ -23,8 +23,11 @@ public class TagController {
     }
 
     @GetMapping("/GetAll")
-    public List<TagDto> getAll() {
+    public List<TagDto> getAll(@RequestParam(name = "keyword", required = false) String keyword) {
         List<Tag> categories = tagService.getAll();
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            categories = tagService.GetTagsByKeyword(categories, keyword);
+        }
         List<TagDto> tagDtos = categories.stream()
                 .map(tag -> modelMapper.map(tag, TagDto.class))
                 .collect(Collectors.toList());
