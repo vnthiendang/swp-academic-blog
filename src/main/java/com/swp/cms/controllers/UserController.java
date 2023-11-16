@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/blog/user")
@@ -33,12 +34,13 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     @GetMapping("/GetAll")
     public List<UserDto> getAll() {
-        List<User> res = userService.getAllUsers();
-        List<UserDto> userDto = mapper.fromEntityToUserDtoList(res);
-        return userDto;
+        List<User> users = userService.getAllUsers();
+        List<UserDto> userDtos = users.stream()
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .collect(Collectors.toList());
+        return userDtos;
     }
 
 //get user profile

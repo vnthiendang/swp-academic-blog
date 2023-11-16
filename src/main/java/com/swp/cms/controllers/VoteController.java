@@ -6,6 +6,7 @@ import com.swp.entities.Vote;
 import com.swp.services.VoteService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class   VoteController {
                 .collect(Collectors.toList());
         return dtos;
     }
+
     //get vote by postID
     @GetMapping("/getall/{postId}")
     public List<VoteDto> getAllByPostId(@PathVariable Integer postId) {
@@ -52,19 +54,40 @@ public class   VoteController {
         return dto;
     }
 
+//    @PostMapping("/post")
+//    public VoteDto addVote(@RequestBody VoteRequest voteRequest) {
+//        Vote createdVote = voteService.createOrUpdateVote(voteRequest);
+//        VoteDto voteDto = modelMapper.map(createdVote, VoteDto.class);
+//        return voteDto;
+//    }
+
     @PostMapping("/post")
-    public VoteDto addVote(@RequestBody VoteRequest voteRequest) {
-//        Vote vote = modelMapper.map(voteRequest, Vote.class);
-        Vote createdVote = voteService.createVote(voteRequest);
-        VoteDto voteDto = modelMapper.map(createdVote, VoteDto.class);
-        return voteDto;
+    public ResponseEntity<Object> addVote(@RequestBody VoteRequest voteRequest) {
+        String resultMessage = voteService.createOrUpdateVote(voteRequest);
+
+        if (resultMessage.contains("successfully")) {
+            // If the result message contains "successfully", it's a success message
+            if (resultMessage.contains("deleted")) {
+                return ResponseEntity.ok("Unvoted successfully");
+            } else {
+                // If it's not a deletion, return the VoteDto
+                Vote createdVote = voteService.getVoteByUserIdAndPostId(voteRequest.getUserID(), voteRequest.getPostID()).orElse(null);
+                if (createdVote != null) {
+                    VoteDto voteDto = modelMapper.map(createdVote, VoteDto.class);
+                    return ResponseEntity.ok(voteDto);
+                }
+            }
+        }
+
+        // If none of the conditions are met, return a bad request status
+        return ResponseEntity.badRequest().body("Failed to perform the vote operation");
     }
 
-    //Update a vote by vote id
-    @PutMapping("/{voteId}")
-    public VoteDto updateVote(@PathVariable Integer voteId, @RequestBody VoteRequest voteRequest) {
-        Vote updatedVote = voteService.updateVote(voteId, voteRequest);
-        VoteDto voteDto = modelMapper.map(updatedVote, VoteDto.class);
-        return voteDto;
-    }
+//    //Update a vote by vote id
+//    @PutMapping("/{voteId}")
+//    public VoteDto updateVote(@PathVariable Integer voteId, @RequestBody VoteRequest voteRequest) {
+//        Vote updatedVote = voteService.updateVote(voteId, voteRequest);
+//        VoteDto voteDto = modelMapper.map(updatedVote, VoteDto.class);
+//        return voteDto;
+//    }
 }

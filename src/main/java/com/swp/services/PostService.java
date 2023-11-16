@@ -32,6 +32,10 @@ public class PostService {
     private MediaRepository mediaRepository;
     @Autowired
     private TagRepository tagRepository;
+    @Autowired
+    private ReportRepository reportRepository;
+    @Autowired
+    private ReportTypeRepository reportTypeRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -135,7 +139,7 @@ public class PostService {
         return postRepository.save(post);
     }
 
-
+@Transactional
     public Post updatePost(Integer postId, PostRequest postRequest) {
         Post post = getById(postId);
         if (post == null) {
@@ -203,8 +207,16 @@ public class PostService {
             post.getPostTags().clear();
         }
 
+        Optional<PostApprovals> postApprovals = postApprovalsRepository.findByPostPostsId(postId);
+
+        if (postApprovals.isPresent()){
+            postApprovalsRepository.deleteById(postApprovals.get().getId());
+            post.setPostApprovals(null);
+        }
         return postRepository.save(post); // Save and return the updated post
+
     }
+
 @Transactional
     public List<Post> findMostVotedPostInCategory(int categoryId) {
         // Step 1: Fetch all posts in the desired category
@@ -257,13 +269,18 @@ public class PostService {
 
         User currentUser = userRepository.findById(userIds)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User"));
-
-        PostApprovals post = new PostApprovals();
-        post.setPost(getPostById(id));
-        post.setStatus("APPROVED");
-        post.setCreatedDate(LocalDateTime.now());
-        post.setViewedByUser(currentUser);
-        return postApprovalsRepository.save(post);
+        Optional<Post> post = postRepository.findById(id);
+        if (post.isPresent()){
+            if (post.get().getCreatedByUser().getUsId() == userIds ){
+                throw new IllegalStateException("Cannot review your own post");
+            }
+        }
+        PostApprovals postApprovals = new PostApprovals();
+        postApprovals.setPost(getPostById(id));
+        postApprovals.setStatus("APPROVED");
+        postApprovals.setCreatedDate(LocalDateTime.now());
+        postApprovals.setViewedByUser(currentUser);
+        return postApprovalsRepository.save(postApprovals);
     }
 
     //reject post
@@ -274,14 +291,44 @@ public class PostService {
 
         User currentUser = userRepository.findById(userIds)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User"));
-
-        PostApprovals post = new PostApprovals();
-        post.setPost(getPostById(id));
-        post.setStatus("REJECTED");
-        post.setCreatedDate(LocalDateTime.now());
-        post.setViewedByUser(currentUser);
-        return postApprovalsRepository.save(post);
+        Optional<Post> post = postRepository.findById(id);
+        if (post.isPresent()){
+            if (post.get().getCreatedByUser().getUsId() == userIds ){
+                throw new IllegalStateException("Cannot review your own post");
+            }
+        }
+        PostApprovals postApprovals = new PostApprovals();
+        postApprovals.setPost(getPostById(id));
+        postApprovals.setStatus("REJECTED");
+        postApprovals.setCreatedDate(LocalDateTime.now());
+        postApprovals.setViewedByUser(currentUser);
+        return postApprovalsRepository.save(postApprovals);
     }
+
+    public long countRejectedPostApprovalsForUserWithin24Hours(Integer userId) {
+        LocalDateTime twentyFourHoursAgo = LocalDateTime.now().minusHours(24);
+
+        return postApprovalsRepository.countByPost_CreatedByUser_UsIdAndStatusAndCreatedDateGreaterThan(
+                userId, "REJECTED", twentyFourHoursAgo
+        );
+    }
+
+    public Report generateReportIfCountRejectedPostApprovalsForUserWithin24HoursThresholdExceeded(Integer userId) {
+        long rejectedPostApprovalsCount = countRejectedPostApprovalsForUserWithin24Hours(userId);
+
+        if (rejectedPostApprovalsCount >= 5) {
+            // Create a Report object or take appropriate actions
+            Report report = new Report();
+            report.setReportType(reportTypeRepository.findById(2).orElseThrow());
+            report.setReportDetail("User: " + userRepository.findById(userId).orElseThrow().getDisplay_name()
+            + " has more than 4 rejected post requests within 24 hours");
+            report.setCreatedTime(LocalDateTime.now());
+            return reportRepository.save(report);
+        }
+
+        return null; // No report generated if the threshold is not exceeded
+    }
+
 
     public List<PostDto> mapPostsToPostDtos(List<Post> posts) {
         return posts.stream()

@@ -24,6 +24,7 @@ public class PostDto {
     private List<Award> awardList;
     private List<Comment> commentList;
     private List<Vote> voteList;
+    private String reviewedByTeacher;
 
     private Integer vote1Count = 0;
     private Integer vote2Count = 0;
@@ -43,14 +44,6 @@ public class PostDto {
         }
     }
 
-//     public String getPostApprovals() {
-//         if (postApprovals != null) {
-//             return postApprovals.getStatus();
-//         } else {
-//             return "N/A"; // Or any other appropriate default value
-//         }
-//     }
-
     public String getPostApprovals() {
         if (postApprovals != null) {
             return postApprovals.getStatus();
@@ -59,33 +52,6 @@ public class PostDto {
         }
 
     }
-
-//    public List<String> getMediaList() {
-//        if (mediaList != null) {
-//            List<String> mediaUrls = new ArrayList<>();
-//            for (MediaDto media : mediaList) {
-//                if (media != null && media.getMediaUrl() != null) {
-//                    mediaUrls.add(media.getMediaUrl());
-//                }
-//            }
-//            return mediaUrls;
-//        }
-//        return Collections.emptyList(); // or handle the case when mediaList is null
-//    }
-
-
-//    public List<String> getMediaList() {
-//        if (mediaList != null) {
-//            List<String> mediaUrls = new ArrayList<>();
-//            for (Media media : mediaList) {
-//                if (media != null && media.getMediaUrl() != null) {
-//                    mediaUrls.add(media.getMediaUrl());
-//                }
-//            }
-//            return mediaUrls;
-//        }
-//        return Collections.emptyList(); // or handle the case when mediaList is null
-//    }
 
     public List<byte[]> getMediaList() {
         if (mediaList != null) {
@@ -177,5 +143,11 @@ public class PostDto {
 
     }
 
+    public String getReviewedByTeacher(){
+        if (postApprovals != null) {
+            return postApprovals.getViewedByUser().getDisplay_name();
+        }
+        return "N/A";
+    }
 }
 

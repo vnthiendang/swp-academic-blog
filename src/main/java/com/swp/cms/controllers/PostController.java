@@ -6,6 +6,7 @@ import com.swp.cms.mapper.PostMapper;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.Post;
 import com.swp.entities.PostApprovals;
+import com.swp.entities.Report;
 import com.swp.services.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +38,6 @@ public class PostController {
     @PostMapping("/create")
     public PostDto addPost(@ModelAttribute PostRequest postRequest) {
         Post post = postService.createPost(postRequest);
-//            System.out.println(" ID: " + post.getMedias());
-//            System.out.println("Post ID: " + post.getTags());
-//            System.out.println("Status: " + post.getTitle());
-//            System.out.println("Created Date: " + post.getPostsId());
-//            System.out.println("Viewed By User: " + post.getMedias());
-//            System.out.println("sucesssssssssssssssssssssssssssDto");
         PostDto dto = postService.mapPostToPostDto(post);
         return dto;
     }
@@ -129,27 +124,6 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         return dtos;
     }
 
-//    @GetMapping("/GetAllApproved")
-//    public List<PostDto> getAllApprovedPostDtosByCategoryId(@RequestParam(name = "categoryId", required = true) Integer categoryId) {
-//        List<Post> approvedPosts = postService.getAllApprovedPosts();
-//
-//        if (categoryId != null) {
-//            approvedPosts = postService.GetPostsByCategoryId(approvedPosts, categoryId);
-//        }
-//        List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
-//        return dtos;
-//    }
-//
-//    @GetMapping("/GetAllApproved")
-//    public List<PostDto> getAllApprovedPostDtosByTagId(@RequestParam(name = "categoryId", required = true) Integer tagId) {
-//        List<Post> approvedPosts = postService.getAllApprovedPosts();
-//
-//        if (tagId != null) {
-//            approvedPosts = postService.GetPostsByTagId(approvedPosts, tagId);
-//        }
-//        List<PostDto> dtos = postService.mapPostsToPostDtos(approvedPosts);
-//        return dtos;
-//    }
     //get post detail by post id
     @GetMapping("/GetAllApproved/{id}")
     public PostDto getById(@PathVariable Integer id) {
@@ -196,9 +170,9 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     @PostMapping("/postRequest/reject/{id}")
     public PostApprovalsDto rejectPost(@PathVariable Integer id) {
         PostApprovals requestPost = postService.rejectPost(id);
-
         PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
-
+        Report report = postService.generateReportIfCountRejectedPostApprovalsForUserWithin24HoursThresholdExceeded(requestPost.getPost().getCreatedByUser().getUsId());
+        System.out.println(report);
         return postDto;
     }
 

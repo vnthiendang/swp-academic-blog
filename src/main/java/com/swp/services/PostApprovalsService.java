@@ -61,4 +61,5 @@ public class PostApprovalsService {
         return postApprovalsRepository.save(postApprovals); // Save and return the updated post
     }
 
+
 }

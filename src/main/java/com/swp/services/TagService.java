@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TagService {
@@ -50,5 +51,15 @@ public class TagService {
         tag.setTagDescription(tagRequest.getTagDescription());
         tag.setCreatedDate(OffsetDateTime.now());
         return tagRepository.save(tag); // Save and return the updated post
+    }
+
+    public List<Tag> GetTagsByKeyword(List<Tag> tags, String keyword) {
+        if (keyword != null && !keyword.isEmpty()) {
+            String lowercaseKeyword = keyword.toLowerCase().trim();
+            return tags.stream()
+                    .filter(tag -> tag.getTagName().toLowerCase().contains(lowercaseKeyword))
+                    .collect(Collectors.toList());
+        }
+        return tags; // Return the original list if keyword is not provided
     }
 }
