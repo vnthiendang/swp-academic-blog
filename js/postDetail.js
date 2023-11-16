@@ -85,6 +85,7 @@ function displayPost() {
 displayPost();
 
 
+
 function displayComments() {
   const commentContainer = document.getElementById('commentContainer');
 
@@ -133,6 +134,7 @@ function displayComments() {
       console.error('Error retrieving comments:', error);
     });
 }
+
 
 // Call the function to display the post
 displayComments();
