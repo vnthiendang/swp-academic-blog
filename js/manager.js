@@ -1,4 +1,8 @@
-import {approvedPostList, userList, violationList} from './Services/admin.service.js';
+import {addAccountViolation, approvedPostList, userList, violationList, updatePostStatus} from './Services/admin.service.js';
+import { getAllAward } from "./Services/award.service.js";
+import { getAllReports } from "./Services/report.service.js";
+import { getAllTeacherCategory } from "./Services/category.service.js";
+import { userInfo } from "./Services/auth.service.js";
 
 const options = {
   month: "short",
@@ -16,7 +20,7 @@ const renderPostTable = (posts) => {
   
   const thead = document.createElement('thead');
   const headerRow = document.createElement('tr');
-  const headers = ['Post Status', 'Teacher Review', 'Created Date', 'Post'];
+  const headers = ['Post Status', 'Teacher Review', 'Created Date', 'Post', 'Action'];
   
   headers.forEach(headerText => {
     const th = document.createElement('th');
@@ -50,8 +54,38 @@ const renderPostTable = (posts) => {
     const roleIdCell = document.createElement('td');
     roleIdCell.textContent = post.post;
     row.appendChild(roleIdCell);
+
+    const actionCell = document.createElement('td');
+
+    const updateStatusBtn = document.createElement('button');
+    updateStatusBtn.classList.add('styled-button');
+    updateStatusBtn.dataset.postId = post.post;
+    updateStatusBtn.textContent = 'Update Status';
+    actionCell.appendChild(updateStatusBtn);
+
+    row.appendChild(actionCell);
   
     tbody.appendChild(row);
+
+    updateStatusBtn.addEventListener('click', async () => {
+      const postId = updateStatusBtn.dataset.postId;
+      console.log(postId);
+      const userInfos = await userInfo();
+      try {
+        const model = {
+          viewedByUser: userInfos.userId,
+          postApprovalsStatus: 'APPROVED'
+        };
+        const response = await updatePostStatus(postId, model);
+        if(response != null){
+          alert('Status changed');
+        }else{
+          alert('Fail to perform!');
+        }
+      } catch (error) {
+        console.error('Error change status:', error);
+      }
+    });
   });
   
   table.appendChild(tbody);
@@ -69,7 +103,7 @@ const renderUserTable = (users) => {
     // Create table header
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
-    const headers = ['Display Name', 'Additional Info', 'Email', 'Created Date', 'Role ID'];
+    const headers = ['Display Name', 'Additional Info', 'Email', 'Created Date', 'Role ID', 'Action'];
   
     headers.forEach(headerText => {
       const th = document.createElement('th');
@@ -107,8 +141,42 @@ const renderUserTable = (users) => {
       const roleIdCell = document.createElement('td');
       roleIdCell.textContent = user.role_id;
       row.appendChild(roleIdCell);
+
+      const actionCell = document.createElement('td');
+
+      const addViolationButton = document.createElement('button');
+      addViolationButton.classList.add('styled-button');
+      addViolationButton.dataset.userId = user.userId;
+      addViolationButton.textContent = 'Add violation';
+      actionCell.appendChild(addViolationButton);
+
+      const createUserBtn = document.createElement('button');
+      createUserBtn.classList.add('styled-button');
+      createUserBtn.textContent = 'Create User';
+      actionCell.appendChild(createUserBtn);
+
+      row.appendChild(actionCell);
   
       tbody.appendChild(row);
+
+      addViolationButton.addEventListener('click', async () => {
+        const userId = addViolationButton.dataset.userId;
+        try {
+          const model = {
+            userId: userId,
+            violation_type: 2
+          };
+          const response = await addAccountViolation(model);
+          if(response != null){
+            alert('Account violation Added');
+          }else{
+            alert('Fail to perform add violation!');
+          }
+        } catch (error) {
+          console.error('Error adding violation:', error);
+        }
+      });
+
     });
   
     table.appendChild(tbody);
@@ -181,7 +249,6 @@ approvedPostList()
 
 userList()
   .then((users) => {
-    console.log(users);
     renderUserTable(users);
 });
 
@@ -189,4 +256,209 @@ violationList()
   .then((user) => {
     renderviolationTable(user);
 });
+
+
+// MANAGE AWARD
+const displayAwards = async () => {
+  const awardTable = document.getElementById('awardTable');
+
+  try {
+    const table = document.createElement('table');
+    table.classList.add('award-table');
+    
+    // Create table header
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    const headers = ['Post', 'Given By Teacher', 'Award', 'Action'];
+    
+    headers.forEach(headerText => {
+      const th = document.createElement('th');
+      th.textContent = headerText;
+      headerRow.appendChild(th);
+    });
+    
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+    
+    // Create table body
+    const tbody = document.createElement('tbody');
+    const awards = await getAllAward();
+
+    awards.forEach(award => {
+      const row = document.createElement('tr');
+
+      row.classList.add('award-row');
+
+      const postAward = document.createElement('td');
+      postAward.textContent = award.post;
+      row.appendChild(postAward);
+
+      const givenBy = document.createElement('td');
+      givenBy.textContent = award.givenByUser;
+      row.appendChild(givenBy);
+
+      const awardType = document.createElement('td');
+      awardType.textContent = award.awardType;
+      row.appendChild(awardType);
+
+      const actionCell = document.createElement('td');
+
+      const updateAwardBtn = document.createElement('button');
+      updateAwardBtn.classList.add('styled-button');
+      //updateAwardBtn.dataset.userId = user.userId;
+      updateAwardBtn.textContent = 'Update award';
+      actionCell.appendChild(updateAwardBtn);
+
+      const createBtn = document.createElement('button');
+      createBtn.classList.add('styled-button');
+      createBtn.textContent = 'Create';
+      actionCell.appendChild(createBtn);
+
+      row.appendChild(actionCell);
+
+      tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    awardTable.appendChild(table);
+  } catch (error) {
+    console.error('Error retrieving awards:', error);
+  }
+};
+
+displayAwards();
+
+// MANAGE Report
+const displayReports = async () => {
+  const awardTable = document.getElementById('reportTable');
+
+  try {
+    const table = document.createElement('table');
+    table.classList.add('report-table');
+    
+    // Create table header
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    const headers = ['Report Type', 'Reported By', 'Detail', 'Violation Rule', 'Action'];
+    
+    headers.forEach(headerText => {
+      const th = document.createElement('th');
+      th.textContent = headerText;
+      headerRow.appendChild(th);
+    });
+    
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+    
+    // Create table body
+    const tbody = document.createElement('tbody');
+    const reports = await getAllReports();
+
+    reports.forEach(report => {
+      const row = document.createElement('tr');
+
+      row.classList.add('award-row');
+
+      const reportType = document.createElement('td');
+      reportType.textContent = report.reportType;
+      row.appendChild(reportType);
+
+      const reportBy = document.createElement('td');
+      reportBy.textContent = report.reportedByUser;
+      row.appendChild(reportBy);
+
+      const detail = document.createElement('td');
+      detail.textContent = report.reportDetail;
+      row.appendChild(detail);
+
+      const violationRule = document.createElement('td');
+      violationRule.textContent = report.violationRuleList.join(', ');
+      row.appendChild(violationRule);
+
+      const actionCell = document.createElement('td');
+
+      const updateReportBtn = document.createElement('button');
+      updateReportBtn.classList.add('styled-button');
+      updateReportBtn.textContent = 'Update';
+      actionCell.appendChild(updateReportBtn);
+
+      const createBtn = document.createElement('button');
+      createBtn.classList.add('styled-button');
+      createBtn.textContent = 'Create';
+      actionCell.appendChild(createBtn);
+
+      row.appendChild(actionCell);
+
+      tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    awardTable.appendChild(table);
+  } catch (error) {
+    console.error('Error retrieving reports:', error);
+  }
+};
+
+displayReports();
+
+
+// MANAGE Teacher Category
+const displayTeacherCategory = async () => {
+  const awardTable = document.getElementById('categoryTable');
+
+  try {
+    const table = document.createElement('table');
+    table.classList.add('category-table');
+    
+    // Create table header
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    const headers = ['Teacher', 'Category', 'Action'];
+    
+    headers.forEach(headerText => {
+      const th = document.createElement('th');
+      th.textContent = headerText;
+      headerRow.appendChild(th);
+    });
+    
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+    
+    // Create table body
+    const tbody = document.createElement('tbody');
+    const reports = await getAllTeacherCategory();
+
+    reports.forEach(report => {
+      const row = document.createElement('tr');
+
+      const teacher = document.createElement('td');
+      teacher.textContent = report.teacher;
+      row.appendChild(teacher);
+
+      const cateTeacher = document.createElement('td');
+      cateTeacher.textContent = report.category;
+      row.appendChild(cateTeacher);
+
+      const actionCell = document.createElement('td');
+
+      const updateCateBtn = document.createElement('button');
+      updateCateBtn.classList.add('styled-button');
+      updateCateBtn.textContent = 'Update';
+      actionCell.appendChild(updateCateBtn);
+
+      const createBtn = document.createElement('button');
+      createBtn.classList.add('styled-button');
+      createBtn.textContent = 'Create';
+      actionCell.appendChild(createBtn);
+
+      row.appendChild(actionCell);
+
+      tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    awardTable.appendChild(table);
+  } catch (error) {
+    console.error('Error retrieving teacher categories:', error);
+  }
+};
+
+displayTeacherCategory();
   

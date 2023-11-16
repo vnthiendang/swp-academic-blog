@@ -112,6 +112,113 @@
     background-color: #e6e6e6;
   }
 
+  .award-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+
+  .award-table th,
+  .award-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .award-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+
+  .award-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .award-table tbody tr:hover {
+    background-color: #e6e6e6;
+  }
+
+  /* violation */
+  .violation-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+
+  .violation-table th,
+  .violation-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .violation-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+
+  .violation-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .violation-table tbody tr:hover {
+    background-color: #e6e6e6;
+  }
+
+  /* report table */
+  .report-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+
+  .report-table th,
+  .report-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .report-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+
+  .report-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .report-table tbody tr:hover {
+    background-color: #e6e6e6;
+  }
+
+  /* teacher category table */
+  .category-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+
+  .category-table th,
+  .category-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .category-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+
+  .category-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .category-table tbody tr:hover {
+    background-color: #e6e6e6;
+  }
+
   .styled-button {
     display: inline-block;
     padding: 5px 10px;
