@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VoteService {
@@ -42,22 +43,79 @@ public class VoteService {
         return voteRepository.findAll();
     }
 
-    public Vote createVote(VoteRequest voteRequest){
-        Vote vote = new Vote();
-        vote.setPost(postRepository.findById(voteRequest.getPostID()).
-                orElseThrow(() -> new IllegalArgumentException("Invalid Post")));
-        vote.setUser(userRepository.findById(voteRequest.getUserID()).
-                orElseThrow(() -> new IllegalArgumentException("Invalid User")));
-        vote.setVoteType(voteTypeRepository.findById(voteRequest.getVoteTypeID()).
-                orElseThrow(() -> new IllegalArgumentException("Invalid Vote Type")));
-        vote.setCreatedDate(OffsetDateTime.now());
-        return voteRepository.save(vote);
+    public Optional<Vote> getVoteByUserIdAndPostId(int userId, int postId) {
+        return voteRepository.findByUserUsIdAndPostPostsId(userId, postId);
     }
-    public Vote updateVote(Integer voteID, VoteRequest voteRequest){
-        Vote vote = getById(voteID);
-        vote.setVoteType(voteTypeRepository.findById(voteRequest.getVoteTypeID()).
-                orElseThrow(() -> new IllegalArgumentException("Invalid Vote Type")));
+
+//    public Vote createOrUpdateVote(VoteRequest voteRequest) {
+//        int userId = voteRequest.getUserID();
+//        int postId = voteRequest.getPostID();
+//        int voteTypeId = voteRequest.getVoteTypeID();
+//
+//        Optional<Vote> existingVote = getVoteByUserIdAndPostId(userId, postId);
+//
+//        if (existingVote.isPresent()) {
+//            return handleExistingVote(existingVote.get(), voteTypeId);
+//        } else {
+//            return createNewVote(postId, userId, voteTypeId);
+//        }
+//    }
+
+    public String createOrUpdateVote(VoteRequest voteRequest) {
+        int userId = voteRequest.getUserID();
+        int postId = voteRequest.getPostID();
+        int voteTypeId = voteRequest.getVoteTypeID();
+
+        Optional<Vote> existingVote = getVoteByUserIdAndPostId(userId, postId);
+
+        if (existingVote.isPresent()) {
+            return handleExistingVote(existingVote.get(), voteTypeId);
+        } else {
+            createNewVote(postId, userId, voteTypeId);
+            return "Vote created successfully";
+        }
+    }
+
+    private String handleExistingVote(Vote existingVote, int newVoteTypeId) {
+        int existingVoteVoteTypeId = existingVote.getVoteType().getId();
+
+        if (newVoteTypeId != existingVoteVoteTypeId) {
+            deleteVote(existingVote);
+            createNewVote(existingVote.getPost().getPostsId(), existingVote.getUser().getUsId(), newVoteTypeId);
+            return "Vote updated successfully";
+        } else {
+            deleteVote(existingVote);
+            return "Vote deleted successfully";
+        }
+    }
+
+//    private Vote handleExistingVote(Vote existingVote, int newVoteTypeId) {
+//        int existingVoteVoteTypeId = existingVote.getVoteType().getId();
+//
+//        if (newVoteTypeId != existingVoteVoteTypeId) {
+//            deleteVote(existingVote);
+//            return createNewVote(existingVote.getPost().getPostsId(), existingVote.getUser().getUsId(), newVoteTypeId);
+//        } else {
+//            deleteVote(existingVote);
+//            return existingVote;
+//        }
+//    }
+
+    private Vote createNewVote(int postId, int userId, int voteTypeId) {
+        Vote vote = new Vote();
+        vote.setPost(postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Post")));
+        vote.setUser(userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid User")));
+        vote.setVoteType(voteTypeRepository.findById(voteTypeId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Vote Type")));
         vote.setCreatedDate(OffsetDateTime.now());
-        return voteRepository.save(vote);
+        return voteRepository.save(vote); // Return the newly created vote
+    }
+
+    private void deleteVote(Vote vote) {
+        if (vote != null) {
+            voteRepository.deleteById(vote.getId());
+        }
     }
 }
