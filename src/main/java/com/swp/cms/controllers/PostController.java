@@ -6,6 +6,7 @@ import com.swp.cms.mapper.PostMapper;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.Post;
 import com.swp.entities.PostApprovals;
+import com.swp.entities.Report;
 import com.swp.services.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,9 +170,9 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     @PostMapping("/postRequest/reject/{id}")
     public PostApprovalsDto rejectPost(@PathVariable Integer id) {
         PostApprovals requestPost = postService.rejectPost(id);
-
         PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
-
+        Report report = postService.generateReportIfCountRejectedPostApprovalsForUserWithin24HoursThresholdExceeded(requestPost.getPost().getCreatedByUser().getUsId());
+        System.out.println(report);
         return postDto;
     }
 

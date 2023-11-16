@@ -32,6 +32,10 @@ public class PostService {
     private MediaRepository mediaRepository;
     @Autowired
     private TagRepository tagRepository;
+    @Autowired
+    private ReportRepository reportRepository;
+    @Autowired
+    private ReportTypeRepository reportTypeRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -300,6 +304,31 @@ public class PostService {
         postApprovals.setViewedByUser(currentUser);
         return postApprovalsRepository.save(postApprovals);
     }
+
+    public long countRejectedPostApprovalsForUserWithin24Hours(Integer userId) {
+        LocalDateTime twentyFourHoursAgo = LocalDateTime.now().minusHours(24);
+
+        return postApprovalsRepository.countByPost_CreatedByUser_UsIdAndStatusAndCreatedDateGreaterThan(
+                userId, "REJECTED", twentyFourHoursAgo
+        );
+    }
+
+    public Report generateReportIfCountRejectedPostApprovalsForUserWithin24HoursThresholdExceeded(Integer userId) {
+        long rejectedPostApprovalsCount = countRejectedPostApprovalsForUserWithin24Hours(userId);
+
+        if (rejectedPostApprovalsCount >= 5) {
+            // Create a Report object or take appropriate actions
+            Report report = new Report();
+            report.setReportType(reportTypeRepository.findById(2).orElseThrow());
+            report.setReportDetail("User: " + userRepository.findById(userId).orElseThrow().getDisplay_name()
+            + " has more than 4 rejected post requests within 24 hours");
+            report.setCreatedTime(LocalDateTime.now());
+            return reportRepository.save(report);
+        }
+
+        return null; // No report generated if the threshold is not exceeded
+    }
+
 
     public List<PostDto> mapPostsToPostDtos(List<Post> posts) {
         return posts.stream()

@@ -24,6 +24,7 @@ public class PostDto {
     private List<Award> awardList;
     private List<Comment> commentList;
     private List<Vote> voteList;
+    private String reviewedByTeacher;
 
     private Integer vote1Count = 0;
     private Integer vote2Count = 0;
@@ -142,5 +143,11 @@ public class PostDto {
 
     }
 
+    public String getReviewedByTeacher(){
+        if (postApprovals != null) {
+            return postApprovals.getViewedByUser().getDisplay_name();
+        }
+        return "N/A";
+    }
 }
 
