@@ -104,7 +104,24 @@
                     <h5 class="title-text">
                         Violation Accounts
                     </h5>
-                    
+                </div>
+
+                <div class="content" onclick="showContent('content12')">
+                    <h5 class="title-text">
+                        Manage Award
+                    </h5>
+                </div>
+
+                <div class="content" onclick="showContent('content14')">
+                    <h5 class="title-text">
+                        Manage Report
+                    </h5>
+                </div>
+
+                <div class="content" onclick="showContent('content16')">
+                    <h5 class="title-text">
+                        Manage Teacher Category
+                    </h5>
                 </div>
                 
             </div>
@@ -117,13 +134,14 @@
                 <div id="content1Content" style="display: none;">
                         
                         <div class="frame">
+                            <div class="title">
+                                <h1>Post Management</h1>
+                            </div>
                             
                             <div class="article-management">
 
                                 <div id="postTable"></div>
                             </div>
-                            <button class="styled-button">Update</button>
-                            <button class="styled-button">Flag Post</button>
                         </div>
 
                 </div>
@@ -134,20 +152,17 @@
                     
                     <div class="frame">
                         <div class="title">
-                            <h1>Title</h1>
+                            <h1>User Management</h1>
                         </div>
                         <div class="user-management">
                             <div class="search-bar">
-                              <input type="text" placeholder="Search Users" id="searchInput">
-                              <button onclick="searchUsers()">Search</button>
+                              
                             </div>
                           
                               <!-- Rows -->
                             <div id="userTable"></div>
        
                         </div>
-                        <button class="styled-button">Update</button>
-                        <button class="styled-button">Ban user</button>
                     </div>
 
                 </div>
@@ -156,6 +171,9 @@
                 <div id="content10Content" style="display: none;">
                     
                     <div class="frame">
+                        <div class="title">
+                            <h1>Violation Management</h1>
+                        </div>
                         <div class="violation-management">
                         
                               <!-- Rows -->
@@ -194,6 +212,101 @@
                         }
                     </script>
 
+                </div>
+
+                <!-- Award Management -->
+                <div id="content12Content" style="display: none;">
+                    
+                    <div class="frame">
+                        <div class="title">
+                            <h1>Award Management</h1>
+                        </div>
+                        <div class="award-management">
+                        
+                              <!-- Rows -->
+                            <div id="awardTable"></div>
+                        </div>
+
+                    </div>
+                    <script>
+                        function showDeletePopup() {
+                            var popup = document.getElementById("deletePopup");
+                            popup.style.display = "flex";
+                        }
+                
+                        function handleConfirmDelete() {
+                            
+                        }
+                
+                        function handleCancelDelete() {
+                            var popup = document.getElementById("deletePopup");
+                            popup.style.display = "none";
+                        }
+                    </script>
+
+                </div>
+
+                <!-- Report Management -->
+                <div id="content14Content" style="display: none;">
+                    
+                                    <div class="frame">
+                                        <div class="title">
+                                            <h1>Report Management</h1>
+                                        </div>
+                                        <div class="report-management">
+                                        
+                                              <!-- Rows -->
+                                            <div id="reportTable"></div>
+                                        </div>
+                
+                                    </div>
+                                    <script>
+                                        function showDeletePopup() {
+                                            var popup = document.getElementById("deletePopup");
+                                            popup.style.display = "flex";
+                                        }
+                                
+                                        function handleConfirmDelete() {
+                                            
+                                        }
+                                
+                                        function handleCancelDelete() {
+                                            var popup = document.getElementById("deletePopup");
+                                            popup.style.display = "none";
+                                        }
+                                    </script>
+                
+                </div>
+
+                <div id="content16Content" style="display: none;">
+                    
+                                    <div class="frame">
+                                        <div class="title">
+                                            <h1>Category Management</h1>
+                                        </div>
+                                        <div class="category-management">
+                                        
+                                              <!-- Rows -->
+                                            <div id="categoryTable"></div>
+                                        </div>
+                
+                                    </div>
+                                    <script>
+                                        function showDeletePopup() {
+                                            var popup = document.getElementById("deletePopup");
+                                            popup.style.display = "flex";
+                                        }
+                                
+                                        function handleConfirmDelete() {
+                                            
+                                        }
+                                
+                                        function handleCancelDelete() {
+                                            var popup = document.getElementById("deletePopup");
+                                            popup.style.display = "none";
+                                        }
+                                    </script>
+                
                 </div>
             </div>
 
@@ -242,7 +355,6 @@
         rightContents.forEach(content => content.style.display = 'none');
 
         // Show the selected content
-        console.log('Content ID:', contentId); // Debugging line
         document.getElementById(contentId + 'Content').style.display = 'block';
     }
 </script>
