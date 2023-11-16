@@ -53,12 +53,12 @@
                 FPT BLOG
             </a>
             
-            <a href="/create.html" class="p-2" style="border-left: 1px solid white;">
-                New post
+            <a href="/home.html" class="p-2" style="border-left: 1px solid white;">
+                Home
             </a>
-            
-            <a href="/bestartice.html" class="p-2">
-                Best articles
+
+            <a href="bestartice.html" class="p-2">
+                Best Article
             </a>
 
             <a href="teacherPage.html" class="p-2">
@@ -68,7 +68,7 @@
             <!-- Category  -->
             <div class="group inline-block relative">
                 <button class="py-2 px-4 rounded inline-flex items-center" id="category">
-                    <span class="mr-1" style="font-weight: 500;">Category</span>
+                    <span class="mr-1" style="font-weight: 600;">Category</span>
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
@@ -78,6 +78,7 @@
                 </ul>
             </div>
         </div>
+
         <div class="p-1">
             <form class="flex items-center">
                 <label for="simple-search" class="sr-only">Search</label>
@@ -140,7 +141,7 @@
                 <div id="postTag"></div>
 
                 <div class="inner-column">
-                    <div class="container-user">
+                    <div class="container-user" title="Name User">
                         <div class="by-user">
                             <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
                         </div>
@@ -151,7 +152,7 @@
                 </div>
 
                 <div class="inner-column">
-                    <div class="container-datetime">
+                    <div class="container-datetime" title="Date Time">
                         <div class="date-time">
                             <i class="fa-regular fa-calendar-days" style="color: #000000;"></i>
                         </div>
@@ -160,14 +161,32 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="inner-column">
+                    <div class="container-read" title="Reading Time">
+                        <div class="number-read">
+                            <i class="fa-regular fa-clock" style="color: #000000;"></i>
+                        </div>
+                        <div class="number-read" id="readingTime">
+                            <!-- Times Read -->
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="inner-column">
-                    <div class="container-tag">
+                    <div class="container-tag" title="Category">
                         <div class="tag-category">
-                            <i class="fa-solid fa-hashtag" style="color: #ff0000;"></i>
+                            <h2 >
+                                Category: 
+                            </h2>
                         </div>
-                        <div class="tag-category" id="postCategory">
-                            <!-- Tag Category -->
+                        <div class="container-tag-hover">
+                            <div class="tag-category">
+                                <i class="fa-solid fa-hashtag";></i>
+                            </div>
+                            <div class="tag-category" id="postCategory">
+                                <!-- Tag Category -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -246,7 +265,7 @@
     </footer>
 
     <script type="module" src='./js/postReview.js'></script>
-    <script type="module" src='./js/home.js'></script>
+    <script type="module" src='./js/postDetail.js'></script>
 </body>
 <script src="./js/tailwind.config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
