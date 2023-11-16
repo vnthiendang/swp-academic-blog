@@ -6,7 +6,7 @@ import { getAllTag } from "./Services/tag.service.js";
   
     tags.forEach(tag => {
       const link = document.createElement('a');
-      link.href = `pageByTag.html?tagId=${tag.id}`;
+      link.href = `pageByTag.html?tagName=${tag.tagName}`;
       link.innerHTML = `<div class="rounded-2xl bg-gray-300 py-1 text-center">${tag.tagName}</div>`;
       categoryList.appendChild(link);
     });

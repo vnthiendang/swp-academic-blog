@@ -91,17 +91,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const wordCount = words.length;
 
     // Check if the word count is less than 100
-    if (wordCount < 100) {
-      // Display an alert
-      alert('Your post detail should have at least 100 words.');
-      return; // Stop further execution
-    }
+    // if (wordCount < 100) {
+    //   // Display an alert
+    //   alert('Your post detail should have at least 100 words.');
+    //   return; // Stop further execution
+    // }
 
     const titleInput = document.querySelector('#updatePost input[type="text"]');
     //const allowCommentSelect = document.querySelector('#comment');
-    const categorySelect = document.querySelector('#categoryID');
+    const categorySelect = document.querySelector('#opt');
     const textEditor = document.querySelector('#text-editor');
     const tagList = Array.from(document.querySelectorAll("#tags li")).map(li => li.textContent);
+    console.log('Category: '+categorySelect.textContent);
 
     //const us = await userInfo();
     //const userId = us.userId;
@@ -123,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const model = {
-      categoryID: parseInt(categorySelect.textContent),
+      categoryName: categorySelect.textContent,
       title: titleInput.value,
       detail: textEditor.innerHTML,
       mediaList: [],

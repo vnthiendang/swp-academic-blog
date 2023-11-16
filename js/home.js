@@ -2,6 +2,7 @@ import {
   getAllApprovedPosts,
   searchedPosts,
 } from "../js/Services/post.service.js";
+import { userInfo } from "./Services/auth.service.js";
 import { getAllCategory } from "./Services/category.service.js";
 
 const options = {
@@ -9,6 +10,24 @@ const options = {
   day: "2-digit",
   hour: "2-digit", 
 };
+
+const showHeaderForTeacher = async () => {
+  try {
+    const usersInfo = await userInfo();
+    const userRole = usersInfo.role_id;
+
+    if (userRole === 'Teacher') {
+      // Display the form
+      document.getElementById('teacherPage').style.display = 'block';
+    } else {
+      // Hide the form
+      document.getElementById('teacherPage').style.display = 'none';
+    }
+  } catch (error) {
+  }
+};
+
+showHeaderForTeacher();
 
 // DISPLAY LIST APPROVED POSTS
 function displayPosts(posts) {
@@ -56,15 +75,15 @@ function displayPosts(posts) {
       grayTextSpan.textContent = " in ";
       createdByUser.appendChild(grayTextSpan);
 
-      const postTagLink = document.createElement("a");
-      postTagLink.href = "#";
+      const categoryLink = document.createElement("a");
+      categoryLink.href = `postByCategory.html?categoryName=${post.belongedToCategory}`;
 
       const postTagSpan = document.createElement("span");
       postTagSpan.className = "tag-name";
       postTagSpan.textContent = post.belongedToCategory;
-      postTagLink.appendChild(postTagSpan);
+      categoryLink.appendChild(postTagSpan);
 
-      createdByUser.appendChild(postTagLink);
+      createdByUser.appendChild(categoryLink);
       flexElement.appendChild(createdByUser);
 
       const dateTimeElement1 = document.createElement("div");
@@ -77,18 +96,6 @@ function displayPosts(posts) {
       const formattedTime = postCreatedTime.toLocaleString("en-US", options);
       dateTimeElement2.textContent = formattedTime;
       flexElement.appendChild(dateTimeElement2);
-
-      const dateTimeElement3 = document.createElement("div");
-      dateTimeElement3.className = "p-0.5 bg-gray-900 rounded-full mx-4";
-      flexElement.appendChild(dateTimeElement3);
-
-      const memberOnlyElement = document.createElement("div");
-      memberOnlyElement.textContent = "Member only";
-      flexElement.appendChild(memberOnlyElement);
-
-      const dateTimeElement4 = document.createElement("div");
-      dateTimeElement4.className = "p-0.5 bg-gray-900 rounded-full mx-4";
-      flexElement.appendChild(dateTimeElement4);
 
       if(post.awardList != null && post.awardList.length > 0){
         const elm4 = document.createElement("div");
@@ -109,6 +116,10 @@ function displayPosts(posts) {
       }
 
       if(post.voteList != null && post.voteList.length > 0){
+        const elm5 = document.createElement("div");
+        elm5.className = "p-0.5 bg-gray-900 rounded-full mx-4";
+        flexElement.appendChild(elm5);
+
         const voteIcon = document.createElement("i");
         voteIcon.className =
         "fa-regular fa-heart fa-beat-fade fa-xl";
@@ -179,9 +190,6 @@ function displayPosts(posts) {
         iconTagElement.appendChild(iconTagImg);
         flexItemsElement.appendChild(iconTagElement);
 
-        const tagLink1 = document.createElement("a");
-        tagLink1.href = "/pageByCategory.html?tagId";
-
         const postTagList = document.createElement("div");
         postTagList.className =
           "post-tag-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
@@ -191,8 +199,8 @@ function displayPosts(posts) {
           postTagList.appendChild(tagItem);
         });
 
-        tagLink1.appendChild(postTagList);
-        flexItemsElement.appendChild(tagLink1);
+        //tagLink1.appendChild(postTagList);
+        flexItemsElement.appendChild(postTagList);
       }
 
       postElement.appendChild(flexItemsElement);

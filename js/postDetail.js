@@ -190,7 +190,7 @@ form.addEventListener("submit", async (event) => {
 const showFormForStudent = async () => {
   try {
     const usersInfo = await userInfo();
-    const userRole = usersInfo.role_id; // Assuming the role is accessible as `userInfo.role`
+    const userRole = usersInfo.role_id;
 
     if (userRole === 'Student') {
       // Display the form

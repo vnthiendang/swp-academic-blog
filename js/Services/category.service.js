@@ -6,7 +6,7 @@ const getAllCategory = async () => {
   try {
     const response = await request.get(`category/GetAll`, {
       headers: {
-        Authorization: `Bearer ${token}` // Include the token in the request headers
+        Authorization: `Bearer ${token}`
       }
     });
 
@@ -20,4 +20,47 @@ const getAllCategory = async () => {
 
 export {
     getAllCategory
+};
+
+
+// // //              CATEGORY MANAGEMENT
+export const getAllTeacherCategory = async () => {
+  try {
+    const response = await request.get('categoryManagement/GetAll', {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    });
+
+    return response;
+  } catch (error) {
+    console.error('Error fetching category managements:', error);
+  }
+};
+
+export const getTeacherCategoryById = async (id) => {
+  try {
+    const response = await request.get(`categoryManagement/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    });
+
+    return response;
+  } catch (error) {
+    console.error('Error fetching category management by id:', error);
+  }
+};
+
+export const createTeacherCategory = async (model) => {
+  try {
+    const response = await request.post(`categoryManagement/post`, model,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error creating category management:', error);
+  } 
 };

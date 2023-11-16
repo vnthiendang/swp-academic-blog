@@ -2,7 +2,7 @@
 import { getPostByCategory } from './Services/post.service.js';
 
 const urlParams = new URLSearchParams(window.location.search);
-const categoryName = urlParams.get('categoryId');
+const categoryName = urlParams.get('categoryName');
 
 function displayPosts(response) {
 

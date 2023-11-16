@@ -150,25 +150,9 @@ export const getPostByCategory = async (categoryName) => {
   }
 };
 
-export const getPostByCate = async (categoryId) => {
+export const getPostByTags = async (tagName) => {
   try {
-    const response = await request.get(`post/GetAllApproved/filter?categoryId=${categoryId}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-      // params: {
-      //   categoryId
-      // }
-    });
-    return response;
-  } catch (error) {
-    console.error('Error retrieving post by vote count:', error);
-  }
-};
-
-export const getPostByTags = async (tagIds) => {
-  try {
-    const response = await request.get(`post/GetAllApproved?tagIds=${tagIds}`, {
+    const response = await request.get(`post/GetAllApproved?tagName=${tagName}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -178,20 +162,7 @@ export const getPostByTags = async (tagIds) => {
     });
     return response;
   } catch (error) {
-    console.error('Error retrieving post:', error);
-  }
-};
-
-export const getPostSortBy = async () => {
-  try {
-    const response = await request.get(`post/GetAllApproved/filter?sortDirection`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    });
-    return response;
-  } catch (error) {
-    console.error('Error retrieving post:', error);
+    console.error('Error retrieving post by tag:', error);
   }
 };
 

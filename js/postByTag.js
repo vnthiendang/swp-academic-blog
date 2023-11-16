@@ -1,7 +1,7 @@
 import { getPostByTags } from "./Services/post.service.js";
 
 const urlParams = new URLSearchParams(window.location.search);
-const tagId = urlParams.get('tagId');
+const tagName = urlParams.get('tagName');
 
 function displayPosts(response) {
 
@@ -76,7 +76,7 @@ function displayPosts(response) {
 }
 
   const displayAllPosts = () => {
-    getPostByTags(tagId)
+    getPostByTags(tagName)
       .then((posts) => {
         displayPosts(posts);
       })

@@ -1,10 +1,7 @@
 import {
   getAllApprovedPosts,
-  getMostVotePost,
-  getPostByCate,
   getPostByCategory,
   getPostByTags,
-  getPostSortBy,
   searchedPosts,
 } from "./Services/post.service.js";
 import { getAllCategory } from "./Services/category.service.js";
@@ -288,18 +285,34 @@ const displayTags = async (tags) => {
     categoryList.appendChild(listItem);
 
     link.addEventListener("click", async () => {
-    const posts = await getPostByTags(tag.tagNames);
+    const posts = await getPostByTags(tag.tagName);
     displayPosts(posts);
       
     });
   });
 };
 
-const sortButton = document.getElementById("sort-button");
-sortButton.addEventListener("click", async () => {
-  const posts = await getPostSortBy();
-  displayPosts(posts);
-});
+const sortByOption = [
+  { value: "likeCount", text: "Like Count" },
+  { value: "dislikeCount", text: "Dislike Count" },
+  { value: "createdDate", text: "Created Date" },
+  { value: "awardCount", text: "Award Count" }
+];
+
+const sortButton = async (sortByOption) =>{
+  const sortByList = document.querySelector(".sortBy absolute hidden text-gray-700 pt-2 group-hover\\:block");
+
+  sortByOption.forEach((sortBy) => {
+    const listItem = document.createElement("li");
+    const link = document.createElement("a");
+    link.className = "rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white";
+    link.textContent = sortBy.text;
+
+    listItem.appendChild(link);
+    sortByList.appendChild(listItem);
+  });
+
+};
 
 const sortByVote = document.getElementById("sortByVote");
 sortByVote.addEventListener("click", async () => {
