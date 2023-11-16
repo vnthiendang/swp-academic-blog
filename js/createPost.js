@@ -27,14 +27,11 @@ document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById('createPost');
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-  
-      // Get the text content of the editor
+
   const text = quill.getText();
 
-  // Split the text into words using a space as a delimiter
   const words = text.split(/\s+/);
 
-  // Get the word count
   const wordCount = words.length;
 
   // Check if the word count is less than 100
@@ -48,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //const allowCommentSelect = document.querySelector('#comment');
     const categorySelect = document.querySelector('#Category');
     const textEditor = document.querySelector('#text-editor');
-    const tagList = Array.from(document.querySelectorAll("#tags li")).map(li => li.textContent);
+    const tagList = Array.from(document.querySelectorAll("#tags li")).map(li => parseInt(li.textContent));
       
     const us = await userInfo();
     const userId = us.userId;
@@ -61,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let i = 0; i < imageInput.files.length; i++) {
       formData.append('mediaList', imageInput.files[i]);
     }
-    formData.append('tagList', tagList);
+    formData.append('tagList', []);
 
     const config = {
       headers: {
@@ -73,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
       //const response = await axios.post('http://localhost:8080/blog/post/create', formData, config);
       const res = await createPost(formData, config);
 
-      if (res != null) {
+      if (res !== null) {
         alert('Your Post created successfully!');
         window.location.href = '/home.html';
       } else {
@@ -85,4 +82,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
-
