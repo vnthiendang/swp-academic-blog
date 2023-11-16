@@ -44,6 +44,12 @@ function displayPost() {
         imageElement.src = `data:image/jpeg;base64, ${post.mediaList[0]}`;
         // imageElement.style.width = '240px'; 
         // imageElement.style.height = 'auto';
+
+        const readingTimeElement = document.getElementById('readingTime');
+        const minuteText = post.readingTime === 1 ? 'minute' : 'minutes';
+        readingTimeElement.textContent = post.readingTime + ' ' + minuteText + '' || '';
+        document.getElementById('postVote').textContent = post.vote1Count ?? '#';
+        document.getElementById('postVote2').textContent = post.vote2Count ?? '#';
       }
 
     })
