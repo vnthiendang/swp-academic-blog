@@ -146,3 +146,34 @@
     margin: 1px;
 }
 /* ================================================================ */
+#header {
+    height: 50px;
+}
+
+#category {
+    /* background-color: #4CAF50; */
+    border-right: 1px solid white;
+    /* border-left: 1px solid white; */
+}
+
+#category:hover {
+    background-color: #4CAF50;
+}
+
+#taskbar .p-2 {
+    border-right: 1px solid white;
+    padding-right: 20px;
+    padding-left: 20px; 
+    font-weight: 700;
+}
+
+.p-logo {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.p-2:hover {
+    color: black;
+    background-color: white;
+    text-decoration: underline;
+}

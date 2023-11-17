@@ -25,13 +25,11 @@
                 FPT BLOG
             </a>
             
+            
             <a href="/create.html" class="p-2" style="border-left: 1px solid white;">
                 New post
             </a>
             
-            <!-- <a href="/bestartice.html" class="p-2">
-                Best articles
-            </a> -->
 
             <a href="teacherPage.html" class="p-2" id="teacherPage">
                 Post Request
@@ -165,19 +163,43 @@
             </div>
 
                 <div class="group inline-block relative">
-                    <button class="py-2 px-4 rounded inline-flex items-center">
+                    <!-- <button class="py-2 px-4 rounded inline-flex items-center">
                         <span class="mr-20">Tag</span>
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                         </svg>
-                    </button>
-                    <ul id="tagList" class="absolute hidden text-gray-700 pt-2">
-                        <!-- Your tag items go here -->
-                        <li><a href="#">Tag 1</a></li>
-                        <li><a href="#">Tag 2</a></li>
-                        <li><a href="#">Tag 3</a></li>
-                        <!-- Add more tags as needed -->
-                    </ul>
+                    </button> -->
+                    <form> 
+                        <div class="multipleSelection"> 
+                            <div class="selectBox"
+                                onclick="showCheckboxes()"> 
+                                <select> 
+                                    <option>Select options</option> 
+                                </select> 
+                                <div class="overSelect"></div> 
+                            </div> 
+                
+                            <div id="checkBoxes"> 
+                                <label for="first"> 
+                                    <input type="checkbox" id="first" /> 
+                                    checkBox1 
+                                </label> 
+                                
+                                <label for="second"> 
+                                    <input type="checkbox" id="second" /> 
+                                    checkBox2 
+                                </label> 
+                                <label for="third"> 
+                                    <input type="checkbox" id="third" /> 
+                                    checkBox3 
+                                </label> 
+                                <label for="fourth"> 
+                                    <input type="checkbox" id="fourth" /> 
+                                    checkBox4 
+                                </label> 
+                            </div> 
+                        </div> 
+                    </form> 
                 </div>
 
                 <div class="group inline-block relative">

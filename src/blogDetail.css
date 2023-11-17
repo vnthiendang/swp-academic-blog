@@ -203,6 +203,7 @@ Main {
     background-color: white;
     text-decoration: underline;
 }
+
 /*========================== Header ==============================*/
 #footer {
     /* background-color: antiquewhite; */
@@ -210,3 +211,20 @@ Main {
     border-top: 1px solid gray;
     border-radius: 0%;
 }
+/*========================== Footer ==============================*/
+
+.button-report {
+    padding: 15%;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: antiquewhite;
+}
+
+.button-report:hover {
+    transition-duration: 0.5s;
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+    background-color: red;
+}
+/* =============================================================== */
