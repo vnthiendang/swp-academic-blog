@@ -33,6 +33,7 @@ public class Report {
     @Column(name = "created_date")
     private LocalDateTime createdTime;
 
+
     @Column(name = "status")
     private String status;
 
