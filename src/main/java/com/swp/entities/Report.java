@@ -33,6 +33,20 @@ public class Report {
     @Column(name = "created_date")
     private LocalDateTime createdTime;
 
+
+    @Column(name = "status")
+    private String status;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "\"reviewed_by\"")
+    private User viewedByUser;
+
+    @Column(name = "reviewed_time")
+    private LocalDateTime reviewedTime;
+
+    @Column(name = "reported_object_link")
+    private String reportedObjectLink;
+
     @OneToMany(mappedBy = "report", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ReportViolation> reportViolations = new ArrayList<>();
 

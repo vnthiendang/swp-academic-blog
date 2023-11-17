@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -33,4 +34,12 @@ public class Comment {
     @JoinColumn(name = "parent_comment_id")
     private Comment parentComment;
 
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
 }
