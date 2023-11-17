@@ -58,6 +58,9 @@ public class User implements UserDetails {
     @Column(name = "created_date")
     private LocalDateTime created_date;
 
+    @Column(name = "contribution_point")
+    private Integer contributionPoint;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

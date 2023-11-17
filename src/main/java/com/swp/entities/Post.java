@@ -37,6 +37,12 @@ public class Post {
     @JoinColumn(name = "belonged_to_category_id")
     private Category belongedToCategory;
 
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
+
     @OneToOne(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private PostApprovals postApprovals;
 

@@ -30,4 +30,8 @@ public class PostApprovals {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "\"viewed_by_user_id\"")
     private User viewedByUser;
+
+    @Column(name = "teacher_message")
+    private String teacherMessage;
+
 }

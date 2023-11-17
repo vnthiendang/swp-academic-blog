@@ -34,6 +34,9 @@ public class Category {
     @OneToMany(mappedBy = "belongedToCategory", fetch = FetchType.LAZY)
     private List<Post> posts;
 
+    @Column(name = "description")
+    private String description;
+
     public Category(int cateId) {
         this.cateId = cateId;
     }
