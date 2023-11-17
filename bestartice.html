@@ -129,24 +129,21 @@
         <div class="wapper-title">
             <div class="column">
                 <div class="inner-column">
-                    <h2> DIT ME MAy</h2>
-                    <ul>
-                        <li>Item 1</li>
-                        <li>Item 2</li>
-                        <li>Item 3</li>
-                    </ul>
-                </div>
-
-                <div class="inner-column">
-                    <h2> DIT ME MAy</h2>
-                </div>
-
-                <div class="inner-column">
-                    <h2> DIT ME MAy</h2>
-                </div>
-
-                <div class="inner-column">
-                    <h2> DIT ME MAy</h2>
+                    <form class="flex items-center" id="search-form">
+                        <label for="simple-search" class="sr-only">Search</label>
+                        <div class="relative w-full">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                                </svg>
+                            </div>
+                            <input type="text" id="simple-search"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Search blog, tag, ..." required>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -169,13 +166,17 @@
 
                 <div class="group inline-block relative">
                     <button class="py-2 px-4 rounded inline-flex items-center">
-                        <span class="mr-2">Tag</span>
+                        <span class="mr-20">Tag</span>
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                         </svg>
                     </button>
-                    <ul class="absolute hidden text-gray-700 pt-2 group-hover:block">
-
+                    <ul id="tagList" class="absolute hidden text-gray-700 pt-2">
+                        <!-- Your tag items go here -->
+                        <li><a href="#">Tag 1</a></li>
+                        <li><a href="#">Tag 2</a></li>
+                        <li><a href="#">Tag 3</a></li>
+                        <!-- Add more tags as needed -->
                     </ul>
                 </div>
 
@@ -199,6 +200,39 @@
                         </svg>
                     </button>
                 </div>
+
+                <div class="group inline-block relative" style="margin-left: 10%;">
+                    <button id="sortByVote" class="py-2 px-4 rounded inline-flex items-center">
+                        Filter
+                    </button>
+                </div>
+
+                <div class="start-end-date" style="display: flex; align-items: center; margin-top: 1%; margin-left: 3px;">
+                    <div>
+                        <h2 style="margin-right: 10px;">Start date</h2>
+                    </div>
+                    
+                    <div class="group ">
+                        <button id="sort-button" class="py-2 px-4 rounded inline-flex items-center">
+                            <span class="sortBy">
+                                <input type="date" name="dto" id="date_timepicker_end">
+                            </span>
+                        </button>
+                    </div>
+
+                    <div>
+                        <h2 style="margin-left: 10px; margin-right: 10px;">End date</h2>
+                    </div>
+
+                    <div class="group inline-block relative">
+                        <button id="sort-button" class="py-2 px-4 rounded inline-flex items-center">
+                            <span class="sortBy">
+                                <input type="date" name="dto" id="date_timepicker_end">
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                
 
                 <!-- Main Post -->
                 <div class="grid grid-cols-6 gap-4 bg-white" id="post">

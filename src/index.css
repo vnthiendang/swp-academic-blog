@@ -153,11 +153,19 @@ Main {
 .container-tag {
     display: flex;
 }
+.container-tag-hover {
+    display: flex;
+}
 .tag-category {
-    color: red;
+    color: black;
     font-size: 20px;
     font-weight: 600;
     margin: 1px;
+}
+
+.container-tag-hover:hover {
+    border-radius: 10px;
+    background-color: antiquewhite;
 }
 /* ================================================================ */
 .button {
@@ -182,11 +190,11 @@ Main {
     background-color: #4CAF50;
 }
 
-.p-2 {
+#taskbar .p-2 {
     border-right: 1px solid white;
     padding-right: 20px;
     padding-left: 20px;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 .p-logo {

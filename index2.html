@@ -171,6 +171,38 @@
                     </div>
                 </div>
                 
+                <script>
+                    function toggleLikeIcon() {
+                        var likeIcon = document.getElementById('likeIcon');
+                        
+                        // Toggle between the regular and solid thumbs-up icons
+                        if (likeIcon.classList.contains('fa-regular')) {
+                            likeIcon.classList.remove('fa-regular');
+                            likeIcon.classList.add('fa-solid');
+                            likeIcon.style.color = '#000000'; // Set the color as needed
+                        } else {
+                            likeIcon.classList.remove('fa-solid');
+                            likeIcon.classList.add('fa-regular');
+                            likeIcon.style.color = '#000000'; // Set the color as needed
+                        }
+                    }
+                
+                    function toggleDislikeIcon() {
+                        var dislikeIcon = document.getElementById('dislikeIcon');
+                        
+                        // Toggle between the regular and solid thumbs-down icons
+                        if (dislikeIcon.classList.contains('fa-regular')) {
+                            dislikeIcon.classList.remove('fa-regular');
+                            dislikeIcon.classList.add('fa-solid');
+                            dislikeIcon.style.color = '#0c0d0d'; // Set the color as needed
+                        } else {
+                            dislikeIcon.classList.remove('fa-solid');
+                            dislikeIcon.classList.add('fa-regular');
+                            dislikeIcon.style.color = '#000000'; // Set the color as needed
+                        }
+                    }
+                </script>
+                
                 
                 <div class="inner-column">
                     <div class="container-tag" title="Category">
