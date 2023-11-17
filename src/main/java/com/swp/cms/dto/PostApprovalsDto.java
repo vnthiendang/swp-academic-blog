@@ -13,6 +13,7 @@ public class PostApprovalsDto {
     private LocalDateTime createdDate;
     private Post post;
     private User viewedByUser;
+    private String teacherMessage;
     public String getViewedByUser() {
         if (viewedByUser != null) {
             return viewedByUser.getDisplay_name();

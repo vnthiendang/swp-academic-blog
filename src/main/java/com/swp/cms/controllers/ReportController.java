@@ -27,8 +27,11 @@ public class ReportController {
     }
 
     @GetMapping("/GetAll")
-    public List<ReportDto> getAll() {
+    public List<ReportDto> getAll(@RequestParam(name = "userId", required = false) Integer userId) {
         List<Report> cate = reportService.getAll();
+        if (userId != null){
+            cate = reportService.GetReportsByUserId(cate, userId);
+        }
         List<ReportDto> reportDtos = cate.stream()
                 .map(report -> modelMapper.map(report, ReportDto.class))
                 .collect(Collectors.toList());

@@ -25,8 +25,11 @@ public class CategoryManagementController {
     }
 
     @GetMapping("/GetAll")
-    public List<CategoryManagementDto> getAll() {
+    public List<CategoryManagementDto> getAll(@RequestParam(name = "userId", required = false) Integer userId) {
         List<CategoryManagement> categoryManagements = categoryManagementService.getAll();
+        if (userId != null){
+            categoryManagements = categoryManagementService.GetCategoryManagementsByUserId(categoryManagements, userId);
+        }
         List<CategoryManagementDto> dtos = categoryManagements.stream()
                 .map(categoryManagement -> modelMapper.map(categoryManagement, CategoryManagementDto.class))
                 .collect(Collectors.toList());

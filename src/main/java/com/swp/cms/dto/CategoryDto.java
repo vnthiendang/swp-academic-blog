@@ -11,8 +11,8 @@ import java.time.OffsetDateTime;
 public class CategoryDto {
     private Integer id;
     private String content;
-
     private LocalDateTime createdDate;
+    private String description;
 
     private Category parentCategory;
     public String getParentCategory() {

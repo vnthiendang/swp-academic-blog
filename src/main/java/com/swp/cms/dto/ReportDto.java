@@ -16,6 +16,10 @@ public class ReportDto {
     private String reportDetail;
     private LocalDateTime createdTime;
     private List<ViolationRule> violationRuleList;
+    private String status;
+    private LocalDateTime reviewedTime;
+    private User reviewedBy;
+    private String reportedObjectLink;
 
     public String getReportedByUser() {
         if (reportedByUser != null) {
@@ -40,6 +44,13 @@ public class ReportDto {
         }
 
         return Collections.emptyList(); // or handle the case when postViolationRuleList is null
+    }
+
+    public String getReviewedBy() {
+        if (reviewedBy != null) {
+            return this.reviewedBy.getDisplay_name();
+        }
+        return "system";
     }
 
 }
