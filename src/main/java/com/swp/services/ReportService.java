@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 @Service
@@ -91,6 +92,7 @@ public class ReportService {
         return reportRepository.save(report); // Save and return the updated post
     }
 
+
     public List<Report> GetReportsByUserId(List<Report> cate, Integer userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userId));
@@ -98,4 +100,5 @@ public class ReportService {
                 .filter(report -> Integer.parseInt(report.getReportedObjectLink())== userId)
                 .collect(Collectors.toList());
     }
+
 }
