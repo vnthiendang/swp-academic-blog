@@ -29,6 +29,26 @@ const showHeaderForTeacher = async () => {
 
 showHeaderForTeacher();
 
+const showHeaderForTeacher2 = async () => {
+  try {
+    const usersInfo = await userInfo();
+    const userRole = usersInfo.role_id;
+
+    if (userRole === 'Teacher') {
+      // Display the form
+      document.getElementById('teacherPage2').style.display = 'block';
+    } else {
+      // Hide the form
+      document.getElementById('teacherPage2').style.display = 'none';
+    }
+  } catch (error) {
+    // Handle errors if needed
+  }
+};
+
+showHeaderForTeacher2();
+
+
 // DISPLAY LIST APPROVED POSTS
 function displayPosts(posts) {
   const postContainer = document.querySelector("#post .col-span-6");

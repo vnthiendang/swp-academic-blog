@@ -14,28 +14,37 @@
 
 <body>
     <!--header-->
-    <header class="flex items-center justify-between w-full bg-black text-white">
-        <div class="flex items-center">
-            <a href="home.html" class="items-start justify-center">
+    <header class="flex items-center justify-between w-full bg-black text-white" id="header">
+        <!-- Logo and title -->
+        <div class="flex items-center" id="taskbar">
+            <!-- <a href="/home.html" class="items-start justify-center">
                 <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
-            </a>
-
-            <a href="/home.html" class="p-2">
+            </a> -->
+            
+            <a href="/home.html" class="p-logo" style="font-size: 40px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque; margin-right: 10px;">
                 FPT BLOG
             </a>
-
-            <a href="/home.html" class="p-2">
-                Home
+            
+            <a href="/create.html" class="p-2" style="border-left: 1px solid white;">
+                New post
             </a>
             
             <a href="/bestartice.html" class="p-2">
                 Best articles
             </a>
-            
+
+            <a href="teacherPage.html" class="p-2" id="teacherPage">
+                Post Request
+            </a>
+
+            <a href="/giveAward.html" class="p-2" id="teacherPage2">
+                Give Award
+            </a>
+
             <!-- Category  -->
-            <div class="group inline-block relative">
-                <button class="py-2 px-4 rounded inline-flex items-center">
-                    <span class="mr-1">Category</span>
+            <!-- <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center" id="category">
+                    <span class="mr-1" style="font-weight: 700;">Category</span>
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
@@ -43,7 +52,21 @@
                 <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
                     
                 </ul>
-            </div>
+            </div> -->
+            
+            <!--ranking-->
+            <!-- <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center" id="rank">
+                    <span class="mr-1" style="font-weight: 500;">Rank</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    
+                </ul>
+            </div> -->
+
         </div>
         <div class="p-1 flex">
             <form class="flex items-center" id="search-form">
@@ -70,19 +93,41 @@
                     <span class="sr-only">Search</span>
                 </button>
             </form>
-            <div class="flex items-center justify-center ">
+            <div class="flex items-center justify-center">
                 <div class="mx-5">
+                    <a href="profile.html" class="mx-5">
                     <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
                         alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                    </a>
                 </div>
+
                 <div class="pr-2">
-                    
+
                     <div class="cursor-pointer">
-                        <a href="/login.html">Log out</a>
-                        
+                        <a href="/login.html">Log Out</a>
                     </div>
+
                 </div>
             </div>
+            
+            <script>
+                var prevScrollPos = window.pageYOffset;
+                var header = document.getElementById("header");
+        
+                window.onscroll = function() {
+                    var currentScrollPos = window.pageYOffset;
+                    
+                    if (prevScrollPos > currentScrollPos) {
+                        // Scrolling up
+                        header.style.top = "0";
+                    } else {
+                        // Scrolling down
+                        header.style.top = "-100px"; // Adjust the value based on your header height
+                    }
+        
+                    prevScrollPos = currentScrollPos;
+                }
+            </script>
         </div>
 
     </header>
@@ -230,7 +275,9 @@
     </script>
 
     <script type="module" src="./js/profile.js"></script>
+    <script type="module" src='./js/home.js'></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+
     
 </html>

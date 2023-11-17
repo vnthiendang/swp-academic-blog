@@ -248,8 +248,6 @@
   
   .pagination a:hover:not(.active) {background-color: #ddd;}
 
-
-
 .wapper-title {
     width: 70%;
     /* padding: 20px; */
@@ -289,4 +287,18 @@
     .column {
         width: 80%;
     }
+}
+
+/* ======================================== Header ========================================= */
+
+#button-filter {
+    background-color: beige;
+}
+
+#button-filter:hover {
+    transition-duration: 0.5s;
+    font-size: 19px;
+    font-weight: 700;
+    color: white;
+    background-color: blue;
 }

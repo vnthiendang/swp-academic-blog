@@ -29,10 +29,13 @@
             <a href="/create.html" class="p-2" style="border-left: 1px solid white;">
                 New post
             </a>
-            
 
             <a href="teacherPage.html" class="p-2" id="teacherPage">
                 Post Request
+            </a>
+
+            <a href="/giveAward.html" class="p-2" id="teacherPage2">
+                Give Award
             </a>
 
             <!-- Category  -->
@@ -162,6 +165,7 @@
                 </ul>
             </div>
 
+                <!-- Tag -->
                 <div class="group inline-block relative">
                     <!-- <button class="py-2 px-4 rounded inline-flex items-center">
                         <span class="mr-20">Tag</span>
@@ -169,39 +173,137 @@
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                         </svg>
                     </button> -->
-                    <form> 
-                        <div class="multipleSelection"> 
-                            <div class="selectBox"
-                                onclick="showCheckboxes()"> 
-                                <select> 
-                                    <option>Select options</option> 
-                                </select> 
-                                <div class="overSelect"></div> 
-                            </div> 
+
+                    <button class="py-2 px-4 rounded inline-flex items-center">
+                        <span class="mr-auto">
+                            <form class="tag"> 
+                                <div class="multipleSelection"> 
+                                    <div class="selectBox"
+                                        onclick="sortbytag()"> 
+                                        <select> 
+                                            <option>Tag</option> 
+                                        </select> 
+                                        <div class="overSelect"></div> 
+                                    </div> 
+                        
+                                    <div id="sort-tag">
+                                        <label for="selectAllTag" style="background-color: burlywood;"> 
+                                            <input type="checkbox" id="selectAllTag" onclick="toggleAllTag()" /> 
+                                            Select All
+                                        </label> 
+                                    
+                                        <label for="firstTag"> 
+                                            <input type="checkbox" id="firstTag" /> 
+                                            checkBox1 
+                                        </label> 
+                                    
+                                        <label for="secondTag"> 
+                                            <input type="checkbox" id="secondTag" /> 
+                                            checkBox2 
+                                        </label> 
+                                    
+                                        <label for="thirdTag"> 
+                                            <input type="checkbox" id="thirdTag" /> 
+                                            checkBox3 
+                                        </label> 
+                                    
+                                        <label for="fourthTag"> 
+                                            <input type="checkbox" id="fourthTag" /> 
+                                            checkBox4 
+                                        </label> 
+                                    </div>
+                                    
+                                </div> 
+                            </form>
+                        </span>
+                    </button>
+ 
+                    <style> 
+                        h1 { 
+                            color: green; 
+                        } 
+
+                        .multipleSelection { 
+                            width: 100px; 
+                            background-color: #BCC2C1; 
+                        } 
                 
-                            <div id="checkBoxes"> 
-                                <label for="first"> 
-                                    <input type="checkbox" id="first" /> 
-                                    checkBox1 
-                                </label> 
-                                
-                                <label for="second"> 
-                                    <input type="checkbox" id="second" /> 
-                                    checkBox2 
-                                </label> 
-                                <label for="third"> 
-                                    <input type="checkbox" id="third" /> 
-                                    checkBox3 
-                                </label> 
-                                <label for="fourth"> 
-                                    <input type="checkbox" id="fourth" /> 
-                                    checkBox4 
-                                </label> 
-                            </div> 
-                        </div> 
-                    </form> 
+                        .selectBox { 
+                            position: relative; 
+                        } 
+                
+                        .selectBox select { 
+                            width: 100%; 
+                            font-weight: bold; 
+                        } 
+                
+                        .overSelect { 
+                            position: absolute; 
+                            left: 0; 
+                            right: 0; 
+                            top: 0; 
+                            bottom: 0; 
+                        } 
+                        #selectAllTag{
+                            display: none;
+                        }
+                        #sort-tag { 
+                            display: none; 
+                            border: 1px #8DF5E4 solid; 
+                        } 
+                
+                        #sort-tag label { 
+                            display: block; 
+                        } 
+                
+                        #sort-tag label:hover { 
+                            background-color: #4F615E; 
+                        } 
+                    </style> 
+
+                    <script> 
+                        var showTag = true; 
+                
+                        function sortbytag() { 
+                            var checkboxes = 
+                                document.getElementById("sort-tag"); 
+                
+                            if (showTag) { 
+                                checkboxes.style.display = "block"; 
+                                showTag = false; 
+                            } else { 
+                                checkboxes.style.display = "none"; 
+                                showTag = true; 
+                            } 
+                        } 
+                    </script> 
+
+                    <script>
+                        var showTag = true;
+                    
+                        function sortbytag() {
+                            var checkboxes = document.getElementById("sort-tag");
+                    
+                            if (showTag) {
+                                checkboxes.style.display = "block";
+                                showTag = false;
+                            } else {
+                                checkboxes.style.display = "none";
+                                showTag = true;
+                            }
+                        }
+                    
+                        function toggleAllTag() {
+                            var checkboxes = document.getElementById("sort-tag").getElementsByTagName('input');
+                    
+                            for (var i = 0; i < checkboxes.length; i++) {
+                                checkboxes[i].checked = !checkboxes[i].checked;
+                            }
+                        }
+                    </script>
                 </div>
 
+                <!-- Sort By -->
                 <div class="group inline-block relative">
                     <button id="sort-button" class="py-2 px-4 rounded inline-flex items-center">
                         <span class="sortBy">Sort By</span>
@@ -214,21 +316,153 @@
                     </ul>
                 </div>
 
+                <!-- Sort Direction -->
                 <div class="group inline-block relative">
-                    <button id="sortByVote" class="py-2 px-4 rounded inline-flex items-center">
+                    <!-- <button id="sortByVote" class="py-2 px-4 rounded inline-flex items-center">
                         <span class="mostVotedPost">Sort Direction</span>
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                         </svg>
+                    </button> -->
+
+                    <button class="py-2 px-4 rounded inline-flex items-center">
+                        <span class="mr-auto">
+                            <form class="sort-direction"> 
+                                <div class="multipleSelection"> 
+                                    <div class="selectBox"
+                                        onclick="sortbydirection()"> 
+                                        <select> 
+                                            <option>Sort Direction</option> 
+                                        </select> 
+                                        <div class="overSelect"></div> 
+                                    </div> 
+                        
+                                    <div id="sort-direction"> 
+                                        <label for="selectAllDirection" style="background-color: burlywood;"> 
+                                            <input type="checkbox" id="selectAllDirection" onclick="toggleAllDirection()" /> 
+                                            Select All
+                                        </label>
+
+                                        <label for="first"> 
+                                            <input type="checkbox" id="firstTagg" /> 
+                                            checkBox1 
+                                        </label> 
+                                        
+                                        <label for="second"> 
+                                            <input type="checkbox" id="secondTagg" /> 
+                                            checkBox2 
+                                        </label> 
+                                        <label for="third"> 
+                                            <input type="checkbox" id="thirdTagg" /> 
+                                            checkBox3 
+                                        </label> 
+                                        <label for="fourth"> 
+                                            <input type="checkbox" id="fourthTagg" /> 
+                                            checkBox4 
+                                        </label> 
+                                    </div> 
+                                </div> 
+                            </form>
+                        </span>
+                        
                     </button>
+ 
+                    <style> 
+                        h1 { 
+                            color: green; 
+                        } 
+
+                        .multipleSelection { 
+                            width: 150px; 
+                            background-color: whitesmoke; 
+                        } 
+                
+                        .selectBox { 
+                            position: relative; 
+                        } 
+                
+                        .selectBox select { 
+                            width: 100%; 
+                            font-weight: bold; 
+                        } 
+                
+                        .overSelect { 
+                            position: absolute; 
+                            left: 0; 
+                            right: 0; 
+                            top: 0; 
+                            bottom: 0; 
+                        } 
+                        
+                        #selectAllDirection {
+                            display: none;
+                        }
+                        
+                        #sort-direction { 
+                            display: none; 
+                            border: 1px #8DF5E4 solid; 
+                        } 
+                
+                        #sort-direction label { 
+                            display: block; 
+                        } 
+                
+                        #sort-direction label:hover { 
+                            background-color: wheat; 
+                        }
+                    </style> 
+
+                    <script> 
+                        var showDirection = true; 
+                
+                        function sortbydirection() { 
+                            var checkboxes = 
+                                document.getElementById("sort-direction"); 
+                
+                            if (showDirection)    { 
+                                checkboxes.style.display = "block"; 
+                                showDirection = false; 
+                            } else { 
+                                checkboxes.style.display = "none"; 
+                                showDirection = true; 
+                            } 
+                        } 
+                    </script> 
+                    
+                    <script>
+                        var showDirection = true;
+                    
+                        function sortbydirection() {
+                            var checkboxes = document.getElementById("sort-direction");
+                    
+                            if (showDirection) {
+                                checkboxes.style.display = "block";
+                                showDirection = false;
+                            } else {
+                                checkboxes.style.display = "none";
+                                showDirection = true;
+                            }
+                        }
+                    
+                        function toggleAllDirection() {
+                            var checkboxes = document.getElementById("sort-direction").getElementsByTagName('input');
+                    
+                            for (var i = 0; i < checkboxes.length; i++) {
+                                checkboxes[i].checked = !checkboxes[i].checked;
+                            }
+                        }
+                    </script>
+                    
                 </div>
 
+                <!-- Button Filter -->
                 <div class="group inline-block relative" style="margin-left: 10%;">
-                    <button id="sortByVote" class="py-2 px-4 rounded inline-flex items-center">
+                    <button id="button-filter" class="py-2 px-4 rounded inline-flex items-center">
                         Filter
                     </button>
                 </div>
 
+                <!-- Start End Date -->
                 <div class="start-end-date" style="display: flex; align-items: center; margin-top: 1%; margin-left: 3px;">
                     <div>
                         <h2 style="margin-right: 10px;">Start date</h2>
