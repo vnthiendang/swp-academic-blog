@@ -151,10 +151,10 @@ const displayVoteType = (types) => {
   });
 };
 
-getVoteType()
-  .then((votes) => {
-    displayVoteType(votes);
-});
+// getVoteType()
+//   .then((votes) => {
+//     displayVoteType(votes);
+// });
 
 
 const form = document.getElementById("comment");
@@ -165,9 +165,8 @@ form.addEventListener("submit", async (event) => {
   const commentText = document.getElementById("cmt").value.trim();
 
   if (commentText === "") {
-    // Display an alert
     alert("Please enter a valid comment.");
-    return; // Stop further execution
+    return; 
   }
 
   const us = await userInfo();
@@ -208,32 +207,66 @@ const showFormForStudent = async () => {
 
 showFormForStudent();
 
-async function handleVotePost() {
+function toggleLikeIcon() {
+  var likeIcon = document.getElementById('likeIcon');
+  
+  // Toggle between the regular and solid thumbs-up icons
+  if (likeIcon.classList.contains('fa-regular')) {
+      likeIcon.classList.remove('fa-regular');
+      likeIcon.classList.add('fa-solid');
+      likeIcon.style.color = '#000000'; // Set the color as needed
+  } else {
+      likeIcon.classList.remove('fa-solid');
+      likeIcon.classList.add('fa-regular');
+      likeIcon.style.color = '#000000'; // Set the color as needed
+  }
+}
+
+function toggleDislikeIcon() {
+  var dislikeIcon = document.getElementById('dislikeIcon');
+  
+  // Toggle between the regular and solid thumbs-down icons
+  if (dislikeIcon.classList.contains('fa-regular')) {
+      dislikeIcon.classList.remove('fa-regular');
+      dislikeIcon.classList.add('fa-solid');
+      dislikeIcon.style.color = '#0c0d0d'; // Set the color as needed
+  } else {
+      dislikeIcon.classList.remove('fa-solid');
+      dislikeIcon.classList.add('fa-regular');
+      dislikeIcon.style.color = '#000000'; // Set the color as needed
+  }
+}
+
+async function handleVotePost(voteType) {
     const us = await userInfo();
     const usId = us.userId;
-
-    const typeSelect = document.querySelector('#VoteType');
-
+    //const typeSelect = document.querySelector('#VoteType');
 
     var model = {
       userID: usId,
       postID: belongedToPostID,
-      voteTypeID: typeSelect.value
+      voteTypeID: voteType
     };
 
     try {
-      // Call the votePost method passing the model
       const response = await votePost(model);
 
       if(response != null){
-        alert('Vote post success!');
+        location.reload();
       }
     } catch (error) {
       console.error('Error creating vote:', error);
     }
 }
-document.querySelector(".fa").addEventListener("click", handleVotePost);
+document.querySelector("#likeIcon").addEventListener("click", () => {
+  handleVotePost(1);
+  toggleLikeIcon();
+});
 
+document.querySelector("#dislikeIcon").addEventListener("click", () => {
+  handleVotePost(2);
+  toggleDislikeIcon();
+});
 
 //TEACHER GIVE AWARD
 const showFormForTeacher = async () => {

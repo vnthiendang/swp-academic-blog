@@ -28,7 +28,8 @@ function displayPost() {
       document.getElementById('postTitle').textContent = post.title;
       document.getElementById('postAuthor').textContent = post.createdByUser;
       document.getElementById('postDate').textContent = formattedTime;
-      document.getElementById('postTag').textContent = post.tagList ?? '';
+      const postTagElement = document.getElementById('postTag');
+      postTagElement.textContent = post.tagList ? post.tagList.join(', ') : '';
       document.getElementById('postCategory').textContent = post.belongedToCategory ?? '';
       document.getElementById('postContent').innerHTML = post.postDetail;
       

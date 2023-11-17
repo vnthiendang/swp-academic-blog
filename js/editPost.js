@@ -1,5 +1,6 @@
 import { getAllCategory } from "./Services/category.service.js";
 import { updatePost } from "./Services/post.service.js";
+import { getAllTag } from "./Services/tag.service.js";
 import * as request from './utils/request.js';
 
 const token = localStorage.getItem("token");
@@ -31,10 +32,10 @@ function displayEditPost() {
 
       document.getElementById('title').value = post.title;
       //document.getElementById('tags').textContent = post.tagList ?? '';
-      post.tagList.forEach((tag) => {
-        const tagItem = document.getElementById('tags');
-        tagItem.textContent = tag;
-      });
+      // post.tagList.forEach((tag) => {
+      //   const tagItem = document.getElementById('tags');
+      //   tagItem.textContent = tag;
+      // });
 
       document.getElementById('opt').textContent = post.belongedToCategory;
 
@@ -73,7 +74,28 @@ const displayCategories = (categories) => {
 getAllCategory()
   .then((cates) => {
     displayCategories(cates);
+});
+
+const displayTags = async (tags) => {
+  const selectElement = document.getElementById('tags');
+  //const listTags = document.getElementById('listTags');
+
+  tags.forEach(tag => {
+    const option = document.createElement('option');
+    option.value = tag.tagName;
+    option.textContent = tag.tagName;
+
+    // const tagItem = document.createElement('div');
+    // tagItem.textContent = tag.tagName;
+    // listTags.appendChild(tagItem);
+
+    selectElement.appendChild(option);
   });
+};
+
+getAllTag().then((tags) => {
+  displayTags(tags);
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   const imageInput = document.getElementById("mediaList");
@@ -81,28 +103,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById('updatePost');
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    // Get the text content of the editor
-    const text = quill.getText();
 
-    // Split the text into words using a space as a delimiter
-    const words = text.split(/\s+/);
-
-    // Get the word count
+    const textElement = document.querySelector('#text-editor');
+    const text = textElement.textContent || textElement.innerText;
+    
+    const words = text.trim().split(/\s+/);
+    
     const wordCount = words.length;
-
-    // Check if the word count is less than 100
-    // if (wordCount < 100) {
-    //   // Display an alert
-    //   alert('Your post detail should have at least 100 words.');
-    //   return; // Stop further execution
-    // }
+    
+    if (wordCount < 100) {
+      alert('Your post detail should have at least 100 words.');
+      return;
+    }
 
     const titleInput = document.querySelector('#updatePost input[type="text"]');
     //const allowCommentSelect = document.querySelector('#comment');
     const categorySelect = document.querySelector('#opt');
     const textEditor = document.querySelector('#text-editor');
-    const tagList = Array.from(document.querySelectorAll("#tags li")).map(li => li.textContent);
-    console.log('Category: '+categorySelect.textContent);
+    // const tagList = Array.from(document.querySelector("#Tag")).map(li => li.textContent);
+    const tagList = document.querySelector("#tags");
 
     //const us = await userInfo();
     //const userId = us.userId;
@@ -118,18 +137,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // formData.append('tagList', tagList);
 
-    const mediaList = [];
-    for (let i = 0; i < imageInput.files.length; i++) {
-      mediaList.push(imageInput.files[i]);
-    }
-
     const model = {
       categoryName: categorySelect.textContent,
       title: titleInput.value,
       detail: textEditor.innerHTML,
       mediaList: [],
-      tagList: tagList
+      tagList: tagList.value ? [tagList.value] : []
     };
+
+    for (let i = 0; i < imageInput.files.length; i++) {
+      model.mediaList.push(imageInput.files[i]);
+    }
 
     try {
 

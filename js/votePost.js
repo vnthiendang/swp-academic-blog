@@ -57,7 +57,7 @@ function displayPosts(posts) {
       createdByUser.appendChild(grayTextSpan);
 
       const postTagLink = document.createElement("a");
-      postTagLink.href = "#";
+      postTagLink.href = `/postByCategory.html?categoryName=${encodeURIComponent(post.belongedToCategory)}`;
 
       const postTagSpan = document.createElement("span");
       postTagSpan.className = "tag-name";
@@ -77,18 +77,6 @@ function displayPosts(posts) {
       const formattedTime = postCreatedTime.toLocaleString("en-US", options);
       dateTimeElement2.textContent = formattedTime;
       flexElement.appendChild(dateTimeElement2);
-
-      const dateTimeElement3 = document.createElement("div");
-      dateTimeElement3.className = "p-0.5 bg-gray-900 rounded-full mx-4";
-      flexElement.appendChild(dateTimeElement3);
-
-      const memberOnlyElement = document.createElement("div");
-      memberOnlyElement.textContent = "Member only";
-      flexElement.appendChild(memberOnlyElement);
-
-      const dateTimeElement4 = document.createElement("div");
-      dateTimeElement4.className = "p-0.5 bg-gray-900 rounded-full mx-4";
-      flexElement.appendChild(dateTimeElement4);
 
       if(post.awardList != null && post.awardList.length > 0){
         const elm4 = document.createElement("div");
@@ -112,6 +100,10 @@ function displayPosts(posts) {
         // });
         flexElement.appendChild(awardList);
       }
+
+      const dateTimeElement3 = document.createElement("div");
+      dateTimeElement3.className = "p-0.5 bg-gray-900 rounded-full mx-4";
+      flexElement.appendChild(dateTimeElement3);
 
       if(post.voteList != null && post.voteList.length > 0){
         const voteIcon = document.createElement("i");
@@ -151,25 +143,23 @@ function displayPosts(posts) {
       const flexItemsElement = document.createElement("div");
       flexItemsElement.className = "flex items-center px-8";
 
-      if(post.tagList != null && post.tagList.length > 0){
-        const iconTagElement = document.createElement("div");
-        iconTagElement.className = "icon-tag";
-        const iconTagImg = document.createElement("img");
-        iconTagImg.src = "img/tag.png";
-        iconTagImg.alt = "icon-tag";
+      if (post.tagList.length > 0) {
+        const iconTagElement = document.createElement('div');
+        iconTagElement.className = 'icon-tag';
+        const iconTagImg = document.createElement('img');
+        iconTagImg.src = 'img/tag.png';
+        iconTagImg.alt = 'icon-tag';
         iconTagElement.appendChild(iconTagImg);
         flexItemsElement.appendChild(iconTagElement);
-
-        const tagLink1 = document.createElement("a");
-        tagLink1.href = "/pageByTag.html?tagId";
-        post.tagList.forEach((tag) => {
-          const postTagList = document.createElement("div");
-          postTagList.className = "rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-          //const tagItem = document.createElement("span");
-          postTagList.textContent = tag;
-          tagLink1.appendChild(postTagList);
-          //postTagList.appendChild(tagItem);
-          flexItemsElement.appendChild(tagLink1);
+      
+        post.tagList.forEach(tag => {
+          const tagLink = document.createElement('a');
+          tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+          const tagDiv = document.createElement('div');
+          tagDiv.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+          tagDiv.textContent = tag;
+          tagLink.appendChild(tagDiv);
+          flexItemsElement.appendChild(tagLink);
         });
       }
 

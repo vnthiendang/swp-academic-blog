@@ -166,19 +166,19 @@ export const getPostByTags = async (tagName) => {
   }
 };
 
-export const getMostVotePost = async (categoryId) => {
+export const filterPost = async (categoryName, tagNames, sortBy, sortDirection) => {
   try {
-    const response = await request.get(`post/mostVotedPost`, {
+    const response = await request.get(`post/GetAllApproved/filter`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       },
       params: {
-        categoryId
+        categoryName, tagNames, sortBy, sortDirection
       }
     });
     return response;
   } catch (error) {
-    console.error('Error retrieving post by vote count:', error);
+    console.error('Error filtering posts:', error);
   }
 };
 //FILTER

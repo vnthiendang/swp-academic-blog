@@ -47,32 +47,17 @@ function displayPosts(posts) {
         createdByUser.appendChild(grayTextSpan);
   
         const postTagLink = document.createElement('a');
-        postTagLink.href = '/Page SE SA AI BS/html/pageBusiness.html';
+        postTagLink.href = `/postByCategory.html?categoryName=${encodeURIComponent(post.belongedToCategory)}`;
     
         const postTagSpan1 = document.createElement('span');
         postTagSpan1.className = 'tag-name';
         postTagSpan1.textContent = post.belongedToCategory;
         postTagLink.appendChild(postTagSpan1);
-    
-        const commaSpan = document.createElement('span');
-        commaSpan.className = 'tag-name';
-        commaSpan.textContent = ' , ';
-        postTagLink.appendChild(commaSpan);
   
         const postTagSpan2 = document.createElement('span');
         postTagSpan2.className = 'tag-name';
         postTagSpan2.textContent = '';
         postTagLink.appendChild(postTagSpan2);
-    
-        const commaSpan2 = document.createElement('span');
-        commaSpan2.className = 'tag-name';
-        commaSpan2.textContent = ' , ';
-        postTagLink.appendChild(commaSpan2);
-    
-        const postTagSpan3 = document.createElement('span');
-        postTagSpan3.className = 'tag-name';
-        postTagSpan3.textContent = '';
-        postTagLink.appendChild(postTagSpan3);
     
         createdByUser.appendChild(postTagLink);
         flexElement.appendChild(createdByUser);
@@ -87,14 +72,6 @@ function displayPosts(posts) {
       const formattedTime = postCreatedTime.toLocaleString('en-US', options);
       dateTimeElement2.textContent = formattedTime;
       flexElement.appendChild(dateTimeElement2);
-  
-      const dateTimeElement3 = document.createElement('div');
-      dateTimeElement3.className = 'p-0.5 bg-gray-900 rounded-full mx-4';
-      flexElement.appendChild(dateTimeElement3);
-  
-      const memberOnlyElement = document.createElement('div');
-      memberOnlyElement.textContent = 'Member only';
-      flexElement.appendChild(memberOnlyElement);
   
       postElement.appendChild(flexElement);
   
@@ -140,7 +117,7 @@ function displayPosts(posts) {
         flexItemsElement.appendChild(imgContainer);
       }
 
-      if(post.tagList.length > 0){
+      if (post.tagList.length > 0) {
         const iconTagElement = document.createElement('div');
         iconTagElement.className = 'icon-tag';
         const iconTagImg = document.createElement('img');
@@ -148,15 +125,16 @@ function displayPosts(posts) {
         iconTagImg.alt = 'icon-tag';
         iconTagElement.appendChild(iconTagImg);
         flexItemsElement.appendChild(iconTagElement);
-    
-        const tagLink1 = document.createElement('a');
-        tagLink1.href = '/Page SE SA AI BS/html/pageTechnoloy.html';
-        const tagDiv1 = document.createElement('div');
-        tagDiv1.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';  
-  
-        tagDiv1.textContent = post.tagList ?? 'tag';
-        tagLink1.appendChild(tagDiv1);
-        flexItemsElement.appendChild(tagLink1);
+      
+        post.tagList.forEach(tag => {
+          const tagLink = document.createElement('a');
+          tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+          const tagDiv = document.createElement('div');
+          tagDiv.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+          tagDiv.textContent = tag;
+          tagLink.appendChild(tagDiv);
+          flexItemsElement.appendChild(tagLink);
+        });
       }
   
       postElement.appendChild(flexItemsElement);

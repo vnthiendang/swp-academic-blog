@@ -96,12 +96,21 @@
                     </div>
                 
             </div>
+            <div class="flex flex-col">
+                <label for="">Tags
+                <select id="tags"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <option value>Choose tags</option>
+                </select>
+                
+            </label>
+            </div>
             <div>
               <!-- <label for="mediaList">Media:</label >
               <input type="file" id="mediaList" name="mediaList" > -->
-              <label for="mediaList" id="drop-area"
-              class="flex flex-col items-center justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
-              <div class="flex flex-col items-center justify-center">
+                <label for="mediaList" id="drop-area"
+                class="flex flex-col items-center justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+                <div class="flex flex-col items-center justify-center">
                   <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -110,21 +119,12 @@
                   <div id="img-view" class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
                           class="font-semibold">Click
                           to upload</span> or drag and drop</div>
-              </div>
-              <input type="file" id="mediaList" accept="image/*" class="hidden" multiple/>
+                </div>
+                <input type="file" id="mediaList" accept="image/*" class="hidden" multiple/>
               
-          </label>
+                </label>
             </div>
-            <div class="flex flex-col">
-                <label for="">Tags
-                <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "> 
-                    <select id="tags"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    <option selected>Choose tags</option>
-                </select>
-                </div> 
-            </label>
-            </div>
+
             <div>
               <button type="submit">Update Post</button>
             </div>
@@ -306,6 +306,6 @@
         document.getElementById("drop-area").addEventListener("click", resetDropArea);
     
     
-    </script> 
+</script> 
 
 </html>

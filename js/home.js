@@ -181,26 +181,24 @@ function displayPosts(posts) {
         flexItemsElement.appendChild(imgContainer);
       }
 
-      if(post.tagList.length > 0){
-        const iconTagElement = document.createElement("div");
-        iconTagElement.className = "icon-tag";
-        const iconTagImg = document.createElement("img");
-        iconTagImg.src = "img/tag.png";
-        iconTagImg.alt = "icon-tag";
+      if (post.tagList.length > 0) {
+        const iconTagElement = document.createElement('div');
+        iconTagElement.className = 'icon-tag';
+        const iconTagImg = document.createElement('img');
+        iconTagImg.src = 'img/tag.png';
+        iconTagImg.alt = 'icon-tag';
         iconTagElement.appendChild(iconTagImg);
         flexItemsElement.appendChild(iconTagElement);
-
-        const postTagList = document.createElement("div");
-        postTagList.className =
-          "post-tag-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-        post.tagList.forEach((tag) => {
-          const tagItem = document.createElement("span");
-          tagItem.textContent = tag;
-          postTagList.appendChild(tagItem);
+      
+        post.tagList.forEach(tag => {
+          const tagLink = document.createElement('a');
+          tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+          const tagDiv = document.createElement('div');
+          tagDiv.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+          tagDiv.textContent = tag;
+          tagLink.appendChild(tagDiv);
+          flexItemsElement.appendChild(tagLink);
         });
-
-        //tagLink1.appendChild(postTagList);
-        flexItemsElement.appendChild(postTagList);
       }
 
       postElement.appendChild(flexItemsElement);

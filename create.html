@@ -119,20 +119,26 @@
                             </select>
                         </label>
                     </div>
-                    <div class="flex flex-col">
-                        <label for="">Tags
-                            <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "> 
-                                <!-- <div class="tags-input"> 
-                                <ul id="tags"></ul> 
-                                <input type="text" id="input-tag" 
-                                    placeholder="Add a tag" /> 
-                                </div> -->
-                                <select id="tags" 
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                <option value>Choose Topics</option>
-                            </select>
-                            </div> 
+                    <!-- <div class="flex flex-col">
+                        <label for="simple-search">Tags
+                            <form class="flex items-center" id="search-form">
+                                <div class="relative w-full">
+                                    <input type="text" id="tag-search"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700"
+                                        placeholder="Search tag" required>
+                                </div>
+                            </form>
                         </label>
+                        <div id="searchResults"></div>
+                    </div> -->
+                    <div class="flex flex-col">
+                        <label for="">Tag
+                            <select id="Tag"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option value>Choose Tags</option>
+                            </select>
+                        </label>
+                        <div id="listTags"></div>
                     </div>
 
 

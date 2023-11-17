@@ -43,32 +43,29 @@ function displayPosts(response) {
       infoElement.classList.add('two-line-preview');
       infoElement.innerHTML = post.postDetail;
       anchorElement.appendChild(infoElement);
-  
-      // Create the tags element
-      var tagsElement = document.createElement('div');
-      tagsElement.classList.add('tags');
-  
-      // Create the icon-tag element
-      var iconTagElement = document.createElement('div');
-      iconTagElement.classList.add('icon-tag');
-      var iconTagImageElement = document.createElement('img');
-      iconTagImageElement.src = '/img/tag.png';
-      iconTagImageElement.alt = 'icon-tag';
-      iconTagElement.appendChild(iconTagImageElement);
-      tagsElement.appendChild(iconTagElement);
-  
-      // Create the tag element
-      var tagElement = document.createElement('a');
-      tagElement.href = '/Page SE SA AI BS/html/pageTechnoloy.html';
-      var tagSpanElement = document.createElement('span');
-      tagSpanElement.classList.add('tag');
-      tagSpanElement.textContent = post.tagList[0];
-      tagElement.appendChild(tagSpanElement);
-      tagsElement.appendChild(tagElement);
+
+      if (post.tagList.length > 0) {
+        const iconTagElement = document.createElement('div');
+        iconTagElement.className = 'icon-tag';
+        const iconTagImg = document.createElement('img');
+        iconTagImg.src = 'img/tag.png';
+        iconTagImg.alt = 'icon-tag';
+        iconTagElement.appendChild(iconTagImg);
+        postElement.appendChild(iconTagElement);
+      
+        post.tagList.forEach(tag => {
+          const tagLink = document.createElement('a');
+          tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+          const tagDiv = document.createElement('div');
+          //tagDiv.className = 'rounded-xl bg-gray-200 text-gray-900 px-2 mr-4';
+          tagDiv.textContent = tag;
+          tagLink.appendChild(tagDiv);
+          postElement.appendChild(tagLink);
+        });
+      }
   
       // Append all elements to the post element
       postElement.appendChild(anchorElement);
-      postElement.appendChild(tagsElement);
   
       // Append the post element to the container
       container.appendChild(postElement);
