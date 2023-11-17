@@ -5,6 +5,8 @@ import com.swp.entities.Post;
 import com.swp.entities.User;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class CommentDto {
     private Integer id;
@@ -12,6 +14,10 @@ public class CommentDto {
     private Post post;
     private User createdByUser;
     private Comment parentComment;
+    private String status;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
+
     public String getCreatedByUser(){
         return this.createdByUser.getDisplay_name();
     }

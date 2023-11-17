@@ -26,6 +26,10 @@ public class PostDto {
     private List<Vote> voteList;
     private String reviewedByTeacher;
 
+    private String status;
+    private LocalDateTime updatedDate;
+
+
     private Integer vote1Count = 0;
     private Integer vote2Count = 0;
     private Integer wordCount = 0;

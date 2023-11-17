@@ -15,6 +15,7 @@ public class UserDto {
     private String email;
     private LocalDateTime created_date;
     private Role role_id;
+    private Integer contributionPoint;
     public String getRole_id(){
         return this.role_id.getRoleInfo();
     }
