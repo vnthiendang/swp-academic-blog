@@ -139,17 +139,17 @@ function displayComments() {
 // Call the function to display the post
 displayComments();
 
-const displayVoteType = (types) => {
-  const selectElement = document.getElementById('VoteType');
+// const displayVoteType = (types) => {
+//   const selectElement = document.getElementById('VoteType');
 
-  types.forEach(type => {
-    const option = document.createElement('option');
-    option.value = type.id;
-    option.textContent = type.voteType;
+//   types.forEach(type => {
+//     const option = document.createElement('option');
+//     option.value = type.id;
+//     option.textContent = type.voteType;
 
-    selectElement.appendChild(option);
-  });
-};
+//     selectElement.appendChild(option);
+//   });
+// };
 
 // getVoteType()
 //   .then((votes) => {
@@ -195,10 +195,11 @@ const showFormForStudent = async () => {
 
     if (userRole === 'Student') {
       // Display the form
-      document.getElementById('createVote').style.display = 'block';
+      document.getElementById('likeIcon').style.display = 'block';
+      document.getElementById('dislikeIcon').style.display = 'block';
     } else {
-      // Hide the form
-      document.getElementById('createVote').style.display = 'none';
+      document.getElementById('likeIcon').style.display = 'none';
+      document.getElementById('dislikeIcon').style.display = 'none';
     }
   } catch (error) {
     console.error('Error retrieving user info:', error);
@@ -253,6 +254,8 @@ async function handleVotePost(voteType) {
 
       if(response != null){
         location.reload();
+      }else{
+        alert('Fail to vote post!');
       }
     } catch (error) {
       console.error('Error creating vote:', error);
@@ -260,12 +263,12 @@ async function handleVotePost(voteType) {
 }
 document.querySelector("#likeIcon").addEventListener("click", () => {
   handleVotePost(1);
-  toggleLikeIcon();
+  //toggleLikeIcon();
 });
 
 document.querySelector("#dislikeIcon").addEventListener("click", () => {
   handleVotePost(2);
-  toggleDislikeIcon();
+  //toggleDislikeIcon();
 });
 
 //TEACHER GIVE AWARD

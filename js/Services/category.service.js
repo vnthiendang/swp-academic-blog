@@ -9,8 +9,6 @@ const getAllCategory = async () => {
         Authorization: `Bearer ${token}`
       }
     });
-
-    console.log(response);
     return response;
   } catch (error) {
     

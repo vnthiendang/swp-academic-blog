@@ -166,14 +166,19 @@ export const getPostByTags = async (tagName) => {
   }
 };
 
-export const filterPost = async (categoryName, tagNames, sortBy, sortDirection) => {
+export const filterPost = async (categoryName, tagNames, startDate, endDate, sortBy, sortDirection) => {
   try {
     const response = await request.get(`post/GetAllApproved/filter`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       },
       params: {
-        categoryName, tagNames, sortBy, sortDirection
+        categoryName, 
+        tagNames: tagNames.join(','), 
+        startDate,
+        endDate,
+        sortBy: sortBy.join(','), 
+        sortDirection
       }
     });
     return response;

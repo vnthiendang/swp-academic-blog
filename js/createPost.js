@@ -98,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     try {
-      //const response = await axios.post('http://localhost:8080/blog/post/create', formData, config);
       const res = await createPost(formData, config);
 
       if (res != null) {

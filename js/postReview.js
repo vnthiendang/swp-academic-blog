@@ -69,16 +69,7 @@ const rejectButton = document.getElementById("rejectButton");
 approveButton.addEventListener("click", async (event) =>{
   event.preventDefault();
 
-  const user = await userInfo();
-  const usId = user.userId;
-
-  const post = {
-    post: postId,
-    viewedByUser: usId,
-    postApprovalsStatus: "APPROVED"
-  }
-
-  const response = await approvePost(post);
+  const response = await approvePost(postId);
 
   if(response == null){
     alert('Fail to approve!');
@@ -91,16 +82,7 @@ approveButton.addEventListener("click", async (event) =>{
 rejectButton.addEventListener("click", async (event) =>{
   event.preventDefault();
 
-  const user = await userInfo();
-  const usId = user.userId;
-
-  const post = {
-    post: postId,
-    viewedByUser: usId,
-    postApprovalsStatus: "REJECTED"
-  }
-
-  const response = await rejectPost(post);
+  const response = await rejectPost(postId);
 
   if(response == null){
     alert('Fail to reject!');
@@ -111,9 +93,9 @@ rejectButton.addEventListener("click", async (event) =>{
 });
 
 
-const approvePost = async (model) => {
+const approvePost = async (postId) => {
   try {
-    const response = await request.post(`postapproval/post`, model, {
+    const response = await request.post(`post/postRequest/reject/${postId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -124,9 +106,9 @@ const approvePost = async (model) => {
   } 
 };
 
-const rejectPost = async (model) => {
+const rejectPost = async (postId) => {
   try {
-    const response = await request.post(`postapproval/post`, model, {
+    const response = await request.post(`post/postRequest/approve/${postId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -136,14 +118,4 @@ const rejectPost = async (model) => {
     console.error('Error reject post:', error);
   }
   
-}
-
-function arrayBufferToBase64(buffer) {
-  let binary = '';
-  const bytes = new Uint8Array(buffer);
-  const len = bytes.byteLength;
-  for (let i = 0; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return btoa(binary);
 }

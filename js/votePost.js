@@ -1,18 +1,37 @@
 import {
+  filterPost,
   getAllApprovedPosts,
-  getPostByCategory,
-  getPostByTags,
   searchedPosts,
 } from "./Services/post.service.js";
 import { getAllCategory } from "./Services/category.service.js";
 import { getAllTag } from "./Services/tag.service.js";
-import { getMostVotePosts } from "./Services/vote.service.js";
+import { userInfo } from "./Services/auth.service.js";
 
 const options = {
   month: "short",
   day: "2-digit", 
   hour: "2-digit", 
 };
+
+const showHeaderForTeacher = async () => {
+  try {
+    const usersInfo = await userInfo();
+    const userRole = usersInfo.role_id;
+
+    if (userRole === 'Teacher') {
+      // Display the form
+      document.getElementById('teacherPage').style.display = 'block';
+      document.getElementById('teacherPage2').style.display = 'block';
+    } else {
+      // Hide the form
+      document.getElementById('teacherPage').style.display = 'none';
+      document.getElementById('teacherPage2').style.display = 'none';
+    }
+  } catch (error) {
+  }
+};
+
+showHeaderForTeacher();
 
 // DISPLAY LIST APPROVED POSTS
 function displayPosts(posts) {
@@ -24,7 +43,7 @@ function displayPosts(posts) {
     noResultsElement.className =
       "text-center text-4xl font-bold text-gray-500 dark:text-gray-400";
     noResultsElement.textContent =
-      "No results related to your search. Please use other keywords.";
+      "No results related to your filter. Please use other options.";
     postContainer.appendChild(noResultsElement);
   } else {
     for (var i = 0; i < posts.length; i++) {
@@ -196,16 +215,16 @@ function displayPosts(posts) {
 }
 
 // Function to display all approved posts
-const displayAllPosts = () => {
-  getAllApprovedPosts()
-    .then((posts) => {
-      displayPosts(posts);
-    })
-    .catch((error) => {
-      console.error(error);
-      // Handle the error as needed
-    });
-};
+// const displayAllPosts = () => {
+//   getAllApprovedPosts()
+//     .then((posts) => {
+//       displayPosts(posts);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//       // Handle the error as needed
+//     });
+// };
 
 getAllCategory().then((cates) => {
   displayCategories(cates);
@@ -215,103 +234,142 @@ getAllTag().then((tags) => {
   displayTags(tags);
 });
 
-displayAllPosts();
-
-// SEARCH POSTS
-const searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const searchInput = document.querySelector("#simple-search");
-  const searchTerm = searchInput.value;
-
-  if (searchTerm) {
-    searchedPosts(searchTerm)
-      .then((posts) => {
-        displayPosts(posts);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  } else {
-    displayAllPosts();
-  }
-
-  searchInput.value = "";
-});
+//displayAllPosts();
 
 
 //GET LIST CATEGORIES
-const displayCategories = async (categories) => {
-  const categoryList = document.querySelector(".absolute.hidden.text-gray-700.pt-1.group-hover\\:block");
+const displayCategories = (categories) => {
+  const selectElement = document.getElementById('Category');
 
-  categories.forEach((category) => {
-    const listItem = document.createElement("li");
-    const link = document.createElement("a");
-    link.className = "rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white";
-    link.textContent = category.content;
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category.content;
+    option.textContent = category.content;
 
-    listItem.appendChild(link);
-    categoryList.appendChild(listItem);
-
-    link.addEventListener("click", async () => {
-    const posts = await getPostByCategory(category.content);
-    displayPosts(posts);
-      
-    });
+    selectElement.appendChild(option);
   });
 };
 
 const displayTags = async (tags) => {
-  const categoryList = document.querySelector(".absolute.hidden.text-gray-700.pt-2.group-hover\\:block");
+  const tagList = document.querySelector("#sort-tag");
 
   tags.forEach((tag) => {
-    const listItem = document.createElement("li");
-    const link = document.createElement("a");
-    link.className = "rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white";
-    link.textContent = tag.tagName;
+    const listItem = document.createElement("label");
+    listItem.style.backgroundColor = "burlywood";
+    listItem.innerHTML = `
+      <input type="checkbox" class="tag-checkbox" value="${tag.tagName}" />
+      ${tag.tagName}
+    `;
 
-    listItem.appendChild(link);
-    categoryList.appendChild(listItem);
-
-    link.addEventListener("click", async () => {
-    const posts = await getPostByTags(tag.tagName);
-    displayPosts(posts);
-      
-    });
+    tagList.appendChild(listItem);
   });
 };
 
-const sortByOption = [
-  { value: "likeCount", text: "Like Count" },
-  { value: "dislikeCount", text: "Dislike Count" },
-  { value: "createdDate", text: "Created Date" },
-  { value: "awardCount", text: "Award Count" }
-];
+const displaySortBy = () => {
+  const selectElement = document.querySelector('#sort-by');
 
-const sortButton = async (sortByOption) =>{
-  const sortByList = document.querySelector(".sortBy absolute hidden text-gray-700 pt-2 group-hover\\:block");
+  const opt1 = document.createElement("label");
+  opt1.style.backgroundColor = "burlywood";
+  opt1.innerHTML = `
+    <input type="checkbox" class="sortBy-checkbox" value="likeCount" />
+    Like Count
+  `;
 
-  sortByOption.forEach((sortBy) => {
-    const listItem = document.createElement("li");
-    const link = document.createElement("a");
-    link.className = "rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white";
-    link.textContent = sortBy.text;
+  const opt2 = document.createElement("label");
+  opt2.style.backgroundColor = "burlywood";
+  opt2.innerHTML = `
+    <input type="checkbox" class="sortBy-checkbox" value="dislikeCount" />
+    Dislike Count
+  `;
 
-    listItem.appendChild(link);
-    sortByList.appendChild(listItem);
-  });
+  const opt3 = document.createElement("label");
+  opt3.style.backgroundColor = "burlywood";
+  opt3.innerHTML = `
+    <input type="checkbox" class="sortBy-checkbox" value="createdDate" />
+    Created Date
+  `;
 
+  const opt4 = document.createElement("label");
+  opt4.style.backgroundColor = "burlywood";
+  opt4.innerHTML = `
+    <input type="checkbox" class="sortBy-checkbox" value="awardCount" />
+    Award Count
+  `;
+
+  selectElement.appendChild(opt1);
+  selectElement.appendChild(opt2);
+  selectElement.appendChild(opt3);
+  selectElement.appendChild(opt4);
 };
 
-const sortByVote = document.getElementById("sortByVote");
-sortByVote.addEventListener("click", async () => {
+displaySortBy();
+
+const displaysortDirection = () => {
+  const selectElement = document.getElementById('sortDirection');
+
+  const option = document.createElement('option');
+  option.value = 'asc';
+  option.textContent = 'Ascending';
+
+  const option1 = document.createElement('option');
+  option1.value = 'desc';
+  option1.textContent = 'Descending';
+
+  selectElement.appendChild(option);
+  selectElement.appendChild(option1);
+};
+
+displaysortDirection();
+
+const filterPosts = document.querySelector("#button-filter");
+filterPosts.addEventListener("click", async () => {
+
+  const selectElement = document.getElementById('Category');
+  const categoryName = selectElement.value;
+
+  const tagCheckboxes = document.querySelectorAll('.tag-checkbox');
+  const tagNames = Array.from(tagCheckboxes)
+    .filter(checkbox => checkbox.checked)
+    .map(checkbox => checkbox.value);
+
+  const sortByCheckboxes = document.querySelectorAll('.sortBy-checkbox');
+  const sortBy = Array.from(sortByCheckboxes)
+    .filter(checkbox => checkbox.checked)
+    .map(checkbox => checkbox.value);
+
+  const selectSortDirection = document.getElementById('sortDirection');
+  const sortDirection = selectSortDirection.value;
+
+  const startDates = document.getElementById('date_timepicker_start');
+  const startDateValue = startDates.value;
+
+// Parse the date string in the format MM/DD/YYYY
+const startDateParts = startDateValue.split('/');
+const year = parseInt(startDateParts[2]);
+const month = parseInt(startDateParts[0]);
+const day = parseInt(startDateParts[1]);
+
+const startDate = {
+  year,
+  month,
+  day,
+  hour: 0,
+  minute: 0,
+  second: 0
+};
+
+  const endDates = document.getElementById('date_timepicker_end');
+  const endDate = endDates.value;
+
   try {
-    const response = await getMostVotePosts();
-    displayPosts(response);
+    const response = await filterPost(categoryName, tagNames, startDate, endDate, sortBy, sortDirection);
+    if(response == null){
+      alert('Please check your filter!');
+    }else{
+      displayPosts(response);
+    }
   } catch (error) {
-    alert('An error occurred!');
-    console.error(error);
+    console.error('Error filtering posts:', error);
   }
-  
 });
+
