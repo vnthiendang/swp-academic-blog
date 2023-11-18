@@ -2,7 +2,9 @@ package com.swp.services;
 
 import com.swp.cms.reqDto.CategoryManagementRequest;
 import com.swp.entities.CategoryManagement;
+
 import com.swp.entities.User;
+
 import com.swp.repositories.CategoryManagementRepository;
 import com.swp.repositories.CategoryRepository;
 import com.swp.repositories.UserRepository;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 @Service
@@ -52,6 +55,7 @@ public class CategoryManagementService {
         return categoryManagementRepository.save(categoryManagement);
     }
 
+
     public List<CategoryManagement> GetCategoryManagementsByUserId(List<CategoryManagement> categoryManagements, Integer userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userId));
@@ -59,4 +63,5 @@ public class CategoryManagementService {
                 .filter(categoryManagement -> categoryManagement.getTeacher().getUsId().equals(userId))
                 .collect(Collectors.toList());
     }
+
 }

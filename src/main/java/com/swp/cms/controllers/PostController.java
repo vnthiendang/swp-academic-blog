@@ -168,6 +168,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         return dtos;
     }
 
+
     @GetMapping("/GetAll")
     public List<PostDto> getAllPostDtosByCriteria(
             @RequestParam(name = "postApprovalStatuses", required = false) List<String> postApprovalStatuses,
@@ -207,6 +208,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
         return dtos;
     }
+
 
     //get post detail by post id
     @GetMapping("/GetAllApproved/{id}")
@@ -285,6 +287,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
 //    }
 
     @PostMapping("/postRequest/reject/{id}")
+
     public ResponseEntity<Map<String, Object>> rejectPost(@PathVariable Integer id) {
         try {
             // Call the service method to reject the post
@@ -314,6 +317,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
             // Handle other exceptions
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("message", "An error occurred"));
         }
+
     }
 
 

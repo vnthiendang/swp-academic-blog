@@ -30,6 +30,7 @@ public class CategoryManagementController {
         if (userId != null){
             categoryManagements = categoryManagementService.GetCategoryManagementsByUserId(categoryManagements, userId);
         }
+
         List<CategoryManagementDto> dtos = categoryManagements.stream()
                 .map(categoryManagement -> modelMapper.map(categoryManagement, CategoryManagementDto.class))
                 .collect(Collectors.toList());

@@ -36,8 +36,10 @@ public class PostService {
     private ReportRepository reportRepository;
     @Autowired
     private ReportTypeRepository reportTypeRepository;
+
     @Autowired
     private CategoryManagementRepository categoryManagementRepository;
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -307,8 +309,10 @@ public class PostService {
         return postApprovalsRepository.save(postApprovals);
     }
 
+
     public long countRejectedPostApprovalsForUserWithin24Hours(Integer userId) {
         LocalDateTime twentyFourHoursAgo = LocalDateTime.now().minusHours(24);
+
 
         return postApprovalsRepository.countByPost_CreatedByUser_UsIdAndStatusAndCreatedDateGreaterThan(
                 userId, "REJECTED", twentyFourHoursAgo
