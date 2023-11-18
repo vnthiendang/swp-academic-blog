@@ -25,7 +25,6 @@ public class CategoryManagementController {
     }
 
     @GetMapping("/GetAll")
-
     public List<CategoryManagementDto> getAll(@RequestParam(name = "userId", required = false) Integer userId) {
         List<CategoryManagement> categoryManagements = categoryManagementService.getAll();
         if (userId != null){

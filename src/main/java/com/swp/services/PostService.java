@@ -38,6 +38,10 @@ public class PostService {
     private ReportTypeRepository reportTypeRepository;
 
     @Autowired
+    private CategoryManagementRepository categoryManagementRepository;
+
+
+    @Autowired
     private ModelMapper modelMapper;
     private Integer userId;
 
@@ -305,8 +309,10 @@ public class PostService {
         return postApprovalsRepository.save(postApprovals);
     }
 
+
     public long countRejectedPostApprovalsForUserWithin24Hours(Integer userId) {
         LocalDateTime twentyFourHoursAgo = LocalDateTime.now().minusHours(24);
+
 
         return postApprovalsRepository.countByPost_CreatedByUser_UsIdAndStatusAndCreatedDateGreaterThan(
                 userId, "REJECTED", twentyFourHoursAgo
@@ -525,4 +531,114 @@ public class PostService {
                 .filter(post -> post.getCreatedByUser().getUsId().equals(userId))
                 .collect(Collectors.toList());
     }
+
+
+
+    public List<Post> filterPostsByPostStatus(List<Post> posts, List<String> postStatuses) {
+        List<Post> results = new ArrayList<>();
+
+        if (postStatuses != null && !postStatuses.isEmpty()) {
+            for (String postStatus : postStatuses) {
+                switch (postStatus.toLowerCase().trim()) {
+                    case "edited":
+                        results.addAll(posts.stream()
+                                .filter(post -> "edited".equalsIgnoreCase(post.getStatus()))
+                                .collect(Collectors.toList()));
+                        break;
+
+                    case "deleted":
+                        results.addAll(posts.stream()
+                                .filter(post -> "deleted".equalsIgnoreCase(post.getStatus()))
+                                .collect(Collectors.toList()));
+                        break;
+
+                    case "created":
+                        results.addAll(posts.stream()
+                                .filter(post -> post.getStatus() == null)
+                                .collect(Collectors.toList()));
+                        break;
+
+                    default:
+                        throw new IllegalArgumentException("Unsupported post status: " + postStatus);
+
+                }
+            }
+        }
+
+        return results;
+    }
+
+    public List<Post> filterPostsByPostApprovalStatus(List<String> postApprovalStatuses) {
+        List<Post> results = new ArrayList<>();
+        if (postApprovalStatuses != null && !postApprovalStatuses.isEmpty()) {
+
+            for (String postApprovalStatus : postApprovalStatuses) {
+                switch (postApprovalStatus.toLowerCase().trim()) {
+                    case "approved":
+                        results.addAll(postRepository.findAllApprovedPosts());
+                        break;
+
+                    case "rejected":
+                        results.addAll(postRepository.findAllRejectedPosts());
+                        break;
+
+                    case "pending":
+                        results.addAll(getPostsWithoutApprovals());
+                        break;
+
+                    default:
+                        throw new IllegalArgumentException("Unsupported post approval status: " + postApprovalStatus);
+                }
+            }
+        }
+        return results;
+    }
+
+    public List<Post> getPostRequestsWithoutCurrentUserOwnPostRequests(List<Post> posts) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        Integer userIds = userDetails.getUsId();
+
+        List<Post> postsWithoutCurrentUserOwnPostRequests = posts.stream()
+                .filter(post -> !post.getCreatedByUser().getUsId().equals(userIds))
+                .collect(Collectors.toList());
+
+        return postsWithoutCurrentUserOwnPostRequests;
+    }
+
+    public List<Post> getPostsWithoutApprovalsAndByCurrentUserCategoryManagement() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        Integer userIds = userDetails.getUsId();
+
+        User currentUser = userRepository.findById(userIds)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userIds));
+
+        List<CategoryManagement> categoryManagements = categoryManagementRepository.findAll();
+        List<Integer> categoryManagementOfCurrentUser = categoryManagements.stream()
+                .filter(categoryManagement -> categoryManagement.getTeacher().getUsId().equals(userIds))
+                .map(CategoryManagement::getId)
+                .collect(Collectors.toList());
+
+        List<PostApprovals> postApprovals = postApprovalsRepository.findAll();
+
+        List<PostApprovals> postApprovalsFiltered = new ArrayList<>();
+        if (categoryManagementOfCurrentUser != null && !categoryManagementOfCurrentUser.isEmpty()) {
+            postApprovalsFiltered = postApprovals.stream()
+                    .filter(postApproval ->
+                            categoryManagementOfCurrentUser.contains(postApproval.getPost().getBelongedToCategory().getCateId()))
+                    .collect(Collectors.toList());
+        }
+
+        List<Integer> postIdsWithApprovals = postApprovalsFiltered.stream()
+                .map(postApproval -> postApproval.getPost().getPostsId())
+                .collect(Collectors.toList());
+
+        return postRepository.findAll()
+                .stream()
+                .filter(post -> !postIdsWithApprovals.contains(post.getPostsId()))
+                .filter(post -> categoryManagementOfCurrentUser.contains(post.getBelongedToCategory().getCateId()))
+                .collect(Collectors.toList());
+    }
+
 }

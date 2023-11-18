@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface PostRepository extends JpaRepository<Post, Integer>, JpaSpecificationExecutor<Post> {
@@ -21,8 +22,12 @@ public interface PostRepository extends JpaRepository<Post, Integer>, JpaSpecifi
     @Query("SELECT p FROM Post p JOIN p.postApprovals pa WHERE pa.status = 'APPROVED'")
     List<Post> findAllApprovedPosts();
 
+    @Query("SELECT p FROM Post p JOIN p.postApprovals pa WHERE pa.status = 'REJECTED'")
+    List<Post> findAllRejectedPosts();
+
     @Query("SELECT p FROM Post p LEFT JOIN p.postApprovals pa WHERE pa.post IS NULL")
     List<Post> findAllReviewedPosts();
 
+    List<Post> findByStatus(String status);
     List<Post> findByBelongedToCategory(Category category);
 }
