@@ -8,12 +8,18 @@ import com.swp.entities.Post;
 import com.swp.entities.PostApprovals;
 import com.swp.entities.Report;
 import com.swp.services.PostService;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/blog/post")
@@ -22,8 +28,6 @@ public class PostController {
     private final PostService postService;
     @Autowired
     private ModelMapper modelMapper;
-    @Autowired
-    private PostMapper postMapper;
 
     public PostController(PostService postService) {
         this.postService = postService;
@@ -93,6 +97,46 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     return dtos;
 }
 
+    @GetMapping("/GetAll/filter")
+    public List<PostDto> getAllPostDtosByFilterSelection(
+            @RequestParam(name = "postApprovalStatuses", required = false) List<String> postApprovalStatuses,
+            @RequestParam(name = "postStatuses", required = false) List<String> postStatuses,
+            @RequestParam(name = "keyword", required = false) String keyword,
+            @RequestParam(name = "categoryName", required = false) String categoryName,
+            @RequestParam(name = "tagNames", required = false) List<String> tagNames,
+            @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
+            @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
+            @RequestParam(name = "userId", required = false) Integer userId,
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection) {
+
+        List<Post> posts = postService.filterPostsByPostApprovalStatus(postApprovalStatuses);
+
+        if (postStatuses != null && !postStatuses.isEmpty()) {
+            posts = postService.filterPostsByPostStatus(posts, postStatuses);
+        }
+
+        if (startDate != null && endDate != null) {
+            posts = postService.filterPostsByDateRange(posts, startDate, endDate);
+        }
+        if (categoryName != null && !categoryName.trim().isEmpty()) {
+            posts = postService.filterByCategoryName(posts, categoryName);
+        }
+
+        if (tagNames != null && !tagNames.isEmpty()) {
+            posts = postService.filterByTagNames(posts, tagNames);
+        }
+        if (keyword != null && !keyword.trim().isEmpty()){
+            posts = postService.GetPostsByKeyword(posts, keyword);
+        }
+        if (userId != null){
+            posts = postService.GetPostsByUserId(posts, userId);
+        }
+        posts = postService.sortPosts(posts, sortBy, sortDirection);
+        List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
+        return dtos;
+    }
+
     @GetMapping("/GetAllApproved")
     public List<PostDto> getAllApprovedPostDtosByCategoryOrTag(
             @RequestParam(name = "keyword", required = false) String keyword,
@@ -124,6 +168,46 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         return dtos;
     }
 
+    @GetMapping("/GetAll")
+    public List<PostDto> getAllPostDtosByCriteria(
+            @RequestParam(name = "postApprovalStatuses", required = false) List<String> postApprovalStatuses,
+            @RequestParam(name = "postStatuses", required = false) List<String> postStatuses,
+            @RequestParam(name = "keyword", required = false) String keyword,
+            @RequestParam(name = "categoryName", required = false) String categoryName,
+            @RequestParam(name = "tagNames", required = false) List<String> tagNames,
+            @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
+            @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
+            @RequestParam(name = "userId", required = false) Integer userId,
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection) {
+
+        List<Post> posts = postService.filterPostsByPostApprovalStatus(postApprovalStatuses);
+
+        if (postStatuses != null && !postStatuses.isEmpty()) {
+            posts = postService.filterPostsByPostStatus(posts, postStatuses);
+        }
+
+        if (startDate != null && endDate != null) {
+            posts = postService.filterPostsByDateRange(posts, startDate, endDate);
+        }
+        if (categoryName != null && !categoryName.trim().isEmpty()) {
+            posts = postService.filterByCategoryName(posts, categoryName);
+        }
+
+        if (tagNames != null && !tagNames.isEmpty()) {
+            posts = postService.filterByTagNames(posts, tagNames);
+        }
+        if (keyword != null && !keyword.trim().isEmpty()){
+            posts = postService.GetPostsByKeyword(posts, keyword);
+        }
+        if (userId != null){
+            posts = postService.GetPostsByUserId(posts, userId);
+        }
+        posts = postService.sortPosts(posts, sortBy, sortDirection);
+        List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
+        return dtos;
+    }
+
     //get post detail by post id
     @GetMapping("/GetAllApproved/{id}")
     public PostDto getById(@PathVariable Integer id) {
@@ -145,8 +229,9 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
 
     @GetMapping("/postRequest")
     public List<PostDto> getAllPostRequest() {
-        List<Post> posts = postService.getPostsWithoutApprovals();
-        List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
+        List<Post> posts = postService.getPostsWithoutApprovalsAndByCurrentUserCategoryManagement();
+        List<Post> postss = postService.getPostRequestsWithoutCurrentUserOwnPostRequests(posts);
+        List<PostDto> dtos = postService.mapPostsToPostDtos(postss);
         return dtos;
     }
 
@@ -158,22 +243,78 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         return dto;
     }
 
+//    @PostMapping("/postRequest/approve/{id}")
+//    public PostApprovalsDto approvePost(@PathVariable Integer id) {
+//        PostApprovals requestPost = postService.approvePost(id);
+//        PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
+//
+//        return postDto;
+//    }
+
     @PostMapping("/postRequest/approve/{id}")
-    public PostApprovalsDto approvePost(@PathVariable Integer id) {
-        PostApprovals requestPost = postService.approvePost(id);
+    public ResponseEntity<?> approvePost(@PathVariable Integer id) {
+        try {
+            // Call the service method to approve the post
+            PostApprovals requestPost = postService.approvePost(id);
 
-        PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
+            // Map the result to DTO
+            PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
 
-        return postDto;
+            // Return a successful response with the DTO
+            return ResponseEntity.ok(postDto);
+        } catch (IllegalArgumentException e) {
+            // Handle the case where the user is invalid
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid User");
+        } catch (IllegalStateException e) {
+            // Handle the case where the post cannot be approved by the user who created it
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        } catch (Exception e) {
+            // Handle other exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+        }
     }
+
+
+//    @PostMapping("/postRequest/reject/{id}")
+//    public PostApprovalsDto rejectPost(@PathVariable Integer id) {
+//        PostApprovals requestPost = postService.rejectPost(id);
+//        PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
+//        Report report = postService.generateReportIfCountRejectedPostApprovalsForUserWithin24HoursThresholdExceeded(requestPost.getPost().getCreatedByUser().getUsId());
+//        System.out.println(report);
+//        return postDto;
+//    }
 
     @PostMapping("/postRequest/reject/{id}")
-    public PostApprovalsDto rejectPost(@PathVariable Integer id) {
-        PostApprovals requestPost = postService.rejectPost(id);
-        PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
-        Report report = postService.generateReportIfCountRejectedPostApprovalsForUserWithin24HoursThresholdExceeded(requestPost.getPost().getCreatedByUser().getUsId());
-        System.out.println(report);
-        return postDto;
+    public ResponseEntity<Map<String, Object>> rejectPost(@PathVariable Integer id) {
+        try {
+            // Call the service method to reject the post
+            PostApprovals requestPost = postService.rejectPost(id);
+
+            // Map the result to DTO
+            PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
+
+            // Generate a report if the rejection threshold is exceeded
+            Report report = postService.generateReportIfCountRejectedPostApprovalsForUserWithin24HoursThresholdExceeded(requestPost.getPost().getCreatedByUser().getUsId());
+
+            // Create a response map with message, data (PostApprovalsDto), and report information
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Post rejected successfully");
+            response.put("data", postDto);
+            response.put("report", report);
+
+            // Return a successful response with the map
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            // Handle the case where the user is invalid
+            return ResponseEntity.badRequest().body(Collections.singletonMap("message", "Invalid User"));
+        } catch (IllegalStateException e) {
+            // Handle the case where the post cannot be rejected by the user who created it
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Collections.singletonMap("message", e.getMessage()));
+        } catch (Exception e) {
+            // Handle other exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("message", "An error occurred"));
+        }
     }
+
 
 }
