@@ -99,6 +99,12 @@
                         Manage Teacher Category
                     </h5>
                 </div>
+
+                <div class="content" onclick="showContent('content18')">
+                    <h5 class="title-text">
+                        Category Request
+                    </h5>
+                </div>
                 
             </div>
     
@@ -254,6 +260,7 @@
                 
                 </div>
 
+                <!-- Teacher Category -->
                 <div id="content16Content" style="display: none;">
                     
                                     <div class="frame">
@@ -283,6 +290,38 @@
                                         }
                                     </script>
                 
+                </div>
+
+                <!-- Category Request -->
+                <div id="content18Content" style="display: none;">
+                    
+                    <div class="frame">
+                        <div class="title">
+                            <h1>Category Request Management</h1>
+                        </div>
+                        <div class="request-management">
+                        
+                              <!-- Rows -->
+                            <div id="requestTable"></div>
+                        </div>
+
+                    </div>
+                    <script>
+                        function showDeletePopup() {
+                            var popup = document.getElementById("deletePopup");
+                            popup.style.display = "flex";
+                        }
+                
+                        function handleConfirmDelete() {
+                            
+                        }
+                
+                        function handleCancelDelete() {
+                            var popup = document.getElementById("deletePopup");
+                            popup.style.display = "none";
+                        }
+                    </script>
+
                 </div>
             </div>
 

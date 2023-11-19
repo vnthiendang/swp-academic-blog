@@ -95,7 +95,7 @@ rejectButton.addEventListener("click", async (event) =>{
 
 const approvePost = async (postId) => {
   try {
-    const response = await request.post(`post/postRequest/reject/${postId}`, {
+    const response = await request.post(`post/postRequest/approve/${postId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -108,7 +108,7 @@ const approvePost = async (postId) => {
 
 const rejectPost = async (postId) => {
   try {
-    const response = await request.post(`post/postRequest/approve/${postId}`, {
+    const response = await request.post(`post/postRequest/reject/${postId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

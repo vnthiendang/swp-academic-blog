@@ -43,75 +43,47 @@ import {
         "No results related to your search. Please use other keywords.";
       postContainer.appendChild(noResultsElement);
     } else {
-      posts.forEach((post) => {
-        const postElement = document.createElement("div");
-        postElement.innerHTML = `
-          <div class="wapper-title">
-            <div class="column">
-              <div class="inner-column">
-                <div class="container-user">
-                  <div class="by-user">
-                    <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
-                  </div>
-                  <div class="by-user-logo"></div>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <div class="inner-column">
-                <div class="container-user">
-                  <div class="by-user">
-                    <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
-                  </div>
-                  <div class="by-user">${post.createdByUser}</div>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <div class="inner-column">
-                <div class="container-datetime">
-                  <div class="date-time">
-                    <i class="fa-regular fa-calendar-days" style="color: #000000;"></i>
-                  </div>
-                  <div class="date-time">${new Date(post.createdTime).toLocaleString("en-US", options)}</div>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <div class="inner-column">
-                <div class="container-tag">
-                  <div class="tag-category">
-                    <i class="fa-solid fa-hashtag" style="color: #ff0000;"></i>
-                  </div>
-                  <div class="tag-category">${post.belongedToCategory}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="container-post-img">
-            <div class="post-title-content">
-              <div class="column-title">
-                <div class="postTitle">
-                  <h2>${post.title}</h2>
-                </div>
-              </div>
-              <div class="column-content">
-                <div class="postContent">${post.content}</div>
-              </div>
-            </div>
-          </div>
-          ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Post Image">` : ""}
-        `;
-  
-        postContainer.appendChild(postElement);
+      posts.forEach((postData) => {
+        const byUser = document.querySelector('.created-by-user');
+        if (postData.createdByUser) {
+          byUser.textContent = postData.createdByUser;
+        } else {
+          byUser.textContent = 'Unknown User';
+        }
+      
+        // Date Time
+        const postDate = document.querySelector('#postDate');
+        const postCreatedTime = new Date(postData.createdTime);
+        const formattedTime = postCreatedTime.toLocaleString("en-US", options);
+        postDate.textContent = formattedTime;
+      
+        // Tag Category
+        const postCategory = document.querySelector('#postCategory');
+        postCategory.textContent = postData.belongedToCategory;
+      
+        // Title
+        const postTitle = document.querySelector('.postTitle h2');
+        postTitle.textContent = postData.title;
+      
+        // Content
+        const postContent = document.querySelector('.postContent h2');
+        postContent.textContent = postData.postDetail;
+      
+        // Image
+        const postImage = document.querySelector('.container-img img');
+        
+        if(postData.mediaList.length > 0){
+          
+          postData.mediaList.forEach(media => {
+            postImage.src = `data:image/jpeg;base64, ${media}`;
+          });
+        }
+      
+        // Number Read
+        const readingTime = document.querySelector('#readingTime');
+        readingTime.textContent = postData.readingTime;
       });
     }
-  }
-  
-  function extractTextFromHTML(html) {
-    const tempElement = document.createElement("div");
-    tempElement.innerHTML = html;
-    return tempElement.textContent || tempElement.innerText || "";
   }
   
   // Function to display all approved posts

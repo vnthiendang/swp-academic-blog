@@ -182,6 +182,7 @@
   .report-table th {
     background-color: #f2f2f2;
     font-weight: bold;
+    width: 40px;
   }
 
   .report-table tbody tr:nth-child(even) {
@@ -218,6 +219,33 @@
   .category-table tbody tr:hover {
     background-color: #e6e6e6;
   }
+
+    /*category request table */
+    .request-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+    }
+  
+    .request-table th,
+    .request-table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    .request-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+  
+    .request-table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  
+    .request-table tbody tr:hover {
+      background-color: #e6e6e6;
+    }
 
   .styled-button {
     display: inline-block;

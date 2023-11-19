@@ -1,8 +1,9 @@
-import {addAccountViolation, approvedPostList, userList, violationList, updatePostStatus} from './Services/admin.service.js';
+import {addAccountViolation, approvedPostList, userList, violationList, updatePostStatus, violationRuleList} from './Services/admin.service.js';
 import { getAllAward } from "./Services/award.service.js";
 import { getAllReports } from "./Services/report.service.js";
 import { getAllTeacherCategory } from "./Services/category.service.js";
 import { userInfo } from "./Services/auth.service.js";
+import { getAllRequests, reviewRequest } from './Services/request.service.js';
 
 const options = {
   month: "short",
@@ -146,8 +147,7 @@ const renderUserTable = (users) => {
 
       const addViolationButton = document.createElement('button');
       addViolationButton.classList.add('styled-button');
-      addViolationButton.dataset.userId = user.userId;
-      addViolationButton.textContent = 'Add violation';
+      addViolationButton.textContent = 'Delete';
       actionCell.appendChild(addViolationButton);
 
       const createUserBtn = document.createElement('button');
@@ -158,24 +158,6 @@ const renderUserTable = (users) => {
       row.appendChild(actionCell);
   
       tbody.appendChild(row);
-
-      addViolationButton.addEventListener('click', async () => {
-        const userId = addViolationButton.dataset.userId;
-        try {
-          const model = {
-            userId: userId,
-            violation_type: 2
-          };
-          const response = await addAccountViolation(model);
-          if(response != null){
-            alert('Account violation Added');
-          }else{
-            alert('Fail to perform add violation!');
-          }
-        } catch (error) {
-          console.error('Error adding violation:', error);
-        }
-      });
 
     });
   
@@ -338,7 +320,7 @@ const displayReports = async () => {
     // Create table header
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
-    const headers = ['Report Type', 'Reported By', 'Detail', 'Violation Rule', 'Action'];
+    const headers = ['Report Type', 'By', 'Detail', 'Violation Rule', 'Action'];
     
     headers.forEach(headerText => {
       const th = document.createElement('th');
@@ -381,14 +363,63 @@ const displayReports = async () => {
       updateReportBtn.textContent = 'Update';
       actionCell.appendChild(updateReportBtn);
 
-      const createBtn = document.createElement('button');
-      createBtn.classList.add('styled-button');
-      createBtn.textContent = 'Create';
-      actionCell.appendChild(createBtn);
+      const addViolationBtn = document.createElement('button');
+      addViolationBtn.classList.add('styled-button');
+      addViolationBtn.dataset.reportedObjectLink = report.reportedObjectLink;
+      addViolationBtn.textContent = 'Add Violation';
+      actionCell.appendChild(addViolationBtn);
+
+      const dropdown = document.createElement('select');
+      dropdown.innerHTML = "<option value>Choose Violation Type</option>";
+
+      const populateDropdownOptions = async () => {
+        try {
+          const response = await violationRuleList();
+          const violationRules = response;
+      
+          violationRules.forEach((rule) => {
+            const option = document.createElement('option');
+            option.value = rule.id;
+            option.textContent = rule.violationRuleInfo;
+            dropdown.appendChild(option);
+          });
+        } catch (error) {
+          console.error('Error fetching violation rules:', error);
+          // Handle error
+        }
+      };
+
+      populateDropdownOptions().then(() => {
+        actionCell.appendChild(dropdown);
+      });
 
       row.appendChild(actionCell);
 
       tbody.appendChild(row);
+
+      addViolationBtn.addEventListener('click', async () => {
+        const obj = addViolationBtn.dataset.reportedObjectLink;
+
+        if(dropdown.value){
+          try {
+            const model = {
+              userId: obj,
+              violation_type: dropdown.value
+            };
+            const response = await addAccountViolation(model);
+            if(response != null){
+              alert('Account violation Added');
+              location.reload();
+            }else{
+              alert('Fail to perform add violation!');
+            }
+          } catch (error) {
+            console.error('Error adding violation:', error);
+          }
+        }else{
+          alert('Must choose violation type first!');
+        }
+      });
     });
     table.appendChild(tbody);
     awardTable.appendChild(table);
@@ -461,4 +492,116 @@ const displayTeacherCategory = async () => {
 };
 
 displayTeacherCategory();
+
+// MANAGE Category Request
+const displayCategoryRequest = async () => {
+  const requestTable = document.getElementById('requestTable');
+
+  try {
+    const table = document.createElement('table');
+    table.classList.add('request-table');
+    
+    // Create table header
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    const headers = ['Request Type', 'Teacher', 'Detail', 'Action'];
+    
+    headers.forEach(headerText => {
+      const th = document.createElement('th');
+      th.textContent = headerText;
+      headerRow.appendChild(th);
+    });
+    
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+    
+    // Create table body
+    const tbody = document.createElement('tbody');
+    const requests = await getAllRequests();
+
+    requests.forEach(request => {
+      const row = document.createElement('tr');
+
+      const type = document.createElement('td');
+      type.textContent = request.requestType;
+      row.appendChild(type);
+
+      const byUser = document.createElement('td');
+      byUser.textContent = request.requestedByUser;
+      row.appendChild(byUser);
+
+      const detail = document.createElement('td');
+      detail.textContent = request.requestDetail;
+      row.appendChild(detail);
+
+      const actionCell = document.createElement('td');
+
+      const approveBtn = document.createElement('button');
+      approveBtn.classList.add('styled-button');
+      approveBtn.dataset.requestId = request.id;
+      approveBtn.textContent = 'Approve';
+      actionCell.appendChild(approveBtn);
+
+      const rejectBtn = document.createElement('button');
+      rejectBtn.classList.add('styled-button');
+      rejectBtn.dataset.requestId = request.id;
+      rejectBtn.textContent = 'Reject';
+      actionCell.appendChild(rejectBtn);
+
+      row.appendChild(actionCell);
+
+      tbody.appendChild(row);
+
+      approveBtn.addEventListener('click', async () => {
+        const requestId = approveBtn.dataset.requestId;
+        const userInfos = await userInfo();
+
+          try {
+            const model = {
+              reviewedByAdminId: userInfos.userId,
+              adminMessage: "approved",
+              status: "approved"
+            };
+            const response = await reviewRequest(requestId, model);
+            if(response != null){
+              alert('Teacher Category Approved!');
+              location.reload();
+            }else{
+              alert('Fail to perform!');
+            }
+          } catch (error) {
+            console.error('Error review requests:', error);
+          }
+      });
+
+      rejectBtn.addEventListener('click', async () => {
+        const requestId = approveBtn.dataset.requestId;
+        const userInfos = await userInfo();
+
+          try {
+            const model = {
+              reviewedByAdminId: userInfos.userId,
+              adminMessage: "",
+              status: "rejected"
+            };
+            const response = await reviewRequest(requestId, model);
+            if(response != null){
+              alert('Teacher Category Rejected!');
+              location.reload();
+            }else{
+              alert('Fail to perform!');
+            }
+          } catch (error) {
+            console.error('Error review requests:', error);
+          }
+      });
+    });
+    table.appendChild(tbody);
+    requestTable.appendChild(table);
+  } catch (error) {
+    console.error('Error retrieving category requests:', error);
+  }
+};
+
+displayCategoryRequest();
   

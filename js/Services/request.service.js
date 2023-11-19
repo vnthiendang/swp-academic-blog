@@ -73,3 +73,16 @@ export const editRequest = async (requestId, model) => {
     console.error('Error updating request:', error);
   } 
 };
+
+export const reviewRequest = async (id, model) => {
+  try {
+    const response = await request.put(`request/review/${id}`, model, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error review request:', error);
+  } 
+};

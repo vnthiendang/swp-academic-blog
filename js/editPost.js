@@ -145,9 +145,9 @@ document.addEventListener("DOMContentLoaded", function () {
       tagList: tagList.value ? [tagList.value] : []
     };
 
-    for (let i = 0; i < imageInput.files.length; i++) {
-      model.mediaList.push(imageInput.files[i]);
-    }
+    imageInput.addEventListener("change", () => {
+      model.mediaList = Array.from(imageInput.files);
+    });
 
     try {
 

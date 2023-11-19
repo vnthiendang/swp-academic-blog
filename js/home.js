@@ -19,34 +19,16 @@ const showHeaderForTeacher = async () => {
     if (userRole === 'Teacher') {
       // Display the form
       document.getElementById('teacherPage').style.display = 'block';
-    } else {
-      // Hide the form
-      document.getElementById('teacherPage').style.display = 'none';
-    }
-  } catch (error) {
-  }
-};
-
-showHeaderForTeacher();
-
-const showHeaderForTeacher2 = async () => {
-  try {
-    const usersInfo = await userInfo();
-    const userRole = usersInfo.role_id;
-
-    if (userRole === 'Teacher') {
-      // Display the form
       document.getElementById('teacherPage2').style.display = 'block';
     } else {
       // Hide the form
+      document.getElementById('teacherPage').style.display = 'none';
       document.getElementById('teacherPage2').style.display = 'none';
     }
   } catch (error) {
-    // Handle errors if needed
   }
 };
-
-showHeaderForTeacher2();
+showHeaderForTeacher();
 
 
 // DISPLAY LIST APPROVED POSTS
