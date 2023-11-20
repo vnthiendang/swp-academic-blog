@@ -148,60 +148,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="inner-column">
-                    <div class="container-vote" title="Like">
-                        <div class="number-vote">
-                            <i class="fa-regular fa-thumbs-up" style="color: #000000;" id="likeIcon" onclick="toggleLikeIcon()"></i>
-                        </div>
-                        <div class="number-vote" id="postVote">
-                            <!-- Number Of Vote Like -->
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="inner-column">
-                    <div class="container-vote" title="Dislike">
-                        <div class="number-vote">
-                            <i class="fa-regular fa-thumbs-down" style="color: #000000;" id="dislikeIcon" onclick="toggleDislikeIcon()"></i>
-                        </div>
-                        <div class="number-vote" id="postVote2">
-                            <!-- Number Of Vote Dislike -->
-                        </div>
-                    </div>
-                </div>
-                
-                <script>
-                    function toggleLikeIcon() {
-                        var likeIcon = document.getElementById('likeIcon');
-                        
-                        // Toggle between the regular and solid thumbs-up icons
-                        if (likeIcon.classList.contains('fa-regular')) {
-                            likeIcon.classList.remove('fa-regular');
-                            likeIcon.classList.add('fa-solid');
-                            likeIcon.style.color = '#000000'; // Set the color as needed
-                        } else {
-                            likeIcon.classList.remove('fa-solid');
-                            likeIcon.classList.add('fa-regular');
-                            likeIcon.style.color = '#000000'; // Set the color as needed
-                        }
-                    }
-                
-                    function toggleDislikeIcon() {
-                        var dislikeIcon = document.getElementById('dislikeIcon');
-                        
-                        // Toggle between the regular and solid thumbs-down icons
-                        if (dislikeIcon.classList.contains('fa-regular')) {
-                            dislikeIcon.classList.remove('fa-regular');
-                            dislikeIcon.classList.add('fa-solid');
-                            dislikeIcon.style.color = '#0c0d0d'; // Set the color as needed
-                        } else {
-                            dislikeIcon.classList.remove('fa-solid');
-                            dislikeIcon.classList.add('fa-regular');
-                            dislikeIcon.style.color = '#000000'; // Set the color as needed
-                        }
-                    }
-                </script>
                 
                 
                 <div class="inner-column">
@@ -222,40 +168,27 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Vote Type . Give Award . Button Give Award -->
-            <!-- <div class="column">
-                <div class="inner-column">
-                    <form class="form" id="createVote">
-                        <div class="flex flex-col">
-                            <label for="">
-                                <select id="VoteType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">
-                                    <option selected>Vote Type</option>
-                                </select>
-                            </label>
-                        </div>
-                    </form>
 
-                    <div class="inner-column">
-                        <button style="background-color: green;color: white;" class="fa bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">Vote</button>
+            <!-- Button Aprove . Button Reject -->
+            <div class="column">
+                <div class="inner-column">
+                    <div class="tools">
+                        <div class="button" style="display: flex;">
+                            <button class="button approve-button" id="approveButton">Approve</button>
+                            <!-- <button class="button reject-button" id="rejectButton">Reject</button> -->
+                        </div>
                     </div>
                 </div>
-            </div> -->
 
-            <!-- <div class="column">
                 <div class="inner-column">
-                    <form class="form" id="createAward">
-                        <div class="flex flex-col" >
-                            <label for="">
-                                <select id="AwardType" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">
-                                    <option selected>Award Type</option>
-                                </select>
-                            </label>
-                            <button id="button-give-award" style="background-color: green;color: white;" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">Give Award</button>
-                        </div>  
-                    </form>
+                    <div class="tools">
+                        <div class="button-reject" style="display: flex;">
+                            <!-- <button class="button approve-button" id="approveButton">Approve</button> -->
+                            <button class="button reject-button" id="rejectButton">Reject</button>
+                        </div>
+                    </div>
                 </div>
-            </div> -->
+            </div>
 
         </div>
 
@@ -276,56 +209,6 @@
             </div>
             <div>
                 <h5 id="postCategory"></h5>
-            </div>
-        </div>
-
-        <!-- Comment -->
-        <div class="wapper-title-comment">
-            <div class="column-comment">
-                <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
-
-                    <div class="max-w-2xl mx-auto px-4">
-                        <div class="flex justify-between items-center mb-6">
-                            <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion</h2>
-                        </div>
-                        <form class="mb-6" id="comment">
-                            <div
-                                class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                                <label for="comment" class="sr-only">Your comment</label >
-                  
-                                <input class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800" 
-                                type="text" name="comment" placeholder="Write a comment..." id="cmt" rows class="input-control" required>
-                            </div>
-                            <button type="submit"
-                                class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                                Post comment
-                            </button>
-                        </form>
-                        <div id="commentContainer" >
-                            <article
-                            class="p-6 mb-3 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                            <footer class="flex justify-between items-center mb-2">
-                                <div class="flex items-center">
-                                    <p
-                                        class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold" id="commentByUser">
-                                    </p>
-        
-                                </div>
-                                
-                            </footer>
-                            <p class="text-gray-500 dark:text-gray-400" id="commentText"></p>
-                            <div class="flex items-center mt-4 space-x-4">
-                                <button type="button"
-                                    class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
-                                    <i class="fa-regular fa-comment px-2"></i>
-                                    Reply
-                                </button>
-                            </div>
-                        </article>
-                        </div>
-                        
-                    </div>
-                </section>
             </div>
         </div>
 
@@ -361,8 +244,7 @@
         </div>
     </footer>
 
-    <script type="module" src='./js/home.js'></script>
-    <script type="module" src='./js/postDetail.js'></script>
+    <script type="module" src='./js/postReview.js'></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 

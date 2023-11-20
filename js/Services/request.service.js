@@ -17,6 +17,33 @@ export const getPostRequest = async () => {
     }
 };
 
+export const approvePost = async (id) => {
+  try {
+    const response = await request.post(`post/postRequest/approve/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error approve post:', error);
+  } 
+};
+
+export const rejectPost = async (id) => {
+  try {
+    const response = await request.post(`post/postRequest/reject/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error reject post:', error);
+  }
+  
+}
+
 
 //   API REQUEST
 export const getAllRequests = async () => {

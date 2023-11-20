@@ -343,23 +343,32 @@ filterPosts.addEventListener("click", async () => {
   const startDates = document.getElementById('date_timepicker_start');
   const startDateValue = startDates.value;
 
-// Parse the date string in the format MM/DD/YYYY
-const startDateParts = startDateValue.split('/');
-const year = parseInt(startDateParts[2]);
-const month = parseInt(startDateParts[0]);
-const day = parseInt(startDateParts[1]);
+  let startDate = null;
 
-const startDate = {
-  year,
-  month,
-  day,
-  hour: 0,
-  minute: 0,
-  second: 0
-};
+  // Parse the date string in the format MM/DD/YYYY
+  const startDateParts = startDateValue.split('/');
+  const year = parseInt(startDateParts[2]);
+  const month = parseInt(startDateParts[0]);
+  const day = parseInt(startDateParts[1]);
+  
+  if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+    startDate = new Date(year, month - 1, day);
+  }
 
   const endDates = document.getElementById('date_timepicker_end');
-  const endDate = endDates.value;
+  const endDateValue = endDates.value;
+
+  let endDate = null;
+
+  // Parse the date string in the format MM/DD/YYYY
+  const endDateParts = endDateValue.split('/');
+  const yearEnd = parseInt(endDateParts[2]);
+  const monthEnd = parseInt(endDateParts[0]);
+  const dayEnd = parseInt(endDateParts[1]);
+  
+  if (!isNaN(yearEnd) && !isNaN(monthEnd) && !isNaN(dayEnd)) {
+    endDate = new Date(yearEnd, monthEnd - 1, dayEnd);
+  }
 
   try {
     const response = await filterPost(categoryName, tagNames, startDate, endDate, sortBy, sortDirection);

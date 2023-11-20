@@ -1,7 +1,9 @@
 import { createComment, getCommentById } from "./Services/post.service.js";
 import * as request from './utils/request.js';
 import { userInfo } from "./Services/auth.service.js";
-import { getVoteType, votePost } from "./Services/vote.service.js";
+import { votePost } from "./Services/vote.service.js";
+import { violationRuleList } from "./Services/admin.service.js";
+import { createReport } from "./Services/report.service.js";
 import { createAward, getAllAwardType } from './Services/award.service.js';
 
 const token = localStorage.getItem("token");
@@ -198,8 +200,8 @@ const showFormForStudent = async () => {
       document.getElementById('likeIcon').style.display = 'block';
       document.getElementById('dislikeIcon').style.display = 'block';
     } else {
-      document.getElementById('likeIcon').style.display = 'none';
-      document.getElementById('dislikeIcon').style.display = 'none';
+      document.getElementById('likeIcon').style.pointerEvents = 'none';
+      document.getElementById('dislikeIcon').style.pointerEvents = 'none';
     }
   } catch (error) {
     console.error('Error retrieving user info:', error);
@@ -306,6 +308,57 @@ const displayAwardType = (types) => {
 
 getAllAwardType().then((types) => {
   displayAwardType(types);
+});
+
+const displayViolationType = (types) => {
+  const selectElement = document.getElementById('violationRule');
+
+  types.forEach(type => {
+    const option = document.createElement('option');
+    option.value = type.violationRuleInfo;
+    option.textContent = type.violationRuleInfo;
+
+    selectElement.appendChild(option);
+  });
+};
+violationRuleList().then((rules) => {
+  displayViolationType(rules);
+});
+
+const reportButton = document.getElementById('reportButton');
+const violationRule = document.getElementById('violationRule');
+
+let isFirstClick = true;
+
+reportButton.addEventListener('click', async function() {
+  if (isFirstClick) {
+    violationRule.style.display = 'block';
+    isFirstClick = false;
+  }else if(violationRule.value.length > 0){
+    const us = await userInfo();
+    const usId = us.userId;
+
+    var model ={
+      reportTypeId: 1,
+      violationRuleList : Array.from(violationRule.selectedOptions, option => option.value),
+      reportDetail: "User Report",
+      reportedByUserId: usId
+  }
+  try {
+      const response = await createReport(model);
+
+      if(response != null){
+        alert('Post Reported!');
+        location.reload();
+      }else {
+        alert('Fail to create report!');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }else {
+    alert('Please choose a violation type!');
+  }
 });
 
 //Give Award
