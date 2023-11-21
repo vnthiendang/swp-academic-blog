@@ -7,7 +7,6 @@ const token = localStorage.getItem("token");
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('belongedToPostID');
-console.log('Post ID: ' + postId);
 
 //EDIT POST
 function displayEditPost() {

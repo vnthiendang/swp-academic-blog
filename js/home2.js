@@ -32,7 +32,7 @@ import {
   
   // DISPLAY LIST APPROVED POSTS
   function displayPosts(posts) {
-    const postContainer = document.querySelector(".main-blog");
+    const postContainer = document.querySelector(".wapper-title");
     postContainer.innerHTML = "";
   
     if (posts.length === 0) {
@@ -44,21 +44,21 @@ import {
       postContainer.appendChild(noResultsElement);
     } else {
       posts.forEach((postData) => {
-        const byUser = document.querySelector('.created-by-user');
+        const byUser = document.getElementsByClassName('createdUser');
         if (postData.createdByUser) {
           byUser.textContent = postData.createdByUser;
         } else {
-          byUser.textContent = 'Unknown User';
+          byUser.textContent = '';
         }
       
         // Date Time
-        const postDate = document.querySelector('#postDate');
+        const postDate = document.getElementById('postDate');
         const postCreatedTime = new Date(postData.createdTime);
         const formattedTime = postCreatedTime.toLocaleString("en-US", options);
         postDate.textContent = formattedTime;
       
         // Tag Category
-        const postCategory = document.querySelector('#postCategory');
+        const postCategory = document.getElementById('postCategory');
         postCategory.textContent = postData.belongedToCategory;
       
         // Title
@@ -80,7 +80,7 @@ import {
         }
       
         // Number Read
-        const readingTime = document.querySelector('#readingTime');
+        const readingTime = document.getElementById('readingTime');
         readingTime.textContent = postData.readingTime;
       });
     }

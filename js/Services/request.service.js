@@ -17,9 +17,9 @@ export const getPostRequest = async () => {
     }
 };
 
-export const approvePost = async (id) => {
+export const approvePost = async (id, model) => {
   try {
-    const response = await request.post(`post/postRequest/approve/${id}`, {
+    const response = await request.post(`post/postRequest/approve/${id}`, model, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -30,9 +30,9 @@ export const approvePost = async (id) => {
   } 
 };
 
-export const rejectPost = async (id) => {
+export const rejectPost = async (id, model) => {
   try {
-    const response = await request.post(`post/postRequest/reject/${id}`, {
+    const response = await request.post(`post/postRequest/reject/${id}`, model, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }

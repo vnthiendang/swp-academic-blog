@@ -341,7 +341,7 @@ filterPosts.addEventListener("click", async () => {
   const sortDirection = selectSortDirection.value;
 
   const startDates = document.getElementById('date_timepicker_start');
-  const startDateValue = startDates.value;
+  const startDateValue = startDates.value; //2023-11-11
 
   let startDate = null;
 
@@ -375,6 +375,7 @@ filterPosts.addEventListener("click", async () => {
     if(response == null){
       alert('Please check your filter!');
     }else{
+      console.log(startDate);
       displayPosts(response);
     }
   } catch (error) {

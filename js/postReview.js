@@ -68,7 +68,11 @@ const rejectButton = document.getElementById("rejectButton");
 approveButton.addEventListener("click", async (event) =>{
   event.preventDefault();
 
-  const response = await approvePost(postId);
+  var model = {
+    teacherMessage: "approved"
+  }
+
+  const response = await approvePost(postId, model);
 
   if(response == null){
     alert('Fail to approve!');
@@ -80,8 +84,11 @@ approveButton.addEventListener("click", async (event) =>{
 
 rejectButton.addEventListener("click", async (event) =>{
   event.preventDefault();
+  var model = {
+    teacherMessage: "rejected"
+  }
 
-  const response = await rejectPost(postId);
+  const response = await rejectPost(postId, model);
 
   if(response == null){
     alert('Fail to reject!');
