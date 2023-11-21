@@ -47,13 +47,22 @@ public class ReportService {
 
     public Report createReport(ReportRequest reportRequest){
         Report report = new Report();
+
         report.setReportType(reportTypeRepository.findById(reportRequest.getReportTypeId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Report Type")));
         report.setReportedByUser(userRepository.findById(reportRequest.getReportedByUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User")));
+
         report.setReportDetail(reportRequest.getReportDetail());
+
         report.setCreatedTime(LocalDateTime.now());
+
+        report.setStatus("pending");
+
+        report.setReportedObjectLink(reportRequest.getReportedObjectLink());
+
         List<String> violationRuleList = reportRequest.getViolationRuleList();
+
         if (violationRuleList != null && !violationRuleList.isEmpty()) {
             List<ReportViolation> reportViolationList = new ArrayList<>();
             for (String violationRuleInfo : violationRuleList) {
@@ -68,10 +77,44 @@ public class ReportService {
         }
         return reportRepository.save(report);
     }
+
     public Report updateReport(Integer reportID, ReportRequest reportRequest){
         Report report = getById(reportID);
         report.setReportDetail(reportRequest.getReportDetail());
-        report.setCreatedTime(LocalDateTime.now());
+
+        List<String> violationRuleList = reportRequest.getViolationRuleList();
+        if (violationRuleList != null && !violationRuleList.isEmpty()) {
+            report.getReportViolations().clear();
+            List<ReportViolation> reportViolationList = new ArrayList<>();
+            for (String violationRuleInfo : violationRuleList) {
+                ViolationRule violationRule = violationRuleRepository.findByViolationRuleInfo(violationRuleInfo)
+                        .orElseThrow(() -> new IllegalArgumentException("Invalid Violation Rule"));
+                ReportViolation reportViolation = new ReportViolation();
+                reportViolation.setViolationRule(violationRule);
+                reportViolation.setReport(report);
+                reportViolationList.add(reportViolation);
+            }
+            report.setReportViolations(reportViolationList);
+        }else {
+            report.getReportViolations().clear();
+        }
+
+        return reportRepository.save(report); // Save and return the updated post
+    }
+
+    public Report reviewReport(Integer reportID, ReportRequest reportRequest){
+        Report report = getById(reportID);
+        report.setStatus(report.getStatus());
+
+        if (reportRequest.getViewedByUser() != null) {
+            report.setViewedByUser(userRepository.findById(reportRequest.getViewedByUser())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid User")));
+        } else {
+            report.setViewedByUser(null);
+        }
+
+        report.setReviewedTime(LocalDateTime.now());
+
         List<String> violationRuleList = reportRequest.getViolationRuleList();
         if (violationRuleList != null && !violationRuleList.isEmpty()) {
             report.getReportViolations().clear();

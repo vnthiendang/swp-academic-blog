@@ -4,13 +4,17 @@ import com.swp.cms.reqDto.CommentRequest;
 import com.swp.cms.reqDto.CommentRequest;
 import com.swp.entities.Comment;
 import com.swp.entities.Comment;
+import com.swp.entities.Comment;
 import com.swp.repositories.CommentRepository;
 import com.swp.repositories.CommentRepository;
 import com.swp.repositories.PostRepository;
 import com.swp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -56,11 +60,24 @@ public class CommentService {
         } else {
             comment.setParentComment(null);
         }
+        comment.setStatus("created");
         return commentRepository.save(comment);
     }
     public Comment updateComment(Integer commentID, CommentRequest commentRequest){
         Comment comment = getById(commentID);
         comment.setCommentText(commentRequest.getCommentText());
+        comment.setUpdatedDate(LocalDateTime.now());
+        comment.setStatus("edited");
         return commentRepository.save(comment);
+    }
+
+    public void deleteCommentById(Integer commentId) {
+        Comment comment = getById(commentId);
+        if (comment != null) {
+            comment.setStatus("deleted");
+            commentRepository.save(comment);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Comment not found with ID: " + commentId);
+        }
     }
 }

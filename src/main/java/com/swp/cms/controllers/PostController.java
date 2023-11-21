@@ -3,10 +3,12 @@ package com.swp.cms.controllers;
 import com.swp.cms.dto.PostApprovalsDto;
 import com.swp.cms.dto.PostDto;
 import com.swp.cms.mapper.PostMapper;
+import com.swp.cms.reqDto.PostApprovalsRequest;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.Post;
 import com.swp.entities.PostApprovals;
 import com.swp.entities.Report;
+import com.swp.services.PostApprovalsService;
 import com.swp.services.PostService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.modelmapper.ModelMapper;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -49,7 +52,7 @@ public class PostController {
 
     //update a post by postId
     @PutMapping("/edit/{id}")
-    public PostDto updatePost(@PathVariable Integer id, @RequestBody PostRequest postRequest){
+    public PostDto updatePost(@PathVariable Integer id, @ModelAttribute PostRequest postRequest){
         Post post = postService.updatePost(id, postRequest);
         PostDto dto = postService.mapPostToPostDto(post);
         return dto;
@@ -104,6 +107,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
             @RequestParam(name = "keyword", required = false) String keyword,
             @RequestParam(name = "categoryName", required = false) String categoryName,
             @RequestParam(name = "tagNames", required = false) List<String> tagNames,
+            @RequestParam(name = "minimumLikeCount", required = false) Integer minimumLikeCount,
             @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
             @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
             @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
@@ -126,6 +130,11 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         if (tagNames != null && !tagNames.isEmpty()) {
             posts = postService.filterByTagNames(posts, tagNames);
         }
+
+        if (minimumLikeCount != null) {
+            posts = postService.filterByMinimumLikeCount(posts, minimumLikeCount);
+        }
+
         if (keyword != null && !keyword.trim().isEmpty()){
             posts = postService.GetPostsByKeyword(posts, keyword);
         }
@@ -228,7 +237,17 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     // TEACHER ROLE
 
     @GetMapping("/postRequest")
-    public List<PostDto> getAllPostRequest() {
+    public List<PostDto> getAllPostRequest(
+//            @RequestParam(name = "postApprovalStatuses", required = false) List<String> postApprovalStatuses,
+//            @RequestParam(name = "postCategories", required = false) List<String> postCategories,
+//            @RequestParam(name = "isFilterByCurrentUserCategoryManagement", required = false) boolean isFilterByCurrentUserCategoryManagement,
+//            @RequestParam(name = "isIncludedCurrentUserOwnPostRequest", required = false) boolean isIncludedCurrentUserOwnPostRequest,
+//            @RequestParam(name = "userIdOfPostOfPostApproval", required = false) Integer userIdOfPostOfPostApproval
+    ) {
+//        List<PostApprovals> postApprovals = postApprovalsService.filterPostApprovalsByPostApprovalStatus(postApprovalStatuses);
+//        if (postStatuses != null && !postStatuses.isEmpty()) {
+//            posts = postService.filterPostsByPostStatus(posts, postStatuses);
+//        }
         List<Post> posts = postService.getPostsWithoutApprovalsAndByCurrentUserCategoryManagement();
         List<Post> postss = postService.getPostRequestsWithoutCurrentUserOwnPostRequests(posts);
         List<PostDto> dtos = postService.mapPostsToPostDtos(postss);
@@ -252,10 +271,10 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
 //    }
 
     @PostMapping("/postRequest/approve/{id}")
-    public ResponseEntity<?> approvePost(@PathVariable Integer id) {
+    public ResponseEntity<?> approvePost(@PathVariable Integer id, @RequestBody PostApprovalsRequest postApprovalsRequest) {
         try {
             // Call the service method to approve the post
-            PostApprovals requestPost = postService.approvePost(id);
+            PostApprovals requestPost = postService.approvePost(id, postApprovalsRequest);
 
             // Map the result to DTO
             PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
@@ -285,10 +304,10 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
 //    }
 
     @PostMapping("/postRequest/reject/{id}")
-    public ResponseEntity<Map<String, Object>> rejectPost(@PathVariable Integer id) {
+    public ResponseEntity<Map<String, Object>> rejectPost(@PathVariable Integer id, @RequestBody PostApprovalsRequest postApprovalsRequest) {
         try {
             // Call the service method to reject the post
-            PostApprovals requestPost = postService.rejectPost(id);
+            PostApprovals requestPost = postService.rejectPost(id, postApprovalsRequest);
 
             // Map the result to DTO
             PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
@@ -316,5 +335,14 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         }
     }
 
+    @PutMapping("/delete/{commentId}")
+    public ResponseEntity<Void> deletePost(@PathVariable Integer postId) {
+        postService.deletePostById(postId);
+        return ResponseEntity.noContent().build();
+    }
 
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<String> handleResponseStatusException(ResponseStatusException e) {
+        return ResponseEntity.status(e.getStatusCode()).body(e.getReason());
+    }
 }

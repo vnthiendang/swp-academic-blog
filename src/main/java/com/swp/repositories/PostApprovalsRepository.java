@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Optional;
 
 @Repository
@@ -14,4 +15,8 @@ public interface PostApprovalsRepository extends JpaRepository<PostApprovals, In
     long countByPost_CreatedByUser_UsIdAndStatusAndCreatedDateGreaterThan(
             Integer userId, String status, LocalDateTime createdDate
     );
+
+    Collection<? extends PostApprovals> findByStatus(String status);
+
+    Collection<? extends PostApprovals> findByPostBelongedToCategoryContent(String categoryName);
 }

@@ -69,4 +69,13 @@ public class Post {
         }
         return tags;
     }
+
+    public Integer getLikeCount() {
+        long likeCount = votes.stream()
+                .filter(vote -> vote.getVoteType().equals(1))
+                .count();
+
+        return Math.toIntExact(likeCount);
+    }
+
 }

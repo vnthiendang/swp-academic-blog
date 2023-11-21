@@ -6,7 +6,9 @@ import com.swp.entities.Comment;
 import com.swp.services.CommentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,4 +70,15 @@ public class CommentController {
         CommentDto commentDto = modelMapper.map(updatedComment, CommentDto.class);
         return commentDto;
     }
+    @PutMapping("/delete/{commentId}")
+    public ResponseEntity<Void> deleteComment(@PathVariable Integer commentId) {
+        commentService.deleteCommentById(commentId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<String> handleResponseStatusException(ResponseStatusException e) {
+        return ResponseEntity.status(e.getStatusCode()).body(e.getReason());
+    }
+
 }
