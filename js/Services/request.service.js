@@ -17,17 +17,37 @@ export const getPostRequest = async () => {
     }
 };
 
-export const approvePost = async (id, model) => {
+// export const approvePost = async (id, model) => {
+//   try {
+//     const response = await request.post(`post/postRequest/approve/${id}`, model, {
+//       headers: {
+//         Authorization: `Bearer ${localStorage.getItem("token")}`
+//       }
+//     });
+//     return response;
+//   } catch (error) {
+//     console.error('Error approve post:', error);
+//   } 
+// };
+
+export const approvePost = async (id, teacherMessage) => {
   try {
-    const response = await request.post(`post/postRequest/approve/${id}`, model, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+    const response = await request.post(
+      `post/postRequest/approve/${id}`, teacherMessage ,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json", // Set the content type to JSON
+        },
       }
-    });
+    );
     return response;
   } catch (error) {
-    console.error('Error approve post:', error);
-  } 
+    console.error(
+      "Error approve post:",
+      error.response ? error.response.data : error.message
+    );
+  }
 };
 
 export const rejectPost = async (id, model) => {

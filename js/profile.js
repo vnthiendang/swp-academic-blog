@@ -1,6 +1,25 @@
 import { userInfo } from '../js/Services/auth.service.js';
-import { getPostById, getPostByUserId, updatePost } from './Services/post.service.js';
+import { deletePost, getPostById, getPostByUserId } from './Services/post.service.js';
 import { updateProfile } from './Services/profile.service.js';
+
+const showHeaderForTeacher = async () => {
+  try {
+    const usersInfo = await userInfo();
+    const userRole = usersInfo.role_id;
+
+    if (userRole === 'Teacher') {
+      // Display the form
+      document.getElementById('teacherPage').style.display = 'block';
+      document.getElementById('teacherPage2').style.display = 'block';
+    } else {
+      // Hide the form
+      document.getElementById('teacherPage').style.display = 'none';
+      document.getElementById('teacherPage2').style.display = 'none';
+    }
+  } catch (error) {
+  }
+};
+showHeaderForTeacher();
 
 const getUserInfo = async () => {
 
@@ -59,7 +78,9 @@ const displayPosts = async() => {
   try {
     const userInfos = await userInfo();
     const usId = userInfos.userId;
-    const posts = await getPostByUserId(usId);
+    const postApprovalStatuses = "approved,rejected,pending";
+
+    const posts = await getPostByUserId(usId, postApprovalStatuses);
     const tableBody = document.querySelector('#postTable tbody');
     tableBody.innerHTML = '';
   
@@ -78,15 +99,15 @@ const displayPosts = async() => {
                   class="editPostButton" 
                   style="background-color: green; color: white;" 
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-55 p-2.5" 
-                  data-post-id="${post.postsId}"
-                >
-                  Edit
+                  data-post-id="${post.postsId}">Edit
                 </button>
               </label>
             </div>
           </form>
         </td>
-        <td><a href="#" class="delete">Delete</a></td>
+        <td><button id="deleteBtn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-55 p-2.5"
+        data-post-id="${post.postsId}">Delete
+        </button></td>
       `;
   
       // Add event listener to the Edit button
@@ -101,6 +122,21 @@ const displayPosts = async() => {
         const url = `editPost.html?belongedToPostID=${postId}`;
       
         window.open(url, "Edit Post", `width=${width}, height=${height}, left=${left}, top=${top}`);
+      });
+
+      const delButton = row.querySelector('#deleteBtn');
+      delButton.addEventListener('click', async () => {
+        const postId = editButton.getAttribute('data-post-id');
+
+        const confirmed = confirm("Are you sure you want to delete this post?");
+        if (confirmed) {
+          const res = await deletePost(postId);
+          if (res != null) {
+            alert('Delete Post Successfully!');
+          } else {
+            alert('Fail to delete post!');
+          }
+        }
       });
   
       tableBody.appendChild(row);

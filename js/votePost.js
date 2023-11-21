@@ -337,49 +337,61 @@ filterPosts.addEventListener("click", async () => {
     .filter(checkbox => checkbox.checked)
     .map(checkbox => checkbox.value);
 
-  const selectSortDirection = document.getElementById('sortDirection');
-  const sortDirection = selectSortDirection.value;
+  const sortDirection = document.getElementById('sortDirection');
 
-  const startDates = document.getElementById('date_timepicker_start');
-  const startDateValue = startDates.value; //2023-11-11
-
-  let startDate = null;
-
-  // Parse the date string in the format MM/DD/YYYY
-  const startDateParts = startDateValue.split('/');
-  const year = parseInt(startDateParts[2]);
-  const month = parseInt(startDateParts[0]);
-  const day = parseInt(startDateParts[1]);
+    const startDates = document.getElementById("date_timepicker_start");
+    const startDateValue = startDates.value;
   
-  if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
-    startDate = new Date(year, month - 1, day);
-  }
-
-  const endDates = document.getElementById('date_timepicker_end');
-  const endDateValue = endDates.value;
-
-  let endDate = null;
-
-  // Parse the date string in the format MM/DD/YYYY
-  const endDateParts = endDateValue.split('/');
-  const yearEnd = parseInt(endDateParts[2]);
-  const monthEnd = parseInt(endDateParts[0]);
-  const dayEnd = parseInt(endDateParts[1]);
+    let startDate = null;
+    let formattedStartDate = null;
   
-  if (!isNaN(yearEnd) && !isNaN(monthEnd) && !isNaN(dayEnd)) {
-    endDate = new Date(yearEnd, monthEnd - 1, dayEnd);
-  }
-
-  try {
-    const response = await filterPost(categoryName, tagNames, startDate, endDate, sortBy, sortDirection);
-    if(response == null){
-      alert('Please check your filter!');
-    }else{
-      console.log(startDate);
-      displayPosts(response);
+    // Parse the date string in the format MM/DD/YYYY
+    const startDateParts = startDateValue.split("/");
+    const year = parseInt(startDateParts[2]);
+    const month = parseInt(startDateParts[0]);
+    const day = parseInt(startDateParts[1]);
+  
+    if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+      startDate = new Date(year, month - 1, day);
+      // Format startDate as a string in the desired format
+      formattedStartDate = startDate.toISOString();
     }
-  } catch (error) {
-    console.error('Error filtering posts:', error);
-  }
+  
+    const endDates = document.getElementById("date_timepicker_end");
+    const endDateValue = endDates.value;
+  
+    let endDate = null;
+    let formattedEndDate = null;
+  
+    // Parse the date string in the format MM/DD/YYYY
+    const endDateParts = endDateValue.split("/");
+    const yearEnd = parseInt(endDateParts[2]);
+    const monthEnd = parseInt(endDateParts[0]);
+    const dayEnd = parseInt(endDateParts[1]);
+  
+    if (!isNaN(yearEnd) && !isNaN(monthEnd) && !isNaN(dayEnd)) {
+      endDate = new Date(yearEnd, monthEnd - 1, dayEnd);
+      endDate.setHours(23, 59, 59, 999);
+      formattedEndDate = endDate.toISOString();
+    }
+  
+    try {
+      const response = await filterPost(
+        categoryName,
+        tagNames,
+        formattedStartDate, // Use formattedStartDate instead of startDate
+        formattedEndDate,
+        sortBy,
+        sortDirection.value
+      );
+      if (response == null) {
+        alert("Please check your filter!");
+      } else {
+        console.log(formattedStartDate, sortBy);
+        displayPosts(response);
+      }
+    } catch (error) {
+      console.error("Error filtering posts:", error);
+    }
 });
 
