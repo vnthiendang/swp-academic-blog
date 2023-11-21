@@ -2,7 +2,7 @@ import * as request from '../utils/request.js'
 
 const token = localStorage.getItem("token");
 
-const getAllCategory = async () => {
+export const getAllCategory = async () => {
   try {
     const response = await request.get(`category/GetAll`, {
       headers: {
@@ -14,10 +14,6 @@ const getAllCategory = async () => {
     
     throw new Error("An error occurred. Please try again later.");
   }
-};
-
-export {
-    getAllCategory
 };
 
 
@@ -41,6 +37,23 @@ export const getTeacherCategoryById = async (id) => {
     const response = await request.get(`categoryManagement/${id}`, {
       headers: {
         Authorization: `Bearer ${token}` 
+      }
+    });
+
+    return response;
+  } catch (error) {
+    console.error('Error fetching category management by id:', error);
+  }
+};
+
+export const getTeacherCategoryByUserId = async (userId) => {
+  try {
+    const response = await request.get(`categoryManagement/GetAll`, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      },
+      params: {
+        userId
       }
     });
 

@@ -65,19 +65,21 @@ displayPost();
 const approveButton = document.getElementById("approveButton");
 const rejectButton = document.getElementById("rejectButton");
 
-approveButton.addEventListener("click", async (event) =>{
+approveButton.addEventListener("click", async (event) => {
   event.preventDefault();
+
+  // const teacherMessageInput = document.getElementById("teacherMessageInput");
+  // const teacherMessage = teacherMessageInput.value; // Get the value from the input field
 
   var model = {
     teacherMessage: "approved"
   }
-
   const response = await approvePost(postId, model);
 
-  if(response == null){
-    alert('Fail to approve!');
-  }else{
-    alert('Post approved!');
+  if (response == null) {
+    alert("Fail to approve!");
+  } else {
+    alert("Post approved!");
     window.location.href = "../teacherPage.html";
   }
 });

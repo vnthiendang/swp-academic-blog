@@ -32,7 +32,7 @@ import {
   
   // DISPLAY LIST APPROVED POSTS
   function displayPosts(posts) {
-    const postContainer = document.querySelector(".wapper-title");
+    const postContainer = document.querySelector(".main-blog");
     postContainer.innerHTML = "";
   
     if (posts.length === 0) {
@@ -44,6 +44,24 @@ import {
       postContainer.appendChild(noResultsElement);
     } else {
       posts.forEach((postData) => {
+        const postElement = document.querySelector(".wapper-title");
+        postElement.innerHTML = `
+          <!-- ByUser DateTime NumberRead -->
+          <div class="column">
+            <!-- Rest of the HTML structure for ByUser, DateTime, and NumberRead -->
+          </div>
+          
+          <!-- Title Content Img -->
+          <div class="container-post-img">
+            <!-- Rest of the HTML structure for Title, Content, and Img -->
+          </div>
+  
+          <!-- Category NumberRead -->
+          <div class="column">
+            <!-- Rest of the HTML structure for Category and NumberRead -->
+          </div>
+        `;
+        
         const byUser = document.getElementsByClassName('createdUser');
         if (postData.createdByUser) {
           byUser.textContent = postData.createdByUser;

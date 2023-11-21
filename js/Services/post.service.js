@@ -62,6 +62,20 @@ export const updatePost = async (postId, post) => {
   }
 };
 
+export const deletePost = async (postId) => {
+  try {
+    const response = await request.put(`post/delete/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+    
+  } catch (error) {
+    console.error('Error deleting post:', error);
+  }
+};
+
 export const getPostById = async (id) => {
   try {
     const response = await request.get(`post/GetAllApproved/${id}`, {
@@ -75,11 +89,15 @@ export const getPostById = async (id) => {
   }
 };
 
-export const getPostByUserId = async (userId) => {
+export const getPostByUserId = async (userId, postApprovalStatuses) => {
   try {
-    const response = await request.get(`post/GetAllApproved?userId=${userId}`, {
+    const response = await request.get(`post/GetAll/filter`, {
       headers: {
         Authorization: `Bearer ${token}`
+      },
+      params: {
+        userId,
+        postApprovalStatuses
       }
     });
     return response;
