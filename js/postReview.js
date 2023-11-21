@@ -1,4 +1,4 @@
-import { userInfo } from './Services/profile.service.js';
+import { approvePost, rejectPost } from './Services/request.service.js';
 import * as request from './utils/request.js';
 const token = localStorage.getItem("token");
 
@@ -34,23 +34,22 @@ function displayPost() {
       document.getElementById('postContent').innerHTML = post.postDetail;
       
       if(post.mediaList.length > 0){
-
-        // post.mediaList.forEach(media => {
-        // const mediaList = post.mediaList;
-          
-        //   mediaList.appendChild(mediaItem);
-        // });
-
         const imageElement = document.getElementById('postMedia');
         imageElement.src = `data:image/jpeg;base64, ${post.mediaList[0]}`;
-        // imageElement.style.width = '240px'; 
-        // imageElement.style.height = 'auto';
+      }
 
-        const readingTimeElement = document.getElementById('readingTime');
-        const minuteText = post.readingTime === 1 ? 'minute' : 'minutes';
-        readingTimeElement.textContent = post.readingTime + ' ' + minuteText + '' || '';
-        document.getElementById('postVote').textContent = post.vote1Count ?? '#';
-        document.getElementById('postVote2').textContent = post.vote2Count ?? '#';
+      const readingTimeElement = document.getElementById('readingTime');
+      const minuteText = post.readingTime === 1 ? 'minute' : 'minutes';
+      readingTimeElement.textContent = post.readingTime + ' ' + minuteText + '' || '';
+
+      if (post.tagList.length > 0) {
+        document.querySelector('.container-tags').style.display = 'block';
+        post.tagList.forEach(tag => {
+          const tagDiv = document.getElementById('postTag');
+          tagDiv.textContent = tag;
+        });
+      }else{
+        document.querySelector('.container-tags').style.display = 'none';
       }
 
     })
@@ -91,31 +90,3 @@ rejectButton.addEventListener("click", async (event) =>{
     window.location.href = "../teacherPage.html";
   }
 });
-
-
-const approvePost = async (postId) => {
-  try {
-    const response = await request.post(`post/postRequest/approve/${postId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    return response;
-  } catch (error) {
-    console.error('Error approve post:', error);
-  } 
-};
-
-const rejectPost = async (postId) => {
-  try {
-    const response = await request.post(`post/postRequest/reject/${postId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    return response;
-  } catch (error) {
-    console.error('Error reject post:', error);
-  }
-  
-}
