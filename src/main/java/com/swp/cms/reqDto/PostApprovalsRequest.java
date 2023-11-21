@@ -20,5 +20,6 @@ public class PostApprovalsRequest {
     @NotNull
     private String postApprovalsStatus;
     private LocalDateTime createdDate;
+    private String teacherMessage;
 
 }

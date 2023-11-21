@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,8 +36,21 @@ public class UserController {
     }
 
     @GetMapping("/GetAll")
-    public List<UserDto> getAll() {
+
+    public List<UserDto> getAll(
+            @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
+            @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection
+    ) {
         List<User> users = userService.getAllUsers();
+        if (startDate != null && endDate != null) {
+            users = userService.filterUsersByDateRange(users, startDate, endDate);
+        }
+
+        users = userService.sortUsers(users, sortBy, sortDirection);
+
+
         List<UserDto> userDtos = users.stream()
                 .map(user -> modelMapper.map(user, UserDto.class))
                 .collect(Collectors.toList());

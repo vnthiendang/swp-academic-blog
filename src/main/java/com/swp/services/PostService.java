@@ -1,6 +1,7 @@
 package com.swp.services;
 
 import com.swp.cms.dto.PostDto;
+import com.swp.cms.reqDto.PostApprovalsRequest;
 import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.*;
 import com.swp.repositories.*;
@@ -8,10 +9,12 @@ import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -39,6 +42,8 @@ public class PostService {
 
     @Autowired
     private CategoryManagementRepository categoryManagementRepository;
+    @Autowired
+    private ViolationRuleRepository violationRuleRepository;
 
 
     @Autowired
@@ -96,6 +101,7 @@ public class PostService {
         post.setTitle(postRequest.getTitle());
         post.setPostDetail(postRequest.getDetail());
         post.setCreatedTime(LocalDateTime.now());
+        post.setStatus("created");
 
         List<MultipartFile> medias = postRequest.getMediaList(); // Change to a list of media URLs
         if (medias != null && !medias.isEmpty()) {
@@ -154,6 +160,9 @@ public class PostService {
         post.setPostDetail(postRequest.getDetail());
         post.setBelongedToCategory(categoryRepository.findByContent(postRequest.getCategoryName())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Category")));
+
+        post.setStatus("edited");
+        post.setUpdatedDate(LocalDateTime.now());
 
         // Update Medias
         List<MultipartFile> medias = postRequest.getMediaList();
@@ -266,7 +275,7 @@ public class PostService {
 //    }
 
     //approve post
-    public PostApprovals approvePost(Integer id) {
+    public PostApprovals approvePost(Integer id, PostApprovalsRequest postApprovalsRequest) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User userDetails = (User) authentication.getPrincipal();
         Integer userIds = userDetails.getUsId();
@@ -284,11 +293,28 @@ public class PostService {
         postApprovals.setStatus("APPROVED");
         postApprovals.setCreatedDate(LocalDateTime.now());
         postApprovals.setViewedByUser(currentUser);
+
+
+        if (postApprovalsRequest.getTeacherMessage() != null) {
+            postApprovals.setTeacherMessage(postApprovalsRequest.getTeacherMessage());
+        }
+
+        Integer contributionPoints = currentUser.getContributionPoint();
+        if (contributionPoints != null) {
+            currentUser.setContributionPoint(contributionPoints + 20);
+        } else {
+            // Handle the case where contributionPoints is null
+            // For example, you might want to initialize it to 10 or set a default value.
+            currentUser.setContributionPoint(20);
+            userRepository.save(currentUser);
+        }
+
+
         return postApprovalsRepository.save(postApprovals);
     }
 
     //reject post
-    public PostApprovals rejectPost(Integer id) {
+    public PostApprovals rejectPost(Integer id, PostApprovalsRequest postApprovalsRequest) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User userDetails = (User) authentication.getPrincipal();
         Integer userIds = userDetails.getUsId();
@@ -306,13 +332,17 @@ public class PostService {
         postApprovals.setStatus("REJECTED");
         postApprovals.setCreatedDate(LocalDateTime.now());
         postApprovals.setViewedByUser(currentUser);
+
+
+        if (postApprovalsRequest.getTeacherMessage() != null) {
+            postApprovals.setTeacherMessage(postApprovalsRequest.getTeacherMessage());
+        }
+
         return postApprovalsRepository.save(postApprovals);
     }
 
-
     public long countRejectedPostApprovalsForUserWithin24Hours(Integer userId) {
         LocalDateTime twentyFourHoursAgo = LocalDateTime.now().minusHours(24);
-
 
         return postApprovalsRepository.countByPost_CreatedByUser_UsIdAndStatusAndCreatedDateGreaterThan(
                 userId, "REJECTED", twentyFourHoursAgo
@@ -328,12 +358,28 @@ public class PostService {
             report.setReportType(reportTypeRepository.findById(2).orElseThrow());
             report.setReportDetail("User: " + userRepository.findById(userId).orElseThrow().getDisplay_name()
             + " has more than 4 rejected post requests within 24 hours");
+
             report.setCreatedTime(LocalDateTime.now());
+            report.setStatus("approved");
+            report.setReviewedTime(LocalDateTime.now());
+            report.setReportedObjectLink("");
+
+            ViolationRule violationRule = violationRuleRepository.findById(8)
+                            .orElseThrow(() -> new IllegalArgumentException("Invalid Violation Rule"));
+
+            List<ReportViolation> reportViolationList = new ArrayList<>();
+            ReportViolation reportViolation = new ReportViolation();
+            reportViolation.setViolationRule(violationRule);
+            reportViolation.setReport(report);
+            reportViolationList.add(reportViolation);
+            report.setReportViolations(reportViolationList);
+
             return reportRepository.save(report);
         }
 
         return null; // No report generated if the threshold is not exceeded
     }
+
 
 
     public List<PostDto> mapPostsToPostDtos(List<Post> posts) {
@@ -638,6 +684,23 @@ public class PostService {
                 .stream()
                 .filter(post -> !postIdsWithApprovals.contains(post.getPostsId()))
                 .filter(post -> categoryManagementOfCurrentUser.contains(post.getBelongedToCategory().getCateId()))
+                .collect(Collectors.toList());
+    }
+
+
+    public void deletePostById(Integer postId) {
+        Post post = getById(postId);
+        if (post != null) {
+            post.setStatus("deleted");
+            postRepository.save(post);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post not found with ID: " + postId);
+        }
+    }
+
+    public List<Post> filterByMinimumLikeCount(List<Post> posts, Integer minimumLikeCount) {
+        return posts.stream()
+                .filter(post -> post.getLikeCount() != null && post.getLikeCount() >= minimumLikeCount)
                 .collect(Collectors.toList());
     }
 

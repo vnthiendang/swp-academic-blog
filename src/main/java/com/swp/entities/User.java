@@ -61,6 +61,11 @@ public class User implements UserDetails {
     @Column(name = "contribution_point")
     private Integer contributionPoint;
 
+
+    @OneToMany(mappedBy = "createdByUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

@@ -1,6 +1,7 @@
 package com.swp.cms.controllers;
 
 import com.swp.cms.dto.PostApprovalsDto;
+import com.swp.cms.dto.PostDto;
 import com.swp.cms.reqDto.PostApprovalsRequest;
 import com.swp.entities.PostApprovals;
 import com.swp.services.PostApprovalsService;
@@ -12,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -30,14 +32,56 @@ public class PostApprovalsController {
     }
 
     @GetMapping("/getall")
-    public List<PostApprovalsDto> getAll() {
+    public List<PostApprovalsDto> getAll(
+            @RequestParam(name = "postApprovalStatuses", required = false) List<String> postApprovalStatuses,
+            @RequestParam(name = "postCategories", required = false) List<String> postCategories,
+            @RequestParam(name = "isFilterByCurrentUserCategoryManagement", required = false) Boolean isFilterByCurrentUserCategoryManagement,
+            @RequestParam(name = "isExcludedCurrentUserOwnPostRequest", required = false) Boolean isExcludedCurrentUserOwnPostRequest,
+            @RequestParam(name = "isExcludedOtherUserPostRequest", required = false) Boolean isExcludedOtherUserPostRequest,
+            @RequestParam(name = "userIdOfPostOfPostApproval", required = false) Integer userIdOfPostOfPostApproval,
+            @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
+            @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
+            @RequestParam(name = "teacherId", required = false) Integer teacherId,
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection
+    ) {
         // Check authentication
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List<PostApprovals> res = postApprovalsService.getAll();
-        List<PostApprovalsDto> postApprovalsDtos = res.stream()
-                .map(PostApprovals -> modelMapper.map(PostApprovals, PostApprovalsDto.class))
-                .collect(Collectors.toList());
-        return postApprovalsDtos;
+
+        List<PostApprovals> postApprovals = postApprovalsService.filterPostApprovalsByPostApprovalStatus(postApprovalStatuses);
+
+        if (postCategories != null && !postCategories.isEmpty()) {
+            postApprovals = postApprovalsService.filterPostApprovalsByPostCategories(postApprovals, postCategories);
+        }
+
+        if (isFilterByCurrentUserCategoryManagement != null && isFilterByCurrentUserCategoryManagement) {
+            postApprovals = postApprovalsService.filterByCurrentUserCategoryManagement(postApprovals);
+        }
+
+        if (isExcludedCurrentUserOwnPostRequest != null && isExcludedCurrentUserOwnPostRequest){
+            postApprovals = postApprovalsService.filterExcludedCurrentUserOwnPostRequest(postApprovals);
+        }
+
+        if (isExcludedOtherUserPostRequest != null && isExcludedOtherUserPostRequest){
+            postApprovals = postApprovalsService.filterExcludedOtherUserPostRequest(postApprovals);
+        }
+
+        if (userIdOfPostOfPostApproval != null){
+            postApprovals = postApprovalsService.GetPostApprovalsByUserIdOfPostOfPostApproval(postApprovals, userIdOfPostOfPostApproval);
+        }
+
+        if (startDate != null && endDate != null) {
+            postApprovals = postApprovalsService.filterPostsByDateRange(postApprovals, startDate, endDate);
+        }
+
+        if (teacherId != null){
+            postApprovals = postApprovalsService.GetPostApprovalsByTeacherId(postApprovals, teacherId);
+        }
+
+        postApprovals = postApprovalsService.sortPostApprovals(postApprovals, sortBy, sortDirection);
+
+        List<PostApprovalsDto> dtos = postApprovalsService.mapPostApprovalsToPostApprovalDtos(postApprovals);
+        return dtos;
 
     }
 

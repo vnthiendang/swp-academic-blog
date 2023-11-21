@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "award")
 @Getter
@@ -25,4 +27,8 @@ public class Award {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "\"given_by_user_id\"")
     private User givenByUser;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdTime;
+
 }

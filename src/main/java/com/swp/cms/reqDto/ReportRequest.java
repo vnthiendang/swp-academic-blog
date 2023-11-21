@@ -16,5 +16,11 @@ public class ReportRequest {
     private LocalDateTime createdTime;
     @NotNull
     private String reportDetail;
+
+    private String status;
+    private Integer viewedByUser;
+    private LocalDateTime reviewedTime;
+    private String reportedObjectLink;
+
     private List<String> violationRuleList;
 }
