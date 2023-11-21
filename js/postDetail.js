@@ -299,7 +299,7 @@ reportButton.addEventListener('click', async function() {
     const height = window.innerHeight;
     const left = 0;
     const top = 0;
-    const url = `editPost.html`;
+    const url = `reportPost.html` ;
   
     window.open(url, "Report Violation", `width=${width}, height=${height}, left=${left}, top=${top}`);
 

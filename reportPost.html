@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="src/blogDetail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
+    <title>Academic blog at FPT University</title>
+</head>
+
+<body>
+    <!-- Header  -->
+    <header class="flex items-center justify-between w-full bg-black text-white p-1" id="header">
+        <div class="flex items-center" id="taskbar">
+            <!-- <a href="/home.html" class="items-start justify-center">
+                <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
+            </a> -->
+            
+            <a href="/home.html" class="p-logo" style="font-size: 35px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque; margin-right: 10px;">
+                FPT BLOG
+            </a>
+
+            <a href="create.html" class="p-2" style="border-left: 1px solid white;">
+                New Post
+            </a>
+
+            <a href="bestartice.html" class="p-2">
+                Best Article
+            </a>
+
+            <a href="teacherPage.html" class="p-2" id="teacherPage">
+                Post Request
+            </a>
+
+            <a href="/giveAward.html" class="p-2" id="teacherPage2">
+                Give Award
+            </a>
+
+            <!-- Category  -->
+            <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center" id="category">
+                    <span class="mr-1" style="font-weight: 600;">Category</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="p-1">
+
+        </div>
+
+        <script>
+            var prevScrollPos = window.pageYOffset;
+            var header = document.getElementById("header");
+    
+            window.onscroll = function() {
+                var currentScrollPos = window.pageYOffset;
+                
+                if (prevScrollPos > currentScrollPos) {
+                    // Scrolling up
+                    header.style.top = "0";
+                } else {
+                    // Scrolling down
+                    header.style.top = "-100px"; // Adjust the value based on your header height
+                }
+    
+                prevScrollPos = currentScrollPos;
+            }
+        </script>
+    </header>
+
+    <!-- Main  -->
+    <Main>
+        <div class="wapper-title" id="detail">
+            <!-- Title -->
+            <div class="column">
+                <div class="mr-7" id="postTitle" style="text-align: center;">
+                    Submit a report posts
+                </div>
+                <h3 style="font-size: 18px; font-weight: 300 ; color: black ; letter-spacing: 1.2px; line-height: 22px; text-align: center ;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                    From tech to tilt, we're here to help you! <br>
+                    Submit a Report! So long as it doesn't fall through a portal, we'll get back to you soon.
+                </h3>
+            </div><br><br>
+            
+                <span class="details">
+                    DETAILS
+                </span>
+                <style>
+                    .details {
+                        /* padding: 10px 0; */
+                        margin-bottom: 17px;
+                        font-size: 15px;
+                        font-weight: 700;
+                        color: #808080;
+                        text-transform: uppercase;
+                        letter-spacing: 1.2px;
+                        border-bottom: 1px solid #d2d2d2;
+                        width: 77%;
+                    }
+                </style>
+            
+            <div class="column" style="background-color: white;">
+
+                <!-- Column 1 -->
+                <div class="column" onclick="toggleForm('formContainer1')">
+                    <h2>
+                        Community
+                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
+                    </h2>
+                </div>
+                <div class="column">
+                    <div id="formContainer1" class="hidden">
+                        <form action="#">
+                            <label for="fname">Input Text :</label>
+                            <input type="text" id="fname" name="fname" class="textbox-input">
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="column" onclick="toggleForm('formContainer2')">
+                    <h2>
+                        Community
+                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
+                    </h2>
+                </div>
+                <div class="column">
+                    <div id="formContainer2" class="hidden">
+                        <form action="#">
+                            <label for="fname">Input Text :</label>
+                            <input type="text" id="fname" name="fname" class="textbox-input">
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="column" onclick="toggleForm('formContainer3')">
+                    <h2>
+                        Community
+                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
+                    </h2>
+                </div>
+                <div class="column">
+                    <div id="formContainer3" class="hidden">
+                        <form action="#">
+                            <label for="fname">Input Text :</label>
+                            <input type="text" id="fname" name="fname" class="textbox-input">
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Column 4 -->
+                <div class="column" onclick="toggleForm('formContainer4')">
+                    <h2>
+                        Community
+                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
+                    </h2>
+                </div>
+                <div class="column">
+                    <div id="formContainer4" class="hidden">
+                        <form action="#">
+                            <label for="fname">Input Text :</label>
+                            <input type="text" id="fname" name="fname" class="textbox-input">
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Column 5 -->
+                <div class="column" onclick="toggleForm('formContainer5')">
+                    <h2>
+                        Community
+                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
+                    </h2>
+                </div>
+                <div class="column">
+                    <div id="formContainer5" class="hidden">
+                        <form action="#">
+                            <label for="fname">Input Text :</label>
+                            <input type="text" id="fname" name="fname" class="textbox-input">
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Column 6 -->
+                <div class="column" onclick="toggleForm('formContainer6')">
+                    <h2>
+                        Community
+                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
+                    </h2>
+                </div>
+                <div class="column">
+                    <div id="formContainer6" class="hidden">
+                        <form action="#">
+                            <label for="fname">Input Text :</label>
+                            <input type="text" id="fname" name="fname" class="textbox-input">
+                        </form>
+                    </div>
+                </div>
+                <style>
+                    h2 {
+                        padding: 10px 0;
+                        font-size: 15px;
+                        font-weight: 700;
+                        color: black;
+                        text-transform: uppercase;
+                        letter-spacing: 1.2px;
+                        width: 100%;
+                    }
+
+                    .textbox-input {
+                        background-color: antiquewhite;
+                        border-radius: 5px;
+                        border: 1px solid black;
+                    }
+                </style>
+                <script>
+                    function toggleForm(containerId) {
+                        var formContainer = document.getElementById(containerId);
+                        formContainer.classList.toggle("hidden");
+                    }
+                </script>
+                
+            </div>
+
+            <!-- Button -->
+            <div class="column" style="background-color: white;">
+                <!-- Button Report -->
+                <div class="inner-column" title="Report Post">
+                    <button id="#" style="background-color: red; color: white; margin-left: 10px; width: 100px;" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">Report</button>
+                </div>
+            </div>
+            
+        </div>
+
+    </Main>
+
+    <!-- footer  -->
+    <footer class="bg-white rounded-lg shadow dark:bg-gray-900" id="footer">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
+                    <img src="./img/Logo.png" class="h-8 mr-3" alt="Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FPT Blog</span>
+                </a>
+                <ul
+                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a
+                    href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <script type="module" src='./js/home.js'></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</html>
