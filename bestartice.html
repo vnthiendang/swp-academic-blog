@@ -95,9 +95,9 @@
                 <div class="inner-column">
                     <form class="flex items-center" id="search-form">
                         <label for="simple-search" class="sr-only">Search</label>
-                        <div class="relative w-full">
+                        <div class="relative" style="width: 600px;">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                <svg class="w- h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
@@ -105,7 +105,7 @@
                             </div>
                             <input type="text" id="simple-search"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Search blog, tag, ..." required>
+                                placeholder="Search With Your Key" required>
                         </div>
                     </form>
                 </div>
@@ -184,8 +184,8 @@
                             display: none;
                         }
                         #sort-tag { 
-                            display: none; 
-                            border: 1px #8DF5E4 solid; 
+                            display: none;
+                            border: 1px #8DF5E4 solid;
                         } 
                 
                         #sort-tag label { 
@@ -328,8 +328,9 @@
                 </div>
 
                 <!-- Button Filter -->
-                <div class="group inline-block relative" style="margin-left: 10%;">
+                <div class="group inline-block relative" style="margin-left: 1%;">
                     <button id="button-filter" class="py-2 px-4 rounded inline-flex items-center">
+                        <i class="fa-solid fa-magnifying-glass" style="color: #000000; margin-right: 10px;"></i>
                         Filter
                     </button>
                 </div>

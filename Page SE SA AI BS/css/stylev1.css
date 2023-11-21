@@ -59,14 +59,34 @@
 
 .post {
     box-sizing: border-box;
-    flex: 0 0 45%; /* Adjust the percentage as needed */
+    flex: 0 0 45%;
     margin-bottom: 20px;
     border: 2px solid gray;
     border-radius: 10px;
     padding: 10px;
     background-color: whitesmoke;
+    margin-right: 50px;
 }
 
+/* .ListPost {
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: aliceblue;
+    margin-left: 5px;
+} */
+
+.ListPost {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: aliceblue;
+}
   
 .Post-Container {
     /* display: flex; */
@@ -124,27 +144,6 @@
     text-decoration: underline;
     transition-duration: 0.5s;
     font-size: 18px;
-}
-
-/* .ListPost {
-    width: auto;
-    height: auto;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: aliceblue;
-    margin-left: 5px;
-} */
-
-.ListPost {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: auto;
-    height: auto;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: aliceblue;
-    margin-left: -70px;
 }
 
 .post:nth-child(2n) {
