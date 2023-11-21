@@ -213,18 +213,16 @@ Main {
 }
 /*========================== Footer ==============================*/
 
-.button-report {
-    padding: 15%;
-    border-radius: 10px;
-    border: 1px solid black;
-    background-color: antiquewhite;
+#reportButton:hover {
+    transition-duration: 0.5s;
+    font-size: 25px;
+    font-weight: 700;
 }
 
-.button-report:hover {
+#button-give-award:hover {
+    width: 200px;
     transition-duration: 0.5s;
-    font-size: 17px;
+    font-size: 20px;
     font-weight: 700;
-    color: white;
-    background-color: red;
 }
-/* =============================================================== */
+/* ========================== Buton ============================= */
