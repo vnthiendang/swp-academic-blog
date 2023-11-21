@@ -14,9 +14,11 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 import java.util.stream.Collectors;
+
 
 @Service
 public class AwardService {
@@ -65,6 +67,7 @@ public class AwardService {
 //                orElseThrow(() -> new IllegalArgumentException("Invalid Award Type")));
 //        return awardRepository.save(award);
 //    }
+
 
 //public Award createOrUpdateAward(AwardRequest awardRequest) {
 //    int postId = awardRequest.getPostID();
@@ -129,10 +132,12 @@ public class AwardService {
 
         Award award = new Award();
         award.setPost(post);
+
         award.setGivenByUser(userRepository.findById(givenByUserId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User")));
         award.setAwardType(awardTypeRepository.findById(awardTypeId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Award Type")));
+
         award.setCreatedTime(LocalDateTime.now());
 
         Integer userContribution = createdByUser.getContributionPoint();
@@ -230,5 +235,6 @@ public class AwardService {
         return awards.stream()
                 .filter(a -> a.getPost().getCreatedByUser().getUsId().equals(userIdReceived))
                 .collect(Collectors.toList());
+
     }
 }

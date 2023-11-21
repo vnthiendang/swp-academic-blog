@@ -74,6 +74,7 @@ public class PostApprovalsService {
         return postApprovalsRepository.save(postApprovals); // Save and return the updated post
     }
 
+
     public List<PostApprovals> filterPostApprovalsByPostApprovalStatus(List<String> postApprovalStatuses) {
         List<PostApprovals> results = new ArrayList<>();
         if (postApprovalStatuses != null && !postApprovalStatuses.isEmpty()) {
@@ -218,4 +219,5 @@ public class PostApprovalsService {
                 .filter(postApproval -> postApproval.getPost().getCreatedByUser().getUsId().equals(userIdOfPostOfPostApproval))
                 .collect(Collectors.toList());
     }
+
 }

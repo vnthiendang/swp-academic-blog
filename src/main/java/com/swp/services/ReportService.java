@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 @Service
@@ -53,6 +54,7 @@ public class ReportService {
         report.setReportedByUser(userRepository.findById(reportRequest.getReportedByUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User")));
 
+
         report.setReportDetail(reportRequest.getReportDetail());
 
         report.setCreatedTime(LocalDateTime.now());
@@ -62,6 +64,7 @@ public class ReportService {
         report.setReportedObjectLink(reportRequest.getReportedObjectLink());
 
         List<String> violationRuleList = reportRequest.getViolationRuleList();
+
 
         if (violationRuleList != null && !violationRuleList.isEmpty()) {
             List<ReportViolation> reportViolationList = new ArrayList<>();
@@ -78,9 +81,11 @@ public class ReportService {
         return reportRepository.save(report);
     }
 
+
     public Report updateReport(Integer reportID, ReportRequest reportRequest){
         Report report = getById(reportID);
         report.setReportDetail(reportRequest.getReportDetail());
+
 
         List<String> violationRuleList = reportRequest.getViolationRuleList();
         if (violationRuleList != null && !violationRuleList.isEmpty()) {
@@ -98,6 +103,7 @@ public class ReportService {
         }else {
             report.getReportViolations().clear();
         }
+
 
         return reportRepository.save(report); // Save and return the updated post
     }
@@ -134,6 +140,7 @@ public class ReportService {
         return reportRepository.save(report); // Save and return the updated post
     }
 
+
     public List<Report> GetReportsByUserId(List<Report> cate, Integer userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userId));
@@ -141,4 +148,5 @@ public class ReportService {
                 .filter(report -> Integer.parseInt(report.getReportedObjectLink())== userId)
                 .collect(Collectors.toList());
     }
+
 }

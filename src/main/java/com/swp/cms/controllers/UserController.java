@@ -36,6 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/GetAll")
+
     public List<UserDto> getAll(
             @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
             @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
@@ -48,6 +49,7 @@ public class UserController {
         }
 
         users = userService.sortUsers(users, sortBy, sortDirection);
+
 
         List<UserDto> userDtos = users.stream()
                 .map(user -> modelMapper.map(user, UserDto.class))

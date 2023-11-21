@@ -39,10 +39,12 @@ public class PostService {
     private ReportRepository reportRepository;
     @Autowired
     private ReportTypeRepository reportTypeRepository;
+
     @Autowired
     private CategoryManagementRepository categoryManagementRepository;
     @Autowired
     private ViolationRuleRepository violationRuleRepository;
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -292,6 +294,7 @@ public class PostService {
         postApprovals.setCreatedDate(LocalDateTime.now());
         postApprovals.setViewedByUser(currentUser);
 
+
         if (postApprovalsRequest.getTeacherMessage() != null) {
             postApprovals.setTeacherMessage(postApprovalsRequest.getTeacherMessage());
         }
@@ -305,6 +308,7 @@ public class PostService {
             currentUser.setContributionPoint(20);
             userRepository.save(currentUser);
         }
+
 
         return postApprovalsRepository.save(postApprovals);
     }
@@ -328,6 +332,7 @@ public class PostService {
         postApprovals.setStatus("REJECTED");
         postApprovals.setCreatedDate(LocalDateTime.now());
         postApprovals.setViewedByUser(currentUser);
+
 
         if (postApprovalsRequest.getTeacherMessage() != null) {
             postApprovals.setTeacherMessage(postApprovalsRequest.getTeacherMessage());
@@ -374,6 +379,7 @@ public class PostService {
 
         return null; // No report generated if the threshold is not exceeded
     }
+
 
 
     public List<PostDto> mapPostsToPostDtos(List<Post> posts) {
@@ -680,6 +686,7 @@ public class PostService {
                 .filter(post -> categoryManagementOfCurrentUser.contains(post.getBelongedToCategory().getCateId()))
                 .collect(Collectors.toList());
     }
+
 
     public void deletePostById(Integer postId) {
         Post post = getById(postId);

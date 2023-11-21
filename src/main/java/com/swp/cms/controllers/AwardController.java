@@ -82,13 +82,16 @@ public class AwardController {
         return dto;
     }
 
+
     //    //create a award
+
 //    @PostMapping("/post")
 //    public AwardDto addAward(@RequestBody AwardRequest awardRequest) {
 //        Award createdAward = awardService.createAward(awardRequest);
 //        AwardDto awardDto = modelMapper.map(createdAward, AwardDto.class);
 //        return awardDto;
 //    }
+
 
 //    @PostMapping("/post")
 //    public ResponseEntity<Object> addAward(@RequestBody AwardRequest awardRequest) {
@@ -161,6 +164,7 @@ public class AwardController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the request");
         }
     }
+
 
 
 //    //Update a award by award id

@@ -8,7 +8,9 @@ import com.swp.cms.reqDto.PostRequest;
 import com.swp.entities.Post;
 import com.swp.entities.PostApprovals;
 import com.swp.entities.Report;
+
 import com.swp.services.PostApprovalsService;
+
 import com.swp.services.PostService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.modelmapper.ModelMapper;
@@ -107,7 +109,9 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
             @RequestParam(name = "keyword", required = false) String keyword,
             @RequestParam(name = "categoryName", required = false) String categoryName,
             @RequestParam(name = "tagNames", required = false) List<String> tagNames,
+
             @RequestParam(name = "minimumLikeCount", required = false) Integer minimumLikeCount,
+
             @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
             @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
             @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
@@ -131,9 +135,11 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
             posts = postService.filterByTagNames(posts, tagNames);
         }
 
+
         if (minimumLikeCount != null) {
             posts = postService.filterByMinimumLikeCount(posts, minimumLikeCount);
         }
+
 
         if (keyword != null && !keyword.trim().isEmpty()){
             posts = postService.GetPostsByKeyword(posts, keyword);
@@ -177,6 +183,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         return dtos;
     }
 
+
     @GetMapping("/GetAll")
     public List<PostDto> getAllPostDtosByCriteria(
             @RequestParam(name = "postApprovalStatuses", required = false) List<String> postApprovalStatuses,
@@ -217,6 +224,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         return dtos;
     }
 
+
     //get post detail by post id
     @GetMapping("/GetAllApproved/{id}")
     public PostDto getById(@PathVariable Integer id) {
@@ -237,6 +245,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     // TEACHER ROLE
 
     @GetMapping("/postRequest")
+
     public List<PostDto> getAllPostRequest(
 //            @RequestParam(name = "postApprovalStatuses", required = false) List<String> postApprovalStatuses,
 //            @RequestParam(name = "postCategories", required = false) List<String> postCategories,
@@ -248,6 +257,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
 //        if (postStatuses != null && !postStatuses.isEmpty()) {
 //            posts = postService.filterPostsByPostStatus(posts, postStatuses);
 //        }
+
         List<Post> posts = postService.getPostsWithoutApprovalsAndByCurrentUserCategoryManagement();
         List<Post> postss = postService.getPostRequestsWithoutCurrentUserOwnPostRequests(posts);
         List<PostDto> dtos = postService.mapPostsToPostDtos(postss);
@@ -271,10 +281,12 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
 //    }
 
     @PostMapping("/postRequest/approve/{id}")
+
     public ResponseEntity<?> approvePost(@PathVariable Integer id, @RequestBody PostApprovalsRequest postApprovalsRequest) {
         try {
             // Call the service method to approve the post
             PostApprovals requestPost = postService.approvePost(id, postApprovalsRequest);
+
 
             // Map the result to DTO
             PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
@@ -304,6 +316,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
 //    }
 
     @PostMapping("/postRequest/reject/{id}")
+
     public ResponseEntity<Map<String, Object>> rejectPost(@PathVariable Integer id, @RequestBody PostApprovalsRequest postApprovalsRequest) {
         try {
             // Call the service method to reject the post
@@ -315,11 +328,13 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
             // Generate a report if the rejection threshold is exceeded
             Report report = postService.generateReportIfCountRejectedPostApprovalsForUserWithin24HoursThresholdExceeded(requestPost.getPost().getCreatedByUser().getUsId());
 
+
             // Create a response map with message, data (PostApprovalsDto), and report information
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Post rejected successfully");
             response.put("data", postDto);
             response.put("report", report);
+
 
             // Return a successful response with the map
             return ResponseEntity.ok(response);
@@ -345,4 +360,5 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     public ResponseEntity<String> handleResponseStatusException(ResponseStatusException e) {
         return ResponseEntity.status(e.getStatusCode()).body(e.getReason());
     }
+
 }
