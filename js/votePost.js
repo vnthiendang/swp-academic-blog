@@ -339,47 +339,43 @@ filterPosts.addEventListener("click", async () => {
 
   const sortDirection = document.getElementById('sortDirection');
 
-    const startDates = document.getElementById("date_timepicker_start");
-    const startDateValue = startDates.value;
+  const startDates = document.getElementById("date_timepicker_start");
+  const startDateValue = startDates.value;
   
-    let startDate = null;
-    let formattedStartDate = null;
-  
-    // Parse the date string in the format MM/DD/YYYY
-    const startDateParts = startDateValue.split("/");
-    const year = parseInt(startDateParts[2]);
-    const month = parseInt(startDateParts[0]);
-    const day = parseInt(startDateParts[1]);
+  let formattedStartDate = null;
+
+  if (startDateValue) {
+    const startDateParts = startDateValue.split("-");
+    const year = parseInt(startDateParts[0]);
+    const month = parseInt(startDateParts[1]);
+    const day = parseInt(startDateParts[2]);
   
     if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
-      startDate = new Date(year, month - 1, day);
-      // Format startDate as a string in the desired format
-      formattedStartDate = startDate.toISOString();
+      formattedStartDate = new Date(year, month - 1, day).toISOString().slice(0, -1);
     }
+  }
   
     const endDates = document.getElementById("date_timepicker_end");
     const endDateValue = endDates.value;
-  
-    let endDate = null;
+
     let formattedEndDate = null;
   
-    // Parse the date string in the format MM/DD/YYYY
-    const endDateParts = endDateValue.split("/");
-    const yearEnd = parseInt(endDateParts[2]);
-    const monthEnd = parseInt(endDateParts[0]);
-    const dayEnd = parseInt(endDateParts[1]);
-  
-    if (!isNaN(yearEnd) && !isNaN(monthEnd) && !isNaN(dayEnd)) {
-      endDate = new Date(yearEnd, monthEnd - 1, dayEnd);
-      endDate.setHours(23, 59, 59, 999);
-      formattedEndDate = endDate.toISOString();
+    if(endDateValue){
+      const endDateParts = endDateValue.split("-");
+      const yearEnd = parseInt(endDateParts[0]);
+      const monthEnd = parseInt(endDateParts[1]);
+      const dayEnd = parseInt(endDateParts[2]);
+    
+      if (!isNaN(yearEnd) && !isNaN(monthEnd) && !isNaN(dayEnd)) {
+        formattedEndDate = new Date(yearEnd, monthEnd - 1, dayEnd).toISOString().slice(0, -1);
+      }
     }
   
     try {
       const response = await filterPost(
         categoryName,
         tagNames,
-        formattedStartDate, // Use formattedStartDate instead of startDate
+        formattedStartDate,
         formattedEndDate,
         sortBy,
         sortDirection.value
@@ -387,7 +383,7 @@ filterPosts.addEventListener("click", async () => {
       if (response == null) {
         alert("Please check your filter!");
       } else {
-        console.log(formattedStartDate, sortBy);
+        console.log(formattedStartDate, formattedEndDate);
         displayPosts(response);
       }
     } catch (error) {

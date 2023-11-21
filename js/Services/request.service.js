@@ -43,10 +43,7 @@ export const approvePost = async (id, teacherMessage) => {
     );
     return response;
   } catch (error) {
-    console.error(
-      "Error approve post:",
-      error.response ? error.response.data : error.message
-    );
+    console.log(error);
   }
 };
 

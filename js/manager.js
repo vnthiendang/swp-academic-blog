@@ -241,7 +241,7 @@ violationList()
 
 
 // MANAGE AWARD
-const displayAwards = async () => {
+const displayAwards = async (awards) => {
   const awardTable = document.getElementById('awardTable');
 
   try {
@@ -264,7 +264,6 @@ const displayAwards = async () => {
     
     // Create table body
     const tbody = document.createElement('tbody');
-    const awards = await getAllAward();
 
     awards.forEach(award => {
       const row = document.createElement('tr');
@@ -307,7 +306,11 @@ const displayAwards = async () => {
   }
 };
 
-displayAwards();
+getAllAward()
+  .then((awards) => {
+    displayAwards(awards);
+});
+
 
 // MANAGE Report
 const displayReports = async () => {
@@ -320,7 +323,7 @@ const displayReports = async () => {
     // Create table header
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
-    const headers = ['Report Type', 'By', 'Detail', 'Violation Rule', 'Action'];
+    const headers = ['Report Type', 'By', 'Detail', 'Status', 'Violation Rule', 'Action'];
     
     headers.forEach(headerText => {
       const th = document.createElement('th');
@@ -351,6 +354,10 @@ const displayReports = async () => {
       const detail = document.createElement('td');
       detail.textContent = report.reportDetail;
       row.appendChild(detail);
+
+      const status = document.createElement('td');
+      status.textContent = report.status || 'Pending';
+      row.appendChild(status);
 
       const violationRule = document.createElement('td');
       violationRule.textContent = report.violationRuleList.join(', ');
