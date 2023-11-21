@@ -137,12 +137,31 @@
                             <h1>User Management</h1>
                         </div>
                         <div class="user-management">
-                            <div class="search-bar">
+                            <!-- <div class="search-bar">
                               
-                            </div>
+                            </div> -->
                           
                               <!-- Rows -->
                             <div id="userTable"></div>
+
+                            <style>
+                                #userTable thead th {
+                                    font-weight: bold;
+                                    padding: 8px;
+                                    border: 1px solid #ccc;
+                                }
+
+                                #userTable tbody tr td {
+                                    padding: 8px;
+                                    border: 1px solid #ccc;
+                                }
+
+                                #userTable tbody tr td button{
+                                    margin-left: 1%;
+                                    margin-right: 1%;
+                                }
+
+                            </style>
        
                         </div>
                     </div>
@@ -239,6 +258,24 @@
                                         
                                               <!-- Rows -->
                                             <div id="reportTable"></div>
+
+                                            <style>
+                                                #reportTable thead th {
+                                                    font-weight: bold;
+                                                    padding: 8px;
+                                                    border: 1px solid #ccc;
+                                                }
+
+                                                #reportTable tbody tr td {
+                                                    padding: 8px;
+                                                    border: 1px solid #ccc;
+                                                }
+
+                                                #reportTable tbody tr td button{
+                                                    margin-left: 1%;
+                                                    margin-right: 1%;
+                                                }
+                                            </style>
                                         </div>
                 
                                     </div>
@@ -271,6 +308,24 @@
                                         
                                               <!-- Rows -->
                                             <div id="categoryTable"></div>
+
+                                            <style>
+                                                #categoryTable thead th {
+                                                    font-weight: bold;
+                                                    padding: 8px;
+                                                    border: 1px solid #ccc;
+                                                }
+
+                                                #categoryTable tbody tr td {
+                                                    padding: 8px;
+                                                    border: 1px solid #ccc;
+                                                }
+
+                                                #categoryTable tbody tr td button{
+                                                    margin-left: 1%;
+                                                    margin-right: 1%;
+                                                }
+                                            </style>
                                         </div>
                 
                                     </div>
@@ -295,32 +350,50 @@
                 <!-- Category Request -->
                 <div id="content18Content" style="display: none;">
                     
-                    <div class="frame">
-                        <div class="title">
-                            <h1>Category Request Management</h1>
-                        </div>
-                        <div class="request-management">
-                        
-                              <!-- Rows -->
-                            <div id="requestTable"></div>
-                        </div>
+                                    <div class="frame">
+                                        <div class="title">
+                                            <h1>Category Request Management</h1>
+                                        </div>
+                                        <div class="request-management">
+                                        
+                                            <!-- Rows -->
+                                            <div id="requestTable"></div>
 
-                    </div>
-                    <script>
-                        function showDeletePopup() {
-                            var popup = document.getElementById("deletePopup");
-                            popup.style.display = "flex";
-                        }
-                
-                        function handleConfirmDelete() {
-                            
-                        }
-                
-                        function handleCancelDelete() {
-                            var popup = document.getElementById("deletePopup");
-                            popup.style.display = "none";
-                        }
-                    </script>
+                                            <style>
+                                                #requestTable thead th {
+                                                    font-weight: bold;
+                                                    padding: 8px;
+                                                    border: 1px solid #ccc;
+                                                }
+
+                                                #requestTable tbody tr td {
+                                                    padding: 8px;
+                                                    border: 1px solid #ccc;
+                                                }
+
+                                                #requestTable tbody tr td button{
+                                                    margin-left: 1%;
+                                                    margin-right: 1%;
+                                                }
+                                            </style>
+                                        </div>
+
+                                    </div>
+                                    <script>
+                                        function showDeletePopup() {
+                                            var popup = document.getElementById("deletePopup");
+                                            popup.style.display = "flex";
+                                        }
+                                
+                                        function handleConfirmDelete() {
+                                            
+                                        }
+                                
+                                        function handleCancelDelete() {
+                                            var popup = document.getElementById("deletePopup");
+                                            popup.style.display = "none";
+                                        }
+                                    </script>
 
                 </div>
             </div>
