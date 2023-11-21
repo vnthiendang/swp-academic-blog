@@ -2,8 +2,6 @@ import { createComment, getCommentById } from "./Services/post.service.js";
 import * as request from './utils/request.js';
 import { userInfo } from "./Services/auth.service.js";
 import { votePost } from "./Services/vote.service.js";
-import { violationRuleList } from "./Services/admin.service.js";
-import { createReport } from "./Services/report.service.js";
 import { createAward, getAllAwardType } from './Services/award.service.js';
 
 const token = localStorage.getItem("token");
@@ -140,23 +138,6 @@ function displayComments() {
 
 // Call the function to display the post
 displayComments();
-
-// const displayVoteType = (types) => {
-//   const selectElement = document.getElementById('VoteType');
-
-//   types.forEach(type => {
-//     const option = document.createElement('option');
-//     option.value = type.id;
-//     option.textContent = type.voteType;
-
-//     selectElement.appendChild(option);
-//   });
-// };
-
-// getVoteType()
-//   .then((votes) => {
-//     displayVoteType(votes);
-// });
 
 
 const form = document.getElementById("comment");
@@ -310,55 +291,18 @@ getAllAwardType().then((types) => {
   displayAwardType(types);
 });
 
-const displayViolationType = (types) => {
-  const selectElement = document.getElementById('violationRule');
-
-  types.forEach(type => {
-    const option = document.createElement('option');
-    option.value = type.violationRuleInfo;
-    option.textContent = type.violationRuleInfo;
-
-    selectElement.appendChild(option);
-  });
-};
-violationRuleList().then((rules) => {
-  displayViolationType(rules);
-});
-
 const reportButton = document.getElementById('reportButton');
-const violationRule = document.getElementById('violationRule');
-
-let isFirstClick = true;
-
 reportButton.addEventListener('click', async function() {
-  if (isFirstClick) {
-    violationRule.style.display = 'block';
-    isFirstClick = false;
-  }else if(violationRule.value.length > 0){
-    const us = await userInfo();
-    const usId = us.userId;
+    //const postId = editButton.getAttribute('data-post-id');
+  
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const left = 0;
+    const top = 0;
+    const url = `editPost.html`;
+  
+    window.open(url, "Report Violation", `width=${width}, height=${height}, left=${left}, top=${top}`);
 
-    var model ={
-      reportTypeId: 1,
-      violationRuleList : Array.from(violationRule.selectedOptions, option => option.value),
-      reportDetail: "User Report",
-      reportedByUserId: usId
-  }
-  try {
-      const response = await createReport(model);
-
-      if(response != null){
-        alert('Post Reported!');
-        location.reload();
-      }else {
-        alert('Fail to create report!');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }else {
-    alert('Please choose a violation type!');
-  }
 });
 
 //Give Award
