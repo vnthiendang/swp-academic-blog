@@ -98,7 +98,7 @@ public class PostApprovalsController {
             return ResponseEntity.notFound().build();
         } catch (Exception ex) {
             // Handle other exceptions as needed
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error" + ex.getMessage());
         }
     }
 

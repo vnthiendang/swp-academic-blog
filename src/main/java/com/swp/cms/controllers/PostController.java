@@ -287,7 +287,6 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
             // Call the service method to approve the post
             PostApprovals requestPost = postService.approvePost(id, postApprovalsRequest);
 
-
             // Map the result to DTO
             PostApprovalsDto postDto = modelMapper.map(requestPost, PostApprovalsDto.class);
 
@@ -301,7 +300,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         } catch (Exception e) {
             // Handle other exceptions
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
         }
     }
 
@@ -346,7 +345,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Collections.singletonMap("message", e.getMessage()));
         } catch (Exception e) {
             // Handle other exceptions
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("message", "An error occurred"));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("message", "An error occurred: " + e.getMessage()));
         }
     }
 

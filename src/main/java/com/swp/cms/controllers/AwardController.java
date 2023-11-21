@@ -161,7 +161,7 @@ public class AwardController {
             return ResponseEntity.badRequest().body(errorMessage);
         } catch (Exception e) {
             // Provide a generic error message for other exceptions
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the request");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the request: " + e.getMessage());
         }
     }
 
