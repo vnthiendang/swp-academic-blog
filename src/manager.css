@@ -9,7 +9,7 @@
 }
 
 .right {
-    width: 88%;
+    width: 100%;
     /* padding: 20px; */
     background-color: aliceblue;
 }
@@ -41,8 +41,8 @@
 /* ================================================ Left ======================================= */
 
 .frame {
-    width: auto;
-    height: 3000px;
+    width: 1733px;
+    height: 1000px;
     margin: 0 auto;
     border: 1px solid #ccc;
 }
@@ -52,10 +52,6 @@
     color: #fff;
     padding: 10px;
     text-align: center;
-}
-
-.article-management {
-    padding: 20px;
 }
 
 .search-bar {

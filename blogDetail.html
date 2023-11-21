@@ -183,40 +183,55 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
 
-            <div class="column">
-                <div class="inner-column">
+            <!-- Button -->
+            <div class="column" style="background-color: white;">
+
+                <!-- Button Give Award -->
+                <div class="inner-column" title="Give Award Post">
                     <form class="form" id="createAward">
-                        <div class="flex flex-col" >
+                        <div class="flex flex-row">
                             <label for="">
-                                <select id="AwardType" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">
+                                <select style="width: 210px;" id="AwardType" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
                                     <option selected>Award Type</option>
                                 </select>
                             </label>
-                            <button id="button-give-award" style="background-color: green;color: white;" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5">Give Award</button>
-                        </div>  
+                            <button id="button-give-award" style="background-color: green; color: white; margin-left: 10px; width: 140px;" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">Give Award</button>
+                        </div>
                     </form>
                 </div>
-            </div>
 
-            <!-- Button Report -->
-            <div class="column" style="background-color: white;">
-                <div class="inner-column">
-                    <div class="container-vote" title="Report Post">
-                        <div>
-                            <select style="display: none;" id="violationRule" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5" multiple>
-                                <option selected>Violation Type</option>
-                            </select>
+                <!-- Button Report -->
+                <div class="inner-column" title="Report Post">
+                    <form class="form">
+                        <div class="flex flex-row">
+                            <label for="">
+                                <select style="width: 210px;" id="violationRule" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                                    <option selected>Report Type</option>
+                                </select>
+                            </label>
+                            <button id="reportButton" style="background-color: red; color: white; margin-left: 10px; width: 100px;" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">Report</button>
                         </div>
-                        <div class="button-report">
-                            <button id="reportButton">Report</button>
+                    </form>
+                </div>
+
+                <!-- <div class="column" style="background-color: white;">
+                    <div class="inner-column" title="Report Post">
+                        <div class="container-vote">
+                            <div>
+                                <select id="violationRule" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-50 p-2.5" multiple>
+                                    <option selected>Violation Type</option>
+                                </select>
+                            </div>
+                            <div class="button-report">
+                                <button id="reportButton">Report</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                <!-- Ver1 Fix Eror -->
             </div>
-
         </div>
 
         <!-- IMG Bên Ngoài Mang Vào -->
