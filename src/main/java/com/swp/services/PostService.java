@@ -661,18 +661,19 @@ public class PostService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userIds));
 
         List<CategoryManagement> categoryManagements = categoryManagementRepository.findAll();
-        List<Integer> categoryManagementOfCurrentUser = categoryManagements.stream()
+        List<Integer> categoryManagedOfCurrentUser = categoryManagements.stream()
                 .filter(categoryManagement -> categoryManagement.getTeacher().getUsId().equals(userIds))
-                .map(CategoryManagement::getId)
+                .map(CategoryManagement::getCategory)
+                .map(Category::getCateId)
                 .collect(Collectors.toList());
 
         List<PostApprovals> postApprovals = postApprovalsRepository.findAll();
 
         List<PostApprovals> postApprovalsFiltered = new ArrayList<>();
-        if (categoryManagementOfCurrentUser != null && !categoryManagementOfCurrentUser.isEmpty()) {
+        if (categoryManagedOfCurrentUser != null && !categoryManagedOfCurrentUser.isEmpty()) {
             postApprovalsFiltered = postApprovals.stream()
                     .filter(postApproval ->
-                            categoryManagementOfCurrentUser.contains(postApproval.getPost().getBelongedToCategory().getCateId()))
+                            categoryManagedOfCurrentUser.contains(postApproval.getPost().getBelongedToCategory().getCateId()))
                     .collect(Collectors.toList());
         }
 
@@ -683,7 +684,7 @@ public class PostService {
         return postRepository.findAll()
                 .stream()
                 .filter(post -> !postIdsWithApprovals.contains(post.getPostsId()))
-                .filter(post -> categoryManagementOfCurrentUser.contains(post.getBelongedToCategory().getCateId()))
+                .filter(post -> categoryManagedOfCurrentUser.contains(post.getBelongedToCategory().getCateId()))
                 .collect(Collectors.toList());
     }
 
