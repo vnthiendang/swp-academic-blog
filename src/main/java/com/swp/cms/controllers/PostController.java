@@ -52,7 +52,7 @@ public class PostController {
 
     //update a post by postId
     @PutMapping("/edit/{id}")
-    public PostDto updatePost(@PathVariable Integer id, @ModelAttribute PostRequest postRequest){
+    public PostDto updatePost(@PathVariable Integer id, @RequestBody PostRequest postRequest){
         Post post = postService.updatePost(id, postRequest);
         PostDto dto = postService.mapPostToPostDto(post);
         return dto;
@@ -335,7 +335,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         }
     }
 
-    @PutMapping("/delete/{commentId}")
+    @PutMapping("/delete/{postId}")
     public ResponseEntity<Void> deletePost(@PathVariable Integer postId) {
         postService.deletePostById(postId);
         return ResponseEntity.noContent().build();
