@@ -169,19 +169,21 @@ public class PostApprovalsService {
 
         User currentUser = userRepository.findById(userIds)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with userId: " + userIds));
+
         List<CategoryManagement> categoryManagements = categoryManagementRepository.findAll();
-        List<Integer> categoryManagementOfCurrentUser = categoryManagements.stream()
+        List<Integer> categoryManagedOfCurrentUser = categoryManagements.stream()
                 .filter(categoryManagement -> categoryManagement.getTeacher().getUsId().equals(userIds))
-                .map(CategoryManagement::getId)
+                .map(CategoryManagement::getCategory)
+                .map(Category::getCateId)
                 .collect(Collectors.toList());
 
         List<PostApprovals> postApprovalss = postApprovalsRepository.findAll();
 
         List<PostApprovals> postApprovalsFiltered = new ArrayList<>();
-        if (categoryManagementOfCurrentUser != null && !categoryManagementOfCurrentUser.isEmpty()) {
+        if (categoryManagedOfCurrentUser != null && !categoryManagedOfCurrentUser.isEmpty()) {
             return postApprovalsFiltered = postApprovalss.stream()
                     .filter(postApproval ->
-                            categoryManagementOfCurrentUser.contains(postApproval.getPost().getBelongedToCategory().getCateId()))
+                            categoryManagedOfCurrentUser.contains(postApproval.getPost().getBelongedToCategory().getCateId()))
                     .collect(Collectors.toList());
         } else {
             return postApprovals;
