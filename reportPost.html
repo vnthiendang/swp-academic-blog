@@ -32,27 +32,6 @@
             <a href="bestartice.html" class="p-2">
                 Best Article
             </a>
-
-            <a href="teacherPage.html" class="p-2" id="teacherPage">
-                Post Request
-            </a>
-
-            <a href="/giveAward.html" class="p-2" id="teacherPage2">
-                Give Award
-            </a>
-
-            <!-- Category  -->
-            <div class="group inline-block relative">
-                <button class="py-2 px-4 rounded inline-flex items-center" id="category">
-                    <span class="mr-1" style="font-weight: 600;">Category</span>
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                </button>
-                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-                    
-                </ul>
-            </div>
         </div>
         <div class="p-1">
 
@@ -82,7 +61,7 @@
     <Main>
         <div class="wapper-title" id="detail">
             <!-- Title -->
-            <div class="column">
+            <div class="column1">
                 <div class="mr-7" id="postTitle" style="text-align: center;">
                     Submit a report posts
                 </div>
@@ -112,14 +91,13 @@
             <div class="column" style="background-color: white;">
 
                 <!-- Column 1 -->
-                <div class="column" onclick="toggleForm('formContainer1')">
+                <div class="column" onclick="toggleForm('formContainer')">
                     <h2>
-                        Community
-                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
+
                     </h2>
                 </div>
                 <div class="column">
-                    <div id="formContainer1" class="hidden">
+                    <div id="formContainer" class="hidden">
                         <form action="#">
                             <label for="fname">Input Text :</label>
                             <input type="text" id="fname" name="fname" class="textbox-input">
@@ -127,85 +105,7 @@
                     </div>
                 </div>
 
-                <!-- Column 2 -->
-                <div class="column" onclick="toggleForm('formContainer2')">
-                    <h2>
-                        Community
-                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
-                    </h2>
-                </div>
-                <div class="column">
-                    <div id="formContainer2" class="hidden">
-                        <form action="#">
-                            <label for="fname">Input Text :</label>
-                            <input type="text" id="fname" name="fname" class="textbox-input">
-                        </form>
-                    </div>
-                </div>
 
-                <!-- Column 3 -->
-                <div class="column" onclick="toggleForm('formContainer3')">
-                    <h2>
-                        Community
-                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
-                    </h2>
-                </div>
-                <div class="column">
-                    <div id="formContainer3" class="hidden">
-                        <form action="#">
-                            <label for="fname">Input Text :</label>
-                            <input type="text" id="fname" name="fname" class="textbox-input">
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Column 4 -->
-                <div class="column" onclick="toggleForm('formContainer4')">
-                    <h2>
-                        Community
-                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
-                    </h2>
-                </div>
-                <div class="column">
-                    <div id="formContainer4" class="hidden">
-                        <form action="#">
-                            <label for="fname">Input Text :</label>
-                            <input type="text" id="fname" name="fname" class="textbox-input">
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Column 5 -->
-                <div class="column" onclick="toggleForm('formContainer5')">
-                    <h2>
-                        Community
-                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
-                    </h2>
-                </div>
-                <div class="column">
-                    <div id="formContainer5" class="hidden">
-                        <form action="#">
-                            <label for="fname">Input Text :</label>
-                            <input type="text" id="fname" name="fname" class="textbox-input">
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Column 6 -->
-                <div class="column" onclick="toggleForm('formContainer6')">
-                    <h2>
-                        Community
-                        <i class="fa-solid fa-angle-down fa-lg" style="color: #000000; margin-left: 3%;"></i>
-                    </h2>
-                </div>
-                <div class="column">
-                    <div id="formContainer6" class="hidden">
-                        <form action="#">
-                            <label for="fname">Input Text :</label>
-                            <input type="text" id="fname" name="fname" class="textbox-input">
-                        </form>
-                    </div>
-                </div>
                 <style>
                     h2 {
                         padding: 10px 0;
@@ -236,7 +136,7 @@
             <div class="column" style="background-color: white;">
                 <!-- Button Report -->
                 <div class="inner-column" title="Report Post">
-                    <button id="#" style="background-color: red; color: white; margin-left: 10px; width: 100px;" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">Report</button>
+                    <button id="reportBtn" style="background-color: red; color: white; margin-left: 10px; width: 100px;" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">Report</button>
                 </div>
             </div>
             
@@ -274,7 +174,7 @@
         </div>
     </footer>
 
-    <script type="module" src='./js/home.js'></script>
+    <script type="module" src='./js/reportPost.js'></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
