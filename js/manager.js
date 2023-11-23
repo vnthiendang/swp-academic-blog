@@ -13,7 +13,7 @@ const options = {
 
 const renderPostTable = (posts) => {
   const tab = document.getElementById('postTable');
-  tab.innerHTML = ''; // Clear previous content
+  tab.innerHTML = '';
   
   // Create table
   const table = document.createElement('table');
@@ -159,6 +159,16 @@ const renderUserTable = (users) => {
   
       tbody.appendChild(row);
 
+      createUserBtn.addEventListener('click', async () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const left = 0;
+        const top = 0;
+        const url = `createUser.html`;
+      
+        window.open(url, "Create New User", `width=${width}, height=${height}, left=${left}, top=${top}`);
+      });
+
     });
   
     table.appendChild(tbody);
@@ -176,7 +186,7 @@ const renderviolationTable = (users) => {
   // Create table header
   const thead = document.createElement('thead');
   const headerRow = document.createElement('tr');
-  const headers = ['Violation User', 'Expired date', 'Evidence', 'Created Date', 'Violation Type'];
+  const headers = ['Violation User', 'Expired date', 'Evidence', 'Created Date', 'Violation Type', 'Action'];
   
   headers.forEach(headerText => {
     const th = document.createElement('th');
@@ -216,8 +226,33 @@ const renderviolationTable = (users) => {
     const roleIdCell = document.createElement('td');
     roleIdCell.textContent = user.violationType;
     row.appendChild(roleIdCell);
+
+    const removeBtn = document.createElement('button');
+    removeBtn.classList.add('styled-button');
+    removeBtn.dataset.violatedUser = user.userId;
+    removeBtn.textContent = 'Remove';
+    row.appendChild(removeBtn);
   
     tbody.appendChild(row);
+
+    removeBtn.addEventListener('click', async () => {
+      const obj = removeBtn.dataset.violatedUser;
+
+      const confirmed = confirm("Are you sure want to remove this violated user?");
+      if(confirmed){
+        try {
+          const response = await removeAccountViolation(obj);
+          if(response != null){
+            alert('Account violation Removed');
+            location.reload();
+          }else{
+            alert('Fail to perform remove violation!');
+          }
+        } catch (error) {
+          console.error('Error removing violation:', error);
+        }
+      }
+    });
   });
 
   table.appendChild(tbody);
@@ -241,7 +276,7 @@ violationList()
 
 
 // MANAGE AWARD
-const displayAwards = async (awards) => {
+const displayAwards = async () => {
   const awardTable = document.getElementById('awardTable');
 
   try {
@@ -264,6 +299,7 @@ const displayAwards = async (awards) => {
     
     // Create table body
     const tbody = document.createElement('tbody');
+    const awards = await getAllAward();
 
     awards.forEach(award => {
       const row = document.createElement('tr');
@@ -305,12 +341,7 @@ const displayAwards = async (awards) => {
     console.error('Error retrieving awards:', error);
   }
 };
-
-getAllAward()
-  .then((awards) => {
-    displayAwards(awards);
-});
-
+displayAwards();
 
 // MANAGE Report
 const displayReports = async () => {

@@ -33,9 +33,9 @@ const showHeaderForTeacher = async () => {
 
 showHeaderForTeacher();
 
-// DISPLAY LIST APPROVED POSTS
+// DISPLAY LIST FILTERED POSTS
 function displayPosts(posts) {
-  const postContainer = document.querySelector(".col-span-5");
+  const postContainer = document.querySelector(".main-blog");
   postContainer.innerHTML = "";
 
   if (posts.length === 0) {
@@ -43,209 +43,138 @@ function displayPosts(posts) {
     noResultsElement.className =
       "text-center text-4xl font-bold text-gray-500 dark:text-gray-400";
     noResultsElement.textContent =
-      "No results related to your filter. Please use other options.";
+      "No results related to your search. Please use other keywords.";
     postContainer.appendChild(noResultsElement);
   } else {
-    for (var i = 0; i < posts.length; i++) {
-      var post = posts[i];
-    
-      const columnElement = document.createElement("div");
-      columnElement.className = "column";
-    
-      const postTitleElement = document.createElement("div");
-      postTitleElement.className = "mr-7";
-      postTitleElement.id = "postTitle";
-      postTitleElement.textContent = post.title;
-      columnElement.appendChild(postTitleElement);
-    
-      postContainer.appendChild(columnElement);
-    
-      const infoColumnElement = document.createElement("div");
-      infoColumnElement.className = "column";
-      infoColumnElement.style.backgroundColor = "white";
-    
-      const postTagElement = document.createElement("div");
-      postTagElement.id = "postTag";
-      infoColumnElement.appendChild(postTagElement);
-    
-      const innerColumn1 = document.createElement("div");
-      innerColumn1.className = "inner-column";
-    
-      const containerUserElement = document.createElement("div");
-      containerUserElement.className = "container-user";
-      containerUserElement.title = "Name User";
-    
-      const byUserIcon = document.createElement("div");
-      byUserIcon.className = "by-user";
-      const userIcon = document.createElement("i");
-      userIcon.className = "fa-solid fa-user fa-sm";
-      userIcon.style.color = "#000000";
-      byUserIcon.appendChild(userIcon);
-      containerUserElement.appendChild(byUserIcon);
-    
-      const byUserElement = document.createElement("div");
-      byUserElement.className = "by-user";
-      byUserElement.id = "postAuthor";
-      byUserElement.textContent = post.createdByUser;
-      containerUserElement.appendChild(byUserElement);
-    
-      innerColumn1.appendChild(containerUserElement);
-      infoColumnElement.appendChild(innerColumn1);
-    
-      const innerColumn2 = document.createElement("div");
-      innerColumn2.className = "inner-column";
-    
-      const containerDateTimeElement = document.createElement("div");
-      containerDateTimeElement.className = "container-datetime";
-      containerDateTimeElement.title = "Date Time";
-    
-      const dateTimeIcon = document.createElement("div");
-      dateTimeIcon.className = "date-time";
-      const calendarIcon = document.createElement("i");
-      calendarIcon.className = "fa-regular fa-calendar-days";
-      calendarIcon.style.color = "#000000";
-      dateTimeIcon.appendChild(calendarIcon);
-      containerDateTimeElement.appendChild(dateTimeIcon);
-    
-      const dateTimeElement = document.createElement("div");
-      dateTimeElement.className = "date-time";
-      dateTimeElement.id = "postDate";
-      const postCreatedTime = new Date(post.createdTime);
-      const formattedTime = postCreatedTime.toLocaleString("en-US", options);
-      dateTimeElement.textContent = formattedTime;
-      containerDateTimeElement.appendChild(dateTimeElement);
-    
-      innerColumn2.appendChild(containerDateTimeElement);
-      infoColumnElement.appendChild(innerColumn2);
-    
-      const innerColumn3 = document.createElement("div");
-      innerColumn3.className = "inner-column";
-    
-      const containerReadElement = document.createElement("div");
-      containerReadElement.className = "container-read";
-      containerReadElement.title = "Reading Time";
-    
-      const numberReadIcon = document.createElement("div");
-      numberReadIcon.className = "number-read";
-      const clockIcon = document.createElement("i");
-      clockIcon.className = "fa-regular fa-clock";
-      clockIcon.style.color = "#000000";
-      numberReadIcon.appendChild(clockIcon);
-      containerReadElement.appendChild(numberReadIcon);
-    
-      const numberReadElement = document.createElement("div");
-      numberReadElement.className = "number-read";
-      numberReadElement.id = "readingTime";
-      numberReadElement.textContent = post.readingTime;
-      containerReadElement.appendChild(numberReadElement);
-    
-      innerColumn3.appendChild(containerReadElement);
-      infoColumnElement.appendChild(innerColumn3);
+    $(document).ready(function() {
+      const container = $('.col-span-3');
       
-      if (post.awardList != null && post.awardList.length > 0) {
-        const innerColumn5 = document.createElement("div");
-        innerColumn5.className = "inner-column";
-        const awardElement = document.createElement("div");
-        awardElement.className = "container-award";
-        awardElement.title = "Award";
-      
-        const awardIcon = document.createElement("i");
-        awardIcon.className = "fas fa-crown";
-        awardIcon.style.color = "#c45d08";
-        awardElement.appendChild(awardIcon);
-      
-        post.awardList.forEach(award => {
-          const awardList = document.createElement("div");
-          awardList.className = "award-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-          const items = document.createElement("span");
-          items.textContent = award;
-          awardList.appendChild(items);
-          awardElement.appendChild(awardList);
-        })
-        
-        innerColumn5.appendChild(awardElement);
-        infoColumnElement.appendChild(innerColumn5);
-      }
-      
-      const innerColumn4 = document.createElement("div");
-      innerColumn4.className = "inner-column";
-    
-      const containerTagElement = document.createElement("div");
-      containerTagElement.className = "container-tag";
-      containerTagElement.title = "Category";
-    
-      const tagCategoryElement = document.createElement("div");
-      tagCategoryElement.className = "tag-category";
-      const categoryHeading = document.createElement("h2");
-      categoryHeading.textContent = "Category:";
-      tagCategoryElement.appendChild(categoryHeading);
-      containerTagElement.appendChild(tagCategoryElement);
-    
-      const containerTagHoverElement = document.createElement("div");
-      containerTagHoverElement.className = "container-tag-hover";
-    
-      const tagCategoryIcon = document.createElement("div");
-      tagCategoryIcon.className = "tag-category";
-      const hashtagIcon = document.createElement("i");
-      hashtagIcon.className = "fa-solid fa-hashtag";
-      tagCategoryIcon.appendChild(hashtagIcon);
-      containerTagHoverElement.appendChild(tagCategoryIcon);
-    
-      const tagCategoryElement2 = document.createElement("div");
-      tagCategoryElement2.className = "tag-category";
-      tagCategoryElement2.id = "postCategory";
-      tagCategoryElement2.textContent= post.belongedToCategory;
-      containerTagHoverElement.appendChild(tagCategoryElement2);
-    
-      containerTagElement.appendChild(containerTagHoverElement);
-      innerColumn4.appendChild(containerTagElement);
-      infoColumnElement.appendChild(innerColumn4);
-    
-      postContainer.appendChild(infoColumnElement);
-    
-      const wrapperTitlePostElement = document.createElement("div");
-      wrapperTitlePostElement.className = "wapper-title-post";
-    
-      const columnElement2 = document.createElement("div");
-      columnElement2.className = "column";
-    
-      const postContentElement = document.createElement("p");
-      postContentElement.className = "postContent";
-      postContentElement.id = "postContent";
-      postContentElement.textContent = post.detail;
-      columnElement2.appendChild(postContentElement);
-    
-      wrapperTitlePostElement.appendChild(columnElement2);
-      infoColumnElement.appendChild(wrapperTitlePostElement);
-      
-      if (post.tagList.length > 0) {
-        const innerColumn6 = document.createElement("div");
-        innerColumn6.className = "inner-column";
+      // DISPLAY LIST OF POSTS
+      posts.forEach(function(post) {
+        const postCreatedTime = new Date(post.createdTime);
+        const formattedTime = postCreatedTime.toLocaleString("en-US", options);
 
-        const iconTagElement = document.createElement('div');
-        iconTagElement.className = 'icon-tag';
-        const iconTagImg = document.createElement('img');
-        iconTagImg.src = 'img/tag.png';
-        iconTagImg.alt = 'icon-tag';
-        iconTagElement.appendChild(iconTagImg);
-        innerColumn6.appendChild(iconTagElement);
-      
-        post.tagList.forEach(tag => {
-          const tagLink = document.createElement('a');
-          tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
-          tagLink.id = "postTag";
-          const tagDiv = document.createElement('div');
-          tagDiv.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
-          tagDiv.textContent = tag;
-          tagLink.appendChild(tagDiv);
-          innerColumn6.appendChild(tagLink);
+        let tagsHTML = '';
+        if (typeof post.tagList === 'string') {
+          const tags = post.tagList.split(',').map(tag => tag.trim());
+    
+          tagsHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join(', ');
+        }
+
+        const containerReadHTML = post.tagList.length > 0 ? `
+        <div class="container-read">
+          <div class="tag-list">
+            <i class="fa-solid fa-tags fa-lg" style="color: #ff0000;"></i>
+          </div>
+          <div class="tag-list" id="tagList">
+            ${tagsHTML}
+          </div>
+        </div>
+      ` : '';
+
+        const postHTML = `
+          <div class="main-blog">
+            <div class="wapper-title">
+              <div class="column">
+                <div class="inner-column">
+                  <div class="container-user">
+                    <div class="by-user-logo">
+                      <img src="#" alt="User Logo">
+                    </div>
+                  </div>
+                </div>
+                <div class="inner-column">
+                  <div class="container-user" title="Created By User">
+                    <div class="by-user">
+                      <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
+                    </div>
+                    <div class="createdUser">
+                      ${post.createdByUser}
+                    </div>
+                  </div>
+                </div>
+                <div class="inner-column">
+                  <div class="container-datetime title="Created Time"">
+                    <div class="date-time">
+                      <i class="fa-regular fa-calendar-days" style="color: #000000;"></i>
+                    </div>
+                    <div class="date-time" id="postDate">
+                      ${formattedTime}
+                    </div>
+                  </div>
+                </div>
+                <div class="inner-column">
+                  <div class="container-tag" title="Category">
+                    <div class="tag-category">
+                      <i class="fa-solid fa-hashtag" style="color: #ff0000;"></i>
+                    </div>
+                    <div class="tag-category" id="postCategory">
+                      ${post.belongedToCategory}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container-post-img">
+                <div class="post-title-content" title="Post Title">
+                  <div class="column-title">
+                    <div class="postTitle">
+                      <h2>${post.title}</h2>
+                    </div>
+                  </div>
+                  <div class="column-content">
+                    <div class="postContent">
+                      <h2>${post.postDetail}</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="container-img" title="Cover Image">
+                  <img src="data:image/jpeg;base64, ${post.mediaList}" alt="Post Image">
+                </div>
+              </div>
+              <div class="column">
+                <div class="inner-column">
+                  <div class="container-user" title="Total Like">
+                    <div class="by-user">
+                      <i class="fa-regular fa-thumbs-up fa-xl" style="color: #000000;"></i>
+                    </div>
+                    <div class="total-like" id="voteCount">
+                      ${post.vote1Count}
+                    </div>
+                  </div>
+                </div>
+                <div class="inner-column">
+                  <div class="container-read">
+                    <div class="number-read">
+                      <i class="fa-brands fa-readme fa-bounce" style="color: #000000;"></i>
+                    </div>
+                    <div class="number-read" id="readingTime">
+                      ${post.readingTime}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="inner-column">
+                  <div class="tag-list" id="tagList">
+                    ${containerReadHTML}
+                  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        container.append(postHTML);
+
+        const infoElement = container.find('.postContent h2:last-child');
+        infoElement.css({
+          maxWidth: "1200px",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap"
         });
-        infoColumnElement.appendChild(innerColumn6);
-      }
-    
-      postContainer.appendChild(wrapperTitlePostElement);
-    
-    }
+
+      });
+    });
   }
 }
 

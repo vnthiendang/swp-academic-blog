@@ -43,63 +43,134 @@ import {
         "No results related to your search. Please use other keywords.";
       postContainer.appendChild(noResultsElement);
     } else {
-      posts.forEach((postData) => {
-        const postElement = document.querySelector(".wapper-title");
-        postElement.innerHTML = `
-          <!-- ByUser DateTime NumberRead -->
-          <div class="column">
-            <!-- Rest of the HTML structure for ByUser, DateTime, and NumberRead -->
-          </div>
-          
-          <!-- Title Content Img -->
-          <div class="container-post-img">
-            <!-- Rest of the HTML structure for Title, Content, and Img -->
-          </div>
-  
-          <!-- Category NumberRead -->
-          <div class="column">
-            <!-- Rest of the HTML structure for Category and NumberRead -->
-          </div>
-        `;
+      $(document).ready(function() {
+        const container = $('.col-span-3');
         
-        const byUser = document.getElementsByClassName('createdUser');
-        if (postData.createdByUser) {
-          byUser.textContent = postData.createdByUser;
-        } else {
-          byUser.textContent = '';
-        }
+        // DISPLAY LIST OF POSTS
+        posts.forEach(function(post) {
+          const postCreatedTime = new Date(post.createdTime);
+          const formattedTime = postCreatedTime.toLocaleString("en-US", options);
+
+          let tagsHTML = '';
+          if (typeof post.tagList === 'string') {
+            const tags = post.tagList.split(',').map(tag => tag.trim());
       
-        // Date Time
-        const postDate = document.getElementById('postDate');
-        const postCreatedTime = new Date(postData.createdTime);
-        const formattedTime = postCreatedTime.toLocaleString("en-US", options);
-        postDate.textContent = formattedTime;
-      
-        // Tag Category
-        const postCategory = document.getElementById('postCategory');
-        postCategory.textContent = postData.belongedToCategory;
-      
-        // Title
-        const postTitle = document.querySelector('.postTitle h2');
-        postTitle.textContent = postData.title;
-      
-        // Content
-        const postContent = document.querySelector('.postContent h2');
-        postContent.textContent = postData.postDetail;
-      
-        // Image
-        const postImage = document.querySelector('.container-img img');
-        
-        if(postData.mediaList.length > 0){
+            tagsHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join(', ');
+          }
+
+          const containerReadHTML = post.tagList.length > 0 ? `
+          <div class="container-read">
+            <div class="tag-list">
+              <i class="fa-solid fa-tags fa-lg" style="color: #ff0000;"></i>
+            </div>
+            <div class="tag-list" id="tagList">
+              ${tagsHTML}
+            </div>
+          </div>
+        ` : '';
+
+          const postHTML = `
+            <div class="main-blog">
+              <div class="wapper-title">
+                <div class="column">
+                  <div class="inner-column">
+                    <div class="container-user">
+                      <div class="by-user-logo">
+                        <img src="#" alt="User Logo">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="inner-column">
+                    <div class="container-user" title="Created By User">
+                      <div class="by-user">
+                        <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
+                      </div>
+                      <div class="createdUser">
+                        ${post.createdByUser}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="inner-column">
+                    <div class="container-datetime title="Created Time"">
+                      <div class="date-time">
+                        <i class="fa-regular fa-calendar-days" style="color: #000000;"></i>
+                      </div>
+                      <div class="date-time" id="postDate">
+                        ${formattedTime}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="inner-column">
+                    <div class="container-tag" title="Category">
+                      <div class="tag-category">
+                        <i class="fa-solid fa-hashtag" style="color: #ff0000;"></i>
+                      </div>
+                      <div class="tag-category" id="postCategory">
+                        ${post.belongedToCategory}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container-post-img">
+                  <div class="post-title-content" title="Post Title">
+                    <div class="column-title">
+                      <div class="postTitle">
+                        <h2>${post.title}</h2>
+                      </div>
+                    </div>
+                    <div class="column-content">
+                      <div class="postContent">
+                        <h2>${post.postDetail}</h2>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container-img" title="Cover Image">
+                    <img src="data:image/jpeg;base64, ${post.mediaList}" alt="Post Image">
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="inner-column">
+                    <div class="container-user" title="Total Like">
+                      <div class="by-user">
+                        <i class="fa-regular fa-thumbs-up fa-xl" style="color: #000000;"></i>
+                      </div>
+                      <div class="total-like" id="voteCount">
+                        ${post.vote1Count}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="inner-column">
+                    <div class="container-read">
+                      <div class="number-read">
+                        <i class="fa-brands fa-readme fa-bounce" style="color: #000000;"></i>
+                      </div>
+                      <div class="number-read" id="readingTime">
+                        ${post.readingTime}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="inner-column">
+                    <div class="tag-list" id="tagList">
+                      ${containerReadHTML}
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          `;
           
-          postData.mediaList.forEach(media => {
-            postImage.src = `data:image/jpeg;base64, ${media}`;
+          container.append(postHTML);
+
+          const infoElement = container.find('.postContent h2:last-child');
+          infoElement.css({
+            maxWidth: "1200px",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap"
           });
-        }
-      
-        // Number Read
-        const readingTime = document.getElementById('readingTime');
-        readingTime.textContent = postData.readingTime;
+
+        });
       });
     }
   }

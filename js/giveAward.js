@@ -187,8 +187,7 @@ function displayPosts(posts) {
   }
 
   const displayAllPosts = () => {
-    const statusList = ["approved"];
-    getAwardedPosts(0, statusList)
+    getAwardedPosts(3, "approved,rejected")
       .then((posts) => {
         displayPosts(posts);
       })
