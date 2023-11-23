@@ -52,7 +52,6 @@
     padding: 10px;
     margin-bottom: 20px;
     background-color: whitesmoke;
-
     width: auto;
     height: 300px;
 } */
@@ -60,12 +59,13 @@
 .post {
     box-sizing: border-box;
     flex: 0 0 45%;
+    width: 700px;
     margin-bottom: 20px;
     border: 2px solid gray;
     border-radius: 10px;
     padding: 10px;
     background-color: whitesmoke;
-    margin-right: 50px;
+
 }
 
 /* .ListPost {
@@ -74,7 +74,7 @@
     margin: 0 auto;
     padding: 20px;
     background-color: aliceblue;
-    margin-left: 5px;
+    margin-left:     5px;
 } */
 
 .ListPost {
@@ -135,7 +135,7 @@
     color: red;
 }
 
-.post-info {
+.post-info {    
     display: inline;
     /* color: black; */
 }
@@ -147,12 +147,12 @@
 }
 
 .post:nth-child(2n) {
-    margin-left: 4%; /* Adjust the percentage based on your preference */
+    margin-left: 1%; /* Adjust the percentage based on your preference */
 }
 
-.post:last-child {
+/* .post:last-child {
     margin-left: 0;
-}
+} */
 
 /*========================== Post List ==============================*/
 

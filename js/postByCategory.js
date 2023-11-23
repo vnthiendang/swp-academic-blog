@@ -39,27 +39,27 @@ function displayPosts(response) {
     var tagsElement = document.createElement('div');
     tagsElement.classList.add('tags');
 
-    if(post.tagList.length > 0){
-      var iconTagElement = document.createElement('div');
-      iconTagElement.classList.add('icon-tag');
-      var iconTagImageElement = document.createElement('img');
-      iconTagImageElement.src = '/img/tag.png';
-      iconTagImageElement.alt = 'icon-tag';
-      iconTagElement.appendChild(iconTagImageElement);
-      tagsElement.appendChild(iconTagElement);
+    // if(post.tagList.length > 0){
+    //   // var iconTagElement = document.createElement('div');
+    //   // iconTagElement.classList.add('icon-tag');
+    //   // var iconTagImageElement = document.createElement('img');
+    //   // iconTagImageElement.src = '/img/tag.png';
+    //   // iconTagImageElement.alt = 'icon-tag';
+    //   // iconTagElement.appendChild(iconTagImageElement);
+    //   // tagsElement.appendChild(iconTagElement);
       
-      post.tagList.forEach(tag => {
-        const tagLink = document.createElement('a');
-        tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
-        const tagDiv = document.createElement('div');
-        tagDiv.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
-        tagDiv.textContent = tag;
-        tagLink.appendChild(tagDiv);
-        tagsElement.appendChild(tagLink);
-      });
+    //   post.tagList.forEach(tag => {
+    //     const tagLink = document.createElement('a');
+    //     tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+    //     const tagDiv = document.createElement('div');
+    //     tagDiv.className = '';
+    //     tagDiv.textContent = tag;
+    //     tagLink.appendChild(tagDiv);
+    //     tagsElement.appendChild(tagLink);
+    //   });
 
-      postElement.appendChild(tagsElement);
-    }
+    //   postElement.appendChild(tagsElement);
+    // }
 
     // Append all elements to the post element
     postElement.appendChild(anchorElement);
