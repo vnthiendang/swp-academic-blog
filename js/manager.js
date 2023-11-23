@@ -96,6 +96,11 @@ const renderPostTable = (posts) => {
 const renderUserTable = (users) => {
     const userTable = document.getElementById('userTable');
     userTable.innerHTML = ''; // Clear previous content
+
+    const createUserBtn = document.createElement('button');
+    createUserBtn.classList.add('styled-button');
+    createUserBtn.textContent = 'Create User';
+    userTable.appendChild(createUserBtn);
   
     // Create table
     const table = document.createElement('table');
@@ -145,15 +150,10 @@ const renderUserTable = (users) => {
 
       const actionCell = document.createElement('td');
 
-      const addViolationButton = document.createElement('button');
-      addViolationButton.classList.add('styled-button');
-      addViolationButton.textContent = 'Delete';
-      actionCell.appendChild(addViolationButton);
-
-      const createUserBtn = document.createElement('button');
-      createUserBtn.classList.add('styled-button');
-      createUserBtn.textContent = 'Create User';
-      actionCell.appendChild(createUserBtn);
+      // const addViolationButton = document.createElement('button');
+      // addViolationButton.classList.add('styled-button');
+      // addViolationButton.textContent = 'Delete';
+      // actionCell.appendChild(addViolationButton);
 
       row.appendChild(actionCell);
   
@@ -323,7 +323,7 @@ const displayReports = async () => {
     // Create table header
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
-    const headers = ['Report Type', 'By', 'Detail', 'Status', 'Violation Rule', 'Action'];
+    const headers = ['Report Type', 'By', 'Detail', 'Status', 'Violation Rule', 'Evidence', 'Action'];
     
     headers.forEach(headerText => {
       const th = document.createElement('th');
@@ -362,6 +362,13 @@ const displayReports = async () => {
       const violationRule = document.createElement('td');
       violationRule.textContent = report.violationRuleList.join(', ');
       row.appendChild(violationRule);
+
+      const reportObjLink = document.createElement('td');
+      const objLink = document.createElement('a');
+      reportObjLink.textContent = 'Evidence';
+      objLink.href = `/blogDetail.html?postId=${report.reportedObjectLink}`;
+      reportObjLink.appendChild(objLink);
+      row.appendChild(reportObjLink);
 
       const actionCell = document.createElement('td');
 
@@ -479,7 +486,7 @@ const displayTeacherCategory = async () => {
 
       const updateCateBtn = document.createElement('button');
       updateCateBtn.classList.add('styled-button');
-      updateCateBtn.textContent = 'Update';
+      updateCateBtn.textContent = 'Delete';
       actionCell.appendChild(updateCateBtn);
 
       const createBtn = document.createElement('button');
