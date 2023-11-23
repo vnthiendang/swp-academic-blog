@@ -20,9 +20,9 @@ form.addEventListener("submit", async (event) => {
     if (roleId === 'Admin') {
       window.location.href = "../managerAdmin.html";
     } else if (roleId === 'Teacher') {
-      window.location.href = "../home.html";
+      window.location.href = "../home2.html";
     } else if (roleId === 'Student') {
-      window.location.href = "../home.html";
+      window.location.href = "../home2.html";
     }
   } catch (error) {
     alert('Invalid email or password!');
