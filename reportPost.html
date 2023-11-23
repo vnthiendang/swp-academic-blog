@@ -32,9 +32,70 @@
             <a href="bestartice.html" class="p-2">
                 Best Article
             </a>
-        </div>
-        <div class="p-1">
 
+            <a href="teacherPage.html" class="p-2" id="teacherPage">
+                Post Request
+            </a>
+
+            <a href="/giveAward.html" class="p-2" id="teacherPage2">
+                Give Award
+            </a>
+
+            <!-- Category  -->
+            <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center" id="category">
+                    <span class="mr-1" style="font-weight: 700;">Category</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    
+                </ul>
+            </div>
+            
+            <!--ranking-->
+            <!-- <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center" id="rank">
+                    <span class="mr-1" style="font-weight: 500;">Rank</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+                    
+                </ul>
+            </div> -->
+
+        </div>
+
+
+        <!-- Search -->
+        <div class="p-1">
+            <form class="flex items-center">
+                <label for="simple-search" class="sr-only">Search</label>
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                        </svg>
+                    </div>
+                    <input type="text" id="simple-search"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search blog, tag..." required>
+                </div>
+                <button type="submit"
+                    class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </form>
         </div>
 
         <script>
@@ -84,29 +145,12 @@
                         text-transform: uppercase;
                         letter-spacing: 1.2px;
                         border-bottom: 1px solid #d2d2d2;
-                        width: 77%;
+                        width: 47%;
                     }
                 </style>
-            
-            <div class="column" style="background-color: white;">
-
-                <!-- Column 1 -->
-                <div class="column" onclick="toggleForm('formContainer')">
-                    <h2>
-
-                    </h2>
-                </div>
-                <div class="column">
-                    <div id="formContainer" class="hidden">
-                        <form action="#">
-                            <label for="fname">Input Text :</label>
-                            <input type="text" id="fname" name="fname" class="textbox-input">
-                        </form>
-                    </div>
-                </div>
-
 
                 <style>
+
                     h2 {
                         padding: 10px 0;
                         font-size: 15px;
@@ -120,23 +164,75 @@
                     .textbox-input {
                         background-color: antiquewhite;
                         border-radius: 5px;
-                        border: 1px solid black;
+                        border: 1px
+                         solid black;
                     }
+
+                    #formContainer form {
+                        padding: 10px 0;
+                        font-size: 15px;
+                        font-weight: 400;
+                        color: black;
+                        text-transform: uppercase;
+                        letter-spacing: 1.2px;
+                        width: 100%;
+                    }
+
+                    .column-container-report {
+                        display: flex;
+                        background-color: white;
+                    }
+
+                    .column-report1 {
+                        flex: 1;
+                        background-color: white;
+                    }
+
+                    .column-report2 {
+                        flex: 1;
+                    }
+
+                    .hidden-textbox {
+                        display: none;
+                    }
+
                 </style>
+            <div class="column-container-report" style="background-color: white;">
+                <div class="column-report1" style="background-color: white;" onclick="toggleForm('formContainer')">
+
+                    <!-- Column 1 -->
+                    <div class="column">
+                        <h2>
+    
+                        </h2>
+                    </div>
+    
+                </div>
+    
+                <div class="column-report2">
+                    <div id="formContainer" class="hidden-textbox">
+                        <form action="#">
+                            <label for="fname">
+                                
+                            </label>
+                            <input type="text" id="fname" name="fname" class="textbox-input">
+                        </form>
+                    </div>
+                </div>
+                
                 <script>
                     function toggleForm(containerId) {
                         var formContainer = document.getElementById(containerId);
-                        formContainer.classList.toggle("hidden");
+                        formContainer.classList.toggle("hidden-textbox");
                     }
                 </script>
-                
             </div>
-
+        
             <!-- Button -->
-            <div class="column" style="background-color: white;">
+            <div class="column" style="background-color: white; width: 48%;">
                 <!-- Button Report -->
                 <div class="inner-column" title="Report Post">
-                    <button id="reportBtn" style="background-color: red; color: white; margin-left: 10px; width: 100px;" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">Report</button>
+                    <button id="reportBtn" style="background-color: red; color: white; width: 100px; font-weight: 700; font-size: larger;" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">Report</button>
                 </div>
             </div>
             
@@ -175,6 +271,7 @@
     </footer>
 
     <script type="module" src='./js/reportPost.js'></script>
+    <script type="module" src='./js/home.js'></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 

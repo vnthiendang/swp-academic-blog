@@ -61,12 +61,17 @@ function displayPost() {
       postContentElement.contentEditable = false;
       postContentElement.innerHTML = post.postDetail;
 
+      if(post.mediaList.length > 0){
+        const imageElement = document.getElementById('postMedia');
+        imageElement.src = `data:image/jpeg;base64, ${post.mediaList[0]}`;
+      }
+
       // post.mediaList.forEach(media => {
       //   const mediaItem = document.getElementById('postMedia');
       //   mediaItem.src = `data:image/jpeg;base64, ${media}`;
       //   mediaItem.style.width = '240px'; 
       //   mediaItem.style.height = 'auto';
-      //   //mediaList.appendChild(mediaItem);
+      //   mediaList.appendChild(mediaItem);
       // });
       
       const readingTimeElement = document.getElementById('readingTime');

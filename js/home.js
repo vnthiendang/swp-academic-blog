@@ -71,6 +71,7 @@ function displayPosts(posts) {
 
       const createdByUser = document.createElement("div");
       createdByUser.className = "ml-4";
+      createdByUser.title = 'Name Users';
       createdByUser.textContent = post.createdByUser;
       const grayTextSpan = document.createElement("span");
       grayTextSpan.className = "text-gray-400";
@@ -82,6 +83,7 @@ function displayPosts(posts) {
 
       const postTagSpan = document.createElement("span");
       postTagSpan.className = "tag-name";
+      postTagSpan.title = 'Category';
       postTagSpan.textContent = post.belongedToCategory;
       categoryLink.appendChild(postTagSpan);
 
@@ -94,6 +96,8 @@ function displayPosts(posts) {
 
       const dateTimeElement2 = document.createElement("div");
       dateTimeElement2.className = "date-time";
+      dateTimeElement2.title = "Date Time"
+
       const postCreatedTime = new Date(post.createdTime);
       const formattedTime = postCreatedTime.toLocaleString("en-US", options);
       dateTimeElement2.textContent = formattedTime;
@@ -110,7 +114,8 @@ function displayPosts(posts) {
         flexElement.appendChild(awardIcon);
   
         const awardList = document.createElement("div");
-        awardList.className = "award-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
+        awardList.className = "award-list rounded-xl bg-red text-white px-2 mr-4";
+        awardList.title = 'Award Type';
         const items = document.createElement("span");
         items.textContent = post.awardList.slice(0, 1)[0];
         awardList.appendChild(items);
@@ -122,20 +127,23 @@ function displayPosts(posts) {
         elm5.className = "p-0.5 bg-gray-900 rounded-full mx-4";
         flexElement.appendChild(elm5);
 
-        const voteIcon = document.createElement("i");
-        voteIcon.className =
-        "fa-regular fa-heart fa-beat-fade fa-xl";
-        flexElement.appendChild(voteIcon); 
-
         const voteList = document.createElement("div");
-        voteList.className = "vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
+        voteList.className = "vote-list rounded-xl bg-gray-300 text-gray-900 px-2";
+        voteList.title = 'Total Likes';
         voteList.textContent = post.vote1Count;
-      // post.voteList.forEach((vote) => {
-      //   const item = document.createElement("span");
-      //   item.textContent = vote + "  ";
-      //   voteList.appendChild(item);
-      // });
+        voteList.style.background = "transparent";
+        // post.voteList.forEach((vote) => {
+        //   const item = document.createElement("span");
+        //   item.textContent = vote + "  ";
+        //   voteList.appendChild(item);
+        // });
         flexElement.appendChild(voteList);
+
+        const voteIcon = document.createElement("i");
+        voteIcon.className = "fa-regular fa-thumbs-up fa-xl";
+        voteIcon.title = 'Total Likes';
+        voteIcon.style.marginBottom = '10px'
+        flexElement.appendChild(voteIcon); 
       }
 
       postElement.appendChild(flexElement);
@@ -153,16 +161,18 @@ function displayPosts(posts) {
       infoElement.className = "px-6 py-7 post-detail";
       //infoElement.innerHTML = post.postDetail;
       infoElement.textContent = extractTextFromHTML(post.postDetail);
-      infoElement.style.maxWidth = "1200px"; 
-      infoElement.style.overflow = "hidden";
-      infoElement.style.textOverflow = "ellipsis";
-      infoElement.style.whiteSpace = "nowrap";
+      // infoElement.style.maxWidth = "100em"; 
+      // infoElement.style.overflow = "hidden";
+      // infoElement.style.textOverflow = "ellipsis";
+      // infoElement.style.whiteSpace = "nowrap";
+      infoElement.style.marginLeft = "10px";
+
       postLink.appendChild(infoElement);
 
       postElement.appendChild(postLink);
 
       const flexItemsElement = document.createElement("div");
-      flexItemsElement.className = "flex items-center px-8 mb-1";
+      flexItemsElement.className = "m-5";
 
       if(post.mediaList.length > 0){
         const imgContainer = document.createElement('div');
@@ -170,12 +180,11 @@ function displayPosts(posts) {
 
         const mediaList = document.createElement('div');
         mediaList.className = 'media-list';
-        
         post.mediaList.forEach(media => {
           const mediaItem = document.createElement('img');
           mediaItem.src = `data:image/jpeg;base64, ${media}`;
-          mediaItem.style.width = '50%'; 
-          mediaItem.style.height = 'auto';
+          // mediaItem.style.width = '240px'; 
+          // mediaItem.style.height = 'auto';
           mediaList.appendChild(mediaItem);
         });
 
@@ -184,35 +193,59 @@ function displayPosts(posts) {
       }
 
       if (post.tagList.length > 0) {
-        const iconTagElement = document.createElement('div');
-        iconTagElement.className = 'icon-tag';
-        const iconTagImg = document.createElement('img');
-        iconTagImg.src = 'img/tag.png';
-        iconTagImg.alt = 'icon-tag';
-        iconTagElement.appendChild(iconTagImg);
-        flexItemsElement.appendChild(iconTagElement);
+        // const iconTagElement = document.createElement('div');
+        // iconTagElement.className = 'icon-tag';
+        // const iconTagImg = document.createElement('img');
+        // iconTagImg.src = 'img/tag.png';
+        // iconTagImg.alt = 'icon-tag';
+        // iconTagElement.appendChild(iconTagImg);
+        // flexItemsElement.appendChild(iconTagElement);
       
+        // post.tagList.forEach(tag => {
+        //   const tagLink = document.createElement('a');
+        //   tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+        //   const tagDiv = document.createElement('div');
+        //   tagDiv.className = 'icon-tag';
+        //   tagDiv.textContent = tag;
+        //   tagLink.appendChild(tagDiv);
+        //   flexItemsElement.appendChild(tagLink);
+        // });
+
         post.tagList.forEach(tag => {
           const tagLink = document.createElement('a');
           tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+      
+          // Create a flex container for the icon and tag
+          const flexContainer = document.createElement('div');
+          flexContainer.style.display = 'flex';
+          flexContainer.style.alignItems = 'center'; // Optional: Align items vertically in the center
+      
+          // Create the icon element
+          const iconTag = document.createElement('i');
+          iconTag.className = 'fa-solid fa-tags fa-lg';
+          iconTag.style.color = '#000000'; // Set the color as needed
+          iconTag.style.marginLeft = '1%';
+      
+          // Create the tag element
           const tagDiv = document.createElement('div');
-          tagDiv.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+          tagDiv.className = 'icon-tag';
+          tagDiv.title = 'Tag Name'
           tagDiv.textContent = tag;
-          tagLink.appendChild(tagDiv);
+      
+          // Append the icon and tag to the flex container
+          flexContainer.appendChild(iconTag);
+          flexContainer.appendChild(tagDiv);
+      
+          // Append the flex container to the tagLink
+          tagLink.appendChild(flexContainer);
+      
+          // Append the tagLink to the flexItemsElement
           flexItemsElement.appendChild(tagLink);
-        });
+      });
+      
       }
-
       postElement.appendChild(flexItemsElement);
-
       postContainer.appendChild(postElement);
-
-      // const hr = document.createElement("hr");
-      // hr.style.border = "none"; // Remove the default border
-      // hr.style.backgroundColor = "red"; // Set the background color to create a solid line
-      // hr.style.height = "10px";
-      // hr.style.marginBottom="30px" // Set the thickness of the line to 2 pixels/ Increase the line height to 4 pixels
-      // postContainer.appendChild(hr);
     }
   }
 }
