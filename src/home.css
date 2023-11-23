@@ -351,12 +351,14 @@
     width: 30%;
     height: auto;
     margin-right: auto;
+}
 /* ======================================== notification ========================================= */
 
 .icon {
 	cursor: pointer;
-	margin-right: 50px;
+	margin-right: 10px; 
 	line-height: 60px;
+    margin-bottom: 20px;
 }
 .icon span {
 	background: #f00;
