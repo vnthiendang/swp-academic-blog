@@ -1,8 +1,11 @@
 package com.swp.services;
 
+import com.swp.cms.reqDto.UserRequest;
 import com.swp.entities.Post;
+import com.swp.entities.Role;
 import com.swp.entities.User;
 import com.swp.exception.EntityNotFoundException;
+import com.swp.repositories.RoleRepository;
 import com.swp.repositories.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -25,6 +29,8 @@ public class UserService {
     private Integer userId;
     @Autowired
     private final UserRepository userRepository;
+    @Autowired
+    private final RoleRepository roleRepository;
     @PostConstruct
     public void initialize() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -96,6 +102,32 @@ public class UserService {
         }
 
         return sortedUsers;
+    }
+
+    public User createUser(UserRequest userRequest) {
+        String inputedEmail = userRequest.getEmail();
+        if (inputedEmail != null) {
+            if(userRepository.findByEmail(inputedEmail) != null) {
+                throw new IllegalArgumentException("Email is already in use");
+            } else {
+                User user = new User();
+                user.setDisplay_name(userRequest.getDisplay_name());
+                user.setAdditional_info(userRequest.getAdditional_info());
+                user.setPassword(userRequest.getPassword());
+                user.setEmail(userRequest.getEmail());
+                user.setCreated_date(LocalDateTime.now());
+
+                Role role = roleRepository.findByRoleInfo(userRequest.getRole_id())
+                        .orElseThrow(() -> new IllegalArgumentException("Invalid Role: " + userRequest.getRole_id()));
+                user.setRole_id(role);
+
+                user.setContributionPoint(0);
+
+                return userRepository.save(user);
+            }
+        } else {
+            throw new IllegalArgumentException("Email cannot be null");
+        }
     }
 //    public Boolean existsByUsername(String username) {
 //        return userRepository.existsByUsername(username);
