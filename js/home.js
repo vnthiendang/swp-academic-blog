@@ -71,6 +71,7 @@ function displayPosts(posts) {
 
       const createdByUser = document.createElement("div");
       createdByUser.className = "ml-4";
+      createdByUser.title = 'Name Users';
       createdByUser.textContent = post.createdByUser;
       const grayTextSpan = document.createElement("span");
       grayTextSpan.className = "text-gray-400";
@@ -82,6 +83,7 @@ function displayPosts(posts) {
 
       const postTagSpan = document.createElement("span");
       postTagSpan.className = "tag-name";
+      postTagSpan.title = 'Category';
       postTagSpan.textContent = post.belongedToCategory;
       categoryLink.appendChild(postTagSpan);
 
@@ -94,6 +96,8 @@ function displayPosts(posts) {
 
       const dateTimeElement2 = document.createElement("div");
       dateTimeElement2.className = "date-time";
+      dateTimeElement2.title = "Date Time"
+
       const postCreatedTime = new Date(post.createdTime);
       const formattedTime = postCreatedTime.toLocaleString("en-US", options);
       dateTimeElement2.textContent = formattedTime;
@@ -111,6 +115,7 @@ function displayPosts(posts) {
   
         const awardList = document.createElement("div");
         awardList.className = "award-list rounded-xl bg-red text-white px-2 mr-4";
+        awardList.title = 'Award Type';
         const items = document.createElement("span");
         items.textContent = post.awardList.slice(0, 1)[0];
         awardList.appendChild(items);
@@ -124,6 +129,7 @@ function displayPosts(posts) {
 
         const voteList = document.createElement("div");
         voteList.className = "vote-list rounded-xl bg-gray-300 text-gray-900 px-2";
+        voteList.title = 'Total Likes';
         voteList.textContent = post.vote1Count;
         voteList.style.background = "transparent";
         // post.voteList.forEach((vote) => {
@@ -134,7 +140,9 @@ function displayPosts(posts) {
         flexElement.appendChild(voteList);
 
         const voteIcon = document.createElement("i");
-        voteIcon.className = "fa-regular fa-heart fa-xl";
+        voteIcon.className = "fa-regular fa-thumbs-up fa-xl";
+        voteIcon.title = 'Total Likes';
+        voteIcon.style.marginBottom = '10px'
         flexElement.appendChild(voteIcon); 
       }
 
@@ -221,6 +229,7 @@ function displayPosts(posts) {
           // Create the tag element
           const tagDiv = document.createElement('div');
           tagDiv.className = 'icon-tag';
+          tagDiv.title = 'Tag Name'
           tagDiv.textContent = tag;
       
           // Append the icon and tag to the flex container
