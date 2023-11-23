@@ -11,11 +11,7 @@
 }
 
 .rounded-xl {
-    font-size: large;
     font-weight: 700;
-    text-align: center;
-    border-radius: 10px;
-    transition: background-color 1s, color 1s; /* Add transitions for color changes */
 }
 
 .rounded-xl:hover {

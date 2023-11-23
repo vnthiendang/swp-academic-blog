@@ -59,6 +59,8 @@ function displayPosts(posts) {
 
       const flexElement = document.createElement("div");
       flexElement.className = "flex w-full px-8 py-4 items-center";
+      flexElement.style.fontSize = '15px';
+      flexElement.style.fontWeight = '500';
 
       const avatarImage = document.createElement("div");
       avatarImage.className = "flex";

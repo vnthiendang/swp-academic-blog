@@ -58,10 +58,10 @@
     background-color: #4CAF50;
 }
 
-.p-2 {
+#taskbar .p-2 {
     border-right: 1px solid white;
     padding-right: 20px;
-    padding-left: 20px;
+    padding-left: 20px; 
     font-weight: 700;
 }
 

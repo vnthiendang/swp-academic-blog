@@ -56,8 +56,8 @@
         </div>
 
         <!-- Search -->
-        <div class="p-1">
-            <form class="flex items-center">
+        <div class="p-1 flex">
+            <form class="flex items-center" id="search-form">
                 <label for="simple-search" class="sr-only">Search</label>
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -69,7 +69,7 @@
                     </div>
                     <input type="text" id="simple-search"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search blog, tag..." required>
+                        placeholder="Search blog, tag, ..." required>
                 </div>
                 <button type="submit"
                     class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -81,6 +81,108 @@
                     <span class="sr-only">Search</span>
                 </button>
             </form>
+            
+            <div class="flex items-center justify-center">
+                <div class="mx-5">
+                    <a href="profile.html" class="mx-5">
+                        <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
+                            alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                    </a>
+                </div>
+
+                <!--notification-->
+                <div class="icon" onclick="toggleNotifi()">
+                    <img src="img/bell.png" alt=""> <span>69</span>
+                </div>
+                <div class="notifi-box" id="box">
+                    <h2>Notifications <span>17</span></h2>
+                    <div class="notifi-item">
+                        <img src="img/avatar1.png" alt="img">
+                        <div class="text">
+                            <h4>Elias Abdurrahman</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar2.png" alt="img">
+                        <div class="text">
+                            <h4>John Doe</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar3.png" alt="img">
+                        <div class="text">
+                            <h4>Emad Ali</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar4.png" alt="img">
+                        <div class="text">
+                            <h4>Ekram Abu </h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar5.png" alt="img">
+                        <div class="text">
+                            <h4>Jane Doe</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <!--notification js-->
+                    <script>
+                        var box = document.getElementById('box');
+                        var down = false;
+
+
+                        function toggleNotifi() {
+                            if (down) {
+                                box.style.height = '0px';
+                                box.style.opacity = 0;
+                                down = false;
+                            } else {
+                                box.style.height = '510px';
+                                box.style.opacity = 1;
+                                down = true;
+                            }
+                        }
+                    </script>
+                </div>
+
+                <div class="pr-2">
+
+                    <div class="cursor-pointer">
+                        <a href="/login.html">Log Out</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <script>
+                var prevScrollPos = window.pageYOffset;
+                var header = document.getElementById("header");
+
+                window.onscroll = function () {
+                    var currentScrollPos = window.pageYOffset;
+
+                    if (prevScrollPos > currentScrollPos) {
+                        // Scrolling up
+                        header.style.top = "0";
+                    } else {
+                        // Scrolling down
+                        header.style.top = "-100px"; // Adjust the value based on your header height
+                    }
+
+                    prevScrollPos = currentScrollPos;
+                }
+            </script>
         </div>
 
         <script>
@@ -112,7 +214,7 @@
             </div>
 
             <!-- ByUser DateTime NumberRead -->
-            <div class="column" style="background-color: white;">
+            <div class="column" style="background-color: white; font-size: 16px; font-weight: 500;">
 
                 <!-- Data For NumberRead NumberVote -->
                 <!-- <div id="postTag"></div> -->
@@ -263,12 +365,84 @@
         </div>
 
         <!-- IMG Bên Ngoài Mang Vào -->
-        <div class="wapper-title-img">
+        <!-- <div class="wapper-title-img">
             <div class="column-img">
                 <div class="img">
                     <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" id="postMedia" src="#" alt="">
                 </div>
             </div>
+        </div> -->
+
+        <div class="wapper-title-img">
+            <div class="column-img">
+                <div class="img">
+                    <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" id="postMedia" src="https://via.placeholder.com/150" alt="" onclick="toggleFullScreen()">
+                </div>
+            </div>
+
+            <script>
+                function toggleFullScreen() {
+                    const imgElement = document.getElementById('postMedia');
+                    
+                    // Create a new image element to avoid moving the original one
+                    const fullScreenImage = new Image();
+                    fullScreenImage.src = imgElement.src;
+                    fullScreenImage.className = 'object-cover fullscreen';
+                    fullScreenImage.onclick = closeFullScreen;
+        
+                    // Append the new image to the body
+                    document.body.appendChild(fullScreenImage);
+        
+                    // Listen for scroll events
+                    window.addEventListener('scroll', closeFullScreenOnScroll);
+                }
+        
+                function closeFullScreen() {
+                    const fullScreenImage = document.querySelector('.fullscreen');
+                    
+                    // Remove the full-screen image from the body
+                    fullScreenImage.parentNode.removeChild(fullScreenImage);
+        
+                    // Remove the scroll event listener
+                    window.removeEventListener('scroll', closeFullScreenOnScroll);
+                }
+        
+                function closeFullScreenOnScroll() {
+                    closeFullScreen();
+                }
+            </script>
+    
+            <style>
+                .wapper-title-img {
+                    display: flex;
+                    justify-content: center;
+                }
+    
+                .column-img {
+                    margin: 10px;
+                }
+    
+                .img {
+                    overflow: hidden;
+                }
+    
+                .object-cover {
+                    transition: width 0.3s ease, height 0.3s ease;
+                    cursor: pointer;
+                }
+    
+                .fullscreen {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                    height: 100vh;
+                    object-fit: contain;
+                    z-index: 99999;
+                    background-color: whitesmoke;
+                    transition: width 0.3s ease, height 0.3s ease; /* Adjust duration as needed */
+                }
+            </style>
         </div>
 
         <!-- Post Content -->

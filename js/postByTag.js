@@ -44,25 +44,25 @@ function displayPosts(response) {
       infoElement.innerHTML = post.postDetail;
       anchorElement.appendChild(infoElement);
 
-      if (post.tagList.length > 0) {
-        const iconTagElement = document.createElement('div');
-        iconTagElement.className = 'icon-tag';
-        const iconTagImg = document.createElement('img');
-        iconTagImg.src = 'img/tag.png';
-        iconTagImg.alt = 'icon-tag';
-        iconTagElement.appendChild(iconTagImg);
-        postElement.appendChild(iconTagElement);
+      // if (post.tagList.length > 0) {
+      //   const iconTagElement = document.createElement('div');
+      //   iconTagElement.className = 'icon-tag';
+      //   const iconTagImg = document.createElement('img');
+      //   iconTagImg.src = 'img/tag.png';
+      //   iconTagImg.alt = 'icon-tag';
+      //   iconTagElement.appendChild(iconTagImg);
+      //   postElement.appendChild(iconTagElement);
       
-        post.tagList.forEach(tag => {
-          const tagLink = document.createElement('a');
-          tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
-          const tagDiv = document.createElement('div');
-          //tagDiv.className = 'rounded-xl bg-gray-200 text-gray-900 px-2 mr-4';
-          tagDiv.textContent = tag;
-          tagLink.appendChild(tagDiv);
-          postElement.appendChild(tagLink);
-        });
-      }
+      //   post.tagList.forEach(tag => {
+      //     const tagLink = document.createElement('a');
+      //     tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+      //     const tagDiv = document.createElement('div');
+      //     //tagDiv.className = 'rounded-xl bg-gray-200 text-gray-900 px-2 mr-4';
+      //     tagDiv.textContent = tag;
+      //     tagLink.appendChild(tagDiv);
+      //     postElement.appendChild(tagLink);
+      //   });
+      // }
   
       // Append all elements to the post element
       postElement.appendChild(anchorElement);

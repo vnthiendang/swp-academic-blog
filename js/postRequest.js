@@ -28,11 +28,14 @@ function displayPosts(posts) {
   
         const flexElement = document.createElement('div');
         flexElement.className = 'flex w-full px-8 py-4 items-center';
+        flexElement.style.fontSize = '15px';
+        flexElement.style.fontWeight = '500';
     
         const avatarImage = document.createElement('div');
         avatarImage.className = 'flex';
         const avatarImg = document.createElement('img');
         avatarImg.src = 'img/Img For User/User1.jpg';
+        avatarImage.title = 'Avatar User';
         avatarImg.alt = 'avatar';
         avatarImg.className = 'rounded-full w-8';
         avatarImage.appendChild(avatarImg);
@@ -40,6 +43,7 @@ function displayPosts(posts) {
     
         const createdByUser = document.createElement('div');
         createdByUser.className = 'ml-4';
+        createdByUser.title = 'Name Users';
         createdByUser.textContent = post.createdByUser;
         const grayTextSpan = document.createElement('span');
         grayTextSpan.className = 'text-gray-400';
@@ -48,14 +52,16 @@ function displayPosts(posts) {
   
         const postTagLink = document.createElement('a');
         postTagLink.href = `/postByCategory.html?categoryName=${encodeURIComponent(post.belongedToCategory)}`;
-    
+
         const postTagSpan1 = document.createElement('span');
         postTagSpan1.className = 'tag-name';
+        postTagSpan1.title = 'Tag Category';
         postTagSpan1.textContent = post.belongedToCategory;
         postTagLink.appendChild(postTagSpan1);
   
         const postTagSpan2 = document.createElement('span');
         postTagSpan2.className = 'tag-name';
+        postTagSpan2.title = 'Tag Category';
         postTagSpan2.textContent = '';
         postTagLink.appendChild(postTagSpan2);
     
@@ -64,10 +70,12 @@ function displayPosts(posts) {
     
         const dateTimeElement1 = document.createElement('div');
         dateTimeElement1.className = 'p-0.5 bg-gray-900 rounded-full mx-4';
+        dateTimeElement1.title = 'Date Time';
         flexElement.appendChild(dateTimeElement1);
   
       const dateTimeElement2 = document.createElement('div');
       dateTimeElement2.className = 'date-time';
+      dateTimeElement2.title = 'Date Time';
       const postCreatedTime = new Date(post.createdTime);
       const formattedTime = postCreatedTime.toLocaleString('en-US', options);
       dateTimeElement2.textContent = formattedTime;
@@ -156,6 +164,7 @@ function displayPosts(posts) {
           // Create the tag element
           const tagDiv = document.createElement('div');
           tagDiv.className = 'icon-tag';
+          tagDiv.title = 'Tag Name';
           tagDiv.textContent = tag;
       
           // Append the icon and tag to the flex container
