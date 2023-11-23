@@ -14,11 +14,6 @@ export const getAllApprovedPosts = async () => {
     return response;
   } catch (error) {
     console.error('Error fetching posts:', error);
-    if (error.response && error.response.status === 401) {
-      // Token is invalid or expired
-      alert('Your session logged out! You must login again!');
-    }
-    throw new Error("An error occurred. Please try again later.");
   }
 };
 
@@ -89,20 +84,19 @@ export const getPostById = async (id) => {
   }
 };
 
-export const getPostByUserId = async (userId, postApprovalStatuses) => {
+export const getPostByUserId = async (userId) => {
   try {
-    const response = await request.get(`post/GetAll/filter`, {
+    const response = await request.get(`post/GetAllApproved/filter`, {
       headers: {
         Authorization: `Bearer ${token}`
       },
       params: {
-        userId,
-        postApprovalStatuses
+        userId
       }
     });
     return response;
   } catch (error) {
-    console.error('Error retrieving post:', error);
+    console.error('Error retrieving post by userId:', error);
   }
 };
 //POST

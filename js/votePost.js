@@ -48,168 +48,203 @@ function displayPosts(posts) {
   } else {
     for (var i = 0; i < posts.length; i++) {
       var post = posts[i];
-
-      const postElement = document.createElement("div");
-      postElement.className = 'col-span-5';
-
-      postElement.className = "post-container";
-      postElement.style.width = "1350px"
-
-      const flexElement = document.createElement("div");
-      flexElement.className = "flex w-full px-8 py-4 items-center";
-
-      const avatarImage = document.createElement("div");
-      avatarImage.className = "flex";
-      const avatarImg = document.createElement("img");
-      avatarImg.src = "img/Img For User/User1.jpg";
-      avatarImg.alt = "avatar";
-      avatarImg.className = "rounded-full w-8";
-      avatarImage.appendChild(avatarImg);
-      flexElement.appendChild(avatarImage);
-
-      const createdByUser = document.createElement("div");
-      createdByUser.className = "ml-4";
-      createdByUser.textContent = post.createdByUser;
-      const grayTextSpan = document.createElement("span");
-      grayTextSpan.className = "text-gray-400";
-      grayTextSpan.textContent = " in ";
-      createdByUser.appendChild(grayTextSpan);
-
-      const postTagLink = document.createElement("a");
-      postTagLink.href = `/postByCategory.html?categoryName=${encodeURIComponent(post.belongedToCategory)}`;
-
-      const postTagSpan = document.createElement("span");
-      postTagSpan.className = "tag-name";
-      postTagSpan.textContent = post.belongedToCategory;
-      postTagLink.appendChild(postTagSpan);
-
-      createdByUser.appendChild(postTagLink);
-      flexElement.appendChild(createdByUser);
-
-      const dateTimeElement1 = document.createElement("div");
-      dateTimeElement1.className = "p-0.5 bg-gray-900 rounded-full mx-4";
-      flexElement.appendChild(dateTimeElement1);
-
-      const dateTimeElement2 = document.createElement("div");
-      dateTimeElement2.className = "date-time";
+    
+      const columnElement = document.createElement("div");
+      columnElement.className = "column";
+    
+      const postTitleElement = document.createElement("div");
+      postTitleElement.className = "mr-7";
+      postTitleElement.id = "postTitle";
+      postTitleElement.textContent = post.title;
+      columnElement.appendChild(postTitleElement);
+    
+      postContainer.appendChild(columnElement);
+    
+      const infoColumnElement = document.createElement("div");
+      infoColumnElement.className = "column";
+      infoColumnElement.style.backgroundColor = "white";
+    
+      const postTagElement = document.createElement("div");
+      postTagElement.id = "postTag";
+      infoColumnElement.appendChild(postTagElement);
+    
+      const innerColumn1 = document.createElement("div");
+      innerColumn1.className = "inner-column";
+    
+      const containerUserElement = document.createElement("div");
+      containerUserElement.className = "container-user";
+      containerUserElement.title = "Name User";
+    
+      const byUserIcon = document.createElement("div");
+      byUserIcon.className = "by-user";
+      const userIcon = document.createElement("i");
+      userIcon.className = "fa-solid fa-user fa-sm";
+      userIcon.style.color = "#000000";
+      byUserIcon.appendChild(userIcon);
+      containerUserElement.appendChild(byUserIcon);
+    
+      const byUserElement = document.createElement("div");
+      byUserElement.className = "by-user";
+      byUserElement.id = "postAuthor";
+      byUserElement.textContent = post.createdByUser;
+      containerUserElement.appendChild(byUserElement);
+    
+      innerColumn1.appendChild(containerUserElement);
+      infoColumnElement.appendChild(innerColumn1);
+    
+      const innerColumn2 = document.createElement("div");
+      innerColumn2.className = "inner-column";
+    
+      const containerDateTimeElement = document.createElement("div");
+      containerDateTimeElement.className = "container-datetime";
+      containerDateTimeElement.title = "Date Time";
+    
+      const dateTimeIcon = document.createElement("div");
+      dateTimeIcon.className = "date-time";
+      const calendarIcon = document.createElement("i");
+      calendarIcon.className = "fa-regular fa-calendar-days";
+      calendarIcon.style.color = "#000000";
+      dateTimeIcon.appendChild(calendarIcon);
+      containerDateTimeElement.appendChild(dateTimeIcon);
+    
+      const dateTimeElement = document.createElement("div");
+      dateTimeElement.className = "date-time";
+      dateTimeElement.id = "postDate";
       const postCreatedTime = new Date(post.createdTime);
       const formattedTime = postCreatedTime.toLocaleString("en-US", options);
-      dateTimeElement2.textContent = formattedTime;
-      flexElement.appendChild(dateTimeElement2);
-
-      if(post.awardList != null && post.awardList.length > 0){
-        const elm4 = document.createElement("div");
-        elm4.className = "p-0.5 bg-gray-900 rounded-full mx-4";
-        flexElement.appendChild(elm4);
-
+      dateTimeElement.textContent = formattedTime;
+      containerDateTimeElement.appendChild(dateTimeElement);
+    
+      innerColumn2.appendChild(containerDateTimeElement);
+      infoColumnElement.appendChild(innerColumn2);
+    
+      const innerColumn3 = document.createElement("div");
+      innerColumn3.className = "inner-column";
+    
+      const containerReadElement = document.createElement("div");
+      containerReadElement.className = "container-read";
+      containerReadElement.title = "Reading Time";
+    
+      const numberReadIcon = document.createElement("div");
+      numberReadIcon.className = "number-read";
+      const clockIcon = document.createElement("i");
+      clockIcon.className = "fa-regular fa-clock";
+      clockIcon.style.color = "#000000";
+      numberReadIcon.appendChild(clockIcon);
+      containerReadElement.appendChild(numberReadIcon);
+    
+      const numberReadElement = document.createElement("div");
+      numberReadElement.className = "number-read";
+      numberReadElement.id = "readingTime";
+      numberReadElement.textContent = post.readingTime;
+      containerReadElement.appendChild(numberReadElement);
+    
+      innerColumn3.appendChild(containerReadElement);
+      infoColumnElement.appendChild(innerColumn3);
+      
+      if (post.awardList != null && post.awardList.length > 0) {
+        const innerColumn5 = document.createElement("div");
+        innerColumn5.className = "inner-column";
+        const awardElement = document.createElement("div");
+        awardElement.className = "container-award";
+        awardElement.title = "Award";
+      
         const awardIcon = document.createElement("i");
         awardIcon.className = "fas fa-crown";
-        awardIcon.style = "color: #c45d08;";
-        flexElement.appendChild(awardIcon);
-  
-        const awardList = document.createElement("div");
-        awardList.className = "award-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-        const items = document.createElement("span");
-        items.textContent = post.awardList.slice(0, 1)[0];
-        awardList.appendChild(items);
-        // post.awardList.forEach((award) => {
-        //   const items = document.createElement("span");
-        //   items.textContent = award;
-        //   awardList.appendChild(items);
-        // });
-        flexElement.appendChild(awardList);
+        awardIcon.style.color = "#c45d08";
+        awardElement.appendChild(awardIcon);
+      
+        post.awardList.forEach(award => {
+          const awardList = document.createElement("div");
+          awardList.className = "award-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
+          const items = document.createElement("span");
+          items.textContent = award;
+          awardList.appendChild(items);
+          awardElement.appendChild(awardList);
+        })
+        
+        innerColumn5.appendChild(awardElement);
+        infoColumnElement.appendChild(innerColumn5);
       }
-
-      const dateTimeElement3 = document.createElement("div");
-      dateTimeElement3.className = "p-0.5 bg-gray-900 rounded-full mx-4";
-      flexElement.appendChild(dateTimeElement3);
-
-      if(post.voteList != null && post.voteList.length > 0){
-        const voteIcon = document.createElement("i");
-        voteIcon.className =
-        "fa-regular fa-heart fa-beat-fade fa-xl";
-        flexElement.appendChild(voteIcon); 
-
-        const voteList = document.createElement("div");
-        voteList.className = "vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
-        voteList.textContent = post.vote1Count;
-      // post.voteList.forEach((vote) => {
-      //   const item = document.createElement("span");
-      //   item.textContent = vote + "  ";
-      //   voteList.appendChild(item);
-      // });
-        flexElement.appendChild(voteList);
-      }
-
-      postElement.appendChild(flexElement);
-
-      const postLink = document.createElement("a");
-      postLink.href = `blogDetail.html?belongedToPostID=${post.postsId}`;
-
-      const titleElement = document.createElement("div");
-      titleElement.className = "font-semibold text-2xl px-8";
-      titleElement.id = "title";
-      titleElement.textContent = post.title;
-      postLink.appendChild(titleElement);
-
-      // const infoElement = document.createElement("p");
-      // infoElement.className = "px-6 py-7 post-detail";
-      // infoElement.innerHTML = post.postDetail;
-      // postLink.appendChild(infoElement);
-
-      postElement.appendChild(postLink);
-
-      const flexItemsElement = document.createElement("div");
-      flexItemsElement.className = "flex items-center px-8";
-
+      
+      const innerColumn4 = document.createElement("div");
+      innerColumn4.className = "inner-column";
+    
+      const containerTagElement = document.createElement("div");
+      containerTagElement.className = "container-tag";
+      containerTagElement.title = "Category";
+    
+      const tagCategoryElement = document.createElement("div");
+      tagCategoryElement.className = "tag-category";
+      const categoryHeading = document.createElement("h2");
+      categoryHeading.textContent = "Category:";
+      tagCategoryElement.appendChild(categoryHeading);
+      containerTagElement.appendChild(tagCategoryElement);
+    
+      const containerTagHoverElement = document.createElement("div");
+      containerTagHoverElement.className = "container-tag-hover";
+    
+      const tagCategoryIcon = document.createElement("div");
+      tagCategoryIcon.className = "tag-category";
+      const hashtagIcon = document.createElement("i");
+      hashtagIcon.className = "fa-solid fa-hashtag";
+      tagCategoryIcon.appendChild(hashtagIcon);
+      containerTagHoverElement.appendChild(tagCategoryIcon);
+    
+      const tagCategoryElement2 = document.createElement("div");
+      tagCategoryElement2.className = "tag-category";
+      tagCategoryElement2.id = "postCategory";
+      tagCategoryElement2.textContent= post.belongedToCategory;
+      containerTagHoverElement.appendChild(tagCategoryElement2);
+    
+      containerTagElement.appendChild(containerTagHoverElement);
+      innerColumn4.appendChild(containerTagElement);
+      infoColumnElement.appendChild(innerColumn4);
+    
+      postContainer.appendChild(infoColumnElement);
+    
+      const wrapperTitlePostElement = document.createElement("div");
+      wrapperTitlePostElement.className = "wapper-title-post";
+    
+      const columnElement2 = document.createElement("div");
+      columnElement2.className = "column";
+    
+      const postContentElement = document.createElement("p");
+      postContentElement.className = "postContent";
+      postContentElement.id = "postContent";
+      postContentElement.textContent = post.detail;
+      columnElement2.appendChild(postContentElement);
+    
+      wrapperTitlePostElement.appendChild(columnElement2);
+      infoColumnElement.appendChild(wrapperTitlePostElement);
+      
       if (post.tagList.length > 0) {
+        const innerColumn6 = document.createElement("div");
+        innerColumn6.className = "inner-column";
+
         const iconTagElement = document.createElement('div');
         iconTagElement.className = 'icon-tag';
         const iconTagImg = document.createElement('img');
         iconTagImg.src = 'img/tag.png';
         iconTagImg.alt = 'icon-tag';
         iconTagElement.appendChild(iconTagImg);
-        flexItemsElement.appendChild(iconTagElement);
+        innerColumn6.appendChild(iconTagElement);
       
         post.tagList.forEach(tag => {
           const tagLink = document.createElement('a');
           tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+          tagLink.id = "postTag";
           const tagDiv = document.createElement('div');
           tagDiv.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
           tagDiv.textContent = tag;
           tagLink.appendChild(tagDiv);
-          flexItemsElement.appendChild(tagLink);
+          innerColumn6.appendChild(tagLink);
         });
+        infoColumnElement.appendChild(innerColumn6);
       }
-
-      postElement.appendChild(flexItemsElement);
-
-      if(post.mediaList.length > 0){
-        const imgContainer = document.createElement('div');
-        imgContainer.className = 'm-5';
-
-        const mediaList = document.createElement('div');
-        mediaList.className = 'media-list';
-        post.mediaList.forEach(media => {
-          const mediaItem = document.createElement('img');
-          mediaItem.src = `data:image/jpeg;base64, ${media}`;
-          mediaItem.style.width = '240px'; 
-          mediaItem.style.height = 'auto';
-          mediaList.appendChild(mediaItem);
-        });
-        imgContainer.appendChild(mediaList);
-        postElement.appendChild(imgContainer);
-
-      }
-
-      postContainer.appendChild(postElement);
-
-      // const hr = document.createElement("hr");
-      // hr.style.border = "none"; // Remove the default border
-      // hr.style.backgroundColor = "grey"; // Set the background color to create a solid line
-      // hr.style.height = "2px";
-      // hr.style.margin="10px " // Set the thickness of the line to 2 pixels/ Increase the line height to 4 pixels
-      // postContainer.appendChild(hr);
+    
+      postContainer.appendChild(wrapperTitlePostElement);
+    
     }
   }
 }
@@ -383,7 +418,6 @@ filterPosts.addEventListener("click", async () => {
       if (response == null) {
         alert("Please check your filter!");
       } else {
-        console.log(formattedStartDate, formattedEndDate);
         displayPosts(response);
       }
     } catch (error) {

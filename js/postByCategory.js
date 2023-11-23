@@ -39,27 +39,31 @@ function displayPosts(response) {
     var tagsElement = document.createElement('div');
     tagsElement.classList.add('tags');
 
-    // Create the icon-tag element
-    var iconTagElement = document.createElement('div');
-    iconTagElement.classList.add('icon-tag');
-    var iconTagImageElement = document.createElement('img');
-    iconTagImageElement.src = '/img/tag.png';
-    iconTagImageElement.alt = 'icon-tag';
-    iconTagElement.appendChild(iconTagImageElement);
-    tagsElement.appendChild(iconTagElement);
+    if(post.tagList.length > 0){
+      var iconTagElement = document.createElement('div');
+      iconTagElement.classList.add('icon-tag');
+      var iconTagImageElement = document.createElement('img');
+      iconTagImageElement.src = '/img/tag.png';
+      iconTagImageElement.alt = 'icon-tag';
+      iconTagElement.appendChild(iconTagImageElement);
+      tagsElement.appendChild(iconTagElement);
+      
+      post.tagList.forEach(tag => {
+        const tagLink = document.createElement('a');
+        tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+        const tagDiv = document.createElement('div');
+        tagDiv.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+        tagDiv.textContent = tag;
+        tagLink.appendChild(tagDiv);
+        tagsElement.appendChild(tagLink);
+      });
 
-    // Create the tag element
-    var tagElement = document.createElement('a');
-    tagElement.href = '/Page SE SA AI BS/html/pageTechnoloy.html';
-    var tagSpanElement = document.createElement('span');
-    tagSpanElement.classList.add('tag');
-    tagSpanElement.textContent = post.tagList[0];
-    tagElement.appendChild(tagSpanElement);
-    tagsElement.appendChild(tagElement);
+      postElement.appendChild(tagsElement);
+    }
 
     // Append all elements to the post element
     postElement.appendChild(anchorElement);
-    postElement.appendChild(tagsElement);
+    
 
     // Append the post element to the container
     container.appendChild(postElement);

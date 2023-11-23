@@ -78,88 +78,88 @@ const displayPosts = async() => {
   try {
     const userInfos = await userInfo();
     const usId = userInfos.userId;
-    const postApprovalStatuses = "approved,rejected,pending";
+    //const postApprovalStatuses = "approved,rejected,pending";
 
-    const posts = await getPostByUserId(usId, postApprovalStatuses);
-    const tableBody = document.querySelector('#postTable tbody');
-    tableBody.innerHTML = '';
+    const posts = await getPostByUserId(usId);
+
+    if(posts.length === 0){
+      const postDiv = document.querySelector('.postDiv');
+      const noResultsElement = document.createElement("div");
+      noResultsElement.className =
+        "text-center text-4xl font-bold text-gray-500 dark:text-gray-400";
+      noResultsElement.textContent =
+        "Do not have any posted blog yet.";
+      postDiv.appendChild(noResultsElement);
+    }else{
+      const tableBody = document.querySelector('#postTable tbody');
+      tableBody.innerHTML = '';
+
+      posts.forEach((post, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${post.title}</td>
+          <td>${post.belongedToCategory}</td>
+          <td>${post.status || 'pending'}</td>
+          <td>
+            <form class="form"> 
+              <div class="flex flex-col">
+                <label for="">
+                  <button 
+                    class="editPostButton" 
+                    style="background-color: green; color: white;" 
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-55 p-2.5" 
+                    data-post-id="${post.postsId}">Edit
+                  </button>
+                </label>
+              </div>
+            </form>
+          </td>
+          <td><button id="deleteBtn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-55 p-2.5"
+          data-post-id="${post.postsId}">Delete
+          </button></td>
+        `;
   
-    posts.forEach((post, index) => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${post.title}</td>
-        <td>${post.belongedToCategory}</td>
-        <td>${post.postApprovals}</td>
-        <td>
-          <form class="form"> 
-            <div class="flex flex-col">
-              <label for="">
-                <button 
-                  class="editPostButton" 
-                  style="background-color: green; color: white;" 
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-55 p-2.5" 
-                  data-post-id="${post.postsId}">Edit
-                </button>
-              </label>
-            </div>
-          </form>
-        </td>
-        <td><button id="deleteBtn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-55 p-2.5"
-        data-post-id="${post.postsId}">Delete
-        </button></td>
-      `;
+        const editButton = row.querySelector('.editPostButton');
+        editButton.addEventListener('click', () => {
+          const postId = editButton.getAttribute('data-post-id');
+        
+          const width = window.innerWidth;
+          const height = window.innerHeight;
+          const left = 0;
+          const top = 0;
+          const url = `editPost.html?belongedToPostID=${postId}`;
+        
+          window.open(url, "Edit Post", `width=${width}, height=${height}, left=${left}, top=${top}`);
+        });
   
-      // Add event listener to the Edit button
-      const editButton = row.querySelector('.editPostButton');
-      editButton.addEventListener('click', () => {
-        const postId = editButton.getAttribute('data-post-id');
-      
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        const left = 0;
-        const top = 0;
-        const url = `editPost.html?belongedToPostID=${postId}`;
-      
-        window.open(url, "Edit Post", `width=${width}, height=${height}, left=${left}, top=${top}`);
-      });
-
-      const delButton = row.querySelector('#deleteBtn');
-      delButton.addEventListener('click', async () => {
-        const postId = editButton.getAttribute('data-post-id');
-
-        const confirmed = confirm("Are you sure you want to delete this post?");
-        if (confirmed) {
-          const res = await deletePost(postId);
-          if (res != null) {
-            alert('Delete Post Successfully!');
-          } else {
-            alert('Fail to delete post!');
+        const delButton = row.querySelector('#deleteBtn');
+        delButton.addEventListener('click', async () => {
+          const postId = editButton.getAttribute('data-post-id');
+  
+          const confirmed = confirm("Are you sure you want to delete this post?");
+          if (confirmed) {
+            const res = await deletePost(postId);
+            if (res != null) {
+              alert('Delete Post Successfully!');
+              location.reload();
+            } else {
+              alert('Fail to delete post!');
+            }
           }
-        }
+        });
+    
+        tableBody.appendChild(row);
       });
+    }
   
-      tableBody.appendChild(row);
-    });
-  
+
   } catch (error) {
     console.error('Error retrieving and displaying posts:', error);
   }
 }
 
 displayPosts();
-
-
-// function openEditPostPopup(postId) {
-  
-//   const width = window.innerWidth;
-//   const height = window.innerHeight;
-//   const left = 0;
-//   const top = 0;
-//   const url = `editPost.html?belongedToPostID=${postId}`; 
-  
-//   window.open(url, "Edit Post", `width=${width}, height=${height}, left=${left}, top=${top}`);
-// }
 
 
 

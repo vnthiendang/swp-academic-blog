@@ -323,6 +323,8 @@ const handleCreateAward = async (event) => {
 
       if(response != null){
         alert('Give Award successfully!');
+      }else{
+        alert('Fail to give award!');
       }
     } catch (error) {
       console.error(error);

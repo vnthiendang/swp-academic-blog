@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (res != null) {
         alert('Your Post Edit successfully!');
-        window.location.href = '/home.html';
+        window.location.href = '/profile.html';
       } else {
         alert('Failed to edit post!');
       }

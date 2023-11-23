@@ -1,3 +1,4 @@
+import { userInfo } from './Services/auth.service.js';
 import { approvePost, rejectPost } from './Services/request.service.js';
 import * as request from './utils/request.js';
 const token = localStorage.getItem("token");
@@ -64,6 +65,8 @@ displayPost();
 
 const approveButton = document.getElementById("approveButton");
 const rejectButton = document.getElementById("rejectButton");
+const userInfos = await userInfo();
+const usId = userInfos.userId;
 
 approveButton.addEventListener("click", async (event) => {
   event.preventDefault();
@@ -72,9 +75,11 @@ approveButton.addEventListener("click", async (event) => {
   // const teacherMessage = teacherMessageInput.value; // Get the value from the input field
 
   var model = {
-    teacherMessage: "approved"
+    post: postId,
+    viewedByUser: usId,
+    postApprovalsStatus: "approved"
   }
-  const response = await approvePost(postId, model);
+  const response = await approvePost(model);
 
   if (response == null) {
     alert("Fail to approve!");
@@ -87,10 +92,12 @@ approveButton.addEventListener("click", async (event) => {
 rejectButton.addEventListener("click", async (event) =>{
   event.preventDefault();
   var model = {
-    teacherMessage: "rejected"
+    post: postId,
+    viewedByUser: usId,
+    postApprovalsStatus: "rejected"
   }
 
-  const response = await rejectPost(postId, model);
+  const response = await rejectPost(model);
 
   if(response == null){
     alert('Fail to reject!');
