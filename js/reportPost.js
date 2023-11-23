@@ -23,7 +23,15 @@ import { createReport } from "./Services/report.service.js";
         const h2Element = document.createElement('h2');
         h2Element.textContent = rule.violationRuleInfo;
 
-  
+        // Create the icon element
+        const iconElement = document.createElement('i');
+        iconElement.classList.add('fa-solid', 'fa-chevron-right', 'fa-lg');
+        iconElement.style.color = '#000000';
+        iconElement.style.marginLeft = '1%';
+
+        // Append the icon to the h2 element
+        h2Element.appendChild(iconElement);
+          
         // Append the h2 element to the column
         columnElement.appendChild(h2Element);
   
@@ -33,7 +41,9 @@ import { createReport } from "./Services/report.service.js";
         // Create the label and input elements
         const labelElement = document.createElement('label');
         labelElement.htmlFor = `fname${index + 1}`;
-        labelElement.textContent = 'Message :';
+        labelElement.textContent = 'Message:';
+        labelElement.style.display.replace
+        labelElement.style.marginRight = "10px";
   
         const inputElement = document.createElement('input');
         inputElement.type = 'text';

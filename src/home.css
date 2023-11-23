@@ -11,27 +11,53 @@
 }
 
 .rounded-xl {
+    font-size: large;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10px;
     transition: background-color 1s, color 1s; /* Add transitions for color changes */
 }
 
 .rounded-xl:hover {
     background-color: red;
+    color: black;
+}
+
+/* .icon-tag {
+    width: 16px;
+    height: 16px;
+    margin-right: 0.3%;
+} */
+
+.icon-tag {
+    font-size: large;
+    font-weight: 700;
+    width: 100px;
+    text-align: center;
+    border-radius: 10px;
+    transition: background-color 1s, color 1s;
+    color: white;
+    background-color: red;
+    margin-left: 5px;
+}
+
+.icon-tag:hover {
+    background-color: red;
     color: greenyellow;
 }
 
-.icon-tag {
-    width: 16px; /* Adjust the width as needed */
-    height: 16px; /* Adjust the height as needed */
-    margin-right: 0.3%;
-}
 #tag {
     margin-top: 5px;
 }
+
 .vote-list {
-    /* background-color: aqua; */
+    color: black;
     text-align: center;
-    margin-left: 5px;
+    text-transform: uppercase;
+    font-size: 25px;
+    margin-bottom: 4px;
 }
+
 .vote-list span {
     display: inline-block;
 }
@@ -138,13 +164,29 @@
     color: greenyellow;
 }
 
-.post-detail p {
+.post-container a p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.post-container a p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+/* .post-detail p {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
-}
+} */
 
 .col-span-3{
     border-bottom:1px;
@@ -169,15 +211,15 @@
     margin-right: 10px;
     border-radius: 5px;
     border: 1px solid gray;
-    padding: 5px;
+    /* padding: 5px; */
 }
 
 .post-container:hover {
     background-color: antiquewhite;
 }
 .ql-editor p img {
-    /* background-color: red; */
-    width: 500px;
+    /* background-color: red;
+    width: 500px; */
     height: 300px;
 }
 
@@ -301,4 +343,12 @@
     font-weight: 700;
     color: white;
     background-color: blue;
+}
+
+
+.media-list img {
+    /* display: none; */
+    width: 30%;
+    height: auto;
+    margin-right: auto;
 }

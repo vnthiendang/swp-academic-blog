@@ -88,16 +88,18 @@ function displayPosts(posts) {
       infoElement.className = 'px-7 py-7 post-detail';
       //infoElement.innerHTML = post.postDetail; 
       infoElement.textContent = extractTextFromHTML(post.postDetail);
-      infoElement.style.maxWidth = "1600px"; 
-      infoElement.style.overflow = "hidden";
-      infoElement.style.textOverflow = "ellipsis";
-      infoElement.style.whiteSpace = "nowrap";
+      // infoElement.style.maxWidth = "1600px"; 
+      // infoElement.style.overflow = "hidden";
+      // infoElement.style.textOverflow = "ellipsis";
+      // infoElement.style.whiteSpace = "nowrap";
+
+      infoElement.style.marginLeft = "10px";
       postLink.appendChild(infoElement);
 
       postElement.appendChild(postLink);
   
       const flexItemsElement = document.createElement('div');
-      flexItemsElement.className = 'flex items-center px-8';
+      flexItemsElement.className = 'm-5';
 
       if(post.mediaList.length > 0){
         const imgContainer = document.createElement('div');
@@ -108,8 +110,8 @@ function displayPosts(posts) {
         post.mediaList.forEach(media => {
           const mediaItem = document.createElement('img');
           mediaItem.src = `data:image/jpeg;base64, ${media}`;
-          mediaItem.style.width = '240px'; 
-          mediaItem.style.height = 'auto';
+          // mediaItem.style.width = '30%';
+          // mediaItem.style.height = 'auto';
           mediaList.appendChild(mediaItem);
         });
 
@@ -118,23 +120,54 @@ function displayPosts(posts) {
       }
 
       if (post.tagList.length > 0) {
-        const iconTagElement = document.createElement('div');
-        iconTagElement.className = 'icon-tag';
-        const iconTagImg = document.createElement('img');
-        iconTagImg.src = 'img/tag.png';
-        iconTagImg.alt = 'icon-tag';
-        iconTagElement.appendChild(iconTagImg);
-        flexItemsElement.appendChild(iconTagElement);
+        // const iconTagElement = document.createElement('div');
+        // iconTagElement.className = 'icon-tag';
+        // const iconTagImg = document.createElement('img');
+        // iconTagImg.src = 'img/tag.png';
+        // iconTagImg.alt = 'icon-tag';
+        // iconTagElement.appendChild(iconTagImg);
+        // flexItemsElement.appendChild(iconTagElement);
       
+        // post.tagList.forEach(tag => {
+        //   const tagLink = document.createElement('a');
+        //   tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+        //   const tagDiv = document.createElement('div');
+        //   tagDiv.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+        //   tagDiv.textContent = tag;
+        //   tagLink.appendChild(tagDiv);
+        //   flexItemsElement.appendChild(tagLink);
+        // });
+
         post.tagList.forEach(tag => {
           const tagLink = document.createElement('a');
           tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+      
+          // Create a flex container for the icon and tag
+          const flexContainer = document.createElement('div');
+          flexContainer.style.display = 'flex';
+          flexContainer.style.alignItems = 'center'; // Optional: Align items vertically in the center
+      
+          // Create the icon element
+          const iconTag = document.createElement('i');
+          iconTag.className = 'fa-solid fa-tags fa-lg';
+          iconTag.style.color = '#000000'; // Set the color as needed
+          iconTag.style.marginLeft = '1%';
+      
+          // Create the tag element
           const tagDiv = document.createElement('div');
-          tagDiv.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
+          tagDiv.className = 'icon-tag';
           tagDiv.textContent = tag;
-          tagLink.appendChild(tagDiv);
+      
+          // Append the icon and tag to the flex container
+          flexContainer.appendChild(iconTag);
+          flexContainer.appendChild(tagDiv);
+      
+          // Append the flex container to the tagLink
+          tagLink.appendChild(flexContainer);
+      
+          // Append the tagLink to the flexItemsElement
           flexItemsElement.appendChild(tagLink);
-        });
+      });
       }
   
       postElement.appendChild(flexItemsElement);
