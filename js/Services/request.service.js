@@ -30,10 +30,10 @@ export const getPostRequest = async () => {
 //   } 
 // };
 
-export const approvePost = async (model) => {
+export const approvePost = async (id, model) => {
   try {
     const response = await request.post(
-      `postapproval/post`, model, {
+      `post/postRequest/approve/${id}`, model, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

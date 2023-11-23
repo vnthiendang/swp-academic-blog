@@ -6,9 +6,26 @@ const token = localStorage.getItem("token");
 //POST
 export const getAllApprovedPosts = async () => {
   try {
-    const response = await request.get(`post/GetAllApproved`, {
+    const response = await request.get(`post/GetAllApproved/filter`, {
       headers: {
         Authorization: `Bearer ${token}` 
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+  }
+};
+
+export const getAwardedPosts = async (minimumLikeCount, postApprovalStatuses) => {
+  try {
+    const response = await request.get(`post/GetAll/filter`, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      },
+      params: {
+        minimumLikeCount,
+        postApprovalStatuses
       }
     });
     return response;
@@ -86,7 +103,7 @@ export const getPostById = async (id) => {
 
 export const getPostByUserId = async (userId) => {
   try {
-    const response = await request.get(`post/GetAllApproved/filter`, {
+    const response = await request.get(`post/GetAllApproved`, {
       headers: {
         Authorization: `Bearer ${token}`
       },

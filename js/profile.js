@@ -24,7 +24,6 @@ showHeaderForTeacher();
 const getUserInfo = async () => {
 
     const userInfos = await userInfo();
-    console.log(userInfos);
   
     document.getElementById('roleField').value = userInfos.role_id;
     

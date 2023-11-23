@@ -75,11 +75,12 @@ approveButton.addEventListener("click", async (event) => {
   // const teacherMessage = teacherMessageInput.value; // Get the value from the input field
 
   var model = {
-    post: postId,
-    viewedByUser: usId,
-    postApprovalsStatus: "approved"
+    // post: postId,
+    // viewedByUser: usId,
+    // postApprovalsStatus: "approved"
+    teacherMessage: "approved"
   }
-  const response = await approvePost(model);
+  const response = await approvePost(postId, model);
 
   if (response == null) {
     alert("Fail to approve!");
