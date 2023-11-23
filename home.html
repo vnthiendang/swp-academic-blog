@@ -21,15 +21,16 @@
             <!-- <a href="/home.html" class="items-start justify-center">
                 <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
             </a> -->
-            
-            <a href="/home.html" class="p-logo" style="font-size: 40px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque; margin-right: 10px;">
+
+            <a href="/home.html" class="p-logo"
+                style="font-size: 40px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque; margin-right: 10px;">
                 FPT BLOG
             </a>
-            
+
             <a href="/create.html" class="p-2" style="border-left: 1px solid white;">
                 New post
             </a>
-            
+
             <a href="/bestartice.html" class="p-2">
                 Best articles
             </a>
@@ -50,10 +51,10 @@
                     </svg>
                 </button>
                 <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-                    
+
                 </ul>
             </div>
-            
+
             <!--ranking-->
             <div class="group inline-block relative">
                 <button class="py-2 px-4 rounded inline-flex items-center" id="rank">
@@ -63,7 +64,7 @@
                     </svg>
                 </button>
                 <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
-                    
+
                 </ul>
             </div>
 
@@ -96,10 +97,58 @@
             <div class="flex items-center justify-center">
                 <div class="mx-5">
                     <a href="profile.html" class="mx-5">
-                    <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
-                        alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                        <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
+                            alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
                     </a>
                 </div>
+                <!--notification-->
+                <div class="icon" onclick="toggleNotifi()">
+                    <img src="img/bell.png" alt=""> <span>17</span>
+                </div>
+                <div class="notifi-box" id="box">
+                    <h2>Notifications <span>17</span></h2>
+                    <div class="notifi-item">
+                        <img src="img/avatar1.png" alt="img">
+                        <div class="text">
+                            <h4>Elias Abdurrahman</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar2.png" alt="img">
+                        <div class="text">
+                            <h4>John Doe</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar3.png" alt="img">
+                        <div class="text">
+                            <h4>Emad Ali</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar4.png" alt="img">
+                        <div class="text">
+                            <h4>Ekram Abu </h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar5.png" alt="img">
+                        <div class="text">
+                            <h4>Jane Doe</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                </div>
+
 
                 <div class="pr-2">
 
@@ -109,14 +158,14 @@
 
                 </div>
             </div>
-            
+
             <script>
                 var prevScrollPos = window.pageYOffset;
                 var header = document.getElementById("header");
-        
-                window.onscroll = function() {
+
+                window.onscroll = function () {
                     var currentScrollPos = window.pageYOffset;
-                    
+
                     if (prevScrollPos > currentScrollPos) {
                         // Scrolling up
                         header.style.top = "0";
@@ -124,7 +173,7 @@
                         // Scrolling down
                         header.style.top = "-100px"; // Adjust the value based on your header height
                     }
-        
+
                     prevScrollPos = currentScrollPos;
                 }
             </script>
@@ -155,7 +204,7 @@
                 <div class="grid grid-cols-3 gap-4 bg-white" id="post">
 
                     <div class="col-span-6">
-                        
+
                     </div>
                 </div>
                 <!-- End Post -->
@@ -174,7 +223,7 @@
                     <!-- Tag Name -->
                     <div class="grid grid-cols-2 gap-4 flex-wrap mt-4">
 
-                        
+
                     </div>
 
                     <div class="mt-4 text-green-600">
@@ -230,6 +279,24 @@
 
     <script type="module" src='./js/home.js'></script>
     <script type="module" src='./js/tag.js'></script>
+    <!--notification js-->
+    <script>
+        var box = document.getElementById('box');
+        var down = false;
+
+
+        function toggleNotifi() {
+            if (down) {
+                box.style.height = '0px';
+                box.style.opacity = 0;
+                down = false;
+            } else {
+                box.style.height = '510px';
+                box.style.opacity = 1;
+                down = true;
+            }
+        }
+    </script>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
