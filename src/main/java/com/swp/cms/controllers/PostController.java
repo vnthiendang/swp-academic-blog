@@ -71,6 +71,8 @@ public class PostController {
 //get all approved post by categoryId
 @GetMapping("/GetAllApproved/filter")
 public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
+        @RequestParam(name = "postStatuses", required = false) List<String> postStatuses,
+        @RequestParam(name = "minimumLikeCount", required = false) Integer minimumLikeCount,
         @RequestParam(name = "keyword", required = false) String keyword,
         @RequestParam(name = "categoryName", required = false) String categoryName,
         @RequestParam(name = "tagNames", required = false) List<String> tagNames,
@@ -81,6 +83,11 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection) {
 
     List<Post> approvedPosts = postService.getAllApprovedPosts();
+
+    if (postStatuses != null && !postStatuses.isEmpty()) {
+        approvedPosts = postService.filterPostsByPostStatus(approvedPosts, postStatuses);
+    }
+
     if (startDate != null && endDate != null) {
         approvedPosts = postService.filterPostsByDateRange(approvedPosts, startDate, endDate);
     }
@@ -91,6 +98,11 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     if (tagNames != null && !tagNames.isEmpty()) {
         approvedPosts = postService.filterByTagNames(approvedPosts, tagNames);
     }
+
+    if (minimumLikeCount != null) {
+        approvedPosts = postService.filterByMinimumLikeCount(approvedPosts, minimumLikeCount);
+    }
+
     if (keyword != null && !keyword.trim().isEmpty()){
         approvedPosts = postService.GetPostsByKeyword(approvedPosts, keyword);
     }

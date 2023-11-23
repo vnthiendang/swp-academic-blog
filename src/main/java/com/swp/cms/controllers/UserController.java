@@ -2,6 +2,7 @@ package com.swp.cms.controllers;
 
 import com.swp.cms.dto.UserDto;
 import com.swp.cms.mapper.UserMapper;
+import com.swp.cms.reqDto.UserRequest;
 import com.swp.entities.User;
 import com.swp.services.UserService;
 import jakarta.transaction.Transactional;
@@ -78,6 +79,13 @@ public class UserController {
         User userCreate = userService.addUser(user);
         UserDto usDto = modelMapper.map(userCreate, UserDto.class);
         return usDto;
+    }
+
+    @PostMapping("/post")
+    public UserDto adminAddUser(@RequestBody UserRequest userRequest) {
+        User createdUser = userService.createUser(userRequest);
+        UserDto userDto = modelMapper.map(createdUser, UserDto.class);
+        return userDto;
     }
 
     @PutMapping("/update")

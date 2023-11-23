@@ -83,14 +83,16 @@ public class PostService {
     public Post add(Post post) {
         return postRepository.save(post);
     }
+
     @Transactional
     public List<Post> getAllApprovedPosts() {
         return postRepository.findAllApprovedPosts();
     }
-    @Transactional
-    public List<Post> getAll() {
-        return postRepository.findAllReviewedPosts();
-    }
+
+//    @Transactional
+//    public List<Post> getAll() {
+//        return postRepository.findAllReviewedPosts();
+//    }
 
     public Post createPost(PostRequest postRequest) {
         Post post = new Post();
