@@ -76,7 +76,7 @@ import {
                   <div class="inner-column">
                     <div class="container-user">
                       <div class="by-user-logo">
-                        <img src="#" alt="User Logo">
+                        <img src="img/Img For User/User1.jpg" alt="User Logo">
                       </div>
                     </div>
                   </div>
@@ -91,7 +91,7 @@ import {
                     </div>
                   </div>
                   <div class="inner-column">
-                    <div class="container-datetime title="Created Time"">
+                    <div class="container-datetime" title="Date Time">
                       <div class="date-time">
                         <i class="fa-regular fa-calendar-days" style="color: #000000;"></i>
                       </div>
@@ -140,7 +140,7 @@ import {
                     </div>
                   </div>
                   <div class="inner-column">
-                    <div class="container-read">
+                    <div class="container-read" title="Reading Time">
                       <div class="number-read">
                         <i class="fa-brands fa-readme fa-bounce" style="color: #000000;"></i>
                       </div>
@@ -151,7 +151,7 @@ import {
                   </div>
 
                   <div class="inner-column">
-                    <div class="tag-list" id="tagList">
+                    <div class="tag-list" id="tagList" title="Tag Name">
                       ${containerReadHTML}
                     </div>
                 </div>
@@ -164,7 +164,7 @@ import {
 
           const infoElement = container.find('.postContent h2:last-child');
           infoElement.css({
-            maxWidth: "1200px",
+            maxWidth: "1000px",
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap"
