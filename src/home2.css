@@ -11,7 +11,7 @@
 
 .wapper-title {
     width: 98%;
-    padding: 5px;
+    padding: 15px;
     /* box-sizing: border-box; */
     border-radius: 5px;
     border: 1px solid gray;
@@ -25,10 +25,9 @@
 }
 
 .column {
-    width: 50%;
-    padding: 10px;
+    width: 100%;
+    /* padding: 10px; */
     box-sizing: border-box;
-    /* margin-bottom: 1%; */
     background-color: white;
     /* background-color: red; */
     font-weight: 500;
@@ -50,7 +49,7 @@
 
 .inner-column {
     display: inline-block;
-    margin-right: 2%; /* Adjust the margin as needed for spacing */
+    margin-right: 2%;
 }
 
 @media (min-width: 600px) {
@@ -108,11 +107,13 @@
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
 }
 /* ================================================================ */
 .container-vote {
     display: flex;
+    font-size: 20px;
+    font-weight: 500;
 }
 .number-vote {
     margin: 2.5px;
@@ -121,6 +122,7 @@
 .container-read {
     display: flex;
     font-size: 20px;
+    font-weight: 500;
 }
 .number-read {
     margin: 2.5px;
@@ -133,6 +135,11 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 2.5px;
 }
+.by-user:hover {
+    text-decoration: underline;
+    color: crimson;
+}
+
 .createdUser:hover {
     text-decoration: underline;
     color: crimson;
@@ -148,11 +155,28 @@
 .container-tag {
     display: flex;
 }
+.container-tag-hover {
+    display: flex;
+}
+#postTag:hover {
+    transition: 0.5s;
+    color: white;
+    background-color: red;
+    border-radius: 8px;
+    font-weight: 700;
+}
 .tag-category {
     color: red;
     font-size: 20px;
     font-weight: 600;
     margin: 1px;
+}
+#postCategory:hover {
+    transition: 0.5s;
+    color: white;
+    background-color: red;
+    border-radius: 8px;
+    font-weight: 700;
 }
 /* ================================================================ */
 #header {
@@ -231,7 +255,8 @@
 }
 
 .total-like {
-    font-size: 20px;
+    font-size: 15px;
+    margin-left: 100%;
 }
 
 /* ======================================== notification ========================================= */

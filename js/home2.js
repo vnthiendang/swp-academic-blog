@@ -78,23 +78,18 @@ import {
             <div class="main-blog">
               <div class="wapper-title">
                 <div class="column">
-                  <div class="inner-column">
-                    <div class="container-user">
-                      <div class="by-user-logo">
-                        <img src="img/Img For User/User1.jpg" alt="User Logo">
-                      </div>
-                    </div>
-                  </div>
+
                   <div class="inner-column">
                     <div class="container-user" title="Created By User">
                       <div class="by-user">
                         <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
                       </div>
-                      <div class="createdUser">
+                      <div class="by-user">
                         ${post.createdByUser}
                       </div>
                     </div>
                   </div>
+
                   <div class="inner-column">
                     <div class="container-datetime" title="Date Time">
                       <div class="date-time">
@@ -105,15 +100,23 @@ import {
                       </div>
                     </div>
                   </div>
+
                   <div class="inner-column">
                     <div class="container-tag" title="Category">
-                      <div class="tag-category">
-                        <i class="fa-solid fa-hashtag" style="color: #ff0000;"></i>
-                      </div>
-                      <div class="tag-category" id="postCategory">
-                        ${post.belongedToCategory}
-                      </div>
-                    </div>
+                        <div class="tag-category">
+                            <h2 >
+                                Category: 
+                            </h2>
+                        </div>
+                        <div class="container-tag" title="Category">
+                            <div class="tag-category">
+                              <i class="fa-solid fa-hashtag" style="color: #ff0000;"></i>
+                            </div>
+                            <div class="tag-category" id="postCategory">
+                              ${post.belongedToCategory}
+                            </div>
+                        </div> 
+                      </div> 
                   </div>
                 </div>
                 <div class="container-post-img">
@@ -135,19 +138,20 @@ import {
                 </div>
                 <div class="column">
                   <div class="inner-column">
-                    <div class="container-user" title="Total Like">
-                      <div class="by-user">
-                        <i class="fa-regular fa-thumbs-up fa-xl" style="color: #000000;"></i>
+                    <div class="container-vote" title="Total Like">
+                      <div class="number-vote">
+                        <i class="fa-regular fa-thumbs-up" style="color: #000000;" id="likeIcon"></i>
                       </div>
-                      <div class="total-like" id="voteCount">
+                      <div class="number-vote" id="postVote">
                         ${post.vote1Count}
                       </div>
                     </div>
                   </div>
+
                   <div class="inner-column">
                     <div class="container-read" title="Reading Time">
                       <div class="number-read">
-                        <i class="fa-brands fa-readme fa-bounce" style="color: #000000;"></i>
+                        <i class="fa-regular fa-clock" style="color: #000000;"></i>
                       </div>
                       <div class="number-read" id="readingTime">
                         ${post.readingTime}
@@ -156,9 +160,22 @@ import {
                   </div>
 
                   <div class="inner-column">
-                    <div class="tag-list" id="tagList" title="Tag Name">
-                      ${containerReadHTML}
-                    </div>
+                    <div class="container-tag" title="Tag">
+                        <div class="tag-category">
+                          <h2 >
+                              Tag: 
+                          </h2>
+                        </div>
+                        <div class="container-tag-hover">
+                          <div class="tag-category">
+                            <i class="fa-solid fa-hashtag";></i>
+                          </div>
+                          <div class="tag-category" id="postTag">
+                            ${post.post}
+                          </div>
+                        </div>
+                      </div> 
+                    </div> 
                 </div>
                 </div>
               </div>
