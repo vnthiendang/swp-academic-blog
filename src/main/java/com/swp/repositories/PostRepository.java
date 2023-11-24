@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Integer>, JpaSpecificationExecutor<Post> {
     @Query("SELECT p FROM Post p JOIN p.postApprovals pa " +
-            "WHERE pa.status = 'APPROVED' " +
+            "WHERE LOWER(pa.status) = 'approved' " +
             "AND (TRIM(p.title) ILIKE '%' || TRIM(:keyword) || '%' " +
             "OR TRIM(p.postDetail) ILIKE '%' || TRIM(:keyword) || '%' " +
             "OR TRIM(p.belongedToCategory.content) ILIKE '%' || TRIM(:keyword) || '%')")
