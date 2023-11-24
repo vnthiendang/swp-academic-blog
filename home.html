@@ -57,7 +57,7 @@
             </div>
 
             <!--ranking-->
-            <div class="group inline-block relative">
+            <!-- <div class="group inline-block relative">
                 <button class="py-2 px-4 rounded inline-flex items-center" id="rank">
                     <span class="mr-1" style="font-weight: 500;">Rank</span>
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -67,7 +67,7 @@
                 <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
 
                 </ul>
-            </div>
+            </div> -->
 
         </div>
         <div class="p-1 flex">
@@ -103,6 +103,7 @@
                             alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
                     </a>
                 </div>
+
                 <!--notification-->
                 <div class="icon" onclick="toggleNotifi()">
                     <img src="img/bell.png" alt=""> <span>69</span>
@@ -149,8 +150,25 @@
                         </div>
                     </div>
 
-                </div>
+                    <!--notification js-->
+                    <script>
+                        var box = document.getElementById('box');
+                        var down = false;
 
+
+                        function toggleNotifi() {
+                            if (down) {
+                                box.style.height = '0px';
+                                box.style.opacity = 0;
+                                down = false;
+                            } else {
+                                box.style.height = '510px';
+                                box.style.opacity = 1;
+                                down = true;
+                            }
+                        }
+                    </script>
+                </div>
 
                 <div class="pr-2">
 
@@ -281,24 +299,6 @@
 
     <script type="module" src='./js/home.js'></script>
     <script type="module" src='./js/tag.js'></script>
-    <!--notification js-->
-    <script>
-        var box = document.getElementById('box');
-        var down = false;
-
-
-        function toggleNotifi() {
-            if (down) {
-                box.style.height = '0px';
-                box.style.opacity = 0;
-                down = false;
-            } else {
-                box.style.height = '510px';
-                box.style.opacity = 1;
-                down = true;
-            }
-        }
-    </script>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

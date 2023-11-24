@@ -38,7 +38,8 @@ function displayPosts(response) {
     // Create the tags element
     var tagsElement = document.createElement('div');
     tagsElement.classList.add('tags');
-
+    
+    
     // if(post.tagList.length > 0){
     //   // var iconTagElement = document.createElement('div');
     //   // iconTagElement.classList.add('icon-tag');

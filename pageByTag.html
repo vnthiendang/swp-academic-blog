@@ -13,26 +13,52 @@
 
 <body>
     <!-- Header  -->
-    <header class="flex items-center justify-between w-full bg-black text-white">
-        <div class="flex items-center">
-            <a href="/home.html" class="items-start justify-center">
-                <img src="/img/Logo.png" alt="logo" class="w-16 h-auto">
-            </a>
-            <a href="/home.html" class="p-2">
+    <header class="flex items-center justify-between w-full bg-black text-white" id="header">
+        <!-- Logo and title -->
+        <div class="flex items-center" id="taskbar">
+            <!-- <a href="/home.html" class="items-start justify-center">
+                <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
+            </a> -->
+
+            <a href="/home.html" class="p-logo"
+                style="font-size: 40px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque; margin-right: 10px;">
                 FPT BLOG
             </a>
-            <a href="/home.html" class="p-2">
-                Home
+
+            <a href="/create.html" class="p-2" style="border-left: 1px solid white;">
+                New post
             </a>
-            <!-- Best Articles -->
+
             <a href="/bestartice.html" class="p-2">
                 Best articles
             </a>
 
+            <a href="teacherPage.html" class="p-2" id="teacherPage">
+                Post Request
+            </a>
+            
+            <a href="/giveAward.html" class="p-2" id="teacherPage2">
+                Give Award
+            </a>
+
             <!-- Category  -->
             <div class="group inline-block relative">
-                <button class="py-2 px-4 rounded inline-flex items-center">
-                    <span class="mr-1">Category</span>
+                <button class="py-2 px-4 rounded inline-flex items-center" id="category">
+                    <span class="mr-1" style="font-weight: 700;">Category</span>
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+                <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
+
+
+                </ul>
+            </div>
+
+            <!--ranking-->
+            <!-- <div class="group inline-block relative">
+                <button class="py-2 px-4 rounded inline-flex items-center" id="rank">
+                    <span class="mr-1" style="font-weight: 500;">Rank</span>
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
@@ -40,10 +66,11 @@
                 <ul class="absolute hidden text-gray-700 pt-1 group-hover:block">
 
                 </ul>
-            </div>
+            </div> -->
+
         </div>
         <div class="p-1 flex">
-            <form class="flex items-center">
+            <form class="flex items-center" id="search-form">
                 <label for="simple-search" class="sr-only">Search</label>
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -54,8 +81,8 @@
                         </svg>
                     </div>
                     <input type="text" id="simple-search"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  "
-                        placeholder="Search branch name..." required>
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search blog, tag, ..." required>
                 </div>
                 <button type="submit"
                     class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -70,9 +97,56 @@
             <div class="flex items-center justify-center">
                 <div class="mx-5">
                     <a href="profile.html" class="mx-5">
-                    <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
-                        alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                        <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
+                            alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
                     </a>
+                </div>
+                <!--notification-->
+                <div class="icon" onclick="toggleNotifi()">
+                    <img src="img/bell.png" alt=""> <span>69</span>
+                </div>
+                <div class="notifi-box" id="box">
+                    <h2>Notifications <span>17</span></h2>
+                    <div class="notifi-item">
+                        <img src="img/avatar1.png" alt="img">
+                        <div class="text">
+                            <h4>Elias Abdurrahman</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar2.png" alt="img">
+                        <div class="text">
+                            <h4>John Doe</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar3.png" alt="img">
+                        <div class="text">
+                            <h4>Emad Ali</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar4.png" alt="img">
+                        <div class="text">
+                            <h4>Ekram Abu </h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
+                    <div class="notifi-item">
+                        <img src="img/avatar5.png" alt="img">
+                        <div class="text">
+                            <h4>Jane Doe</h4>
+                            <p>@lorem ipsum dolor sit amet</p>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="pr-2">
@@ -83,7 +157,27 @@
 
                 </div>
             </div>
+
+            <script>
+                var prevScrollPos = window.pageYOffset;
+                var header = document.getElementById("header");
+
+                window.onscroll = function () {
+                    var currentScrollPos = window.pageYOffset;
+
+                    if (prevScrollPos > currentScrollPos) {
+                        // Scrolling up
+                        header.style.top = "0";
+                    } else {
+                        // Scrolling down
+                        header.style.top = "-100px"; // Adjust the value based on your header height
+                    }
+
+                    prevScrollPos = currentScrollPos;
+                }
+            </script>
         </div>
+
     </header>
     <!-- End Header -->
 

@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: start; /* Center the columns horizontally */
+    margin-top: 5px;
 }
 
 .wapper-title {
@@ -30,6 +31,7 @@
     /* margin-bottom: 1%; */
     background-color: white;
     /* background-color: red; */
+    font-weight: 500;
 }
 
 .column-title {
@@ -40,7 +42,6 @@
     /* background-color: red; */
 }
 .column-content {
-    width: 100%;
     box-sizing: border-box;
     /* margin-bottom: 1%; */
     background-color: white;
@@ -49,7 +50,7 @@
 
 .inner-column {
     display: inline-block;
-    margin-right: 5%; /* Adjust the margin as needed for spacing */
+    margin-right: 2%; /* Adjust the margin as needed for spacing */
 }
 
 @media (min-width: 600px) {
@@ -73,9 +74,8 @@
     /* background-color: antiquewhite; */
     background-color: white;
 }
-.container-img {
-    padding: 1%;
-    /* background-color: red; */
+.container-img img{
+    /* padding: 1%; */
     background-color: white;
     flex: 3;
 }
@@ -88,7 +88,7 @@
 /* ============================================================================ */
 
 .postTitle {
-    font-size: 50px;
+    font-size: 30px;
     font-style: normal;
     font-weight: 700;
     color: black;
@@ -96,12 +96,20 @@
 }
 
 .postContent {
+    width: 1200px;
     background-color: white;
     font-size: 19px;
     font-weight: 100;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.postContent h2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
 /* ================================================================ */
 .container-vote {
     display: flex;
@@ -112,6 +120,7 @@
 
 .container-read {
     display: flex;
+    font-size: 20px;
 }
 .number-read {
     margin: 2.5px;
@@ -124,7 +133,7 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 2.5px;
 }
-.by-user:hover {
+.createdUser:hover {
     text-decoration: underline;
     color: crimson;
 }
@@ -176,4 +185,130 @@
     color: black;
     background-color: white;
     text-decoration: underline;
+}
+
+#baner {
+    background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+}
+
+#baner h1 {
+    color: white;
+}
+
+ /* Main section */
+ .main {
+    background-color: white;
+  }
+  
+  /* Header section */
+  #header {
+    height: 50px;
+    background-color: black;
+    color: white;
+  }
+
+  #header {
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    transition: top 0.3s;
+}
+/* ================================================================== */
+.by-user-logo img {
+    width: 60px;
+    height: 20px;
+    /* height:  auto; */
+    border-radius: 150px;
+}
+
+.createdUser {
+    margin-top: 3%;
+    margin-left: 2px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.total-like {
+    font-size: 20px;
+}
+
+/* ======================================== notification ========================================= */
+
+.icon {
+	cursor: pointer;
+	margin-right: 10px; 
+	line-height: 60px;
+    margin-bottom: 20px;
+}
+.icon span {
+	background: #f00;
+	padding: 7px;
+	border-radius: 50%;
+	color: #fff;
+	vertical-align: top;
+	margin-left: -25px;
+}
+.icon img {
+	display: inline-block;
+	width: 40px;
+	margin-top: 20px;
+}
+.icon:hover {
+	opacity: .7;
+}
+
+.logo {
+	flex: 1;
+	margin-left: 50px;
+	color: #eee;
+	font-size: 20px;
+	font-family: monospace;
+}
+
+.notifi-box {
+	width: 300px;
+	height: 0px;
+	opacity: 0;
+	position: absolute;
+	top: 63px;
+	right: 35px;
+	transition: 1s opacity, 250ms height;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+}
+.notifi-box h2 {
+	font-size: 14px;
+	padding: 10px;
+	border-bottom: 1px solid #eee;
+	color: #999;
+}
+.notifi-box h2 span {
+	color: #f00;
+}
+.notifi-item {
+	display: flex;
+	border-bottom: 1px solid #eee;
+	padding: 15px 5px;
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+.notifi-item:hover {
+	background-color: #eee;
+}
+.notifi-item img {
+	display: block;
+	width: 50px;
+	margin-right: 10px;
+	border-radius: 50%;
+}
+.notifi-item .text h4 {
+	color: #777;
+	font-size: 16px;
+	margin-top: 10px;
+}
+.notifi-item .text p {
+	color: #aaa;
+	font-size: 12px;
 }

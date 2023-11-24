@@ -92,7 +92,7 @@
             </div>
 
             <!-- ByUser DateTime NumberRead -->
-            <div class="column" style="background-color: white;">
+            <div class="column" style="background-color: white; font-size: 16px; font-weight: 500;">
 
                 <!-- Data For NumberRead NumberVote -->
                 <!-- <div id="postTag"></div> -->
@@ -243,12 +243,84 @@
         </div>
 
         <!-- IMG Bên Ngoài Mang Vào -->
-        <div class="wapper-title-img">
+        <!-- <div class="wapper-title-img">
             <div class="column-img">
                 <div class="img">
                     <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" id="postMedia" src="#" alt="">
                 </div>
             </div>
+        </div> -->
+
+        <div class="wapper-title-img">
+            <div class="column-img">
+                <div class="img">
+                    <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" id="postMedia" src="https://via.placeholder.com/150" alt="" onclick="toggleFullScreen()">
+                </div>
+            </div>
+
+            <script>
+                function toggleFullScreen() {
+                    const imgElement = document.getElementById('postMedia');
+                    
+                    // Create a new image element to avoid moving the original one
+                    const fullScreenImage = new Image();
+                    fullScreenImage.src = imgElement.src;
+                    fullScreenImage.className = 'object-cover fullscreen';
+                    fullScreenImage.onclick = closeFullScreen;
+        
+                    // Append the new image to the body
+                    document.body.appendChild(fullScreenImage);
+        
+                    // Listen for scroll events
+                    window.addEventListener('scroll', closeFullScreenOnScroll);
+                }
+        
+                function closeFullScreen() {
+                    const fullScreenImage = document.querySelector('.fullscreen');
+                    
+                    // Remove the full-screen image from the body
+                    fullScreenImage.parentNode.removeChild(fullScreenImage);
+        
+                    // Remove the scroll event listener
+                    window.removeEventListener('scroll', closeFullScreenOnScroll);
+                }
+        
+                function closeFullScreenOnScroll() {
+                    closeFullScreen();
+                }
+            </script>
+    
+            <style>
+                .wapper-title-img {
+                    display: flex;
+                    justify-content: center;
+                }
+    
+                .column-img {
+                    margin: 10px;
+                }
+    
+                .img {
+                    overflow: hidden;
+                }
+    
+                .object-cover {
+                    transition: width 0.3s ease, height 0.3s ease;
+                    cursor: pointer;
+                }
+    
+                .fullscreen {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                    height: 100vh;
+                    object-fit: contain;
+                    z-index: 99999;
+                    background-color: whitesmoke;
+                    transition: width 0.3s ease, height 0.3s ease; /* Adjust duration as needed */
+                }
+            </style>
         </div>
 
         <!-- Post Content -->
