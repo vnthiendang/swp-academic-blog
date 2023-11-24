@@ -129,9 +129,12 @@ import {
                       </div>
                     </div>
                   </div>
-                  <div class="container-img" title="Cover Image">
-                    <img src="data:image/jpeg;base64, ${post.mediaList}" alt="Post Image">
-                  </div>
+
+                  ${post.mediaList.length>0 ? `
+                    <div class="container-img" title="Cover Image">
+                      <img src="data:image/jpeg;base64, ${post.mediaList}" alt="Post Image">
+                    </div>
+                  ` : ''}
                 </div>
                 <div class="column">
                   <div class="inner-column">

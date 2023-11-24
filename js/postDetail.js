@@ -112,11 +112,12 @@ function displayComments() {
   const commentContainer = document.getElementById('commentContainer');
 
   // Get comments by PostID
-  getCommentById(postId)
+  getCommentById(parseInt(postId))
     .then((comments) => {
-      console.log(comments);
       comments.forEach(async (comment) => {
         if(comment.status != 'deleted'){
+          const us = await userInfo();
+
           const article = document.createElement('article');
           article.classList.add('p-6', 'mb-3', 'text-base', 'bg-white', 'border-t', 'border-gray-200', 'dark:border-gray-700', 'dark:bg-gray-900');
   
@@ -153,7 +154,9 @@ function displayComments() {
           delButton.innerHTML = '<i class="fa-regular fa-delete px-2"></i>Delete';
           buttonContainer.appendChild(delButton);
 
-          article.appendChild(buttonContainer);
+          if(us.display_name == comment.createdByUser){
+            article.appendChild(buttonContainer);
+          }
           commentContainer.appendChild(article);
 
           //EDIT COMMENT
@@ -241,6 +244,7 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const commentText = document.getElementById("cmt").value.trim();
+  const belongedToPostID = parseInt(postId);
 
   if (commentText === "") {
     alert("Please enter a valid comment.");
@@ -250,7 +254,7 @@ form.addEventListener("submit", async (event) => {
   const us = await userInfo();
   const createdByUserID = us.userId;
 
-  const data = { commentText, postId, createdByUserID };
+  const data = { commentText, belongedToPostID, createdByUserID };
 
     try {
       const res = await createComment(data);
@@ -388,13 +392,13 @@ getAllAwardType().then((types) => {
 
 const reportButton = document.getElementById('reportButton');
 reportButton.addEventListener('click', async function() {
-    const postsId = editButton.getAttribute('data-post-id');
+    // const postsId = reportButton.getAttribute('data-post-id');
   
     const width = window.innerWidth;
     const height = window.innerHeight;
     const left = 0;
     const top = 0;
-    const url = `reportPost.html?postId=${postsId}` ;
+    const url = `reportPost.html?postId=${postId}` ;
   
     window.open(url, "Report Violation", `width=${width}, height=${height}, left=${left}, top=${top}`);
 
