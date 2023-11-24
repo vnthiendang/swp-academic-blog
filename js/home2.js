@@ -54,25 +54,36 @@ import {
           const formattedTime = postCreatedTime.toLocaleString("en-US", options);
 
           let tagsHTML = '';
-          if (typeof post.tagList === 'string') {
-            const tags = post.tagList.split(',').map(tag => tag.trim());
-      
-            tagsHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join(', ');
+          if (Array.isArray(post.tagList) && post.tagList.length > 0) {
+            const tags = post.tagList.map(tag => {
+              const tagLink = document.createElement('a');
+              tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+              tagLink.className = 'tag';
+              tagLink.textContent = tag;
+              return tagLink.outerHTML;
+            });
+            tagsHTML = tags.join(' ');
           }
-
-          const containerReadHTML = post.tagList.length > 0 ? `
-          <div class="container-read">
-            <div class="tag-list">
-              <i class="fa-solid fa-tags fa-lg" style="color: #ff0000;"></i>
+          
+          const containerReadHTML = tagsHTML ? `
+            <div class="container-read">
+              <div class="tag-category">
+                <h2>Tag: </h2>
+              </div>
+              <div class="tag-category">
+                <i class="fa-solid fa-hashtag";></i>
+              </div>
+              <div class="tag-list" id="tagList">
+                ${tagsHTML}
+              </div>
             </div>
-            <div class="tag-list" id="tagList">
-              ${tagsHTML}
-            </div>
-          </div>
-        ` : '';
+          ` : '';
 
         const postLink = document.createElement("a");
         postLink.href = `blogDetail.html?belongedToPostID=${post.postsId}`;
+
+        const categoryLink = document.createElement("a");
+        categoryLink.href = `postByCategory.html?categoryName=${post.belongedToCategory}`;
 
           const postHTML = `
             <div class="main-blog">
@@ -113,7 +124,7 @@ import {
                               <i class="fa-solid fa-hashtag" style="color: #ff0000;"></i>
                             </div>
                             <div class="tag-category" id="postCategory">
-                              ${post.belongedToCategory}
+                              <a href="${categoryLink.href}">${post.belongedToCategory}</a>
                             </div>
                         </div> 
                       </div> 
@@ -164,17 +175,9 @@ import {
 
                   <div class="inner-column">
                     <div class="container-tag" title="Tag">
-                        <div class="tag-category">
-                          <h2 >
-                              Tag: 
-                          </h2>
-                        </div>
                         <div class="container-tag-hover">
-                          <div class="tag-category">
-                            <i class="fa-solid fa-hashtag";></i>
-                          </div>
                           <div class="tag-category" id="postTag">
-                            ${post.post}
+                            ${containerReadHTML}
                           </div>
                         </div>
                       </div> 

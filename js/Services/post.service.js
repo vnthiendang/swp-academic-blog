@@ -47,7 +47,6 @@ export const searchedPosts = async (keyword) => {
     return response;
   } catch (error) {
     console.error('Error searching posts:', error);
-    throw new Error("An error occurred. Please try again later.");
   }
 };
 

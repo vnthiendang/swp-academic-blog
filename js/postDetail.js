@@ -107,135 +107,131 @@ function displayPost() {
 }
 displayPost();
 
-
-function displayComments() {
-  const commentContainer = document.getElementById('commentContainer');
-
   // Get comments by PostID
-  getCommentById(parseInt(postId))
-    .then((comments) => {
-      comments.forEach(async (comment) => {
-        if(comment.status != 'deleted'){
-          const us = await userInfo();
+  const displayComments = async (comments) => {
+    const commentContainer = document.getElementById('commentContainer');
+    comments.forEach(async (comment) => {
+      if(comment.status !== 'deleted'){
+        const us = await userInfo();
 
-          const article = document.createElement('article');
-          article.classList.add('p-6', 'mb-3', 'text-base', 'bg-white', 'border-t', 'border-gray-200', 'dark:border-gray-700', 'dark:bg-gray-900');
-  
-          const footer = document.createElement('footer');
-          footer.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
-  
-          const commentByUser = document.createElement('p');
-          commentByUser.classList.add('inline-flex', 'items-center', 'mr-3', 'text-sm', 'text-gray-900', 'dark:text-white', 'font-semibold');
-          commentByUser.textContent = comment.createdByUser;
-          
-          footer.appendChild(commentByUser);
-  
-          article.appendChild(footer);
-  
-          const commentText = document.createElement('p');
-          commentText.classList.add('text-gray-500', 'dark:text-gray-400');
-          commentText.textContent = comment.commentText;
-          article.appendChild(commentText);
-  
-          const buttonContainer = document.createElement('div');
-          buttonContainer.classList.add('flex', 'items-center', 'mt-4', 'space-x-4');
-  
-          const editBtn = document.createElement('button');
-          editBtn.type = 'button';
-          editBtn.dataset.commentId = comment.id;
-          editBtn.classList.add('flex', 'items-center', 'text-sm', 'text-gray-500', 'hover:underline', 'dark:text-gray-400', 'font-medium');
-          editBtn.innerHTML = '<i class="fa-regular fa-comment px-2"></i>Edit';
-          buttonContainer.appendChild(editBtn);
-  
-          const delButton = document.createElement('button');
-          delButton.type = 'button';
-          delButton.dataset.commentId = comment.id;
-          delButton.classList.add('flex', 'items-center', 'text-sm', 'text-gray-500', 'hover:underline', 'dark:text-gray-400', 'font-medium');
-          delButton.innerHTML = '<i class="fa-regular fa-delete px-2"></i>Delete';
-          buttonContainer.appendChild(delButton);
+        const article = document.createElement('article');
+        article.classList.add('p-6', 'mb-3', 'text-base', 'bg-white', 'border-t', 'border-gray-200', 'dark:border-gray-700', 'dark:bg-gray-900');
 
-          if(us.display_name == comment.createdByUser){
-            article.appendChild(buttonContainer);
-          }
-          commentContainer.appendChild(article);
+        const footer = document.createElement('footer');
+        footer.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
 
-          //EDIT COMMENT
-          editBtn.addEventListener('click', async () => {
-            const commentId = editBtn.dataset.commentId;
-  
-            // Make comment editable
-            commentText.contentEditable = true;
-            commentText.focus();
-            commentText.classList.add('editable');
-  
-            // Disable other buttons
-            editBtn.disabled = true;
-            delButton.disabled = true;
+        const commentByUser = document.createElement('p');
+        commentByUser.classList.add('inline-flex', 'items-center', 'mr-3', 'text-sm', 'text-gray-900', 'dark:text-white', 'font-semibold');
+        commentByUser.textContent = comment.createdByUser;
+        
+        footer.appendChild(commentByUser);
 
-            const originalCommentText = commentText.textContent.trim();
+        article.appendChild(footer);
 
-            const submitForm = async () => {
-              const updatedCommentText = commentText.textContent.trim();
-              if (updatedCommentText !== '' && updatedCommentText !== originalCommentText) {
-                try {
-                  const model = {
-                    commentText: updatedCommentText,
-                  };
-                  const response = await editComment(parseInt(commentId), model);
-                  if (response != null) {
-                    location.reload();
-                  } else {
-                    alert('Failed to edit comment!');
-                  }
-                } catch (error) {
-                  console.error('Error editing comment:', error);
-                }
-              } else {
-                // If the updated comment text is empty or unchanged, revert the changes
-                commentText.textContent = comment.commentText;
-              }
-          
-              // Disable editing and enable buttons
-              commentText.contentEditable = false;
-              commentText.classList.remove('editable');
-              editBtn.disabled = false;
-              delButton.disabled = false;
-            };
+        const commentText = document.createElement('p');
+        commentText.classList.add('text-gray-500', 'dark:text-gray-400');
+        commentText.textContent = comment.commentText;
+        article.appendChild(commentText);
 
-            commentText.addEventListener('keydown', (event) => {
-              if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                submitForm();
-              }
-            });
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('flex', 'items-center', 'mt-4', 'space-x-4');
 
-          });
-  
-          delButton.addEventListener('click', async () => {
-            const commentId = delButton.dataset.commentId;
-            const confirmDelete = confirm('Are you sure you want to delete this comment?');
-            if (confirmDelete) {
+        const editBtn = document.createElement('button');
+        editBtn.type = 'button';
+        editBtn.dataset.commentId = comment.id;
+        editBtn.classList.add('flex', 'items-center', 'text-sm', 'text-gray-500', 'hover:underline', 'dark:text-gray-400', 'font-medium');
+        editBtn.innerHTML = '<i class="fa-regular fa-comment px-2"></i>Edit';
+        buttonContainer.appendChild(editBtn);
+
+        const delButton = document.createElement('button');
+        delButton.type = 'button';
+        delButton.dataset.commentId = comment.id;
+        delButton.classList.add('flex', 'items-center', 'text-sm', 'text-gray-500', 'hover:underline', 'dark:text-gray-400', 'font-medium');
+        delButton.innerHTML = '<i class="fa-regular fa-delete px-2"></i>Delete';
+        buttonContainer.appendChild(delButton);
+
+        if(us.display_name == comment.createdByUser){
+          article.appendChild(buttonContainer);
+        }
+        commentContainer.appendChild(article);
+
+        //EDIT COMMENT
+        editBtn.addEventListener('click', async () => {
+          const commentId = editBtn.dataset.commentId;
+
+          // Make comment editable
+          commentText.contentEditable = true;
+          commentText.focus();
+          commentText.classList.add('editable');
+
+          // Disable other buttons
+          editBtn.disabled = true;
+          delButton.disabled = true;
+
+          const originalCommentText = commentText.textContent.trim();
+
+          const submitForm = async () => {
+            const updatedCommentText = commentText.textContent.trim();
+            if (updatedCommentText !== '' && updatedCommentText !== originalCommentText) {
               try {
-                const response = await deleteComment(commentId);
+                const model = {
+                  commentText: updatedCommentText,
+                };
+                const response = await editComment(parseInt(commentId), model);
                 if (response != null) {
                   location.reload();
                 } else {
-                  alert('Failed to delete comment!');
+                  alert('Failed to edit comment!');
                 }
               } catch (error) {
-                console.error('Error deleting comment:', error);
+                console.error('Error editing comment:', error);
               }
+            } else {
+              // If the updated comment text is empty or unchanged, revert the changes
+              commentText.textContent = comment.commentText;
+            }
+        
+            // Disable editing and enable buttons
+            commentText.contentEditable = false;
+            commentText.classList.remove('editable');
+            editBtn.disabled = false;
+            delButton.disabled = false;
+          };
+
+          commentText.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+              event.preventDefault();
+              submitForm();
             }
           });
-        }
-  
-      });
-    })
-    .catch((error) => {
-      console.error('Error retrieving comments:', error);
+
+        });
+
+        delButton.addEventListener('click', async () => {
+          const commentId = delButton.dataset.commentId;
+          const confirmDelete = confirm('Are you sure you want to delete this comment?');
+          if (confirmDelete) {
+            try {
+              const response = await deleteComment(commentId);
+              if (response != null) {
+                location.reload();
+              } else {
+                alert('Failed to delete comment!');
+              }
+            } catch (error) {
+              console.error('Error deleting comment:', error);
+            }
+          }
+        });
+      }
+
     });
-}
-displayComments();
+  }
+
+getCommentById(postId).then((comments) => {
+  displayComments(comments);
+});
+
 
 
 const form = document.getElementById("comment");
@@ -262,6 +258,7 @@ form.addEventListener("submit", async (event) => {
         alert("Sorry! Please check your comment! ");
       } else {
         location.reload();
+        document.getElementById("cmt").value = "";
       }
     } catch (error) {
       console.error(error);
