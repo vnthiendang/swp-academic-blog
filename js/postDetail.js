@@ -1,4 +1,4 @@
-import { createComment, getCommentById } from "./Services/post.service.js";
+import { createComment, deleteComment, editComment, getCommentById } from "./Services/post.service.js";
 import * as request from './utils/request.js';
 import { userInfo } from "./Services/auth.service.js";
 import { votePost } from "./Services/vote.service.js";
@@ -7,18 +7,38 @@ import { createAward, getAllAwardType } from './Services/award.service.js';
 const token = localStorage.getItem("token");
 
 const options = {
-  month: 'short', // Two-digit month (e.g., 01)
-  day: '2-digit', // Two-digit day (e.g., 18)
-  hour: '2-digit', // Two-digit hour (e.g., 14)
+  month: 'short', 
+  day: '2-digit', 
+  hour: '2-digit', 
 };
 
   // Get the belongedToPostID from the URL query parameters
   const urlParams = new URLSearchParams(window.location.search);
-  const belongedToPostID = urlParams.get('belongedToPostID');
+  const postId = urlParams.get('belongedToPostID');
+
+  const showHeaderForTeacher = async () => {
+    try {
+      const usersInfo = await userInfo();
+      const userRole = usersInfo.role_id;
+  
+      if (userRole === 'Teacher') {
+        // Display the form
+        document.getElementById('teacherPage').style.display = 'block';
+        document.getElementById('teacherPage2').style.display = 'block';
+      } else {
+        // Hide the form
+        document.getElementById('teacherPage').style.display = 'none';
+        document.getElementById('teacherPage2').style.display = 'none';
+      }
+    } catch (error) {
+    }
+  };
+  
+  showHeaderForTeacher();
 
 function displayPost() {
 
-  request.get(`post/GetAllApproved/${belongedToPostID}`, {
+  request.get(`post/GetAllApproved/${postId}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -85,63 +105,133 @@ function displayPost() {
       // Handle error display or logging
     });
 }
-
-// Call the function to display the post
 displayPost();
-
 
 
 function displayComments() {
   const commentContainer = document.getElementById('commentContainer');
 
-  // Get comments by belongedToPostID
-  getCommentById(belongedToPostID)
+  // Get comments by PostID
+  getCommentById(postId)
     .then((comments) => {
-      // Clear existing comments
-      commentContainer.innerHTML = '';
-
-      // Iterate over comments and create HTML elements
+      console.log(comments);
       comments.forEach(async (comment) => {
-        const article = document.createElement('article');
-        article.classList.add('p-6', 'mb-3', 'text-base', 'bg-white', 'border-t', 'border-gray-200', 'dark:border-gray-700', 'dark:bg-gray-900');
+        if(comment.status != 'deleted'){
+          const article = document.createElement('article');
+          article.classList.add('p-6', 'mb-3', 'text-base', 'bg-white', 'border-t', 'border-gray-200', 'dark:border-gray-700', 'dark:bg-gray-900');
+  
+          const footer = document.createElement('footer');
+          footer.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
+  
+          const commentByUser = document.createElement('p');
+          commentByUser.classList.add('inline-flex', 'items-center', 'mr-3', 'text-sm', 'text-gray-900', 'dark:text-white', 'font-semibold');
+          commentByUser.textContent = comment.createdByUser;
+          
+          footer.appendChild(commentByUser);
+  
+          article.appendChild(footer);
+  
+          const commentText = document.createElement('p');
+          commentText.classList.add('text-gray-500', 'dark:text-gray-400');
+          commentText.textContent = comment.commentText;
+          article.appendChild(commentText);
+  
+          const buttonContainer = document.createElement('div');
+          buttonContainer.classList.add('flex', 'items-center', 'mt-4', 'space-x-4');
+  
+          const editBtn = document.createElement('button');
+          editBtn.type = 'button';
+          editBtn.dataset.commentId = comment.id;
+          editBtn.classList.add('flex', 'items-center', 'text-sm', 'text-gray-500', 'hover:underline', 'dark:text-gray-400', 'font-medium');
+          editBtn.innerHTML = '<i class="fa-regular fa-comment px-2"></i>Edit';
+          buttonContainer.appendChild(editBtn);
+  
+          const delButton = document.createElement('button');
+          delButton.type = 'button';
+          delButton.dataset.commentId = comment.id;
+          delButton.classList.add('flex', 'items-center', 'text-sm', 'text-gray-500', 'hover:underline', 'dark:text-gray-400', 'font-medium');
+          delButton.innerHTML = '<i class="fa-regular fa-delete px-2"></i>Delete';
+          buttonContainer.appendChild(delButton);
 
-        const footer = document.createElement('footer');
-        footer.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
+          article.appendChild(buttonContainer);
+          commentContainer.appendChild(article);
 
-        const commentByUser = document.createElement('p');
-        commentByUser.classList.add('inline-flex', 'items-center', 'mr-3', 'text-sm', 'text-gray-900', 'dark:text-white', 'font-semibold');
-        commentByUser.textContent = comment.createdByUser;
-        
-        footer.appendChild(commentByUser);
+          //EDIT COMMENT
+          editBtn.addEventListener('click', async () => {
+            const commentId = editBtn.dataset.commentId;
+  
+            // Make comment editable
+            commentText.contentEditable = true;
+            commentText.focus();
+            commentText.classList.add('editable');
+  
+            // Disable other buttons
+            editBtn.disabled = true;
+            delButton.disabled = true;
 
-        article.appendChild(footer);
+            const originalCommentText = commentText.textContent.trim();
 
-        const commentText = document.createElement('p');
-        commentText.classList.add('text-gray-500', 'dark:text-gray-400');
-        commentText.textContent = comment.commentText;
-        article.appendChild(commentText);
+            const submitForm = async () => {
+              const updatedCommentText = commentText.textContent.trim();
+              if (updatedCommentText !== '' && updatedCommentText !== originalCommentText) {
+                try {
+                  const model = {
+                    commentText: updatedCommentText,
+                  };
+                  const response = await editComment(parseInt(commentId), model);
+                  if (response != null) {
+                    location.reload();
+                  } else {
+                    alert('Failed to edit comment!');
+                  }
+                } catch (error) {
+                  console.error('Error editing comment:', error);
+                }
+              } else {
+                // If the updated comment text is empty or unchanged, revert the changes
+                commentText.textContent = comment.commentText;
+              }
+          
+              // Disable editing and enable buttons
+              commentText.contentEditable = false;
+              commentText.classList.remove('editable');
+              editBtn.disabled = false;
+              delButton.disabled = false;
+            };
 
-        const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('flex', 'items-center', 'mt-4', 'space-x-4');
+            commentText.addEventListener('keydown', (event) => {
+              if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                submitForm();
+              }
+            });
 
-        const replyButton = document.createElement('button');
-        replyButton.type = 'button';
-        replyButton.classList.add('flex', 'items-center', 'text-sm', 'text-gray-500', 'hover:underline', 'dark:text-gray-400', 'font-medium');
-        replyButton.innerHTML = '<i class="fa-regular fa-comment px-2"></i>Reply';
-        buttonContainer.appendChild(replyButton);
-
-        article.appendChild(buttonContainer);
-
-        commentContainer.appendChild(article);
+          });
+  
+          delButton.addEventListener('click', async () => {
+            const commentId = delButton.dataset.commentId;
+            const confirmDelete = confirm('Are you sure you want to delete this comment?');
+            if (confirmDelete) {
+              try {
+                const response = await deleteComment(commentId);
+                if (response != null) {
+                  location.reload();
+                } else {
+                  alert('Failed to delete comment!');
+                }
+              } catch (error) {
+                console.error('Error deleting comment:', error);
+              }
+            }
+          });
+        }
+  
       });
     })
     .catch((error) => {
       console.error('Error retrieving comments:', error);
     });
 }
-
-
-// Call the function to display the post
 displayComments();
 
 
@@ -160,7 +250,7 @@ form.addEventListener("submit", async (event) => {
   const us = await userInfo();
   const createdByUserID = us.userId;
 
-  const data = { commentText, belongedToPostID, createdByUserID };
+  const data = { commentText, postId, createdByUserID };
 
     try {
       const res = await createComment(data);
@@ -233,7 +323,7 @@ async function handleVotePost(voteType) {
 
     var model = {
       userID: usId,
-      postID: belongedToPostID,
+      postID: postId,
       voteTypeID: voteType
     };
 
@@ -298,13 +388,13 @@ getAllAwardType().then((types) => {
 
 const reportButton = document.getElementById('reportButton');
 reportButton.addEventListener('click', async function() {
-    //const postId = editButton.getAttribute('data-post-id');
+    const postsId = editButton.getAttribute('data-post-id');
   
     const width = window.innerWidth;
     const height = window.innerHeight;
     const left = 0;
     const top = 0;
-    const url = `reportPost.html` ;
+    const url = `reportPost.html?postId=${postsId}` ;
   
     window.open(url, "Report Violation", `width=${width}, height=${height}, left=${left}, top=${top}`);
 
@@ -320,7 +410,7 @@ const handleCreateAward = async (event) => {
 
   var model ={
       awardTypeID : awardTypeSelect.value,
-      postID: belongedToPostID,
+      postID: postId,
       givenByUserID: usId
   }
   try {

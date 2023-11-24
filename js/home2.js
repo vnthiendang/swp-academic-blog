@@ -19,9 +19,11 @@ import {
       if (userRole === 'Teacher') {
         // Display the form
         document.getElementById('teacherPage').style.display = 'block';
+        document.getElementById('giveAwardPage').style.display = 'block';
       } else {
         // Hide the form
         document.getElementById('teacherPage').style.display = 'none';
+        document.getElementById('giveAwardPage').style.display = 'none';
       }
     } catch (error) {
     }
@@ -69,6 +71,9 @@ import {
           </div>
         ` : '';
 
+        const postLink = document.createElement("a");
+        postLink.href = `blogDetail.html?belongedToPostID=${post.postsId}`;
+
           const postHTML = `
             <div class="main-blog">
               <div class="wapper-title">
@@ -76,7 +81,7 @@ import {
                   <div class="inner-column">
                     <div class="container-user">
                       <div class="by-user-logo">
-                        <img src="#" alt="User Logo">
+                        <img src="img/Img For User/User1.jpg" alt="User Logo">
                       </div>
                     </div>
                   </div>
@@ -115,12 +120,12 @@ import {
                   <div class="post-title-content" title="Post Title">
                     <div class="column-title">
                       <div class="postTitle">
-                        <h2>${post.title}</h2>
+                        <h2><a href="${postLink.href}">${post.title}</a></h2>
                       </div>
                     </div>
                     <div class="column-content">
                       <div class="postContent">
-                        <h2>${post.postDetail}</h2>
+                        <h2><a href="${postLink.href}">${post.postDetail}</a></h2>
                       </div>
                     </div>
                   </div>

@@ -17,8 +17,8 @@ export const put = async (path, data = {}) => {
     return response.data;
 };
 
-export const del = async (path, data = {}) => {
-    const response = await request.del(path, data);
+export const del = async (path, options = {}) => {
+    const response = await request.delete(path, options);
     return response.data;
 };
 

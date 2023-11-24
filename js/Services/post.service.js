@@ -146,9 +146,9 @@ export const createComment = async (model) => {
   } 
 };
 
-export const editComment = async (postId, model) => {
+export const editComment = async (commentId, model) => {
   try {
-    const response = await request.put(`comment/${postId}`, model, {
+    const response = await request.put(`comment/${commentId}`, model, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -157,6 +157,20 @@ export const editComment = async (postId, model) => {
     
   } catch (error) {
     console.error('Error edit comment:', error);
+  }
+};
+
+export const deleteComment = async (commentId) => {
+  try {
+    const response = await request.put(`comment/delete/${commentId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+    
+  } catch (error) {
+    console.error('Error delete comment:', error);
   }
 };
 //COMMENT

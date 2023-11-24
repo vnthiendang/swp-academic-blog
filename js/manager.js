@@ -396,8 +396,8 @@ const displayReports = async () => {
 
       const reportObjLink = document.createElement('td');
       const objLink = document.createElement('a');
-      reportObjLink.textContent = 'Evidence';
       objLink.href = `/blogDetail.html?postId=${report.reportedObjectLink}`;
+      objLink.textContent = 'Report Evidence';
       reportObjLink.appendChild(objLink);
       row.appendChild(reportObjLink);
 
@@ -517,7 +517,7 @@ const displayTeacherCategory = async () => {
 
       const updateCateBtn = document.createElement('button');
       updateCateBtn.classList.add('styled-button');
-      updateCateBtn.textContent = 'Delete';
+      updateCateBtn.textContent = 'Update';
       actionCell.appendChild(updateCateBtn);
 
       const createBtn = document.createElement('button');
