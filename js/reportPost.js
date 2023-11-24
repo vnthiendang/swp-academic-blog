@@ -1,5 +1,8 @@
 import { violationRuleList } from "./Services/admin.service.js";
 import { createReport } from "./Services/report.service.js";
+
+const urlParams = new URLSearchParams(window.location.search);
+const postId = urlParams.get('postId');
   
   // Function to display the violation rule list in the HTML
   const displayViolationRules = async () => {
@@ -73,7 +76,9 @@ reportBtn.addEventListener("click", async (event) => {
   
     var model = {
       reportTypeId: 1,
-      postId: postId
+      postId: parseInt(postId),
+      // violationRuleList,
+      // reportDetail
     }
     const response = await createReport(model);
   
