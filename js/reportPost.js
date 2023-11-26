@@ -69,7 +69,7 @@ const displayViolationRules = async () => {
       // Add event listener to the checkbox
       checkboxElement.addEventListener('change', () => {
         // Show/hide the single textbox based on the state of the checkbox
-        inputElement.style.display = checkboxElement.checked ? 'block' : 'none';
+        // inputElement.style.display = checkboxElement.checked ? 'block' : 'none';
       });
     });
   } catch (error) {

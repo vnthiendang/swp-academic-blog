@@ -74,25 +74,22 @@ function displayPosts(posts) {
 
         const postHTML = `
           <div class="main-blog">
+          
             <div class="wapper-title">
+
               <div class="column">
-                <div class="inner-column">
-                  <div class="container-user">
-                    <div class="by-user-logo">
-                      <img src="#" alt="User Logo">
-                    </div>
-                  </div>
-                </div>
+
                 <div class="inner-column">
                   <div class="container-user" title="Created By User">
                     <div class="by-user">
                       <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
                     </div>
-                    <div class="createdUser">
+                    <div class="by-user">
                       ${post.createdByUser}
                     </div>
                   </div>
                 </div>
+
                 <div class="inner-column">
                   <div class="container-datetime title="Created Time"">
                     <div class="date-time">
@@ -103,6 +100,7 @@ function displayPosts(posts) {
                     </div>
                   </div>
                 </div>
+
                 <div class="inner-column">
                   <div class="container-tag" title="Category">
                     <div class="tag-category">
@@ -113,7 +111,9 @@ function displayPosts(posts) {
                     </div>
                   </div>
                 </div>
+
               </div>
+
               <div class="container-post-img">
                 <div class="post-title-content" title="Post Title">
                   <div class="column-title">

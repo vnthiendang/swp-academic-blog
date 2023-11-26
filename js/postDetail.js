@@ -417,14 +417,15 @@ const handleCreateAward = async (event) => {
   try {
       const response = await createAward(model);
 
-      if(response != null){
-        alert('Give Award successfully!');
-      }else{
-        alert('Fail to give award!');
-      }
+        const responseData = response;
+        if (response) {
+          alert('Give Award Successfully!');
+        } else {
+          const errorMessage = responseData ? responseData : 'Unknown error occurred.';
+          alert(errorMessage);
+        }
     } catch (error) {
       console.error(error);
-      // Handle the error as needed
     }
 
 };

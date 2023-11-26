@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       if (res != null) {
         alert('Your Post created successfully!');
-        window.location.href = '/home.html';
+        window.location.href = '/home2.html';
       } else {
         alert('Failed to create post.');
       }
