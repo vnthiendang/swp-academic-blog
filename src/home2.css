@@ -152,7 +152,7 @@
 
 .createdUser:hover {
     text-decoration: underline;
-    color: crimson;
+    color: crimson; 
 }
 
 .container-datetime {
@@ -168,12 +168,21 @@
 .container-tag-hover {
     display: flex;
 }
-#postTag:hover {
-    transition: 0.5s;
+.tag-list {
+    display: flex;
+}
+.tag-list a {
+    padding: 1%;
+    width: 200px;
+    margin-left: 5px;
+}
+.tag-list a:hover {
+    transition: 1s;
     color: white;
     background-color: red;
     border-radius: 8px;
     font-weight: 700;
+    text-align: center;
 }
 .tag-category {
     color: red;
@@ -182,6 +191,14 @@
     margin: 1px;
 }
 #postCategory:hover {
+    transition: 0.5s;
+    color: white;
+    background-color: red;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+#tag-name-slide-right a :hover{
     transition: 0.5s;
     color: white;
     background-color: red;
