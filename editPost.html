@@ -106,9 +106,12 @@
             <!--javascript của multiple select tag ở dưới phần body-->
             <div class="flex flex-col">
                 <label for="">Tags
-                    <select id="tags" multiple
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option value>Choose tags</option>
+                    <div>
+                        <h2 id="tagLists"></h2>
+                    </div>
+                    <select id="tags" multiple class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <!-- <option id="optTag" selected>Choose tags</option> -->
+                        <option value="" disabled selected>Add tags</option>
                     </select>
 
                 </label>
@@ -126,7 +129,7 @@
                         </svg>
                         <div id="img-view" class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
                                 class="font-semibold">Click
-                                to upload</span> or drag and drop</div>
+                                to change cover image</span> or drag and drop</div>
                     </div>
                     <input type="file" id="mediaList" accept="image/*" class="hidden" multiple />
 
@@ -179,16 +182,7 @@
 
 
 <!--Multiple Select Tag-->
-<script>
-    new MultiSelectTag('tags', {
-        rounded: true, // default true
-        shadow: true, // default false
-        placeholder: 'Search', // default Search...
-        onChange: function (values) {
-            console.log(values)
-        }
-    })
-</script>
+
 
 
 
@@ -197,7 +191,7 @@
 
     // Get the tags and input elements from the DOM 
     const tags = document.getElementById('tags');
-    const input = document.getElementById('input-tag');
+    const input = document.getElementById('optTag');
 
     // Add an event listener for keydown on the input element 
     input.addEventListener('keydown', function (event) {

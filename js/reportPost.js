@@ -1,8 +1,11 @@
 import { violationRuleList } from "./Services/admin.service.js";
+import { userInfo } from "./Services/auth.service.js";
 import { createReport } from "./Services/report.service.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('postId');
+const checkedCheckboxValues = [];
+let inputElement;
 
 // Function to display the violation rule list in the HTML
 const displayViolationRules = async () => {
@@ -28,7 +31,7 @@ const displayViolationRules = async () => {
     formContainerElement.appendChild(labelElement);
 
     // Create a single textbox
-    const inputElement = document.createElement('input');
+    inputElement = document.createElement('input');
     inputElement.type = 'text';
     inputElement.id = 'singleTextbox';
     inputElement.name = 'singleTextbox';
@@ -67,10 +70,34 @@ const displayViolationRules = async () => {
       columnElement.appendChild(h2Element);
 
       // Add event listener to the checkbox
+      // checkboxElement.addEventListener('change', () => {
+      //   const checkboxElements = document.getElementById(`checkbox${index + 1}`);
+      //   if (checkboxElements.checked) {
+      //     checkedCheckboxValues.push(rule.violationRuleInfo);
+      //   }
+
+      //   // if (checkboxElement.checked) {
+      //   //   checkedCheckboxValues.push(rule.violationRuleInfo);
+      //   // } 
+      //   // else {
+      //   //   const index = checkedCheckboxValues.indexOf(rule.violationRuleInfo);
+      //   //   if (index > -1) {
+      //   //     checkedCheckboxValues.splice(index, 1);
+      //   //   }
+      //   // }
+      // });
+
       checkboxElement.addEventListener('change', () => {
-        // Show/hide the single textbox based on the state of the checkbox
-        // inputElement.style.display = checkboxElement.checked ? 'block' : 'none';
+        if (checkboxElement.checked) {
+          checkedCheckboxValues.push(rule.violationRuleInfo);
+        } else {
+          const index = checkedCheckboxValues.indexOf(rule.violationRuleInfo);
+          if (index > -1) {
+            checkedCheckboxValues.splice(index, 1);
+          }
+        }
       });
+
     });
   } catch (error) {
     console.error('Error displaying violation rules:', error);
@@ -85,11 +112,16 @@ const reportBtn = document.getElementById('reportBtn');
 reportBtn.addEventListener('click', async (event) => {
   event.preventDefault();
 
+  // const detail = document.getElementById(singleTextbox);
+  const userInfos = await userInfo();
+  const usId = userInfos.userId;
+
   var model = {
     reportTypeId: 1,  
     postId: parseInt(postId),
-    // violationRuleList,
-    // reportDetail
+    violationRuleList: checkedCheckboxValues,
+    reportDetail: inputElement.value,
+    reportedByUserId: usId
   };
   const response = await createReport(model);
 

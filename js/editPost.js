@@ -37,6 +37,7 @@ function displayEditPost() {
       // });
 
       document.getElementById('opt').textContent = post.belongedToCategory;
+      document.getElementById('tagLists').textContent = post.tagList;
 
       const postContentElement = document.getElementById('text-editor');
       postContentElement.innerHTML = post.postDetail;
@@ -96,8 +97,19 @@ getAllTag().then((tags) => {
   displayTags(tags);
 });
 
+const getChosenTags = () => {
+  const selectElement = document.getElementById('tags');
+  const selectedOptions = Array.from(selectElement.value);
+  const chosenTags = selectedOptions.map(option => option.value);
+
+  return chosenTags;
+};
+
 document.addEventListener("DOMContentLoaded", function () {
-  const imageInput = document.getElementById("mediaList");
+  //const imageInput = document.getElementById("mediaList");
+  const mediaInput = document.getElementById('mediaList');
+  const selectedFiles = mediaInput.files;
+  const mediaList = Array.from(selectedFiles);
 
   const form = document.getElementById('updatePost');
   form.addEventListener('submit', async (event) => {
@@ -119,44 +131,39 @@ document.addEventListener("DOMContentLoaded", function () {
     //const allowCommentSelect = document.querySelector('#comment');
     const categorySelect = document.querySelector('#opt');
     const textEditor = document.querySelector('#text-editor');
-    // const tagList = Array.from(document.querySelector("#Tag")).map(li => li.textContent);
-    const tagList = document.querySelector("#tags");
-
-    //const us = await userInfo();
-    //const userId = us.userId;
-
-    // const formData = new FormData();
-    // formData.append('categoryID', parseInt(categorySelect.value));
-    // formData.append('title', titleInput.value);
-    // //formData.append('userID', userId);
-    // formData.append('detail', textEditor.innerHTML);
-    // for (let i = 0; i < imageInput.files.length; i++) {
-    //   formData.append('mediaList', imageInput.files[i]);
-    // }
-
-    // formData.append('tagList', tagList);
 
     const model = {
       categoryName: categorySelect.textContent,
       title: titleInput.value,
       detail: textEditor.innerHTML,
       mediaList: [],
-      tagList: tagList.value ? [tagList.value] : []
+      tagList: getChosenTags()
     };
 
-    imageInput.addEventListener("change", () => {
-      model.mediaList = Array.from(imageInput.files);
-    });
+    if (mediaInput.files.length > 0) {
+      mediaInput.addEventListener('change', () => {
+        model.mediaList = Array.from(mediaInput.files);
+      });
+    } else {
+      model.mediaList = new Blob([]);
+    }
 
     try {
-
-      const res = await updatePost(postId, model);
-
-      if (res != null) {
-        alert('Your Post Edit successfully!');
-        window.location.href = '/profile.html';
-      } else {
-        alert('Failed to edit post!');
+      const selectedTagsText = document.getElementById('tagLists').textContent.split(',').map(tag => tag.trim());
+      const chosenTags = getChosenTags() || [];
+      const isDifferent = chosenTags.some(tag => selectedTagsText.includes(tag));
+      
+      //CHECK if TAGS are already chosen
+      if (isDifferent) {
+        alert('Tags are already chosen!');
+      }else{
+        const res = await updatePost(postId, model);
+        if (res != null) {
+          alert('Your Post Edit successfully!');
+          window.location.href = '/profile.html';
+        } else {
+          alert('You need to choose tag!');
+        }
       }
     } catch (error) {
       console.log(error);
