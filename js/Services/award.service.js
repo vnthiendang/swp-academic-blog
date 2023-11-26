@@ -32,12 +32,12 @@ export const getAllAward = async () => {
 
 export const createAward = async (model) => {
   try {
-    const response = await request.post(`award/post`, model, {
+    const response = await request.postAward(`award/post`, model, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
-    return response;
+    return response.data;
     
   } catch (error) {
     console.error('Error giving award:', error);

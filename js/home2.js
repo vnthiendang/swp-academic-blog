@@ -46,7 +46,7 @@ import {
       postContainer.appendChild(noResultsElement);
     } else {
       $(document).ready(function() {
-        const container = $('.col-span-3');
+        const container = $('.main-blog');
         
         // DISPLAY LIST OF POSTS
         posts.forEach(function(post) {

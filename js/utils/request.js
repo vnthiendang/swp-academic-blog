@@ -22,4 +22,9 @@ export const del = async (path, options = {}) => {
     return response.data;
 };
 
+export const postAward = async (path, data = {}) => {
+        const response = await request.post(path, data);
+        return response;
+};
+
 export default request;
