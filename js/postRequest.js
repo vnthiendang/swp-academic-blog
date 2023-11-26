@@ -45,6 +45,7 @@ function displayPosts(posts) {
         createdByUser.className = 'ml-4';
         createdByUser.title = 'Name Users';
         createdByUser.textContent = post.createdByUser;
+
         const grayTextSpan = document.createElement('span');
         grayTextSpan.className = 'text-gray-400';
         grayTextSpan.textContent = ' in ';
@@ -73,13 +74,13 @@ function displayPosts(posts) {
         dateTimeElement1.title = 'Date Time';
         flexElement.appendChild(dateTimeElement1);
   
-      const dateTimeElement2 = document.createElement('div');
-      dateTimeElement2.className = 'date-time';
-      dateTimeElement2.title = 'Date Time';
-      const postCreatedTime = new Date(post.createdTime);
-      const formattedTime = postCreatedTime.toLocaleString('en-US', options);
-      dateTimeElement2.textContent = formattedTime;
-      flexElement.appendChild(dateTimeElement2);
+        const dateTimeElement2 = document.createElement('div');
+        dateTimeElement2.className = 'date-time';
+        dateTimeElement2.title = 'Date Time';
+        const postCreatedTime = new Date(post.createdTime);
+        const formattedTime = postCreatedTime.toLocaleString('en-US', options);
+        dateTimeElement2.textContent = formattedTime;
+        flexElement.appendChild(dateTimeElement2);
   
       postElement.appendChild(flexElement);
   
@@ -166,6 +167,7 @@ function displayPosts(posts) {
           tagDiv.className = 'icon-tag';
           tagDiv.title = 'Tag Name';
           tagDiv.textContent = tag;
+          tagDiv.textContent = `#${tag}`;
       
           // Append the icon and tag to the flex container
           flexContainer.appendChild(iconTag);

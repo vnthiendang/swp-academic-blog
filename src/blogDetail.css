@@ -81,17 +81,15 @@ Main {
 } */
 
 .column-report2 #formContainer label {
-    display: flex;
+    /* display: flex; */
     padding: 10px 0;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 400;
     color: black;
     text-transform: uppercase;
     letter-spacing: 1.2px;
     width: 100%;
 }
-
-.column-report2 #formContainer labe
 
 .column-comment {
     width: 1000px;
@@ -100,7 +98,7 @@ Main {
     /* margin-top: -5%; */
     /* margin-bottom: 1%; */
     background-color: white;
-    margin-right: 380px;
+    margin-right: 370px;
     /* background-color: red; */
 }
 

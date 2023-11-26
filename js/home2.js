@@ -60,6 +60,7 @@ import {
               tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
               tagLink.className = 'tag';
               tagLink.textContent = tag;
+              tagLink.textContent = `#${tag}`;
               return tagLink.outerHTML;
             });
             tagsHTML = tags.join(' ');
@@ -69,9 +70,6 @@ import {
             <div class="container-read">
               <div class="tag-category">
                 <h2>Tag: </h2>
-              </div>
-              <div class="tag-category">
-                <i class="fa-solid fa-hashtag";></i>
               </div>
               <div class="tag-list" id="tagList">
                 ${tagsHTML}
@@ -88,6 +86,7 @@ import {
           const postHTML = `
             <div class="main-blog">
               <div class="wapper-title">
+              
                 <div class="column">
 
                   <div class="inner-column">
@@ -102,7 +101,7 @@ import {
                   </div>
 
                   <div class="inner-column">
-                    <div class="container-datetime" title="Date Time">
+                    <div class="container-datetime" title="Created Time">
                       <div class="date-time">
                         <i class="fa-regular fa-calendar-days" style="color: #000000;"></i>
                       </div>
@@ -129,8 +128,11 @@ import {
                         </div> 
                       </div> 
                   </div>
+
                 </div>
+
                 <div class="container-post-img">
+
                   <div class="post-title-content" title="Post Title">
                     <div class="column-title">
                       <div class="postTitle">

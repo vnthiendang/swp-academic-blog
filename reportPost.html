@@ -154,7 +154,7 @@
                     }
 
                     .column-container-report {
-                        display: flex;
+                        /* display: flex; */
                         background-color: white;
                     }
 
@@ -176,7 +176,7 @@
                 <div class="column-report1" style="background-color: white;">
 
                     <!-- Column 1 -->
-                    <div class="column" onclick="toggleForm('formContainer')">
+                    <div class="column">
                         <h2>
     
                         </h2>
@@ -185,7 +185,7 @@
                 </div>
     
                 <div class="column-report2">
-                    <div id="formContainer" class="hidden-textbox">
+                    <div id="formContainer">
                         <form action="#">
                             <label for="fname">
                                 
@@ -194,13 +194,6 @@
                         </form>
                     </div>
                 </div>
-                
-                <script>
-                    function toggleForm(containerId) {
-                        var formContainer = document.getElementById(containerId);
-                        formContainer.classList.toggle("hidden-textbox");
-                    }
-                </script>
             </div>
         
             <!-- Button -->
