@@ -121,9 +121,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
             @RequestParam(name = "keyword", required = false) String keyword,
             @RequestParam(name = "categoryName", required = false) String categoryName,
             @RequestParam(name = "tagNames", required = false) List<String> tagNames,
-
             @RequestParam(name = "minimumLikeCount", required = false) Integer minimumLikeCount,
-
             @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
             @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
             @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,

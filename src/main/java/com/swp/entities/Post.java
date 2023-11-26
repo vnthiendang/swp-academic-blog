@@ -72,7 +72,7 @@ public class Post {
 
     public Integer getLikeCount() {
         long likeCount = votes.stream()
-                .filter(vote -> vote.getVoteType().equals(1))
+                .filter(vote -> vote.getVoteType().getId().equals(1))
                 .count();
 
         return Math.toIntExact(likeCount);
