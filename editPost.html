@@ -8,11 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
     <title>Edit Post</title>
+    <!--Multiple Select Tag-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.0/dist/js/multi-select-tag.js"></script>
+    <!--Multiple Select Tag-->
     <style>
-        
         form {
             width: auto;
             height: 800px;
@@ -22,13 +26,13 @@
             border-radius: 5px;
             background-color: #f5f5f5;
         }
-      
+
         form label {
             display: block;
             margin-bottom: 10px;
             font-weight: bold;
         }
-      
+
         form input[type="text"],
         form textarea {
             width: 100%;
@@ -42,14 +46,14 @@
         form input[type="file"] {
             margin-top: 5px;
         }
-      
+
         form button[type="submit"] {
-          background-color: green;
-          color: white;
-          border: none;
-          padding: 10px 20px;
-          border-radius: 4px;
-          cursor: pointer;
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -61,7 +65,7 @@
             <a href="/home2.html" class="items-start justify-center">
                 <img src="/img/Logo.png" alt="logo" class="w-16 h-auto">
             </a>
-            
+
             <a href="/home2.html" class="p-2">
                 Home
             </a>
@@ -74,59 +78,63 @@
 
     <!-- Main  -->
     <Main>
-        <form class="form" id="updatePost" >
+        <form class="form" id="updatePost">
             <div>
-              <label for="categoryID">Category:</label>
+                <label for="categoryID">Category:</label>
 
-              <select id="categoryID" name="categoryID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option id="opt" selected>Choose Category</option>
-              </select>
+                <select id="categoryID" name="categoryID"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <option id="opt" selected>Choose Category</option>
+                </select>
             </div>
             <div>
-              <label for="title">Title:</label>
-              <input type="text" id="title" name="title" required>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
             </div>
             <div>
-                
-                    <div class="w-full  mb-4 border border-gray-200 rounded-lg bg-gray-50  dark:border-gray-600">
 
-                        <div id="text-editor" rows="8"
-                            class="block w-full px-0 text-sm text-gray-800 bg-white border-0 focus:ring-0 dark:text-grey dark:placeholder-gray-400">
-                        </div>
+                <div class="w-full  mb-4 border border-gray-200 rounded-lg bg-gray-50  dark:border-gray-600">
+
+                    <div id="text-editor" rows="8"
+                        class="block w-full px-0 text-sm text-gray-800 bg-white border-0 focus:ring-0 dark:text-grey dark:placeholder-gray-400">
                     </div>
-                
+                </div>
+
             </div>
+            <!--choose multiple tags-->
+            <!--link Multiple Select Tag ở header-->
+            <!--javascript của multiple select tag ở dưới phần body-->
             <div class="flex flex-col">
                 <label for="">Tags
-                <select id="tags"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    <option value>Choose tags</option>
-                </select>
-                
-            </label>
+                    <select id="tags" multiple
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <option value>Choose tags</option>
+                    </select>
+
+                </label>
             </div>
             <div>
-              <!-- <label for="mediaList">Media:</label >
+                <!-- <label for="mediaList">Media:</label >
               <input type="file" id="mediaList" name="mediaList" > -->
                 <label for="mediaList" id="drop-area"
-                class="flex flex-col items-center justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
-                <div class="flex flex-col items-center justify-center">
-                  <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                  </svg>
-                  <div id="img-view" class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
-                          class="font-semibold">Click
-                          to upload</span> or drag and drop</div>
-                </div>
-                <input type="file" id="mediaList" accept="image/*" class="hidden" multiple/>
-              
+                    class="flex flex-col items-center justify-center h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+                    <div class="flex flex-col items-center justify-center">
+                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                        </svg>
+                        <div id="img-view" class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                class="font-semibold">Click
+                                to upload</span> or drag and drop</div>
+                    </div>
+                    <input type="file" id="mediaList" accept="image/*" class="hidden" multiple />
+
                 </label>
             </div>
 
             <div>
-              <button type="submit">Update Post</button>
+                <button type="submit">Update Post</button>
             </div>
         </form>
     </Main>
@@ -161,151 +169,170 @@
         </div>
     </footer>
     <script type="module" src='./js/editPost.js'></script>
+
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="js/post_quill_editor.js"></script>
 
-<script> 
-      
+
+
+<!--Multiple Select Tag-->
+<script>
+    new MultiSelectTag('tags', {
+        rounded: true, // default true
+        shadow: true, // default false
+        placeholder: 'Search', // default Search...
+        onChange: function (values) {
+            console.log(values)
+        }
+    })
+</script>
+
+
+
+
+<script>
+
     // Get the tags and input elements from the DOM 
-    const tags = document.getElementById('tags'); 
-    const input = document.getElementById('input-tag'); 
+    const tags = document.getElementById('tags');
+    const input = document.getElementById('input-tag');
 
     // Add an event listener for keydown on the input element 
-    input.addEventListener('keydown', function (event) { 
+    input.addEventListener('keydown', function (event) {
 
         // Check if the key pressed is 'Enter' 
-        if (event.key === 'Enter') { 
-          
+        if (event.key === 'Enter') {
+
             // Prevent the default action of the keypress 
             // event (submitting the form) 
-            event.preventDefault(); 
-          
+            event.preventDefault();
+
             // Create a new list item element for the tag 
-            const tag = document.createElement('li'); 
-          
+            const tag = document.createElement('li');
+
             // Get the trimmed value of the input element 
-            const tagContent = input.value.trim(); 
-          
+            const tagContent = input.value.trim();
+
             // If the trimmed value is not an empty string 
-            if (tagContent !== '') { 
-          
+            if (tagContent !== '') {
+
                 // Set the text content of the tag to  
                 // the trimmed value 
-                tag.innerText = tagContent; 
+                tag.innerText = tagContent;
 
                 // Add a delete button to the tag 
-                tag.innerHTML += '<button class="delete-button"></button>'; 
-                  
+                tag.innerHTML += '<button class="delete-button"></button>';
+
                 // Append the tag to the tags list 
-                tags.appendChild(tag); 
-                  
+                tags.appendChild(tag);
+
                 // Clear the input element's value 
-                input.value = ''; 
-            } 
-        } 
-    }); 
+                input.value = '';
+            }
+        }
+    });
 
     // Add an event listener for click on the tags list 
-    tags.addEventListener('click', function (event) { 
+    tags.addEventListener('click', function (event) {
 
         // If the clicked element has the class 'delete-button' 
-        if (event.target.classList.contains('delete-button')) { 
-          
+        if (event.target.classList.contains('delete-button')) {
+
             // Remove the parent element (the tag) 
-            event.target.parentNode.remove(); 
-        } 
+            event.target.parentNode.remove();
+        }
     }); 
-</script> 
+</script>
 <script>
     // Get the input element
-        var img = document.getElementById("mediaList"); 
-    
-        // Add an event listener to handle the change event
-        img.addEventListener("change", function () {
-            // Get the selected file
-            var file = this.files[0];
-    
-            // Check if the file is an image
-            if (file.type.startsWith("image/")) {
-                // Create a new FileReader object
-                var reader = new FileReader();
-    
+    var img = document.getElementById("mediaList");
+
+    // Add an event listener to handle the change event
+    img.addEventListener("change", function () {
+        // Get the selected file
+        var file = this.files[0];
+
+        // Check if the file is an image
+        if (file.type.startsWith("image/")) {
+            // Create a new FileReader object
+            var reader = new FileReader();
+
+            // Add an event listener to handle the load event
+            reader.addEventListener("load", function () {
+                // Get the image data as a base64 encoded string
+                var data = this.result;
+
+                // Create a new Image object
+                var img = new Image();
+
+                // Set the src attribute to the image data
+                img.src = data;
+
                 // Add an event listener to handle the load event
-                reader.addEventListener("load", function () {
-                    // Get the image data as a base64 encoded string
-                    var data = this.result;
-    
-                    // Create a new Image object
-                    var img = new Image();
-    
-                    // Set the src attribute to the image data
-                    img.src = data;
-    
-                    // Add an event listener to handle the load event
-                    img.addEventListener("load", function () {
-                        // Get the image width and height
-                        var width = this.width;
-                        var height = this.height;
-    
-                        // Display the image information
-                        console.log("Image name: " + file.name);
-                        console.log("Image size: " + file.size + " bytes");
-                        console.log("Image type: " + file.type);
-                        console.log("Image width: " + width + " pixels");
-                       console.log("Image height: " + height + " pixels");
-    
-                        // Get the drop area element
-                        var dropArea = document.getElementById("drop-area");
-    
+                img.addEventListener("load", function () {
+                    // Get the image width and height
+                    var width = this.width;
+                    var height = this.height;
+
+                    // Display the image information
+                    console.log("Image name: " + file.name);
+                    console.log("Image size: " + file.size + " bytes");
+                    console.log("Image type: " + file.type);
+                    console.log("Image width: " + width + " pixels");
+                    console.log("Image height: " + height + " pixels");
+
+                    // Get the drop area element
+                    var dropArea = document.getElementById("drop-area");
+
                     // Remove the default text inside the drop area element
-                        dropArea.innerHTML = "";
-    
-                        // Append the image to the drop area element
-                        dropArea.appendChild(img);
-    
-                        // Adjust the size and position of the image
-                        img.style.width = "100%";
-                        img.style.height = "100%";
-                        img.style.objectFit = "cover";
-                        img.style.margin = "0";
-                    });
+                    dropArea.innerHTML = "";
+
+                    // Append the image to the drop area element
+                    dropArea.appendChild(img);
+
+                    // Adjust the size and position of the image
+                    img.style.width = "100%";
+                    img.style.height = "100%";
+                    img.style.objectFit = "cover";
+                    img.style.margin = "0";
                 });
-    
-                // Read the file as a data URL
-                reader.readAsDataURL(file);
-            } else {
-                // Display an error message
-                alert("Please select an image file.");
-            }
-        });
-    
-        // Create a function that will reset the drop area element
-        function resetDropArea() {
-            // Get the drop area element
-            var dropArea = document.getElementById("drop-area");
-    
-            // Clear the content of the drop area element
-            dropArea.innerHTML = "";
-    
-            // Create a new div element for the default text
-            var div = document.createElement("div");
-            div.id = "img-view";
-            div.className = "mb-2 text-sm text-gray-500 dark:text-gray-400";
-            div.innerHTML = "<span class='font-semibold'>Click to upload</span> or drag and drop";
-    
-            // Append the div element to the drop area element
-            dropArea.appendChild(div);
-    
-            // Append the input element to the drop area element
-            dropArea.appendChild(img);
+            });
+
+            // Read the file as a data URL
+            reader.readAsDataURL(file);
+        } else {
+            // Display an error message
+            alert("Please select an image file.");
         }
-    
-        // Add an event listener to handle the click event on the drop area element
-        document.getElementById("drop-area").addEventListener("click", resetDropArea);
-    
-    
-</script> 
+    });
+
+    // Create a function that will reset the drop area element
+    function resetDropArea() {
+        // Get the drop area element
+        var dropArea = document.getElementById("drop-area");
+
+        // Clear the content of the drop area element
+        dropArea.innerHTML = "";
+
+        // Create a new div element for the default text
+        var div = document.createElement("div");
+        div.id = "img-view";
+        div.className = "mb-2 text-sm text-gray-500 dark:text-gray-400";
+        div.innerHTML = "<span class='font-semibold'>Click to upload</span> or drag and drop";
+
+        // Append the div element to the drop area element
+        dropArea.appendChild(div);
+
+        // Append the input element to the drop area element
+        dropArea.appendChild(img);
+    }
+
+    // Add an event listener to handle the click event on the drop area element
+    document.getElementById("drop-area").addEventListener("click", resetDropArea);
+
+</script>
+
 
 </html>
