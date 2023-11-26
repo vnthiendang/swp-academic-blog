@@ -94,6 +94,16 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.postTitle h2 a {
+    color: currentColor;
+    transition: color 0.3s ease;
+}
+
+.postTitle h2 a:hover {
+    color: seagreen;
+}
+
+
 .postContent {
     width: 1200px;
     background-color: white;

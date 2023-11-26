@@ -57,13 +57,41 @@ Main {
 }
 
 .column-container-report {
-    width: 50%;
+    width: 70%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-left: 20%;
+    /* margin-bottom: 1%; */
+    background-color: white;
+    /* background-color: red; */
+}
+
+.column-report2 {
+    width: 100%;
+    width: 70%;
     padding: 10px;
     box-sizing: border-box;
     /* margin-bottom: 1%; */
     background-color: white;
     /* background-color: red; */
 }
+
+/* .column-report2 #formContainer form {
+    display: flex;
+} */
+
+.column-report2 #formContainer label {
+    display: flex;
+    padding: 10px 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: black;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    width: 100%;
+}
+
+.column-report2 #formContainer labe
 
 .column-comment {
     width: 1000px;
@@ -257,6 +285,10 @@ Main {
     font-size: 20px;
     font-weight: 700;
 }
+.checkbox-input {
+    margin-right: 1%;
+}
+
 /* ========================== Buton ============================= */
 
 .icon {
