@@ -121,9 +121,7 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
             @RequestParam(name = "keyword", required = false) String keyword,
             @RequestParam(name = "categoryName", required = false) String categoryName,
             @RequestParam(name = "tagNames", required = false) List<String> tagNames,
-
             @RequestParam(name = "minimumLikeCount", required = false) Integer minimumLikeCount,
-
             @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
             @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
             @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
@@ -259,20 +257,27 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
     @GetMapping("/postRequest")
 
     public List<PostDto> getAllPostRequest(
-//            @RequestParam(name = "postApprovalStatuses", required = false) List<String> postApprovalStatuses,
-//            @RequestParam(name = "postCategories", required = false) List<String> postCategories,
-//            @RequestParam(name = "isFilterByCurrentUserCategoryManagement", required = false) boolean isFilterByCurrentUserCategoryManagement,
-//            @RequestParam(name = "isIncludedCurrentUserOwnPostRequest", required = false) boolean isIncludedCurrentUserOwnPostRequest,
-//            @RequestParam(name = "userIdOfPostOfPostApproval", required = false) Integer userIdOfPostOfPostApproval
+            @RequestParam(name = "startDate", required = false) LocalDateTime startDate,
+            @RequestParam(name = "endDate", required = false) LocalDateTime endDate,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "createdDate") String sortBy,
+            @RequestParam(name = "userId", required = false) Integer userId,
+            @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection
     ) {
-//        List<PostApprovals> postApprovals = postApprovalsService.filterPostApprovalsByPostApprovalStatus(postApprovalStatuses);
-//        if (postStatuses != null && !postStatuses.isEmpty()) {
-//            posts = postService.filterPostsByPostStatus(posts, postStatuses);
-//        }
 
-        List<Post> posts = postService.getPostsWithoutApprovalsAndByCurrentUserCategoryManagement();
-        List<Post> postss = postService.getPostRequestsWithoutCurrentUserOwnPostRequests(posts);
-        List<PostDto> dtos = postService.mapPostsToPostDtos(postss);
+        List<Post> post = postService.getPostsWithoutApprovalsAndByCurrentUserCategoryManagement();
+        List<Post> posts = postService.getPostRequestsWithoutCurrentUserOwnPostRequests(post);
+
+        if (startDate != null && endDate != null) {
+            posts = postService.filterPostsByDateRange(posts, startDate, endDate);
+        }
+
+        if (userId != null){
+            posts = postService.GetPostsByUserId(posts, userId);
+        }
+
+        posts = postService.sortPosts(posts, sortBy, sortDirection);
+
+        List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
         return dtos;
     }
 
