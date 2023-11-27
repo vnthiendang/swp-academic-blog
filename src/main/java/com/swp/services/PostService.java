@@ -45,6 +45,8 @@ public class PostService {
     @Autowired
     private ViolationRuleRepository violationRuleRepository;
 
+    @Autowired
+    private PostTagRepository postTagRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -58,7 +60,8 @@ public class PostService {
             userId = userDetails.getUsId();
         }
     }
-@Transactional
+
+    @Transactional
     public Post getById(Integer id) {
         List<Post> approvedPosts = postRepository.findAllApprovedPosts();
         Optional<Post> optionalPost = approvedPosts.stream()
@@ -109,7 +112,7 @@ public class PostService {
         if (medias != null && !medias.isEmpty()) {
             List<Media> mediaList = new ArrayList<>();
             for (MultipartFile media : medias) {
-                if (!media.isEmpty()){
+                if (!media.isEmpty()) {
                     Media media1 = new Media();
                     media1.setPost(post);
                     media1.setMediaUrl("ko co URL");
@@ -151,7 +154,7 @@ public class PostService {
         return postRepository.save(post);
     }
 
-@Transactional
+    @Transactional
     public Post updatePost(Integer postId, PostRequest postRequest) {
         Post post = getById(postId);
         if (post == null) {
@@ -202,11 +205,14 @@ public class PostService {
             post.getMedias().addAll(mediaList);
         }
 
+        for (PostTag postTag : post.getPostTags()) {
+            postTagRepository.deleteById(postTag.getId());
+        }
+
         // Update PostTags
         List<String> tagNames = postRequest.getTagList();
         if (tagNames != null && !tagNames.isEmpty()) {
-            // Clear existing post tags and replace with new ones
-            post.getPostTags().clear();
+
             List<PostTag> postTagList = new ArrayList<>();
             for (String tagName : tagNames) {
                 Tag tag = tagRepository.findByTagName(tagName)
@@ -217,14 +223,11 @@ public class PostService {
                 postTagList.add(postTag);
             }
             post.setPostTags(postTagList);
-        } else {
-            // If tagIds is empty, remove all existing post tags
-            post.getPostTags().clear();
         }
 
         Optional<PostApprovals> postApprovals = postApprovalsRepository.findByPostPostsId(postId);
 
-        if (postApprovals.isPresent()){
+        if (postApprovals.isPresent()) {
             postApprovalsRepository.deleteById(postApprovals.get().getId());
             post.setPostApprovals(null);
         }
@@ -232,7 +235,7 @@ public class PostService {
 
     }
 
-@Transactional
+    @Transactional
     public List<Post> findMostVotedPostInCategory(int categoryId) {
         // Step 1: Fetch all posts in the desired category
         Category category = categoryRepository.findById(categoryId)
@@ -241,8 +244,8 @@ public class PostService {
 
         // Step 2: Find the post with the most votes
         postsInCategory.sort((post1, post2) -> Integer.compare(
-            post2.getVotes().size(),
-            post1.getVotes().size()));
+                post2.getVotes().size(),
+                post1.getVotes().size()));
 
         return postsInCategory;
     }
@@ -285,8 +288,8 @@ public class PostService {
         User currentUser = userRepository.findById(userIds)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User"));
         Optional<Post> post = postRepository.findById(id);
-        if (post.isPresent()){
-            if (post.get().getCreatedByUser().getUsId() == userIds ){
+        if (post.isPresent()) {
+            if (post.get().getCreatedByUser().getUsId() == userIds) {
                 throw new IllegalStateException("Cannot review your own post");
             }
         }
@@ -324,8 +327,8 @@ public class PostService {
         User currentUser = userRepository.findById(userIds)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User"));
         Optional<Post> post = postRepository.findById(id);
-        if (post.isPresent()){
-            if (post.get().getCreatedByUser().getUsId() == userIds ){
+        if (post.isPresent()) {
+            if (post.get().getCreatedByUser().getUsId() == userIds) {
                 throw new IllegalStateException("Cannot review your own post");
             }
         }
@@ -359,7 +362,7 @@ public class PostService {
             Report report = new Report();
             report.setReportType(reportTypeRepository.findById(2).orElseThrow());
             report.setReportDetail("User: " + userRepository.findById(userId).orElseThrow().getDisplay_name()
-            + " has more than 4 rejected post requests within 24 hours");
+                    + " has more than 4 rejected post requests within 24 hours");
 
             report.setCreatedTime(LocalDateTime.now());
             report.setStatus("approved");
@@ -367,7 +370,7 @@ public class PostService {
             report.setReportedObjectLink("");
 
             ViolationRule violationRule = violationRuleRepository.findById(8)
-                            .orElseThrow(() -> new IllegalArgumentException("Invalid Violation Rule"));
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid Violation Rule"));
 
             List<ReportViolation> reportViolationList = new ArrayList<>();
             ReportViolation reportViolation = new ReportViolation();
@@ -381,7 +384,6 @@ public class PostService {
 
         return null; // No report generated if the threshold is not exceeded
     }
-
 
 
     public List<PostDto> mapPostsToPostDtos(List<Post> posts) {
@@ -446,6 +448,7 @@ public class PostService {
                     .collect(Collectors.toList());
         }
     }
+
     private boolean postContainsAllTagNames(Post post, List<String> tagNames) {
         Set<String> postTags = post.getPostTags().stream()
                 .map(PostTag::getTag)
@@ -549,6 +552,7 @@ public class PostService {
                 .filter(post -> post.getBelongedToCategory().getCateId().equals(categoryId))
                 .collect(Collectors.toList());
     }
+
     public List<Post> GetPostsByCategoryName(List<Post> approvedPosts, String categoryName) {
         Category category = categoryRepository.findByContent(categoryName)
                 .orElseThrow(() -> new IllegalArgumentException("Category not found with Name: " + categoryName));
@@ -579,7 +583,6 @@ public class PostService {
                 .filter(post -> post.getCreatedByUser().getUsId().equals(userId))
                 .collect(Collectors.toList());
     }
-
 
 
     public List<Post> filterPostsByPostStatus(List<Post> posts, List<String> postStatuses) {
