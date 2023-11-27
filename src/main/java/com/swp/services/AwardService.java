@@ -237,4 +237,16 @@ public class AwardService {
                 .collect(Collectors.toList());
 
     }
+
+    public boolean isPostCreatedByUser(int postId, int givenByUserId) {
+        Optional<Post> postOptional = postRepository.findById(postId);
+        if (postOptional.isPresent()) {
+            Post post = postOptional.get();
+            User createdByUser = post.getCreatedByUser();
+            return createdByUser.getUsId().equals(givenByUserId);
+        } else {
+            throw new IllegalArgumentException("Post not found with postId: " + postId);
+        }
+    }
+
 }

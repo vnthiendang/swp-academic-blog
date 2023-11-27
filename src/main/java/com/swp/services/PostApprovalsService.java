@@ -74,6 +74,12 @@ public class PostApprovalsService {
         return postApprovalsRepository.save(postApprovals); // Save and return the updated post
     }
 
+    public PostApprovals deletePostApprovals(Integer postApprovalsID){
+        PostApprovals postApprovals = getById(postApprovalsID);
+        postApprovals.setStatus("DELETED");
+        return postApprovalsRepository.save(postApprovals); // Save and return the updated post
+    }
+
 
     public List<PostApprovals> filterPostApprovalsByPostApprovalStatus(List<String> postApprovalStatuses) {
         List<PostApprovals> results = new ArrayList<>();

@@ -126,14 +126,14 @@ public class PostApprovalsController {
     public ResponseEntity<String> deletePostApprovalsById(@PathVariable Integer id) {
         try {
             // Call the service to delete the post approvals
-            postApprovalsService.deleteById(id);
+            postApprovalsService.deletePostApprovals(id);
             return new ResponseEntity<>("PostApprovals deleted successfully", HttpStatus.OK);
         } catch (NoSuchElementException e) {
             // Handle case where the post approvals with the given ID was not found
             return new ResponseEntity<>("PostApprovals not found", HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
+        } catch (Exception ex) {
             // Handle other exceptions, such as database errors
-            return new ResponseEntity<>("An error occurred while deleting the PostApprovals", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("An error occurred while deleting the PostApprovals " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

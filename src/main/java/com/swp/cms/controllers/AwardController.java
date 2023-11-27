@@ -144,6 +144,14 @@ public class AwardController {
         try {
             int givenByUserId = awardRequest.getGivenByUserID();
 
+            int postId = awardRequest.getPostID();
+
+            // Check if the user is giving an award to their own post
+            if (awardService.isPostCreatedByUser(postId, givenByUserId)) {
+                String resultMessage = "You cannot give an award to your own post.";
+                return ResponseEntity.badRequest().body(resultMessage);
+            }
+
             if (awardService.hasTeacherGivenAwardThisWeek(givenByUserId)) {
                 String resultMessage = "You have already given an award this week. Cannot give another award.";
                 return ResponseEntity.badRequest().body(resultMessage);
