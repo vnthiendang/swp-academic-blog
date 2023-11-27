@@ -101,7 +101,7 @@ const getChosenTags = () => {
   const selectElement = document.getElementById('tags');
   const selectedOptions = Array.from(selectElement.selectedOptions);
   const chosenTags = selectedOptions.map(option => option.value);
-  return chosenTags;
+  return chosenTags > 0 ? chosenTags : [document.getElementById('tagLists').textContent];
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -147,25 +147,28 @@ document.addEventListener("DOMContentLoaded", function () {
     //   model.mediaList = new Blob([]);
     // }
 
-    try {
-      const selectedTagsText = document.getElementById('tagLists').textContent.split(',').map(tag => tag.trim());
-      const chosenTags = getChosenTags() || [];
-      const isDifferent = chosenTags.some(tag => selectedTagsText.includes(tag));
+    // try {
+    //   const selectedTagsText = document.getElementById('tagLists').textContent.split(',').map(tag => tag.trim());
+    //   const chosenTags = getChosenTags();
+    //   console.log(chosenTags);
+    //   const isDifferent = chosenTags.some(tag => selectedTagsText.includes(tag));
       
-      //CHECK if TAGS are already chosen
-      if (isDifferent) {
-        alert('Tags are already chosen!');
-      }else{
-        const res = await updatePost(postId, model);
-        if (res != null) {
-          alert('Your Post Edit successfully!');
-          window.location.href = '/profile.html';
-        } else {
-          alert('You need to choose tag!');
-        }
-      }
-    } catch (error) {
-      console.log(error);
+    //   //CHECK if TAGS are already chosen
+    //   if (isDifferent) {
+    //     alert('Tags are already chosen!');
+    //   }else{
+
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    const res = await updatePost(postId, model);
+    if (res != null) {
+      alert('Your Post Edit successfully!');
+      window.location.href = '/profile.html';
+    } else {
+      alert('You need to choose tag!');
     }
   });
 });

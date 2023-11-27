@@ -17,7 +17,7 @@ export const getAllAwardType = async () => {
 
 export const getAllAward = async () => {
   try {
-    const response = await request.get(`award/getall`, {
+    const response = await request.get("award/getall", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
