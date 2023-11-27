@@ -175,10 +175,10 @@
     margin: 2.5px;
 }
 
-.by-user:hover {
+/* .by-user:hover {
     text-decoration: underline;
     color: crimson;
-}
+} */
 
 .createdUser:hover {
     text-decoration: underline;
