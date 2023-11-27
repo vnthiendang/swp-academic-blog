@@ -28,6 +28,33 @@ export const getAllAward = async () => {
   }
 };
 
+export const getAllAwardForAdminPage = async () => {
+  try {
+    const response = await fetch(
+      `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/award/getall`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          // Add other headers as needed
+        },
+        // You can add credentials: 'include' if needed
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching awards:", error);
+    throw error; // Re-throw the error to handle it at the calling site if needed
+  }
+};
+
 // export const createAward = async (model) => {
 //   try {
 //     const response = await request.postAward(`award/post`, model, {
