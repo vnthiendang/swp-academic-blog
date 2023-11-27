@@ -17,6 +17,7 @@ public class RequestDto {
     private User reviewedByAdmin;
     private LocalDateTime reviewedTime;
     private String adminMessage;
+    private Integer teacherId;
 
     public String getRequestType() {
         return this.requestType.getRequestInfo();
@@ -32,6 +33,13 @@ public class RequestDto {
     public String getReviewedByAdmin() {
         if (reviewedByAdmin != null) {
             return this.reviewedByAdmin.getDisplay_name();
+        }
+        return null;
+    }
+
+    public Integer getTeacherId() {
+        if (requestedByUser != null) {
+            return this.requestedByUser.getUsId();
         }
         return null;
     }
