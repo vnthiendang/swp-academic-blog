@@ -131,6 +131,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const categorySelect = document.querySelector('#opt');
     const textEditor = document.querySelector('#text-editor');
 
+    const selectedFiles = mediaInput.files;
+    const mediaList = Array.from(selectedFiles);
+
     const model = {
       categoryName: categorySelect.textContent,
       title: titleInput.value,
@@ -138,30 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
       mediaList: [],
       tagList: getChosenTags()
     };
-
-    // if (mediaInput.files.length > 0) {
-    //   mediaInput.addEventListener('change', () => {
-    //     model.mediaList = Array.from(mediaInput.files);
-    //   });
-    // } else {
-    //   model.mediaList = new Blob([]);
-    // }
-
-    // try {
-    //   const selectedTagsText = document.getElementById('tagLists').textContent.split(',').map(tag => tag.trim());
-    //   const chosenTags = getChosenTags();
-    //   console.log(chosenTags);
-    //   const isDifferent = chosenTags.some(tag => selectedTagsText.includes(tag));
-      
-    //   //CHECK if TAGS are already chosen
-    //   if (isDifferent) {
-    //     alert('Tags are already chosen!');
-    //   }else{
-
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
 
     const res = await updatePost(postId, model);
     if (res != null) {
