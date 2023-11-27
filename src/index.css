@@ -216,6 +216,13 @@ Main {
     transition: top 0.3s;
 }
 
+#footer {
+    /* background-color: antiquewhite; */
+    background-color: white;
+    border-top: 2px solid rgb(224, 224, 224);
+    border-radius: 0%;
+}
+
 #category {
     /* background-color: #4CAF50; */
     border-right: 1px solid white;
