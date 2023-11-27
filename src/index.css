@@ -153,10 +153,10 @@ Main {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 2.5px;
 }
-.by-user:hover {
+/* .by-user:hover {
     text-decoration: underline;
     color: crimson;
-}
+} */
 
 
 .container-datetime {

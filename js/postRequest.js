@@ -7,186 +7,240 @@ const options = {
     hour: '2-digit',
 };
 
-// DISPLAY LIST POSTS
+const showHeaderForTeacher = async() => {
+  try {
+      const usersInfo = await userInfo();
+      const userRole = usersInfo.role_id;
+
+      if (userRole === 'Teacher') {
+          // Display the form
+          document.getElementById('teacherPage').style.display = 'block';
+          document.getElementById('teacherPage2').style.display = 'block';
+      } else {
+          // Hide the form
+          document.getElementById('teacherPage').style.display = 'none';
+          document.getElementById('teacherPage2').style.display = 'none';
+      }
+  } catch (error) {}
+};
+
+showHeaderForTeacher();
+
+// DISPLAY LIST APPROVED POSTS
 function displayPosts(posts) {
-    
-    const postContainer = document.querySelector('.col-span-5');
-    postContainer.innerHTML = '';
+  const postContainer = document.querySelector(".main-blog");
+  postContainer.innerHTML = "";
 
-    if(posts.length === 0){
-      const noResultsElement = document.createElement('div');
-      noResultsElement.className = 'text-center text-4xl font-bold text-gray-500 dark:text-gray-400';
-      noResultsElement.textContent = 'No requested posts';
+  if (posts.length === 0) {
+      const noResultsElement = document.createElement("div");
+      noResultsElement.className =
+          "text-center text-4xl font-bold text-gray-500 dark:text-gray-400";
+      noResultsElement.textContent =
+          "No results related to your search. Please use other keywords.";
       postContainer.appendChild(noResultsElement);
-    }else{
-      posts.forEach(post => {
-        
-        const postElement = document.createElement('div');
-        postElement.className = 'col-span-5';
+  } else {
+      $(document).ready(function() {
+                  const container = $(".main-blog");
 
-        postElement.className = "post-container";
-  
-        const flexElement = document.createElement('div');
-        flexElement.className = 'flex w-full px-8 py-4 items-center';
-        flexElement.style.fontSize = '15px';
-        flexElement.style.fontWeight = '500';
-    
-        const avatarImage = document.createElement('div');
-        avatarImage.className = 'flex';
-        const avatarImg = document.createElement('img');
-        avatarImg.src = 'img/Img For User/User1.jpg';
-        avatarImage.title = 'Avatar User';
-        avatarImg.alt = 'avatar';
-        avatarImg.className = 'rounded-full w-8';
-        avatarImage.appendChild(avatarImg);
-        flexElement.appendChild(avatarImage);
-    
-        const createdByUser = document.createElement('div');
-        createdByUser.className = 'ml-4';
-        createdByUser.title = 'Name Users';
-        createdByUser.textContent = post.createdByUser;
+                  // DISPLAY LIST OF POSTS
+                  posts.forEach(function(post) {
+                              const postCreatedTime = new Date(post.createdTime);
+                              const formattedTime = postCreatedTime.toLocaleString("en-US", options);
 
-        const grayTextSpan = document.createElement('span');
-        grayTextSpan.className = 'text-gray-400';
-        grayTextSpan.textContent = ' in ';
-        createdByUser.appendChild(grayTextSpan);
-  
-        const postTagLink = document.createElement('a');
-        postTagLink.href = `/postByCategory.html?categoryName=${encodeURIComponent(post.belongedToCategory)}`;
+                              let tagsHTML = "";
+                              if (Array.isArray(post.tagList) && post.tagList.length > 0) {
+                                  const tags = post.tagList.map((tag) => {
+                                      const tagLink = document.createElement("a");
+                                      tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+                                      tagLink.className = "tag";
+                                      tagLink.textContent = tag;
+                                      tagLink.textContent = `#${tag}`;
+                                      return tagLink.outerHTML;
+                                  });
+                                  tagsHTML = tags.join(" ");
+                              }
 
-        const postTagSpan1 = document.createElement('span');
-        postTagSpan1.className = 'tag-name';
-        postTagSpan1.title = 'Tag Category';
-        postTagSpan1.textContent = post.belongedToCategory;
-        postTagLink.appendChild(postTagSpan1);
-  
-        const postTagSpan2 = document.createElement('span');
-        postTagSpan2.className = 'tag-name';
-        postTagSpan2.title = 'Tag Category';
-        postTagSpan2.textContent = '';
-        postTagLink.appendChild(postTagSpan2);
-    
-        createdByUser.appendChild(postTagLink);
-        flexElement.appendChild(createdByUser);
-    
-        const dateTimeElement1 = document.createElement('div');
-        dateTimeElement1.className = 'p-0.5 bg-gray-900 rounded-full mx-4';
-        dateTimeElement1.title = 'Date Time';
-        flexElement.appendChild(dateTimeElement1);
-  
-        const dateTimeElement2 = document.createElement('div');
-        dateTimeElement2.className = 'date-time';
-        dateTimeElement2.title = 'Date Time';
-        const postCreatedTime = new Date(post.createdTime);
-        const formattedTime = postCreatedTime.toLocaleString('en-US', options);
-        dateTimeElement2.textContent = formattedTime;
-        flexElement.appendChild(dateTimeElement2);
-  
-      postElement.appendChild(flexElement);
-  
-      const postLink = document.createElement('a');
-      postLink.href = `index.html?postId=${post.postsId}`;
+                              //award list
+                              //   const awardList = Object.entries(post.awardTypeCount).map(([awardType, count]) => `
+                              //   <div class="award" title="${awardType}">
+                              //     <i class="fa-solid fa-award" style="color: #ddd60e;"></i>
+                              //     <span class="award-count">${count}</span>
+                              //   </div>
+                              // `).join('');
+                              const awardList = Object.entries(post.awardTypeCount)
+                                  .map(
+                                      ([awardType, count]) => `
+        <div class="award" title="${awardType}">
+          <i class="fa-solid fa-award" style="color: #ddd60e;"></i>
+          <span class="award-count">${count}</span>
+        </div>`
+                                  )
+                                  .join("");
 
-      const titleElement = document.createElement('div');
-      titleElement.className = 'font-semibold text-2xl px-8';
-      titleElement.id = 'title';
-      titleElement.textContent = post.title;
-      postLink.appendChild(titleElement);
+                              const containerReadHTML = tagsHTML ?
+                                  `
+          <div class="container-read">
+            <div class="tag-category">
+              <h2>Tag: </h2>
+            </div>
+            <div class="tag-list" id="tagList">
+              ${tagsHTML}
+            </div>
+          </div>
+        ` :
+                                  "";
 
-      const infoElement = document.createElement('p');
-      infoElement.className = 'px-7 py-7 post-detail';
-      //infoElement.innerHTML = post.postDetail; 
-      infoElement.textContent = extractTextFromHTML(post.postDetail);
-      // infoElement.style.maxWidth = "1600px"; 
-      // infoElement.style.overflow = "hidden";
-      // infoElement.style.textOverflow = "ellipsis";
-      // infoElement.style.whiteSpace = "nowrap";
+                              const postLink = document.createElement("a");
+                              postLink.href = `index.html?postId=${post.postsId}`;
 
-      infoElement.style.marginLeft = "10px";
-      postLink.appendChild(infoElement);
+                              const categoryLink = document.createElement("a");
+                              categoryLink.href = `postByCategory.html?categoryName=${post.belongedToCategory}`;
 
-      postElement.appendChild(postLink);
-  
-      const flexItemsElement = document.createElement('div');
-      flexItemsElement.className = 'm-5';
+                              const postHTML = `
+          <div class="main-blog">
+            <div class="wapper-title">
+            
+              <div class="column">
 
-      if(post.mediaList.length > 0){
-        const imgContainer = document.createElement('div');
-        imgContainer.className = 'm-5';
+                <div class="inner-column">
+                  <div class="container-user" title="Created By User">
+                    <div class="by-user">
+                      <i class="fa-solid fa-user fa-sm" style="color: #000000;"></i>
+                    </div>
+                    <div class="by-user">
+                      ${post.createdByUser}
+                    </div>
+                  </div>
+                </div>
 
-        const mediaList = document.createElement('div');
-        mediaList.className = 'media-list';
-        post.mediaList.forEach(media => {
-          const mediaItem = document.createElement('img');
-          mediaItem.src = `data:image/jpeg;base64, ${media}`;
-          // mediaItem.style.width = '30%';
-          // mediaItem.style.height = 'auto';
-          mediaList.appendChild(mediaItem);
-        });
+                <div class="inner-column">
+                  <div class="container-datetime" title="Created Time">
+                    <div class="date-time">
+                      <i class="fa-regular fa-calendar-days" style="color: #000000;"></i>
+                    </div>
+                    <div class="date-time" id="postDate">
+                      ${formattedTime}
+                    </div>
+                  </div>
+                </div>
 
-        imgContainer.appendChild(mediaList);
-        flexItemsElement.appendChild(imgContainer);
-      }
+                <div class="inner-column">
+                  <div class="container-tag" title="Category">
+                      <div class="tag-category">
+                          <h2 >
+                              Category: 
+                          </h2>
+                      </div>
+                      <div class="container-tag" title="Category">
+                          <div class="tag-category">
+                            <i class="fa-solid fa-hashtag" style="color: #ff0000;"></i>
+                          </div>
+                          <div class="tag-category" id="postCategory">
+                            <a href="${categoryLink.href}">${
+                              post.belongedToCategory
+                            }</a>
+                          </div>
+                      </div> 
+                    </div> 
+                </div>
 
-      if (post.tagList.length > 0) {
-        // const iconTagElement = document.createElement('div');
-        // iconTagElement.className = 'icon-tag';
-        // const iconTagImg = document.createElement('img');
-        // iconTagImg.src = 'img/tag.png';
-        // iconTagImg.alt = 'icon-tag';
-        // iconTagElement.appendChild(iconTagImg);
-        // flexItemsElement.appendChild(iconTagElement);
-      
-        // post.tagList.forEach(tag => {
-        //   const tagLink = document.createElement('a');
-        //   tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
-        //   const tagDiv = document.createElement('div');
-        //   tagDiv.className = 'rounded-xl bg-gray-300 text-gray-900 px-2 mr-4';
-        //   tagDiv.textContent = tag;
-        //   tagLink.appendChild(tagDiv);
-        //   flexItemsElement.appendChild(tagLink);
-        // });
+                <div class="inner-column">
+                  <div class="container-awards" title="Awards">
+                    <div class="award-list">
+                      ${awardList}
+                    </div>
+                  </div>
+                </div>
 
-        post.tagList.forEach(tag => {
-          const tagLink = document.createElement('a');
-          tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
-      
-          // Create a flex container for the icon and tag
-          const flexContainer = document.createElement('div');
-          flexContainer.style.display = 'flex';
-          flexContainer.style.alignItems = 'center'; // Optional: Align items vertically in the center
-      
-          // Create the icon element
-          const iconTag = document.createElement('i');
-          iconTag.className = 'fa-solid fa-tags fa-lg';
-          iconTag.style.color = '#000000'; // Set the color as needed
-          iconTag.style.marginLeft = '1%';
-      
-          // Create the tag element
-          const tagDiv = document.createElement('div');
-          tagDiv.className = 'icon-tag';
-          tagDiv.title = 'Tag Name';
-          tagDiv.textContent = tag;
-          tagDiv.textContent = `#${tag}`;
-      
-          // Append the icon and tag to the flex container
-          flexContainer.appendChild(iconTag);
-          flexContainer.appendChild(tagDiv);
-      
-          // Append the flex container to the tagLink
-          tagLink.appendChild(flexContainer);
-      
-          // Append the tagLink to the flexItemsElement
-          flexItemsElement.appendChild(tagLink);
+              </div>
+
+              <div class="container-post-img">
+
+                <div class="post-title-content" title="Post Title">
+
+                  <div class="column-title">
+                    <div class="postTitle">
+                      <h2><a href="${postLink.href}">${post.title}</a></h2>
+                    </div>
+                  </div>
+
+                  <div class="column-content">
+                    <div class="postContent">
+                      <h2><a href="${postLink.href}">${
+                        post.postDetail
+                      }</a></h2>
+                    </div>
+                  </div>
+
+                </div>
+
+                ${
+                  post.mediaList.length > 0
+                    ? `
+                  <div class="container-img" title="Cover Image">
+                    <img src="data:image/jpeg;base64, ${post.mediaList}" alt="Post Image">
+                  </div>
+                `
+                    : ""
+                }
+              </div>
+
+              <div class="column">
+              
+                <div class="inner-column">
+                  <div class="container-vote" title="Total Like">
+                    <div class="number-vote">
+                      <i class="fa-regular fa-thumbs-up" style="color: #000000;" id="likeIcon"></i>
+                    </div>
+                    <div class="number-vote" id="postVote">
+                      ${post.vote1Count}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="inner-column">
+                  <div class="container-read" title="Reading Time">
+                    <div class="number-read">
+                      <i class="fa-regular fa-clock" style="color: #000000;"></i>
+                    </div>
+                    <div class="number-read" id="readingTime">
+                      ${post.readingTime}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="inner-column">
+                  <div class="container-tag" title="Tag">
+                      <div class="container-tag-hover">
+                        <div class="tag-category" id="postTag">
+                          ${containerReadHTML}
+                        </div>
+                      </div>
+                  </div> 
+                </div> 
+
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+      container.append(postHTML);
+
+      const infoElement = container.find(".postContent h2:last-child");
+      infoElement.css({
+        maxWidth: "1000px",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
       });
-      }
-  
-      postElement.appendChild(flexItemsElement);
-  
-      postContainer.appendChild(postElement);
-      });
-    }
+    });
+  });
 }
+}
+
+
+
 
 function extractTextFromHTML(html) {
   const tempElement = document.createElement("div");
