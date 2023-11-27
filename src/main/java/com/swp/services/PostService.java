@@ -153,11 +153,11 @@ public class PostService {
         }
         return postRepository.save(post);
     }
-
-    @Transactional
+@Transactional
     public Post updatePost(Integer postId, PostRequest postRequest) {
-        Post post = getById(postId);
+        Post post = getPostById(postId);
         if (post == null) {
+            System.out.println("1111111111111111111111111111111111111111" + postId);
             throw new IllegalArgumentException("Post not found"); // Or handle it as needed
         }
 
@@ -206,8 +206,11 @@ public class PostService {
         }
 
         for (PostTag postTag : post.getPostTags()) {
+            System.out.println(postTag.getId() + "11111111111111111111111111111111111111111111111111111");
+            postTagRepository.updatePostIdToNullById(postTag.getId());
             postTagRepository.deleteById(postTag.getId());
         }
+
 
         // Update PostTags
         List<String> tagNames = postRequest.getTagList();

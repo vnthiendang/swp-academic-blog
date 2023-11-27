@@ -6,9 +6,12 @@ import com.swp.entities.AccountViolation;
 import com.swp.services.AccountViolationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @RestController
@@ -50,6 +53,22 @@ public class AccountViolationController {
         AccountViolationDto accountViolationDto = modelMapper.map(createdAccountViolation, AccountViolationDto.class);
         System.out.println("hellooooooooooooooooooooooooooooooo2");
         return accountViolationDto;
+    }
+
+    // Delete mapping for deleting an account violation by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAccountViolationById(@PathVariable Integer id) {
+        try {
+            // Call the service to delete the account violation
+            accountViolationService.deleteById(id);
+            return new ResponseEntity<>("AccountViolation deleted successfully", HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            // Handle case where the account violation with the given ID was not found
+            return new ResponseEntity<>("AccountViolation not found", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            // Handle other exceptions, such as database errors
+            return new ResponseEntity<>("An error occurred while deleting the AccountViolation", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 //
 //    //Update a accountViolation by accountViolation id
