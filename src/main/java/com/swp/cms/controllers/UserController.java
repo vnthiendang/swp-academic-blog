@@ -96,8 +96,12 @@ public class UserController {
         user.setAdditional_info(userDto.getAdditional_info());
 
         // Encode and set the new password
-        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
-        user.setPassword(encodedPassword);
+        String rawPassword = userDto.getPassword();
+        if (rawPassword != null) {
+            // Encode and set the new password
+            String encodedPassword = passwordEncoder.encode(rawPassword);
+            user.setPassword(encodedPassword);
+        }
 
         User updatedUser = userService.addUser(user);
         UserDto updatedUserDto = modelMapper.map(updatedUser, UserDto.class);
