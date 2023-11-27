@@ -5,13 +5,14 @@ import {
   violationList,
   updatePostStatus,
   violationRuleList,
+  deleteViolation,
 } from "./Services/admin.service.js";
 import {
   getAllAward,
   getAllAwardForAdminPage,
 } from "./Services/award.service.js";
 import { getAllReports } from "./Services/report.service.js";
-import { getAllTeacherCategory } from "./Services/category.service.js";
+import { createTeacherCategory, getAllTeacherCategory } from "./Services/category.service.js";
 import { userInfo } from "./Services/auth.service.js";
 import { getAllRequests, reviewRequest } from "./Services/request.service.js";
 
@@ -261,7 +262,7 @@ const renderviolationTable = (users) => {
 
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("styled-button");
-    removeBtn.dataset.violatedUser = user.userId;
+    removeBtn.dataset.violatedUser = user.id;
     removeBtn.textContent = "Remove";
     row.appendChild(removeBtn);
 
@@ -275,7 +276,7 @@ const renderviolationTable = (users) => {
       );
       if (confirmed) {
         try {
-          const response = await removeAccountViolation(obj);
+          const response = await deleteViolation(obj);
           if (response != null) {
             alert("Account violation Removed");
             location.reload();
@@ -557,10 +558,10 @@ const displayTeacherCategory = async () => {
       updateCateBtn.textContent = "Update";
       actionCell.appendChild(updateCateBtn);
 
-      const createBtn = document.createElement("button");
-      createBtn.classList.add("styled-button");
-      createBtn.textContent = "Create";
-      actionCell.appendChild(createBtn);
+      // const createBtn = document.createElement("button");
+      // createBtn.classList.add("styled-button");
+      // createBtn.textContent = "Create";
+      // actionCell.appendChild(createBtn);
 
       row.appendChild(actionCell);
 
@@ -586,7 +587,7 @@ const displayCategoryRequest = async () => {
     // Create table header
     const thead = document.createElement("thead");
     const headerRow = document.createElement("tr");
-    const headers = ["Request Type", "Teacher", "Detail", "Action"];
+    const headers = ["Request Type", "Teacher", "Detail", "Status", "Action"];
 
     headers.forEach((headerText) => {
       const th = document.createElement("th");
@@ -616,6 +617,10 @@ const displayCategoryRequest = async () => {
       detail.textContent = request.requestDetail;
       row.appendChild(detail);
 
+      const status = document.createElement("td");
+      status.textContent = request.status;
+      row.appendChild(status);
+
       const actionCell = document.createElement("td");
 
       const approveBtn = document.createElement("button");
@@ -629,6 +634,12 @@ const displayCategoryRequest = async () => {
       rejectBtn.dataset.requestId = request.id;
       rejectBtn.textContent = "Reject";
       actionCell.appendChild(rejectBtn);
+
+      const addCategoryBtn = document.createElement("button");
+      addCategoryBtn.classList.add("styled-button");
+      addCategoryBtn.dataset.teacher = request.requestedByUser;
+      addCategoryBtn.textContent = "Add category";
+      actionCell.appendChild(addCategoryBtn);
 
       row.appendChild(actionCell);
 
@@ -677,11 +688,32 @@ const displayCategoryRequest = async () => {
           console.error("Error review requests:", error);
         }
       });
+
+      addCategoryBtn.addEventListener("click", async () => {
+        const teacher = approveBtn.dataset.teacher;
+        // const userInfos = await userInfo();
+
+        try {
+          const model = {
+            teacher: teacher,
+            categoryName: "Digital Marketing"
+          };
+          const response = await createTeacherCategory(model);
+          if (response != null) {
+            alert("Teacher Category Added!");
+            location.reload();
+          } else {
+            alert("Fail to add category!");
+          }
+        } catch (error) {
+          console.error("Error add category:", error);
+        }
+      });
     });
     table.appendChild(tbody);
     requestTable.appendChild(table);
   } catch (error) {
-    console.error("Error retrieving category requests:", error);
+    console.error("Error:", error);
   }
 };
 

@@ -168,5 +168,20 @@ const displayPosts = async() => {
 
 displayPosts();
 
+const requestCategoryBtn = document.getElementById("requestCategoryBtn");
+requestCategoryBtn.addEventListener("click", async function () {
+  const userInfos = await userInfo();
 
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const left = 0;
+  const top = 0;
+  const url = `requestCategory.html?requestedByUserId=${userInfos.userId}`;
+
+  window.open(
+    url,
+    "Request Category",
+    `width=${width}, height=${height}, left=${left}, top=${top}`
+  );
+});
 

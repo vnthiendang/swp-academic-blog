@@ -128,3 +128,16 @@ export const updatePostStatus = async (postId, post) => {
     console.error("Error updating post status:", error);
   }
 };
+
+export const deleteViolation = async (id) => {
+  try {
+    const response = await request.del(`accountViolation/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error remove violation account:", error);
+  }
+};

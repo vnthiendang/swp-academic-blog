@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="src/create.css">
+    <title>Category Request</title>
+</head>
+
+<body class=" bg-slate-700" style="background-color: gray-900">
+    <!-- Header  -->
+    <header class="flex items-center justify-between w-full bg-black text-white" id="header">
+        <div class="flex items-center" id="taskbar">
+            <!-- <a href="/home.html" class="items-start justify-center">
+                <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
+            </a> -->
+            <a href="/home2.html" class="p-logo"
+                style="font-size: 40px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque;">
+                FPT BLOG
+            </a>
+            
+            <a href="/create.html" class="p-2" style="border-left: 1px solid white;">
+                New post
+            </a>
+            
+            <a href="/bestartice.html" class="p-2">
+                Best articles
+            </a>
+
+            <a href="teacherPage.html" class="p-2" id="teacherPage">
+                Post Request
+            </a>
+        </div>
+        <div class="p-1 flex">
+            <div class="flex items-center justify-center">
+                <div class="mx-5">
+                    <a href="profile.html" class="mx-5">
+                        <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
+                            alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                    </a>
+                </div>
+
+                <div class="pr-2">
+
+                    <div class="cursor-pointer">
+                        <a href="/login.html">Log Out</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+
+    <!-- CREATE POST -->
+    <form class="form" id="createRequest">
+        
+        <div class="w-full flex items-center flex-col bg-gray-900">
+            <div class="grid grid-cols-3 gap-4 text-white">
+                <div class="m-8">
+                    <div class="flex flex-col">
+                         <div id="error-message" class="text-red-500" style="visibility: hidden;"></div>
+                        <label for="">Teacher</label>
+                        <input type="text" alt="" required
+                            class="border border-gray-800 rounded-md p-2 text-black" readonly/>
+                    </div>
+                    <div class="flex flex-col">
+                        <input id="requestDetail" type="text" alt="" placeholder="Request Detail" required
+                        class="border border-gray-800 rounded-md p-2 text-black"/>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="w-full flex flex-row-reverse m-2">
+
+                <div class="px-6 py-3 rounded-md border border-gray-700 bg-yellow-300 m-2">
+                    <button id="requestCategory" type="submit">Send</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- footer  -->
+    <footer class="bg-white rounded-lg shadow dark:bg-gray-900" style="margin-top: 2%;">
+        <div class="w-full mx-auto p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
+                    <img src="./img/Logo.png" class="h-8 mr-3" alt="Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FPT Blog</span>
+                </a>
+                <ul
+                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a
+                    href="https://flowbite.com/" class="hover:underline">FPT Blog</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+    </form>
+    
+    <script type="module" src='./js/requestCategory.js'></script>
+</body>     
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</html>
