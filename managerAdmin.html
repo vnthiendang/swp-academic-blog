@@ -160,7 +160,9 @@
                             
                             <div class="article-management">
 
-                                <div id="postTable"></div>
+                                <div id="postTable">
+
+                                </div>
                             </div>
                         </div>
 
@@ -249,10 +251,30 @@
                         <div class="award-management">
                         
                               <!-- Rows -->
-                            <div id="awardTable"></div>
+                            <div id="awardTable">
+                                
+                            </div>
                         </div>
 
                     </div>
+                    <style>
+                        #awardTable thead th {
+                            font-weight: bold;
+                            padding: 8px;
+                            border: 1px solid #ccc;
+                        }
+
+                        #awardTable tbody tr td {
+                            padding: 8px;
+                            border: 1px solid #ccc;
+                        }
+
+                        #awardTable tbody tr td button{
+                            margin-left: 1%;
+                            margin-right: 1%;
+                        }
+
+                    </style>
                     <script>
                         function showDeletePopup() {
                             var popup = document.getElementById("deletePopup");

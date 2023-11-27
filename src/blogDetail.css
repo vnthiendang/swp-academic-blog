@@ -272,7 +272,7 @@ Main {
 #footer {
     /* background-color: antiquewhite; */
     background-color: white;
-    border-top: 1px solid gray;
+    border-top: 2px solid rgb(224, 224, 224);
     border-radius: 0%;
 }
 /*========================== Footer ==============================*/
