@@ -47,8 +47,19 @@ function displayPost() {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((response) => {
+    .then(async (response) => {
       const post = response;
+
+      const usersInfo = await userInfo();
+      const user = usersInfo.display_name;
+  
+      if (user === post.createdByUser) {
+        // Display the form
+        document.getElementById("reportButton").style.display = "none";
+      } else {
+        // Hide the form
+        document.getElementById("reportButton").style.display = "block";
+      }
 
       // Store the post data in session storage
       sessionStorage.setItem("postData", JSON.stringify(post));
