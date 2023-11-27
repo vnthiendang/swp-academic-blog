@@ -1,62 +1,66 @@
-import { createComment, deleteComment, editComment, getCommentById } from "./Services/post.service.js";
-import * as request from './utils/request.js';
+import {
+  createComment,
+  deleteComment,
+  editComment,
+  getCommentById,
+} from "./Services/post.service.js";
+import * as request from "./utils/request.js";
 import { userInfo } from "./Services/auth.service.js";
 import { votePost } from "./Services/vote.service.js";
-import { createAward, getAllAwardType } from './Services/award.service.js';
+import { createAward, getAllAwardType } from "./Services/award.service.js";
 
 const token = localStorage.getItem("token");
 
 const options = {
-  month: 'short', 
-  day: '2-digit', 
-  hour: '2-digit', 
+  month: "short",
+  day: "2-digit",
+  hour: "2-digit",
 };
 
-  // Get the belongedToPostID from the URL query parameters
-  const urlParams = new URLSearchParams(window.location.search);
-  const postId = urlParams.get('belongedToPostID');
+// Get the belongedToPostID from the URL query parameters
+const urlParams = new URLSearchParams(window.location.search);
+const postId = urlParams.get("belongedToPostID");
 
-  const showHeaderForTeacher = async () => {
-    try {
-      const usersInfo = await userInfo();
-      const userRole = usersInfo.role_id;
-  
-      if (userRole === 'Teacher') {
-        // Display the form
-        document.getElementById('teacherPage').style.display = 'block';
-        document.getElementById('teacherPage2').style.display = 'block';
-      } else {
-        // Hide the form
-        document.getElementById('teacherPage').style.display = 'none';
-        document.getElementById('teacherPage2').style.display = 'none';
-      }
-    } catch (error) {
+const showHeaderForTeacher = async () => {
+  try {
+    const usersInfo = await userInfo();
+    const userRole = usersInfo.role_id;
+
+    if (userRole === "Teacher") {
+      // Display the form
+      document.getElementById("teacherPage").style.display = "block";
+      document.getElementById("teacherPage2").style.display = "block";
+    } else {
+      // Hide the form
+      document.getElementById("teacherPage").style.display = "none";
+      document.getElementById("teacherPage2").style.display = "none";
     }
-  };
-  
-  showHeaderForTeacher();
+  } catch (error) {}
+};
+
+showHeaderForTeacher();
 
 function displayPost() {
-
-  request.get(`post/GetAllApproved/${postId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-    .then(response => {
+  request
+    .get(`post/GetAllApproved/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
       const post = response;
 
       // Store the post data in session storage
-      sessionStorage.setItem('postData', JSON.stringify(post));
+      sessionStorage.setItem("postData", JSON.stringify(post));
 
       const postCreatedTime = new Date(post.createdTime);
-      const formattedTime = postCreatedTime.toLocaleString('en-US', options);
+      const formattedTime = postCreatedTime.toLocaleString("en-US", options);
 
       // Update HTML elements with post data
-      document.getElementById('postTitle').textContent = post.title;
-      document.getElementById('postAuthor').textContent = post.createdByUser;
-      document.getElementById('postDate').textContent = formattedTime;
-      if(post.tagList.length > 0){
+      document.getElementById("postTitle").textContent = post.title;
+      document.getElementById("postAuthor").textContent = post.createdByUser;
+      document.getElementById("postDate").textContent = formattedTime;
+      if (post.tagList.length > 0) {
         const iconTagElement = document.createElement("div");
         iconTagElement.className = "icon-tag";
         const iconTagImg = document.createElement("img");
@@ -70,169 +74,209 @@ function displayPost() {
         post.tagList.forEach((tag) => {
           //const tagItem = document.createElement("span");
           //tagItem.textContent = tag;
-          document.getElementById('postTag').textContent = tag;
-          
+          document.getElementById("postTag").textContent = tag;
         });
       }
-      
-      document.getElementById('postCategory').textContent = post.belongedToCategory;
 
-      const postContentElement = document.getElementById('postContent');
+      document.getElementById("postCategory").textContent =
+        post.belongedToCategory;
+
+      const postContentElement = document.getElementById("postContent");
       postContentElement.contentEditable = false;
       postContentElement.innerHTML = post.postDetail;
 
-      if(post.mediaList.length > 0){
-        const imageElement = document.getElementById('postMedia');
+      if (post.mediaList.length > 0) {
+        const imageElement = document.getElementById("postMedia");
         imageElement.src = `data:image/jpeg;base64, ${post.mediaList[0]}`;
       }
 
       // post.mediaList.forEach(media => {
       //   const mediaItem = document.getElementById('postMedia');
       //   mediaItem.src = `data:image/jpeg;base64, ${media}`;
-      //   mediaItem.style.width = '240px'; 
+      //   mediaItem.style.width = '240px';
       //   mediaItem.style.height = 'auto';
       //   mediaList.appendChild(mediaItem);
       // });
-      
-      const readingTimeElement = document.getElementById('readingTime');
-      const minuteText = post.readingTime === 1 ? 'minute' : 'minutes';
-      readingTimeElement.textContent = post.readingTime + ' ' + minuteText + '' || '';
-      document.getElementById('postVote').textContent = post.vote1Count ?? '#';
-      document.getElementById('postVote2').textContent = post.vote2Count ?? '#';
+
+      const readingTimeElement = document.getElementById("readingTime");
+      const minuteText = post.readingTime === 1 ? "minute" : "minutes";
+      readingTimeElement.textContent =
+        post.readingTime + " " + minuteText + "" || "";
+      document.getElementById("postVote").textContent = post.vote1Count ?? "#";
+      document.getElementById("postVote2").textContent = post.vote2Count ?? "#";
     })
-    .catch(error => {
-      console.error('Error retrieving post:', error);
+    .catch((error) => {
+      console.error("Error retrieving post:", error);
       // Handle error display or logging
     });
 }
 displayPost();
 
-  // Get comments by PostID
-  const displayComments = async (comments) => {
-    const commentContainer = document.getElementById('commentContainer');
-    comments.forEach(async (comment) => {
-      if(comment.status !== 'deleted'){
-        const us = await userInfo();
+// Get comments by PostID
+const displayComments = async (comments) => {
+  const commentContainer = document.getElementById("commentContainer");
+  comments.forEach(async (comment) => {
+    if (comment.status !== "deleted") {
+      const us = await userInfo();
 
-        const article = document.createElement('article');
-        article.classList.add('p-6', 'mb-3', 'text-base', 'bg-white', 'border-t', 'border-gray-200', 'dark:border-gray-700', 'dark:bg-gray-900');
+      const article = document.createElement("article");
+      article.classList.add(
+        "p-6",
+        "mb-3",
+        "text-base",
+        "bg-white",
+        "border-t",
+        "border-gray-200",
+        "dark:border-gray-700",
+        "dark:bg-gray-900"
+      );
 
-        const footer = document.createElement('footer');
-        footer.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
+      const footer = document.createElement("footer");
+      footer.classList.add("flex", "justify-between", "items-center", "mb-2");
 
-        const commentByUser = document.createElement('p');
-        commentByUser.classList.add('inline-flex', 'items-center', 'mr-3', 'text-sm', 'text-gray-900', 'dark:text-white', 'font-semibold');
-        commentByUser.textContent = comment.createdByUser;
-        
-        footer.appendChild(commentByUser);
+      const commentByUser = document.createElement("p");
+      commentByUser.classList.add(
+        "inline-flex",
+        "items-center",
+        "mr-3",
+        "text-sm",
+        "text-gray-900",
+        "dark:text-white",
+        "font-semibold"
+      );
+      commentByUser.textContent = comment.createdByUser;
 
-        article.appendChild(footer);
+      footer.appendChild(commentByUser);
 
-        const commentText = document.createElement('p');
-        commentText.classList.add('text-gray-500', 'dark:text-gray-400');
-        commentText.textContent = comment.commentText;
-        article.appendChild(commentText);
+      article.appendChild(footer);
 
-        const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('flex', 'items-center', 'mt-4', 'space-x-4');
+      const commentText = document.createElement("p");
+      commentText.classList.add("text-gray-500", "dark:text-gray-400");
+      commentText.textContent = comment.commentText;
+      article.appendChild(commentText);
 
-        const editBtn = document.createElement('button');
-        editBtn.type = 'button';
-        editBtn.dataset.commentId = comment.id;
-        editBtn.classList.add('flex', 'items-center', 'text-sm', 'text-gray-500', 'hover:underline', 'dark:text-gray-400', 'font-medium');
-        editBtn.innerHTML = '<i class="fa-regular fa-comment px-2"></i>Edit';
-        buttonContainer.appendChild(editBtn);
+      const buttonContainer = document.createElement("div");
+      buttonContainer.classList.add(
+        "flex",
+        "items-center",
+        "mt-4",
+        "space-x-4"
+      );
 
-        const delButton = document.createElement('button');
-        delButton.type = 'button';
-        delButton.dataset.commentId = comment.id;
-        delButton.classList.add('flex', 'items-center', 'text-sm', 'text-gray-500', 'hover:underline', 'dark:text-gray-400', 'font-medium');
-        delButton.innerHTML = '<i class="fa-regular fa-delete px-2"></i>Delete';
-        buttonContainer.appendChild(delButton);
+      const editBtn = document.createElement("button");
+      editBtn.type = "button";
+      editBtn.dataset.commentId = comment.id;
+      editBtn.classList.add(
+        "flex",
+        "items-center",
+        "text-sm",
+        "text-gray-500",
+        "hover:underline",
+        "dark:text-gray-400",
+        "font-medium"
+      );
+      editBtn.innerHTML = '<i class="fa-regular fa-comment px-2"></i>Edit';
+      buttonContainer.appendChild(editBtn);
 
-        if(us.display_name == comment.createdByUser){
-          article.appendChild(buttonContainer);
-        }
-        commentContainer.appendChild(article);
+      const delButton = document.createElement("button");
+      delButton.type = "button";
+      delButton.dataset.commentId = comment.id;
+      delButton.classList.add(
+        "flex",
+        "items-center",
+        "text-sm",
+        "text-gray-500",
+        "hover:underline",
+        "dark:text-gray-400",
+        "font-medium"
+      );
+      delButton.innerHTML = '<i class="fa-regular fa-delete px-2"></i>Delete';
+      buttonContainer.appendChild(delButton);
 
-        //EDIT COMMENT
-        editBtn.addEventListener('click', async () => {
-          const commentId = editBtn.dataset.commentId;
+      if (us.display_name == comment.createdByUser) {
+        article.appendChild(buttonContainer);
+      }
+      commentContainer.appendChild(article);
 
-          // Make comment editable
-          commentText.contentEditable = true;
-          commentText.focus();
-          commentText.classList.add('editable');
+      //EDIT COMMENT
+      editBtn.addEventListener("click", async () => {
+        const commentId = editBtn.dataset.commentId;
 
-          // Disable other buttons
-          editBtn.disabled = true;
-          delButton.disabled = true;
+        // Make comment editable
+        commentText.contentEditable = true;
+        commentText.focus();
+        commentText.classList.add("editable");
 
-          const originalCommentText = commentText.textContent.trim();
+        // Disable other buttons
+        editBtn.disabled = true;
+        delButton.disabled = true;
 
-          const submitForm = async () => {
-            const updatedCommentText = commentText.textContent.trim();
-            if (updatedCommentText !== '' && updatedCommentText !== originalCommentText) {
-              try {
-                const model = {
-                  commentText: updatedCommentText,
-                };
-                const response = await editComment(parseInt(commentId), model);
-                if (response != null) {
-                  location.reload();
-                } else {
-                  alert('Failed to edit comment!');
-                }
-              } catch (error) {
-                console.error('Error editing comment:', error);
-              }
-            } else {
-              // If the updated comment text is empty or unchanged, revert the changes
-              commentText.textContent = comment.commentText;
-            }
-        
-            // Disable editing and enable buttons
-            commentText.contentEditable = false;
-            commentText.classList.remove('editable');
-            editBtn.disabled = false;
-            delButton.disabled = false;
-          };
+        const originalCommentText = commentText.textContent.trim();
 
-          commentText.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' && !event.shiftKey) {
-              event.preventDefault();
-              submitForm();
-            }
-          });
-
-        });
-
-        delButton.addEventListener('click', async () => {
-          const commentId = delButton.dataset.commentId;
-          const confirmDelete = confirm('Are you sure you want to delete this comment?');
-          if (confirmDelete) {
+        const submitForm = async () => {
+          const updatedCommentText = commentText.textContent.trim();
+          if (
+            updatedCommentText !== "" &&
+            updatedCommentText !== originalCommentText
+          ) {
             try {
-              const response = await deleteComment(commentId);
+              const model = {
+                commentText: updatedCommentText,
+              };
+              const response = await editComment(parseInt(commentId), model);
               if (response != null) {
                 location.reload();
               } else {
-                alert('Failed to delete comment!');
+                alert("Failed to edit comment!");
               }
             } catch (error) {
-              console.error('Error deleting comment:', error);
+              console.error("Error editing comment:", error);
             }
+          } else {
+            // If the updated comment text is empty or unchanged, revert the changes
+            commentText.textContent = comment.commentText;
+          }
+
+          // Disable editing and enable buttons
+          commentText.contentEditable = false;
+          commentText.classList.remove("editable");
+          editBtn.disabled = false;
+          delButton.disabled = false;
+        };
+
+        commentText.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            submitForm();
           }
         });
-      }
+      });
 
-    });
-  }
+      delButton.addEventListener("click", async () => {
+        const commentId = delButton.dataset.commentId;
+        const confirmDelete = confirm(
+          "Are you sure you want to delete this comment?"
+        );
+        if (confirmDelete) {
+          try {
+            const response = await deleteComment(commentId);
+            if (response != null) {
+              location.reload();
+            } else {
+              alert("Failed to delete comment!");
+            }
+          } catch (error) {
+            console.error("Error deleting comment:", error);
+          }
+        }
+      });
+    }
+  });
+};
 
 getCommentById(postId).then((comments) => {
   displayComments(comments);
 });
-
-
 
 const form = document.getElementById("comment");
 
@@ -244,7 +288,7 @@ form.addEventListener("submit", async (event) => {
 
   if (commentText === "") {
     alert("Please enter a valid comment.");
-    return; 
+    return;
   }
 
   const us = await userInfo();
@@ -252,19 +296,19 @@ form.addEventListener("submit", async (event) => {
 
   const data = { commentText, belongedToPostID, createdByUserID };
 
-    try {
-      const res = await createComment(data);
-      if (res == null) {
-        alert("Sorry! Please check your comment! ");
-      } else {
-        location.reload();
-        document.getElementById("cmt").value = "";
-      }
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred while posting the comment.");
+  try {
+    const res = await createComment(data);
+    if (res == null) {
+      alert("Sorry! Please check your comment! ");
+    } else {
+      location.reload();
+      document.getElementById("cmt").value = "";
     }
-  });
+  } catch (error) {
+    console.error(error);
+    alert("An error occurred while posting the comment.");
+  }
+});
 
 //STUDENT VOTE POST
 const showFormForStudent = async () => {
@@ -272,73 +316,73 @@ const showFormForStudent = async () => {
     const usersInfo = await userInfo();
     const userRole = usersInfo.role_id;
 
-    if (userRole === 'Student') {
+    if (userRole === "Student") {
       // Display the form
-      document.getElementById('likeIcon').style.display = 'block';
-      document.getElementById('dislikeIcon').style.display = 'block';
+      document.getElementById("likeIcon").style.display = "block";
+      document.getElementById("dislikeIcon").style.display = "block";
     } else {
-      document.getElementById('likeIcon').style.pointerEvents = 'none';
-      document.getElementById('dislikeIcon').style.pointerEvents = 'none';
+      document.getElementById("likeIcon").style.pointerEvents = "none";
+      document.getElementById("dislikeIcon").style.pointerEvents = "none";
     }
   } catch (error) {
-    console.error('Error retrieving user info:', error);
+    console.error("Error retrieving user info:", error);
   }
 };
 
 showFormForStudent();
 
 function toggleLikeIcon() {
-  var likeIcon = document.getElementById('likeIcon');
-  
+  var likeIcon = document.getElementById("likeIcon");
+
   // Toggle between the regular and solid thumbs-up icons
-  if (likeIcon.classList.contains('fa-regular')) {
-      likeIcon.classList.remove('fa-regular');
-      likeIcon.classList.add('fa-solid');
-      likeIcon.style.color = '#000000'; // Set the color as needed
+  if (likeIcon.classList.contains("fa-regular")) {
+    likeIcon.classList.remove("fa-regular");
+    likeIcon.classList.add("fa-solid");
+    likeIcon.style.color = "#000000"; // Set the color as needed
   } else {
-      likeIcon.classList.remove('fa-solid');
-      likeIcon.classList.add('fa-regular');
-      likeIcon.style.color = '#000000'; // Set the color as needed
+    likeIcon.classList.remove("fa-solid");
+    likeIcon.classList.add("fa-regular");
+    likeIcon.style.color = "#000000"; // Set the color as needed
   }
 }
 
 function toggleDislikeIcon() {
-  var dislikeIcon = document.getElementById('dislikeIcon');
-  
+  var dislikeIcon = document.getElementById("dislikeIcon");
+
   // Toggle between the regular and solid thumbs-down icons
-  if (dislikeIcon.classList.contains('fa-regular')) {
-      dislikeIcon.classList.remove('fa-regular');
-      dislikeIcon.classList.add('fa-solid');
-      dislikeIcon.style.color = '#0c0d0d'; // Set the color as needed
+  if (dislikeIcon.classList.contains("fa-regular")) {
+    dislikeIcon.classList.remove("fa-regular");
+    dislikeIcon.classList.add("fa-solid");
+    dislikeIcon.style.color = "#0c0d0d"; // Set the color as needed
   } else {
-      dislikeIcon.classList.remove('fa-solid');
-      dislikeIcon.classList.add('fa-regular');
-      dislikeIcon.style.color = '#000000'; // Set the color as needed
+    dislikeIcon.classList.remove("fa-solid");
+    dislikeIcon.classList.add("fa-regular");
+    dislikeIcon.style.color = "#000000"; // Set the color as needed
   }
 }
 
 async function handleVotePost(voteType) {
-    const us = await userInfo();
-    const usId = us.userId;
-    //const typeSelect = document.querySelector('#VoteType');
+  const us = await userInfo();
+  const usId = us.userId;
+  //const typeSelect = document.querySelector('#VoteType');
 
-    var model = {
-      userID: usId,
-      postID: postId,
-      voteTypeID: voteType
-    };
+  var model = {
+    userID: usId,
+    postID: postId,
+    voteTypeID: voteType,
+  };
 
-    try {
-      const response = await votePost(model);
+  try {
+    const response = await votePost(model);
 
-      if(response != null){
-        location.reload();
-      }else{
-        alert('Fail to vote post!');
-      }
-    } catch (error) {
-      console.error('Error creating vote:', error);
+    if (response != null) {
+      location.reload();
+    } else {
+      alert("Fail to vote post!");
     }
+  } catch (error) {
+    console.error("Error creating vote:", error);
+  }
 }
 document.querySelector("#likeIcon").addEventListener("click", () => {
   handleVotePost(1);
@@ -354,17 +398,17 @@ document.querySelector("#dislikeIcon").addEventListener("click", () => {
 const showFormForTeacher = async () => {
   try {
     const usersInfo = await userInfo();
-    const userRole = usersInfo.role_id; 
+    const userRole = usersInfo.role_id;
 
-    if (userRole === 'Teacher') {
+    if (userRole === "Teacher") {
       // Display the form
-      document.getElementById('createAward').style.display = 'block';
+      document.getElementById("createAward").style.display = "block";
     } else {
       // Hide the form
-      document.getElementById('createAward').style.display = 'none';
+      document.getElementById("createAward").style.display = "none";
     }
   } catch (error) {
-    console.error('Error retrieving user info:', error);
+    console.error("Error retrieving user info:", error);
   }
 };
 
@@ -372,10 +416,10 @@ showFormForTeacher();
 
 //GET LIST AWARD TYPE
 const displayAwardType = (types) => {
-  const selectElement = document.getElementById('AwardType');
+  const selectElement = document.getElementById("AwardType");
 
-  types.forEach(type => {
-    const option = document.createElement('option');
+  types.forEach((type) => {
+    const option = document.createElement("option");
     option.value = type.id;
     option.textContent = type.awardType;
 
@@ -387,21 +431,52 @@ getAllAwardType().then((types) => {
   displayAwardType(types);
 });
 
-const reportButton = document.getElementById('reportButton');
-reportButton.addEventListener('click', async function() {
-    // const postsId = reportButton.getAttribute('data-post-id');
-  
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const left = 0;
-    const top = 0;
-    const url = `reportPost.html?postId=${postId}` ;
-  
-    window.open(url, "Report Violation", `width=${width}, height=${height}, left=${left}, top=${top}`);
+const reportButton = document.getElementById("reportButton");
+reportButton.addEventListener("click", async function () {
+  // const postsId = reportButton.getAttribute('data-post-id');
 
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const left = 0;
+  const top = 0;
+  const url = `reportPost.html?postId=${postId}`;
+
+  window.open(
+    url,
+    "Report Violation",
+    `width=${width}, height=${height}, left=${left}, top=${top}`
+  );
 });
 
-//Give Award
+// //Give Award
+// const handleCreateAward = async (event) => {
+//   event.preventDefault();
+
+//   const awardTypeSelect = document.querySelector("#AwardType");
+//   const us = await userInfo();
+//   const usId = us.userId;
+
+//   var model ={
+//       awardTypeID : awardTypeSelect.value,
+//       postID: postId,
+//       givenByUserID: usId
+//   }
+//   try {
+//       const response = await createAward(model);
+
+//         const responseData = response;
+//         if (response) {
+//           alert('Give Award Successfully!');
+//         } else {
+//           const errorMessage = responseData ? responseData : 'Unknown error occurred.';
+//           alert(errorMessage);
+//         }
+//     } catch (error) {
+//       console.error(error);
+//     }
+
+// };
+
 const handleCreateAward = async (event) => {
   event.preventDefault();
 
@@ -409,25 +484,64 @@ const handleCreateAward = async (event) => {
   const us = await userInfo();
   const usId = us.userId;
 
-  var model ={
-      awardTypeID : awardTypeSelect.value,
-      postID: postId,
-      givenByUserID: usId
-  }
+  const model = {
+    awardTypeID: awardTypeSelect.value,
+    postID: postId,
+    givenByUserID: usId,
+  };
+
   try {
-      const response = await createAward(model);
+    const response = await createAward(model);
 
-        const responseData = response;
-        if (response) {
-          alert('Give Award Successfully!');
-        } else {
-          const errorMessage = responseData ? responseData : 'Unknown error occurred.';
-          alert(errorMessage);
-        }
-    } catch (error) {
-      console.error(error);
+    if (response && response.status !== undefined) {
+      switch (response.status) {
+        case 200:
+          // Handle successful response
+          alert("Give Award successfully!");
+          break;
+        case 400:
+          // Handle bad request
+          const errorMessage = await response.text();
+          handleBadRequestAlert(errorMessage);
+          break;
+        case 401:
+          // Handle unauthorized
+          alert("Unauthorized. Please log in.");
+          break;
+        case 500:
+          // Handle internal server error
+          alert("Internal Server Error. Please try again later.");
+          break;
+        default:
+          // Handle other status codes
+          alert(`Failed to give award. Status: ${response.status}`);
+      }
     }
+  } catch (error) {
+    console.error(error);
+    // Handle the error as needed
+  }
+};
 
+const handleBadRequestAlert = (errorMessage) => {
+  console.error("Bad request: ", errorMessage || "Unknown error");
+  alert("Bad request: " + (errorMessage || "Unknown error"));
+
+  if (
+    errorMessage &&
+    errorMessage.includes("You have already given an award this week.")
+  ) {
+    // Handle the specific case where the user has already given an award this week
+    console.error(
+      "You have already given an award this week. Cannot give another award."
+    );
+    alert(
+      "You have already given an award this week. Cannot give another award."
+    );
+    // You can display an alert or perform other error handling actions
+  }
+
+  // You can add more specific checks for other types of errors if needed
 };
 
 const createAwardForm = document.querySelector("#createAward");

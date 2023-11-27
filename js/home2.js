@@ -1,72 +1,89 @@
 import {
-    getAllApprovedPosts,
-    searchedPosts,
-  } from "../js/Services/post.service.js";
-  import { userInfo } from "./Services/auth.service.js";
-  import { getAllCategory } from "./Services/category.service.js";
-  
-  const options = {
-    month: "short", 
-    day: "2-digit",
-    hour: "2-digit", 
-  };
-  
-  const showHeaderForTeacher = async () => {
-    try {
-      const usersInfo = await userInfo();
-      const userRole = usersInfo.role_id;
-  
-      if (userRole === 'Teacher') {
-        // Display the form
-        document.getElementById('teacherPage').style.display = 'block';
-        document.getElementById('giveAwardPage').style.display = 'block';
-      } else {
-        // Hide the form
-        document.getElementById('teacherPage').style.display = 'none';
-        document.getElementById('giveAwardPage').style.display = 'none';
-      }
-    } catch (error) {
-    }
-  };
-  
-  showHeaderForTeacher();
-  
-  
-  // DISPLAY LIST APPROVED POSTS
-  function displayPosts(posts) {
-    const postContainer = document.querySelector(".main-blog");
-    postContainer.innerHTML = "";
-  
-    if (posts.length === 0) {
-      const noResultsElement = document.createElement("div");
-      noResultsElement.className =
-        "text-center text-4xl font-bold text-gray-500 dark:text-gray-400";
-      noResultsElement.textContent =
-        "No results related to your search. Please use other keywords.";
-      postContainer.appendChild(noResultsElement);
-    } else {
-      $(document).ready(function() {
-        const container = $('.main-blog');
-        
-        // DISPLAY LIST OF POSTS
-        posts.forEach(function(post) {
-          const postCreatedTime = new Date(post.createdTime);
-          const formattedTime = postCreatedTime.toLocaleString("en-US", options);
+  getAllApprovedPosts,
+  searchedPosts,
+} from "../js/Services/post.service.js";
+import { userInfo } from "./Services/auth.service.js";
+import { getAllCategory } from "./Services/category.service.js";
 
-          let tagsHTML = '';
-          if (Array.isArray(post.tagList) && post.tagList.length > 0) {
-            const tags = post.tagList.map(tag => {
-              const tagLink = document.createElement('a');
-              tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
-              tagLink.className = 'tag';
-              tagLink.textContent = tag;
-              tagLink.textContent = `#${tag}`;
-              return tagLink.outerHTML;
-            });
-            tagsHTML = tags.join(' ');
-          }
-          
-          const containerReadHTML = tagsHTML ? `
+const options = {
+  month: "short",
+  day: "2-digit",
+  hour: "2-digit",
+};
+
+const showHeaderForTeacher = async () => {
+  try {
+    const usersInfo = await userInfo();
+    const userRole = usersInfo.role_id;
+
+    if (userRole === "Teacher") {
+      // Display the form
+      document.getElementById("teacherPage").style.display = "block";
+      document.getElementById("giveAwardPage").style.display = "block";
+    } else {
+      // Hide the form
+      document.getElementById("teacherPage").style.display = "none";
+      document.getElementById("giveAwardPage").style.display = "none";
+    }
+  } catch (error) {}
+};
+
+showHeaderForTeacher();
+
+// DISPLAY LIST APPROVED POSTS
+function displayPosts(posts) {
+  const postContainer = document.querySelector(".main-blog");
+  postContainer.innerHTML = "";
+
+  if (posts.length === 0) {
+    const noResultsElement = document.createElement("div");
+    noResultsElement.className =
+      "text-center text-4xl font-bold text-gray-500 dark:text-gray-400";
+    noResultsElement.textContent =
+      "No results related to your search. Please use other keywords.";
+    postContainer.appendChild(noResultsElement);
+  } else {
+    $(document).ready(function () {
+      const container = $(".main-blog");
+
+      // DISPLAY LIST OF POSTS
+      posts.forEach(function (post) {
+        const postCreatedTime = new Date(post.createdTime);
+        const formattedTime = postCreatedTime.toLocaleString("en-US", options);
+
+        let tagsHTML = "";
+        if (Array.isArray(post.tagList) && post.tagList.length > 0) {
+          const tags = post.tagList.map((tag) => {
+            const tagLink = document.createElement("a");
+            tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+            tagLink.className = "tag";
+            tagLink.textContent = tag;
+            tagLink.textContent = `#${tag}`;
+            return tagLink.outerHTML;
+          });
+          tagsHTML = tags.join(" ");
+        }
+
+        //award list
+        //   const awardList = Object.entries(post.awardTypeCount).map(([awardType, count]) => `
+        //   <div class="award" title="${awardType}">
+        //     <i class="fa-solid fa-award" style="color: #ddd60e;"></i>
+        //     <span class="award-count">${count}</span>
+        //   </div>
+        // `).join('');
+        const awardList = Object.entries(post.awardTypeCount)
+          .map(
+            ([awardType, count]) => `
+<div class="award" title="${awardType}">
+  <i class="fa-solid fa-award" style="color: #ddd60e;"></i>
+  <span class="award-count">${count}</span>
+</div>
+`
+          )
+          .join("");
+
+        const containerReadHTML = tagsHTML
+          ? `
             <div class="container-read">
               <div class="tag-category">
                 <h2>Tag: </h2>
@@ -75,7 +92,8 @@ import {
                 ${tagsHTML}
               </div>
             </div>
-          ` : '';
+          `
+          : "";
 
         const postLink = document.createElement("a");
         postLink.href = `blogDetail.html?belongedToPostID=${post.postsId}`;
@@ -83,7 +101,7 @@ import {
         const categoryLink = document.createElement("a");
         categoryLink.href = `postByCategory.html?categoryName=${post.belongedToCategory}`;
 
-          const postHTML = `
+        const postHTML = `
             <div class="main-blog">
               <div class="wapper-title">
               
@@ -123,11 +141,21 @@ import {
                               <i class="fa-solid fa-hashtag" style="color: #ff0000;"></i>
                             </div>
                             <div class="tag-category" id="postCategory">
-                              <a href="${categoryLink.href}">${post.belongedToCategory}</a>
+                              <a href="${categoryLink.href}">${
+          post.belongedToCategory
+        }</a>
                             </div>
                         </div> 
                       </div> 
                   </div>
+
+                  <div class="inner-column">
+                  <div class="container-awards" title="Awards">
+                    <div class="award-list">
+                      ${awardList}
+                    </div>
+                  </div>
+                </div>
 
                 </div>
 
@@ -141,16 +169,22 @@ import {
                     </div>
                     <div class="column-content">
                       <div class="postContent">
-                        <h2><a href="${postLink.href}">${post.postDetail}</a></h2>
+                        <h2><a href="${postLink.href}">${
+          post.postDetail
+        }</a></h2>
                       </div>
                     </div>
                   </div>
 
-                  ${post.mediaList.length>0 ? `
+                  ${
+                    post.mediaList.length > 0
+                      ? `
                     <div class="container-img" title="Cover Image">
                       <img src="data:image/jpeg;base64, ${post.mediaList}" alt="Post Image">
                     </div>
-                  ` : ''}
+                  `
+                      : ""
+                  }
                 </div>
                 <div class="column">
                   <div class="inner-column">
@@ -189,25 +223,71 @@ import {
               </div>
             </div>
           `;
-          
-          container.append(postHTML);
 
-          const infoElement = container.find('.postContent h2:last-child');
-          infoElement.css({
-            maxWidth: "1000px",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap"
-          });
+        container.append(postHTML);
 
+        const infoElement = container.find(".postContent h2:last-child");
+        infoElement.css({
+          maxWidth: "1000px",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
         });
       });
-    }
+    });
   }
-  
-  // Function to display all approved posts
-  const displayAllPosts = () => {
-    getAllApprovedPosts()
+}
+
+// Function to display all approved posts
+const displayAllPosts = () => {
+  getAllApprovedPosts()
+    .then((posts) => {
+      displayPosts(posts);
+    })
+    .catch((error) => {
+      console.error(error);
+      // Handle the error as needed
+    });
+};
+
+//GET LIST CATEGORIES
+const displayCategories = (categories) => {
+  const categoryList = document.querySelector(
+    ".absolute.hidden.text-gray-700.pt-1.group-hover\\:block"
+  );
+
+  categories.forEach((category) => {
+    const listItem = document.createElement("li");
+    const link = document.createElement("a");
+    link.className =
+      "rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white";
+    link.href = `postByCategory.html?categoryName=${encodeURIComponent(
+      category.content
+    )}`;
+    link.textContent = category.content;
+
+    listItem.appendChild(link);
+    categoryList.appendChild(listItem);
+  });
+};
+
+getAllCategory().then((cates) => {
+  displayCategories(cates);
+});
+
+// Call the displayAllPosts function when entering the page
+displayAllPosts();
+
+// SEARCH POSTS
+const searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const searchInput = document.querySelector("#simple-search");
+  const searchTerm = searchInput.value;
+
+  if (searchTerm) {
+    searchedPosts(searchTerm)
       .then((posts) => {
         displayPosts(posts);
       })
@@ -215,52 +295,9 @@ import {
         console.error(error);
         // Handle the error as needed
       });
-  };
-  
-  //GET LIST CATEGORIES
-  const displayCategories = (categories) => {
-    const categoryList = document.querySelector(".absolute.hidden.text-gray-700.pt-1.group-hover\\:block");
-  
-    categories.forEach((category) => {
-      const listItem = document.createElement("li");
-      const link = document.createElement("a");
-      link.className = "rounded-b bg-black hover:bg-gray-400 py-5 px-5 block whitespace-no-wrap text-white";
-      link.href = `postByCategory.html?categoryName=${encodeURIComponent(category.content)}`;
-      link.textContent = category.content;
-  
-      listItem.appendChild(link);
-      categoryList.appendChild(listItem);
-    });
-  };
-  
-  getAllCategory().then((cates) => {
-    displayCategories(cates);
-  });
-  
-  // Call the displayAllPosts function when entering the page
-  displayAllPosts();
-  
-  // SEARCH POSTS
-  const searchForm = document.querySelector("#search-form");
-  searchForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-  
-    const searchInput = document.querySelector("#simple-search");
-    const searchTerm = searchInput.value;
-  
-    if (searchTerm) {
-      searchedPosts(searchTerm)
-        .then((posts) => {
-          displayPosts(posts);
-        })
-        .catch((error) => {
-          console.error(error);
-          // Handle the error as needed
-        });
-    } else {
-      displayAllPosts();
-    }
-  
-    searchInput.value = ""; // Clear the search input
-  });
-  
+  } else {
+    displayAllPosts();
+  }
+
+  searchInput.value = ""; // Clear the search input
+});
