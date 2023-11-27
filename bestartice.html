@@ -7,9 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="src/home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
     <link rel="shortcut icon" type="image/png" href="./img/Logo.png" />
     <title>FPTU ACADEMIC BLOG | Best Article</title>
 </head>
@@ -21,12 +20,12 @@
             <!-- <a href="/home.html" class="items-start justify-center">
                 <img src=" ./img/Logo.png" alt="logo" class="w-16 h-auto">
             </a> -->
-            
-            <a href="/home2.html" clas  s="p-logo" style="font-size: 40px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque; margin-right: 10px;">
+
+            <a href="/home2.html" clas s="p-logo" style="font-size: 40px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: bisque; margin-right: 10px;">
                 FPT BLOG
             </a>
-            
-            
+
+
             <a href="/create.html" class="p-2" style="border-left: 1px solid white;">
                 New post
             </a>
@@ -43,8 +42,7 @@
             <div class="flex items-center justify-center ">
                 <div class="mx-5">
                     <a href="profile.html" class="mx-5">
-                        <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png"
-                            alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
+                        <img src="https://www.pngitem.com/pimgs/m/375-3757223_free-icon-download-people-avatar-icon-transparent-background.png" alt="logo" class="w-10 h-10 rounded-full cursor-pointer hover:scale-110">
                     </a>
                 </div>
                 <div class="pr-2">
@@ -58,10 +56,10 @@
             <script>
                 var prevScrollPos = window.pageYOffset;
                 var header = document.getElementById("header");
-        
+
                 window.onscroll = function() {
                     var currentScrollPos = window.pageYOffset;
-                    
+
                     if (prevScrollPos > currentScrollPos) {
                         // Scrolling up
                         header.style.top = "0";
@@ -69,7 +67,7 @@
                         // Scrolling down
                         header.style.top = "-100px"; // Adjust the value based on your header height
                     }
-        
+
                     prevScrollPos = currentScrollPos;
                 }
             </script>
@@ -78,11 +76,9 @@
     </header>
     <section class="bg-white dark:bg-gray-900" id="baner">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-            <h1
-                class="mb-4 mt-10 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+            <h1 class="mb-4 mt-10 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                 Welcome to Best Article</h1>
-            <p class="mb-8 text-lg font-normal text-white lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here at
-                Where knowledge meets passion</p>
+            <p class="mb-8 text-lg font-normal text-white lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Here at Where knowledge meets passion</p>
             <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             </div>
         </div>
@@ -95,252 +91,262 @@
 
             <!--slide left  -->
             <div class="col-span-3">
-                <div class="group inline-block relative">
-                    <select id="Category" required
-                        class="py-2 px-4 rounded inline-flex items-center">
-                        <option value>Category</option>
-                    </select>
-            </div>
-
-                <!-- Tag -->
-                <div class="group inline-block relative">
-                    <!-- <button class="py-2 px-4 rounded inline-flex items-center">
-                        <span class="mr-20">Tag</span>
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                    </button> -->
-
-                    <button class="py-2 px-4 rounded inline-flex items-center">
-                        <span class="mr-auto">
-                            <form class="tag"> 
-                                <div class="multipleSelection"> 
-                                    <div class="selectBox"
-                                        onclick="sortbytag()"> 
-                                        <select> 
-                                            <option>Tag</option> 
-                                        </select> 
-                                        <div class="overSelect"></div> 
-                                    </div> 
-                        
-                                    <div id="sort-tag">
-                                        <label for="selectAllTag" style="background-color: burlywood;"> 
-                                        </label> 
-                                    </div>
-                                    
-                                </div> 
-                            </form>
-                        </span>
-                    </button>
- 
-                    <style> 
-                        h1 { 
-                            color: green; 
-                        } 
-
-                        .multipleSelection { 
-                            width: 100px; 
-                            background-color: #BCC2C1; 
-                        } 
-                
-                        .selectBox { 
-                            position: relative; 
-                        } 
-                
-                        .selectBox select { 
-                            width: 100%; 
-                            font-weight: bold; 
-                        } 
-                
-                        .overSelect { 
-                            position: absolute; 
-                            left: 0; 
-                            right: 0; 
-                            top: 0; 
-                            bottom: 0; 
-                        } 
-                        #selectAllTag{
-                            display: none;
-                        }
-                        #sort-tag { 
-                            display: none;
-                            border: 1px #8DF5E4 solid;
-                        } 
-                
-                        #sort-tag label { 
-                            display: block; 
-                        } 
-                
-                        #sort-tag label:hover { 
-                            background-color: #4F615E; 
-                        } 
-                    </style> 
-
-                    <script> 
-                        var showTag = true; 
-                
-                        function sortbytag() { 
-                            var checkboxes = 
-                                document.getElementById("sort-tag"); 
-                
-                            if (showTag) { 
-                                checkboxes.style.display = "block"; 
-                                showTag = false; 
-                            } else { 
-                                checkboxes.style.display = "none"; 
-                                showTag = true; 
-                            } 
-                        } 
-                    </script> 
-
-                    <script>
-                        var showTag = true;
-                    
-                        function sortbytag() {
-                            var checkboxes = document.getElementById("sort-tag");
-                    
-                            if (showTag) {
-                                checkboxes.style.display = "block";
-                                showTag = false;
-                            } else {
-                                checkboxes.style.display = "none";
-                                showTag = true;
-                            }
-                        }
-                    
-                        function toggleAllTag() {
-                            var checkboxes = document.getElementById("sort-tag").getElementsByTagName('input');
-                    
-                            for (var i = 0; i < checkboxes.length; i++) {
-                                checkboxes[i].checked = !checkboxes[i].checked;
-                            }
-                        }
-                    </script>
-                </div>
-
-                <!-- Sort By -->
-                <div class="group inline-block relative">
-                    <button class="py-2 px-4 rounded inline-flex items-center">
-                        <span class="mr-auto">
-                            <form class="sortBy">
-                                <div class="multipleSelection">
-                                    <div class="selectBox" onclick="sortbys()">
-                                        <select id="sortOption">
-                                            <option value="likeCount">Sort By</option>
-                                        </select>
-                                        <div class="overSelect"></div>
-                                    </div>
-                    
-                                    <div id="sort-by">
-                                    </div>
-                                </div>
-                            </form>
-                        </span>
-                    </button>
-                    <style> 
-                        h1 { 
-                            color: green; 
-                        } 
-    
-                        .multipleSelection { 
-                            width: 100px; 
-                            background-color: #BCC2C1; 
-                        } 
-                
-                        .selectBox { 
-                            position: relative; 
-                        } 
-                
-                        .selectBox select { 
-                            width: 100%; 
-                            font-weight: bold; 
-                        } 
-                
-                        .overSelect { 
-                            position: absolute; 
-                            left: 0; 
-                            right: 0; 
-                            top: 0; 
-                            bottom: 0; 
-                        } 
-                        #sort-by { 
-                            display: none; 
-                            border: 1px #8DF5E4 solid; 
-                        } 
-                
-                        #sort-by label { 
-                            display: block; 
-                        } 
-                
-                        #sort-by label:hover { 
-                            background-color: #4F615E; 
-                        } 
-                    </style> 
-    
-                    <script> 
-                        var showOpt = true; 
-                
-                        function sortbys() { 
-                            var checkboxes = 
-                                document.getElementById("sort-by"); 
-                
-                            if (showOpt) { 
-                                checkboxes.style.display = "block"; 
-                                showOpt = false; 
-                            } else { 
-                                checkboxes.style.display = "none"; 
-                                showOpt = true; 
-                            } 
-                        } 
-                    </script> 
-                </div>
-
-
-                <!-- Sort Direction -->
-                <div class="group inline-block relative">
-
-                    <select id="sortDirection" required
-                        class="py-2 px-4 rounded inline-flex items-center">
-                        <option value>Sort Direction</option>
-                    </select>
-                    
-                </div>
-
-                <!-- Button Filter -->
-                <div class="group inline-block relative" style="margin-left: 1%;">
-                    <button id="button-filter" class="py-2 px-4 rounded inline-flex items-center">
-                        <i class="fa-solid fa-magnifying-glass" style="color: #000000; margin-right: 10px;"></i>
-                        Filter
-                    </button>
-                </div>
-
-                <!-- Start End Date -->
-                <div class="start-end-date" style="display: flex; align-items: center; margin-top: 1%; margin-left: 3px;">
-                    <div>
-                        <h2 style="margin-right: 10px;">Start date</h2>
-                    </div>
-                    
-                    <div class="group ">
-                        <button id="sort-button" class="py-2 px-4 rounded inline-flex items-center">
-                            <span class="sortBy">
-                                <input type="date" name="dto" id="date_timepicker_start">
-                            </span>
-                        </button>
-                    </div>
-
-                    <div>
-                        <h2 style="margin-left: 10px; margin-right: 10px;">End date</h2>
-                    </div>
-
+                <div class="task-sort">
                     <div class="group inline-block relative">
-                        <button id="sort-button" class="py-2 px-4 rounded inline-flex items-center">
-                            <span class="sortBy">
-                                <input type="date" name="dto" id="date_timepicker_end">
+                        <select id="Category" required class="py-2 px-4 rounded inline-flex items-center">
+                            <option value>Category</option>
+                        </select>
+                    </div>
+
+                    <!-- Tag -->
+                    <div class="group inline-block relative">
+                        <!-- <button class="py-2 px-4 rounded inline-flex items-center">
+                            <span class="mr-20">Tag</span>
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                            </svg>
+                        </button> -->
+
+                        <button class="py-2 px-4 rounded inline-flex items-center">
+                            <span class="mr-auto">
+                                <form class="tag"> 
+                                    <div class="multipleSelection"> 
+                                        <div class="selectBox"
+                                            onclick="sortbytag()"> 
+                                            <select> 
+                                                <option>Tag</option> 
+                                            </select> 
+                                            <div class="overSelect"></div> 
+                                        </div> 
+                            
+                                        <div id="sort-tag">
+                                            <label for="selectAllTag" style="background-color: burlywood;"> 
+                                            </label> 
+                                        </div>
+                                        
+                                    </div> 
+                                </form>
                             </span>
                         </button>
+
+                        <style>
+                            h1 {
+                                color: green;
+                            }
+                            
+                            .multipleSelection {
+                                width: 100px;
+                                background-color: #BCC2C1;
+                            }
+                            
+                            .selectBox {
+                                position: relative;
+                            }
+                            
+                            .selectBox select {
+                                width: 100%;
+                                font-weight: bold;
+                            }
+                            
+                            .overSelect {
+                                position: absolute;
+                                left: 0;
+                                right: 0;
+                                top: 0;
+                                bottom: 0;
+                            }
+                            
+                            #selectAllTag {
+                                display: none;
+                            }
+                            
+                            #sort-tag {
+                                display: none;
+                                border: 1px #8DF5E4 solid;
+                            }
+                            
+                            #sort-tag label {
+                                display: block;
+                            }
+                            
+                            #sort-tag label:hover {
+                                background-color: #4F615E;
+                            }
+                        </style>
+
+                        <script>
+                            var showTag = true;
+
+                            function sortbytag() {
+                                var checkboxes =
+                                    document.getElementById("sort-tag");
+
+                                if (showTag) {
+                                    checkboxes.style.display = "block";
+                                    showTag = false;
+                                } else {
+                                    checkboxes.style.display = "none";
+                                    showTag = true;
+                                }
+                            }
+                        </script>
+
+                        <script>
+                            var showTag = true;
+
+                            function sortbytag() {
+                                var checkboxes = document.getElementById("sort-tag");
+
+                                if (showTag) {
+                                    checkboxes.style.display = "block";
+                                    showTag = false;
+                                } else {
+                                    checkboxes.style.display = "none";
+                                    showTag = true;
+                                }
+                            }
+
+                            function toggleAllTag() {
+                                var checkboxes = document.getElementById("sort-tag").getElementsByTagName('input');
+
+                                for (var i = 0; i < checkboxes.length; i++) {
+                                    checkboxes[i].checked = !checkboxes[i].checked;
+                                }
+                            }
+                        </script>
+                    </div>
+
+                    <!-- Sort By -->
+                    <div class="group inline-block relative">
+                        <button class="py-2 px-4 rounded inline-flex items-center">
+                            <span class="mr-auto">
+                                <form class="sortBy">
+                                    <div class="multipleSelection">
+                                        <div class="selectBox" onclick="sortbys()">
+                                            <select id="sortOption">
+                                                <option value="likeCount">Sort By</option>
+                                            </select>
+                                            <div class="overSelect"></div>
+                                        </div>
+                        
+                                        <div id="sort-by">
+                                        </div>
+                                    </div>
+                                </form>
+                            </span>
+                        </button>
+                        <style>
+                            h1 {
+                                color: green;
+                            }
+                            
+                            .multipleSelection {
+                                width: 100px;
+                                background-color: #BCC2C1;
+                            }
+                            
+                            .selectBox {
+                                position: relative;
+                            }
+                            
+                            .selectBox select {
+                                width: 100%;
+                                font-weight: bold;
+                            }
+                            
+                            .overSelect {
+                                position: absolute;
+                                left: 0;
+                                right: 0;
+                                top: 0;
+                                bottom: 0;
+                            }
+                            
+                            #sort-by {
+                                display: none;
+                                border: 1px #8DF5E4 solid;
+                            }
+                            
+                            #sort-by label {
+                                display: block;
+                            }
+                            
+                            #sort-by label:hover {
+                                background-color: #4F615E;
+                            }
+                        </style>
+
+                        <script>
+                            var showOpt = true;
+
+                            function sortbys() {
+                                var checkboxes =
+                                    document.getElementById("sort-by");
+
+                                if (showOpt) {
+                                    checkboxes.style.display = "block";
+                                    showOpt = false;
+                                } else {
+                                    checkboxes.style.display = "none";
+                                    showOpt = true;
+                                }
+                            }
+                        </script>
+                    </div>
+
+
+                    <!-- Sort Direction -->
+                    <div class="group inline-block relative">
+
+                        <select id="sortDirection" required class="py-2 px-4 rounded inline-flex items-center">
+                            <option value>Sort Direction</option>
+                        </select>
+
+                    </div>
+
+                    <!-- Button Filter -->
+                    <div class="group inline-block relative" style="margin-left: 1%;">
+                        <button id="button-filter" class="py-2 px-4 rounded inline-flex items-center">
+                            <i class="fa-solid fa-magnifying-glass" style="color: #000000; margin-right: 10px;"></i>
+                            Filter
+                        </button>
+                    </div>
+
+                    <!-- Start End Date -->
+                    <div class="start-end-date" style="display: flex; align-items: center; margin-top: 1%; margin-left: 3px;">
+                        <div>
+                            <h2 style="margin-right: 10px;">Start date</h2>
+                        </div>
+
+                        <div class="group ">
+                            <button id="sort-button" class="py-2 px-4 rounded inline-flex items-center">
+                                <span class="sortBy">
+                                    <input type="date" name="dto" id="date_timepicker_start">
+                                </span>
+                            </button>
+                        </div>
+
+                        <div>
+                            <h2 style="margin-left: 10px; margin-right: 10px;">End date</h2>
+                        </div>
+
+                        <div class="group inline-block relative">
+                            <button id="sort-button" class="py-2 px-4 rounded inline-flex items-center">
+                                <span class="sortBy">
+                                    <input type="date" name="dto" id="date_timepicker_end">
+                                </span>
+                            </button>
+                        </div>
+
+                        <style>
+                            .start-end-date div h2 {
+                                font-size: 15px;
+                                font-weight: 700;
+                            }
+                        </style>
                     </div>
                 </div>
-                
+
 
                 <!-- Main Post -->
                 <div class="grid grid-cols-6 gap-4 bg-white" id="post">
@@ -349,7 +355,7 @@
                         <!-- Here Html For List Of Post -->
                         <div class="main-blog">
                         </div>
-        
+
                     </div>
 
                 </div>
@@ -371,9 +377,9 @@
 
                     </div>
 
-                    <div class="mt-4 text-green-600">
+                    <!-- <div class="mt-4 text-green-600">
                         See more topics
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -388,8 +394,7 @@
                     <img src="./img/Logo.png" class="h-8 mr-3" alt="Logo" />
                     <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FPT Blog</span>
                 </a>
-                <ul id="about"
-                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                <ul id="about" class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                     <li>
                         <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
                     </li>
@@ -410,10 +415,10 @@
         </div>
     </footer>
 
-    
+
     <script type="module" src='./js/votePost.js'></script>
     <script type="module" src='./js/tag.js'></script>
-    
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="./js/tailwind.config.js"></script>

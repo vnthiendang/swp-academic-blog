@@ -1,89 +1,88 @@
 import {
-  getAllApprovedPosts,
-  searchedPosts,
+    getAllApprovedPosts,
+    searchedPosts,
 } from "../js/Services/post.service.js";
 import { userInfo } from "./Services/auth.service.js";
 import { getAllCategory } from "./Services/category.service.js";
 
 const options = {
-  month: "short",
-  day: "2-digit",
-  hour: "2-digit",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
 };
 
-const showHeaderForTeacher = async () => {
-  try {
-    const usersInfo = await userInfo();
-    const userRole = usersInfo.role_id;
+const showHeaderForTeacher = async() => {
+    try {
+        const usersInfo = await userInfo();
+        const userRole = usersInfo.role_id;
 
-    if (userRole === "Teacher") {
-      // Display the form
-      document.getElementById("teacherPage").style.display = "block";
-      document.getElementById("giveAwardPage").style.display = "block";
-    } else {
-      // Hide the form
-      document.getElementById("teacherPage").style.display = "none";
-      document.getElementById("giveAwardPage").style.display = "none";
-    }
-  } catch (error) {}
+        if (userRole === "Teacher") {
+            // Display the form
+            document.getElementById("teacherPage").style.display = "block";
+            document.getElementById("giveAwardPage").style.display = "block";
+        } else {
+            // Hide the form
+            document.getElementById("teacherPage").style.display = "none";
+            document.getElementById("giveAwardPage").style.display = "none";
+        }
+    } catch (error) {}
 };
 
 showHeaderForTeacher();
 
 // DISPLAY LIST APPROVED POSTS
 function displayPosts(posts) {
-  const postContainer = document.querySelector(".main-blog");
-  postContainer.innerHTML = "";
+    const postContainer = document.querySelector(".main-blog");
+    postContainer.innerHTML = "";
 
-  if (posts.length === 0) {
-    const noResultsElement = document.createElement("div");
-    noResultsElement.className =
-      "text-center text-4xl font-bold text-gray-500 dark:text-gray-400";
-    noResultsElement.textContent =
-      "No results related to your search. Please use other keywords.";
-    postContainer.appendChild(noResultsElement);
-  } else {
-    $(document).ready(function () {
-      const container = $(".main-blog");
+    if (posts.length === 0) {
+        const noResultsElement = document.createElement("div");
+        noResultsElement.className =
+            "text-center text-4xl font-bold text-gray-500 dark:text-gray-400";
+        noResultsElement.textContent =
+            "No results related to your search. Please use other keywords.";
+        postContainer.appendChild(noResultsElement);
+    } else {
+        $(document).ready(function() {
+                    const container = $(".main-blog");
 
-      // DISPLAY LIST OF POSTS
-      posts.forEach(function (post) {
-        const postCreatedTime = new Date(post.createdTime);
-        const formattedTime = postCreatedTime.toLocaleString("en-US", options);
+                    // DISPLAY LIST OF POSTS
+                    posts.forEach(function(post) {
+                                const postCreatedTime = new Date(post.createdTime);
+                                const formattedTime = postCreatedTime.toLocaleString("en-US", options);
 
-        let tagsHTML = "";
-        if (Array.isArray(post.tagList) && post.tagList.length > 0) {
-          const tags = post.tagList.map((tag) => {
-            const tagLink = document.createElement("a");
-            tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
-            tagLink.className = "tag";
-            tagLink.textContent = tag;
-            tagLink.textContent = `#${tag}`;
-            return tagLink.outerHTML;
-          });
-          tagsHTML = tags.join(" ");
-        }
+                                let tagsHTML = "";
+                                if (Array.isArray(post.tagList) && post.tagList.length > 0) {
+                                    const tags = post.tagList.map((tag) => {
+                                        const tagLink = document.createElement("a");
+                                        tagLink.href = `/pageByTag.html?tagName=${encodeURIComponent(tag)}`;
+                                        tagLink.className = "tag";
+                                        tagLink.textContent = tag;
+                                        tagLink.textContent = `#${tag}`;
+                                        return tagLink.outerHTML;
+                                    });
+                                    tagsHTML = tags.join(" ");
+                                }
 
-        //award list
-        //   const awardList = Object.entries(post.awardTypeCount).map(([awardType, count]) => `
-        //   <div class="award" title="${awardType}">
-        //     <i class="fa-solid fa-award" style="color: #ddd60e;"></i>
-        //     <span class="award-count">${count}</span>
-        //   </div>
-        // `).join('');
-        const awardList = Object.entries(post.awardTypeCount)
-          .map(
-            ([awardType, count]) => `
-<div class="award" title="${awardType}">
-  <i class="fa-solid fa-award" style="color: #ddd60e;"></i>
-  <span class="award-count">${count}</span>
-</div>
-`
-          )
-          .join("");
+                                //award list
+                                //   const awardList = Object.entries(post.awardTypeCount).map(([awardType, count]) => `
+                                //   <div class="award" title="${awardType}">
+                                //     <i class="fa-solid fa-award" style="color: #ddd60e;"></i>
+                                //     <span class="award-count">${count}</span>
+                                //   </div>
+                                // `).join('');
+                                const awardList = Object.entries(post.awardTypeCount)
+                                    .map(
+                                        ([awardType, count]) => `
+          <div class="award" title="${awardType}">
+            <i class="fa-solid fa-award" style="color: #ddd60e;"></i>
+            <span class="award-count">${count}</span>
+          </div>`
+                                    )
+                                    .join("");
 
-        const containerReadHTML = tagsHTML
-          ? `
+                                const containerReadHTML = tagsHTML ?
+                                    `
             <div class="container-read">
               <div class="tag-category">
                 <h2>Tag: </h2>
@@ -92,16 +91,16 @@ function displayPosts(posts) {
                 ${tagsHTML}
               </div>
             </div>
-          `
-          : "";
+          ` :
+                                    "";
 
-        const postLink = document.createElement("a");
-        postLink.href = `blogDetail.html?belongedToPostID=${post.postsId}`;
+                                const postLink = document.createElement("a");
+                                postLink.href = `blogDetail.html?belongedToPostID=${post.postsId}`;
 
-        const categoryLink = document.createElement("a");
-        categoryLink.href = `postByCategory.html?categoryName=${post.belongedToCategory}`;
+                                const categoryLink = document.createElement("a");
+                                categoryLink.href = `postByCategory.html?categoryName=${post.belongedToCategory}`;
 
-        const postHTML = `
+                                const postHTML = `
             <div class="main-blog">
               <div class="wapper-title">
               
@@ -142,38 +141,41 @@ function displayPosts(posts) {
                             </div>
                             <div class="tag-category" id="postCategory">
                               <a href="${categoryLink.href}">${
-          post.belongedToCategory
-        }</a>
+                                post.belongedToCategory
+                              }</a>
                             </div>
                         </div> 
                       </div> 
                   </div>
 
                   <div class="inner-column">
-                  <div class="container-awards" title="Awards">
-                    <div class="award-list">
-                      ${awardList}
+                    <div class="container-awards" title="Awards">
+                      <div class="award-list">
+                        ${awardList}
+                      </div>
                     </div>
                   </div>
-                </div>
 
                 </div>
 
                 <div class="container-post-img">
 
                   <div class="post-title-content" title="Post Title">
+
                     <div class="column-title">
                       <div class="postTitle">
                         <h2><a href="${postLink.href}">${post.title}</a></h2>
                       </div>
                     </div>
+
                     <div class="column-content">
                       <div class="postContent">
                         <h2><a href="${postLink.href}">${
-          post.postDetail
-        }</a></h2>
+                          post.postDetail
+                        }</a></h2>
                       </div>
                     </div>
+
                   </div>
 
                   ${
@@ -186,7 +188,9 @@ function displayPosts(posts) {
                       : ""
                   }
                 </div>
+
                 <div class="column">
+                
                   <div class="inner-column">
                     <div class="container-vote" title="Total Like">
                       <div class="number-vote">
@@ -216,9 +220,10 @@ function displayPosts(posts) {
                             ${containerReadHTML}
                           </div>
                         </div>
-                      </div> 
                     </div> 
-                </div>
+                  </div> 
+
+                  </div>
                 </div>
               </div>
             </div>
