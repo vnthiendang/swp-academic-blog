@@ -70,24 +70,24 @@ function displayPosts(posts) {
                               const awardList = Object.entries(post.awardTypeCount)
                                   .map(
                                       ([awardType, count]) => `
-        <div class="award" title="${awardType}">
-          <i class="fa-solid fa-award" style="color: #ddd60e;"></i>
-          <span class="award-count">${count}</span>
-        </div>`
+                                  <div class="award" title="${awardType}">
+                                    <i class="fa-solid fa-award" style="color: #ddd60e;"></i>
+                                    <span class="award-count">${count}</span>
+                                  </div>`
                                   )
                                   .join("");
 
                               const containerReadHTML = tagsHTML ?
                                   `
-          <div class="container-read">
-            <div class="tag-category">
-              <h2>Tag: </h2>
-            </div>
-            <div class="tag-list" id="tagList">
-              ${tagsHTML}
-            </div>
-          </div>
-        ` :
+                                    <div class="container-read">
+                                      <div class="tag-category" id="tag-category">
+                                        <h2>Tag: </h2>
+                                      </div>
+                                      <div class="tag-list" id="tagList">
+                                        ${tagsHTML}
+                                      </div>
+                                    </div>
+                                  ` :
                                   "";
 
                               const postLink = document.createElement("a");
