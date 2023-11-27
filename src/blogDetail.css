@@ -168,6 +168,10 @@ Main {
     user-select: none;
     pointer-events: none;
   }
+.ql-editor p img {
+    padding: 15%;
+    border-radius: 10px;
+}
   .ql-clipboard {
     display: none;
   }

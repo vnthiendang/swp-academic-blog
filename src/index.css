@@ -131,6 +131,16 @@ Main {
     margin-bottom: 3%;
     letter-spacing: 0.5px;
 }
+.ql-editor {
+    user-select: none;
+    pointer-events: none;
+  }
+  .ql-clipboard {
+    display: none;
+  }
+  .ql-tooltip {
+    display: none;
+  }
 /* ================================================================ */
 .container-vote {
     display: flex;

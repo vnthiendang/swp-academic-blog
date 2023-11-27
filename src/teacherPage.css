@@ -434,8 +434,8 @@
 }
 
 .wapper-title {
-    width: 99%;
-    padding: 15px;
+    width: 80%;
+    padding: 20px;
     /* box-sizing: border-box; */
     border-radius: 5px;
     border: 1px solid gray;
@@ -644,12 +644,12 @@
 }
 
 .tag-list a {
-    padding: 1%;
-    width: 200px;
-    margin-left: 5px;
+    margin-top: 1px;
+    margin-left: 15px;
 }
 
 .tag-list a:hover {
+    width: 200px;
     transition: 1s;
     color: white;
     background-color: red;

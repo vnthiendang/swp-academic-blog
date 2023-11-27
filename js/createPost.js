@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
     formData.append('categoryName', categorySelect.value);
     formData.append('title', titleInput.value);
     formData.append('userID', userId);
-    formData.append('detail', textEditor.innerText);
+    formData.append('detail', textEditor.innerHTML);
     if (imageInput.files.length > 0) {
       for (let i = 0; i < imageInput.files.length; i++) {
         formData.append('mediaList', imageInput.files[i]);

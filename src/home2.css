@@ -134,7 +134,9 @@
     user-select: none;
     pointer-events: none;
 }
-
+.ql-editor p img {
+    display: none;   
+}
 .ql-clipboard {
     display: none;
 }
@@ -222,12 +224,12 @@
 }
 
 .tag-list a {
-    padding: 1%;
-    width: 200px;
-    margin-left: 5px;
+    margin-top: 1px;
+    margin-left: 15px;
 }
 
 .tag-list a:hover {
+    width: 200px;
     transition: 1s;
     color: white;
     background-color: red;
