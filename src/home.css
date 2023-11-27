@@ -499,6 +499,10 @@
     display: flex;
 }
 
+.container-post-img div h2 {
+    width: 1100px;
+}
+
 .post-title-content {
     flex: 7;
     /* background-color: antiquewhite; */
