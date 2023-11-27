@@ -99,9 +99,8 @@ getAllTag().then((tags) => {
 
 const getChosenTags = () => {
   const selectElement = document.getElementById('tags');
-  const selectedOptions = Array.from(selectElement.value);
+  const selectedOptions = Array.from(selectElement.selectedOptions);
   const chosenTags = selectedOptions.map(option => option.value);
-
   return chosenTags;
 };
 
@@ -140,13 +139,13 @@ document.addEventListener("DOMContentLoaded", function () {
       tagList: getChosenTags()
     };
 
-    if (mediaInput.files.length > 0) {
-      mediaInput.addEventListener('change', () => {
-        model.mediaList = Array.from(mediaInput.files);
-      });
-    } else {
-      model.mediaList = new Blob([]);
-    }
+    // if (mediaInput.files.length > 0) {
+    //   mediaInput.addEventListener('change', () => {
+    //     model.mediaList = Array.from(mediaInput.files);
+    //   });
+    // } else {
+    //   model.mediaList = new Blob([]);
+    // }
 
     try {
       const selectedTagsText = document.getElementById('tagLists').textContent.split(',').map(tag => tag.trim());
