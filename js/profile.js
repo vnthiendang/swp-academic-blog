@@ -30,15 +30,24 @@ const showHeaderForTeacher2 = async () => {
 
     const createLink = document.getElementById('createLink');
     const bestArticlesLink = document.getElementById('bestArticlesLink');
+    const homeLink = document.getElementById('homeLink');
+    const logoLink = document.getElementById('logoLink');
+    const logoLink2 = document.getElementById('logoLink2');
 
     if (userRole === 'Student' || userRole === 'Teacher') {
       // Display the links
       createLink.style.display = 'block';
       bestArticlesLink.style.display = 'block';
+      homeLink.style.display = 'block';
+      logoLink.style.display = 'none';
+      logoLink2.style.display = 'show'
     } else {
       // Hide the links
       createLink.style.display = 'none';
       bestArticlesLink.style.display = 'none';
+      homeLink.style.display = 'none';
+      logoLink.style.display = 'show';
+      logoLink2.style.display = 'none'
     }
   } catch (error) {
     // Handle errors here

@@ -116,6 +116,7 @@ Main {
     /* padding: 10%; */
     border-radius: 10px;
 }
+  
 
 .inner-column {
     display: inline-block;
@@ -169,7 +170,7 @@ Main {
     pointer-events: none;
   }
 .ql-editor p img {
-    padding: 15%;
+    padding: 5%;
     border-radius: 10px;
 }
   .ql-clipboard {
