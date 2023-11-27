@@ -6,9 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Data
 public class PostDto {
@@ -25,10 +23,9 @@ public class PostDto {
     private List<Comment> commentList;
     private List<Vote> voteList;
     private String reviewedByTeacher;
-
     private String status;
     private LocalDateTime updatedDate;
-
+    private Map<String, Integer> awardTypeCount;
 
     private Integer vote1Count = 0;
     private Integer vote2Count = 0;
@@ -153,5 +150,21 @@ public class PostDto {
         }
         return "N/A";
     }
+
+    public Map<String, Integer> getAwardTypeCount() {
+        Map<String, Integer> awardTypeCountMap = new HashMap<>();
+
+        if (awardList != null && !awardList.isEmpty()) {
+            for (Award award : awardList) {
+                if (award != null && award.getAwardType() != null) {
+                    String awardType = award.getAwardType().getAwardType();
+                    awardTypeCountMap.put(awardType, awardTypeCountMap.getOrDefault(awardType, 0) + 1);
+                }
+            }
+        }
+
+        return awardTypeCountMap;
+    }
+
 }
 

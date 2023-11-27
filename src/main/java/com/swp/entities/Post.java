@@ -6,9 +6,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "post")
@@ -76,6 +74,20 @@ public class Post {
                 .count();
 
         return Math.toIntExact(likeCount);
+    }
+
+    public Map<String, Integer> getAwardListByAwardType() {
+        Map<String, Integer> awardTypeCountMap = new HashMap<>();
+
+        // Count occurrences of each award type
+        for (Award award : awards) {
+            if (award != null && award.getAwardType() != null) {
+                String awardType = award.getAwardType().getAwardType();
+                awardTypeCountMap.put(awardType, awardTypeCountMap.getOrDefault(awardType, 0) + 1);
+            }
+        }
+
+        return awardTypeCountMap;
     }
 
 }
