@@ -1,6 +1,7 @@
 package com.swp.services;
 
 import com.swp.cms.reqDto.RequestRequest;
+import com.swp.entities.CategoryManagement;
 import com.swp.entities.Request;
 import com.swp.repositories.RequestRepository;
 import com.swp.repositories.RequestTypeRepository;
@@ -67,4 +68,10 @@ public class RequestService {
         return requestRepository.save(request); // Save and return the updated post
     }
 
+//    public CategoryManagement addCategoryManagementByRequest(Request reviewedRequest) {
+//        if (reviewedRequest != null) {
+//            CategoryManagement c = new CategoryManagement();
+//            c.setCategory(reviewedRequest.get);
+//        }
+//    }
 }

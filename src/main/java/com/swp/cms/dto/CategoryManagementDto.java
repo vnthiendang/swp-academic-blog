@@ -12,11 +12,15 @@ public class CategoryManagementDto {
     private User teacher;
     private Category category;
     private LocalDateTime createdTime;
+    private Integer teacherId;
 
     public String getTeacher() {
         return this.teacher.getDisplay_name();
     }
 
+    public Integer getTeacherId() {
+        return this.teacher.getUsId();
+    }
     public String getCategory() {
         if (category != null) {
             return this.category.getContent();

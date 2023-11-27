@@ -45,16 +45,35 @@ public class CategoryManagementService {
         return categoryManagementRepository.findAll();
     }
 
-    public CategoryManagement createCategoryManagement(CategoryManagementRequest categoryManagementRequest){
+//    public CategoryManagement createCategoryManagement(CategoryManagementRequest categoryManagementRequest){
+//        CategoryManagement categoryManagement = new CategoryManagement();
+//        categoryManagement.setCreatedTime(LocalDateTime.now());
+//        categoryManagement.setTeacher(userRepository.findById(categoryManagementRequest.getTeacherId())
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid Teacher")));
+//        categoryManagement.setCategory(categoryRepository.findByContent(categoryManagementRequest.getCategoryName())
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid Category")));
+//        return categoryManagementRepository.save(categoryManagement);
+//    }
+
+    public CategoryManagement createCategoryManagement(CategoryManagementRequest categoryManagementRequest) {
         CategoryManagement categoryManagement = new CategoryManagement();
         categoryManagement.setCreatedTime(LocalDateTime.now());
-        categoryManagement.setTeacher(userRepository.findById(categoryManagementRequest.getTeacherId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Teacher")));
-        categoryManagement.setCategory(categoryRepository.findByContent(categoryManagementRequest.getCategoryName())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Category")));
-        return categoryManagementRepository.save(categoryManagement);
-    }
 
+        try {
+            categoryManagement.setTeacher(userRepository.findById(categoryManagementRequest.getTeacherId())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid Teacher")));
+            categoryManagement.setCategory(categoryRepository.findByContent(categoryManagementRequest.getCategoryName())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid Category")));
+
+            return categoryManagementRepository.save(categoryManagement);
+        } catch (IllegalArgumentException e) {
+            // Handle the case where the request parameters are invalid
+            throw e;
+        } catch (Exception ex) {
+            // Handle other exceptions, such as database errors
+            throw new RuntimeException("An error occurred while creating the category management: "+ ex.getMessage());
+        }
+    }
 
     public List<CategoryManagement> GetCategoryManagementsByUserId(List<CategoryManagement> categoryManagements, Integer userId) {
         User user = userRepository.findById(userId)

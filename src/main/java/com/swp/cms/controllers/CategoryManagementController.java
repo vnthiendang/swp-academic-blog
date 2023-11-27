@@ -49,10 +49,18 @@ public class CategoryManagementController {
     }
 
     @PostMapping("/post")
-    public CategoryManagementDto addCategoryManagement(@RequestBody CategoryManagementRequest categoryManagementRequest) {
-        CategoryManagement createdCategoryManagement = categoryManagementService.createCategoryManagement(categoryManagementRequest);
-        CategoryManagementDto categoryManagementDto = modelMapper.map(createdCategoryManagement, CategoryManagementDto.class);
-        return categoryManagementDto;
+    public ResponseEntity<?> addCategoryManagement(@RequestBody CategoryManagementRequest categoryManagementRequest) {
+        try {
+            CategoryManagement createdCategoryManagement = categoryManagementService.createCategoryManagement(categoryManagementRequest);
+            CategoryManagementDto categoryManagementDto = modelMapper.map(createdCategoryManagement, CategoryManagementDto.class);
+            return ResponseEntity.ok(categoryManagementDto);
+        } catch (IllegalArgumentException e) {
+            // Handle the case where the request parameters are invalid
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request parameters: " + e.getMessage());
+        } catch (Exception e) {
+            // Handle other exceptions, such as database errors
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while creating the category management" + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")

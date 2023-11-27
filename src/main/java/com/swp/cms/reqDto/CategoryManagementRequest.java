@@ -13,5 +13,6 @@ public class CategoryManagementRequest {
     private Integer id;
     private String categoryName;
     private Integer teacherId;
+    private String teacherName;
     private LocalDateTime createdTime;
 }
