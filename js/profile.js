@@ -21,6 +21,32 @@ const showHeaderForTeacher = async () => {
 };
 showHeaderForTeacher();
 
+const showHeaderForTeacher2 = async () => {
+  try {
+    const usersInfo = await userInfo();
+    const userRole = usersInfo.role_id;
+
+    const createLink = document.getElementById('createLink');
+    const bestArticlesLink = document.getElementById('bestArticlesLink');
+
+    if (userRole === 'Student' || userRole === 'Teacher') {
+      // Display the links
+      createLink.style.display = 'block';
+      bestArticlesLink.style.display = 'block';
+    } else {
+      // Hide the links
+      createLink.style.display = 'none';
+      bestArticlesLink.style.display = 'none';
+    }
+  } catch (error) {
+    // Handle errors here
+  }
+};
+
+// Call the function when the page loads
+showHeaderForTeacher2();
+
+
 const getUserInfo = async () => {
 
     const userInfos = await userInfo();

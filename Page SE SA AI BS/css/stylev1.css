@@ -26,6 +26,13 @@
 #header {
     height: 50px;
 }
+
+#footer {
+    /* background-color: antiquewhite; */
+    background-color: white;
+    border-top: 2px solid rgb(224, 224, 224);
+    border-radius: 0%;
+  }
 /*========================== Banner ==============================*/
 
 .FeaturedPosts h2 {
@@ -130,6 +137,9 @@
     margin: 10px 0;
     transition: color 0.5s; /* Transition for color change */
     animation: colorAppear 0.5s ease-in-out 10s forwards; /* Delayed color animation */
+}
+.ql-editor p img {
+    display: none;   
 }
 .post-title:hover {
     color: red;
