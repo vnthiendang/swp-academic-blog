@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -165,8 +166,20 @@ public class AwardController {
         }
     }
 
-
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAwardById(@PathVariable Integer id) {
+        try {
+            // Call the service to delete the award
+            awardService.deleteById(id);
+            return new ResponseEntity<>("Award deleted successfully", HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            // Handle case where the award with the given ID was not found
+            return new ResponseEntity<>("Award not found", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            // Handle other exceptions, such as database errors
+            return new ResponseEntity<>("An error occurred while deleting the Award", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 //    //Update a award by award id
 //    @PutMapping("/{awardId}")
 //    public AwardDto updateAward(@PathVariable Integer awardId, @RequestBody AwardRequest awardRequest) {
