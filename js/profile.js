@@ -51,12 +51,20 @@ getUserInfo();
       return;
     }
 
-    var model = {
-      userId:`${usId}`,
-      display_name: name,
-      email: email,
-      password: repeatPassword
-    };
+    if(repeatPassword != ""){
+      var model = {
+        userId:`${usId}`,
+        display_name: name,
+        email: email,
+        password: repeatPassword
+      };
+    }else{
+      var model = {
+        userId:`${usId}`,
+        display_name: name,
+        email: email
+      };
+    }
 
     try {
       const res = await updateProfile(model);
