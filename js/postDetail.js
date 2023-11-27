@@ -72,14 +72,27 @@ function displayPost() {
         tagLink1.href = "#";
 
         post.tagList.forEach((tag) => {
-          //const tagItem = document.createElement("span");
-          //tagItem.textContent = tag;
-          document.getElementById("postTag").textContent = tag;
+          const tagItem = document.getElementById("postTag");
+          tagItem.textContent = tag;
+
+          const tagLink = document.createElement('a');
+          tagLink.href = `/pageByTag.html?tagName=${tag}`;
+          tagLink.textContent = tag;
+
+          tagItem.innerHTML = '';
+          tagItem.appendChild(tagLink);
         });
       }
 
-      document.getElementById("postCategory").textContent =
-        post.belongedToCategory;
+      const postCategoryElement = document.getElementById("postCategory");
+      postCategoryElement.textContent = post.belongedToCategory;
+
+      const categoryLink = document.createElement('a');
+      categoryLink.href = `postByCategory.html?categoryName=${post.belongedToCategory}`;
+      categoryLink.textContent = post.belongedToCategory;
+
+      postCategoryElement.innerHTML = '';
+      postCategoryElement.appendChild(categoryLink);
 
       const postContentElement = document.getElementById("postContent");
       postContentElement.contentEditable = false;
