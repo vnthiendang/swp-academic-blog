@@ -6,9 +6,12 @@ import com.swp.entities.CategoryManagement;
 import com.swp.services.CategoryManagementService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -50,6 +53,21 @@ public class CategoryManagementController {
         CategoryManagement createdCategoryManagement = categoryManagementService.createCategoryManagement(categoryManagementRequest);
         CategoryManagementDto categoryManagementDto = modelMapper.map(createdCategoryManagement, CategoryManagementDto.class);
         return categoryManagementDto;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCategoryManagementById(@PathVariable Integer id) {
+        try {
+            // Call the service to delete the category management entry
+            categoryManagementService.deleteById(id);
+            return new ResponseEntity<>("Category Management deleted successfully", HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            // Handle case where the category management entry with the given ID was not found
+            return new ResponseEntity<>("Category Management not found", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            // Handle other exceptions, such as database errors
+            return new ResponseEntity<>("An error occurred while deleting the Category Management", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
