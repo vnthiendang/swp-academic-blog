@@ -78,15 +78,17 @@ public class PostApprovalsService {
     public List<PostApprovals> filterPostApprovalsByPostApprovalStatus(List<String> postApprovalStatuses) {
         List<PostApprovals> results = new ArrayList<>();
         if (postApprovalStatuses != null && !postApprovalStatuses.isEmpty()) {
-
+            System.out.println(postApprovalStatuses);
             for (String postApprovalStatus : postApprovalStatuses) {
                 switch (postApprovalStatus.toLowerCase().trim()) {
                     case "approved":
                         results.addAll(postApprovalsRepository.findByStatus("approved"));
+                        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
                         break;
 
                     case "rejected":
-                        results.addAll(postApprovalsRepository.findByStatus("approved"));
+                        results.addAll(postApprovalsRepository.findByStatus("rejected"));
+                        System.out.println("11111111hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
                         break;
 
                     default:
@@ -94,6 +96,7 @@ public class PostApprovalsService {
                 }
             }
         }
+        System.out.println(results);
         return results;
     }
 

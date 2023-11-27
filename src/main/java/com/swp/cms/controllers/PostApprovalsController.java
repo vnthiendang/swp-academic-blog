@@ -45,11 +45,15 @@ public class PostApprovalsController {
             @RequestParam(name = "teacherId", required = false) Integer teacherId,
             @RequestParam(name = "sortDirection", required = false, defaultValue = "desc") String sortDirection
     ) {
+        System.out.println("1222222222222222222222222222222222222222222");
         // Check authentication
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         List<PostApprovals> postApprovals = postApprovalsService.filterPostApprovalsByPostApprovalStatus(postApprovalStatuses);
-
+        System.out.println("222222222222222222222222222222222222222222");
+        for (PostApprovals post: postApprovals){
+            System.out.println("sssssssssssssssssssssssssssssssssssssss" + post);
+        }
         if (postCategories != null && !postCategories.isEmpty()) {
             postApprovals = postApprovalsService.filterPostApprovalsByPostCategories(postApprovals, postCategories);
         }
