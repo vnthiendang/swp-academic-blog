@@ -22,6 +22,12 @@ label.btn {
     margin-bottom: 0;
 }
 
+#requestCategoryBtn{
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
 #editButton {
     color: #fff;
     background-color: #007bff;

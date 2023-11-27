@@ -11,10 +11,12 @@ const showHeaderForTeacher = async () => {
       // Display the form
       document.getElementById('teacherPage').style.display = 'block';
       document.getElementById('teacherPage2').style.display = 'block';
+      document.getElementById('requestCategoryBtn').style.display = 'inline-block';
     } else {
       // Hide the form
       document.getElementById('teacherPage').style.display = 'none';
       document.getElementById('teacherPage2').style.display = 'none';
+      document.getElementById('requestCategoryBtn').style.display = 'none';
     }
   } catch (error) {
   }
@@ -195,19 +197,25 @@ const displayPosts = async() => {
 displayPosts();
 
 const requestCategoryBtn = document.getElementById("requestCategoryBtn");
+
 requestCategoryBtn.addEventListener("click", async function () {
-  const userInfos = await userInfo();
+  try {
+    const userInfos = await userInfo();
 
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  const left = 0;
-  const top = 0;
-  const url = `requestCategory.html?requestedByUserId=${userInfos.userId}`;
+    const width = 1000; // Set your desired width
+    const height = 450; // Set your desired height
+    const left = (window.innerWidth - width) / 2;
+    const top = (window.innerHeight - height) / 2;
+    const url = `requestCategory.html?requestedByUserId=${userInfos.userId}`;
 
-  window.open(
-    url,
-    "Request Category",
-    `width=${width}, height=${height}, left=${left}, top=${top}`
-  );
+    window.open(
+      url,
+      "Request Category",
+      `width=${width}, height=${height}, left=${left}, top=${top}`
+    );
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
 });
+
 
