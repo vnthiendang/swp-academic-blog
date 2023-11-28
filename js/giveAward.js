@@ -409,4 +409,4 @@ const displayAllPosts = async () => {
   }
 };
 
-displayAllPosts();
+displayAllPosts();}

@@ -174,7 +174,7 @@ const displayComments = async (comments) => {
       footer.appendChild(commentByUser);
 
       article.appendChild(footer);
-      article.appendChild(commentByUser);
+      // article.appendChild(commentByUser);
 
       const commentText = document.createElement("p");
       commentText.classList.add("text-gray-500", "dark:text-gray-400");
