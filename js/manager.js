@@ -12,7 +12,11 @@ import {
   getAllAwardForAdminPage,
 } from "./Services/award.service.js";
 import { getAllReports } from "./Services/report.service.js";
-import { createTeacherCategory, getAllTeacherCategory } from "./Services/category.service.js";
+import {
+  createTeacherCategory,
+  getAllTeacherCategory,
+  createTeacherCategory2,
+} from "./Services/category.service.js";
 import { userInfo } from "./Services/auth.service.js";
 import { getAllRequests, reviewRequest } from "./Services/request.service.js";
 
@@ -76,31 +80,51 @@ const renderPostTable = (posts) => {
 
     const updateStatusBtn = document.createElement("button");
     updateStatusBtn.classList.add("styled-button");
-    updateStatusBtn.dataset.postId = post.post;
-    updateStatusBtn.textContent = "Update Status";
+    updateStatusBtn.dataset.id = post.id;
+    updateStatusBtn.textContent = "Delete";
     actionCell.appendChild(updateStatusBtn);
 
     row.appendChild(actionCell);
 
     tbody.appendChild(row);
-
     updateStatusBtn.addEventListener("click", async () => {
-      const postId = updateStatusBtn.dataset.postId;
-      console.log(postId);
-      const userInfos = await userInfo();
+      // Display a confirmation popup
+      const userConfirmed = window.confirm(
+        "Are you sure you want to delete this post approval?"
+      );
+
+      // Check if the user confirmed the action
+      if (!userConfirmed) {
+        return; // Do nothing if the user didn't confirm
+      }
+
+      const id = updateStatusBtn.dataset.id;
       try {
-        const model = {
-          viewedByUser: userInfos.userId,
-          postApprovalsStatus: "APPROVED",
-        };
-        const response = await updatePostStatus(postId, model);
-        if (response != null) {
-          alert("Status changed");
+        const response = await fetch(
+          `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/postapproval/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              // Add any other headers if needed
+            },
+          }
+        );
+
+        if (response.ok) {
+          const responseData = await response.text();
+          alert(responseData); // Display success message
+
+          approvedPostList("approved,rejected").then((posts) => {
+            renderPostTable(posts);
+          });
+        } else if (response.status === 404) {
+          alert("PostApprovals not found");
         } else {
-          alert("Fail to perform!");
+          alert("Failed to delete PostApprovals");
         }
       } catch (error) {
-        console.error("Error change status:", error);
+        console.error("Error deleting PostApprovals:", error);
       }
     });
   });
@@ -131,7 +155,6 @@ const renderUserTable = (users) => {
     "Email",
     "Created Date",
     "Role ID",
-    "Action",
   ];
 
   headers.forEach((headerText) => {
@@ -178,7 +201,7 @@ const renderUserTable = (users) => {
     // addViolationButton.textContent = 'Delete';
     // actionCell.appendChild(addViolationButton);
 
-    row.appendChild(actionCell);
+    // row.appendChild(actionCell);
 
     tbody.appendChild(row);
 
@@ -272,14 +295,17 @@ const renderviolationTable = (users) => {
       const obj = removeBtn.dataset.violatedUser;
 
       const confirmed = confirm(
-        "Are you sure want to remove this violated user?"
+        "Are you sure want to remove this violation record?"
       );
       if (confirmed) {
         try {
           const response = await deleteViolation(obj);
           if (response != null) {
             alert("Account violation Removed");
-            location.reload();
+            // location.reload();
+            violationList().then((user) => {
+              renderviolationTable(user);
+            });
           } else {
             alert("Fail to perform remove violation!");
           }
@@ -309,6 +335,7 @@ violationList().then((user) => {
 // MANAGE AWARD
 const displayAwards = async () => {
   const awardTable = document.getElementById("awardTable");
+  awardTable.innerHTML = ""; // Clear previous content
 
   try {
     const table = document.createElement("table");
@@ -353,18 +380,63 @@ const displayAwards = async () => {
 
       const updateAwardBtn = document.createElement("button");
       updateAwardBtn.classList.add("styled-button");
-      //updateAwardBtn.dataset.userId = user.userId;
-      updateAwardBtn.textContent = "Update award";
+      updateAwardBtn.dataset.id = award.id;
+      updateAwardBtn.textContent = "Delete Award";
       actionCell.appendChild(updateAwardBtn);
 
-      const createBtn = document.createElement("button");
-      createBtn.classList.add("styled-button");
-      createBtn.textContent = "Create";
-      actionCell.appendChild(createBtn);
+      // const updateStatusBtn = document.createElement("button");
+      // updateStatusBtn.classList.add("styled-button");
+      // updateStatusBtn.dataset.id = post.id;
+      // updateStatusBtn.textContent = "Delete";
+      // actionCell.appendChild(updateStatusBtn);
+
+      // const createBtn = document.createElement("button");
+      // createBtn.classList.add("styled-button");
+      // createBtn.textContent = "Create";
+      // actionCell.appendChild(createBtn);
 
       row.appendChild(actionCell);
 
       tbody.appendChild(row);
+
+      updateAwardBtn.addEventListener("click", async () => {
+        // Display a confirmation popup
+        const userConfirmed = window.confirm(
+          "Are you sure you want to delete this award?"
+        );
+
+        // Check if the user confirmed the action
+        if (!userConfirmed) {
+          return; // Do nothing if the user didn't confirm
+        }
+
+        const id = updateAwardBtn.dataset.id;
+        try {
+          const response = await fetch(
+            `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/award/${id}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                // Add any other headers if needed
+              },
+            }
+          );
+
+          if (response.ok) {
+            const responseData = await response.text();
+            alert(responseData); // Display success message
+
+            displayAwards();
+          } else if (response.status === 404) {
+            alert("Award not found");
+          } else {
+            alert("Failed to delete award");
+          }
+        } catch (error) {
+          console.error("Error deleting Award:", error);
+        }
+      });
     });
     table.appendChild(tbody);
     awardTable.appendChild(table);
@@ -372,12 +444,13 @@ const displayAwards = async () => {
     console.error("Error retrieving awards:", error);
   }
 };
+
 displayAwards();
 
 // MANAGE Report
 const displayReports = async () => {
   const awardTable = document.getElementById("reportTable");
-
+  awardTable.innerHTML = ""; // Clear previous content
   try {
     const table = document.createElement("table");
     table.classList.add("report-table");
@@ -517,6 +590,7 @@ displayReports();
 // MANAGE Teacher Category
 const displayTeacherCategory = async () => {
   const awardTable = document.getElementById("categoryTable");
+  awardTable.innerHTML = ""; // Clear previous content
 
   try {
     const table = document.createElement("table");
@@ -555,7 +629,8 @@ const displayTeacherCategory = async () => {
 
       const updateCateBtn = document.createElement("button");
       updateCateBtn.classList.add("styled-button");
-      updateCateBtn.textContent = "Update";
+      updateCateBtn.dataset.id = report.id;
+      updateCateBtn.textContent = "Delete";
       actionCell.appendChild(updateCateBtn);
 
       // const createBtn = document.createElement("button");
@@ -566,7 +641,47 @@ const displayTeacherCategory = async () => {
       row.appendChild(actionCell);
 
       tbody.appendChild(row);
+
+      updateCateBtn.addEventListener("click", async () => {
+        // Display a confirmation popup
+        const userConfirmed = window.confirm(
+          "Are you sure you want to delete this category management?"
+        );
+
+        // Check if the user confirmed the action
+        if (!userConfirmed) {
+          return; // Do nothing if the user didn't confirm
+        }
+
+        const id = updateCateBtn.dataset.id;
+        try {
+          const response = await fetch(
+            `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/categoryManagement/${id}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                // Add any other headers if needed
+              },
+            }
+          );
+
+          if (response.ok) {
+            const responseData = await response.text();
+            alert(responseData); // Display success message
+
+            displayTeacherCategory();
+          } else if (response.status === 404) {
+            alert("Category Management not found");
+          } else {
+            alert("Failed to delete category management");
+          }
+        } catch (error) {
+          console.error("Error deleting Category Management:", error);
+        }
+      });
     });
+
     table.appendChild(tbody);
     awardTable.appendChild(table);
   } catch (error) {
@@ -579,7 +694,7 @@ displayTeacherCategory();
 // MANAGE Category Request
 const displayCategoryRequest = async () => {
   const requestTable = document.getElementById("requestTable");
-
+  requestTable.innerHTML = ""; // Clear previous content
   try {
     const table = document.createElement("table");
     table.classList.add("request-table");
@@ -641,6 +756,16 @@ const displayCategoryRequest = async () => {
       addCategoryBtn.textContent = "Add category";
       actionCell.appendChild(addCategoryBtn);
 
+      // Check the request status and hide buttons accordingly
+      if (
+        request.status.toLowerCase() === "approved" ||
+        request.status.toLowerCase() === "rejected"
+      ) {
+        approveBtn.style.display = "none";
+        rejectBtn.style.display = "none";
+        addCategoryBtn.style.display = "none";
+      }
+
       row.appendChild(actionCell);
 
       tbody.appendChild(row);
@@ -658,7 +783,7 @@ const displayCategoryRequest = async () => {
           const response = await reviewRequest(requestId, model);
           if (response != null) {
             alert("Teacher Category Approved!");
-            location.reload();
+            displayCategoryRequest();
           } else {
             alert("Fail to perform!");
           }
@@ -680,7 +805,7 @@ const displayCategoryRequest = async () => {
           const response = await reviewRequest(requestId, model);
           if (response != null) {
             alert("Teacher Category Rejected!");
-            location.reload();
+            displayCategoryRequest();
           } else {
             alert("Fail to perform!");
           }
@@ -690,23 +815,46 @@ const displayCategoryRequest = async () => {
       });
 
       addCategoryBtn.addEventListener("click", async () => {
-        const teacher = approveBtn.dataset.teacher;
-        // const userInfos = await userInfo();
+        const teacherId = request.teacherId;
+        console.log(teacherId);
 
-        try {
-          const model = {
-            teacher: teacher,
-            categoryName: "Digital Marketing"
-          };
-          const response = await createTeacherCategory(model);
-          if (response != null) {
-            alert("Teacher Category Added!");
-            location.reload();
-          } else {
-            alert("Fail to add category!");
+        const categoryName = window.prompt("Enter category:");
+        console.log(categoryName);
+
+        // Check if the user clicked OK in the prompt
+        if (categoryName !== null) {
+          try {
+            const model = {
+              teacherId: teacherId,
+              categoryName: categoryName,
+            };
+
+            const response = await createTeacherCategory2(model);
+
+            if (response.ok) {
+              const contentType = response.headers.get("content-type");
+              if (contentType && contentType.includes("application/json")) {
+                const jsonResponse = await response.json();
+                alert("Teacher Category Added!");
+                // Handle jsonResponse if needed
+              } else {
+                const textResponse = await response.text();
+                alert(
+                  `Teacher Category Added! Server response: ${textResponse}`
+                );
+              }
+            } else if (response.status === 400) {
+              const errorText = await response.text();
+              alert(`Invalid request parameters: ${errorText}`);
+            } else if (response.status === 500) {
+              const errorText = await response.text();
+              alert(`Internal Server Error: ${errorText}`);
+            } else {
+              alert("Fail to add category!");
+            }
+          } catch (error) {
+            console.error("Error add category:", error);
           }
-        } catch (error) {
-          console.error("Error add category:", error);
         }
       });
     });
