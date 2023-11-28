@@ -140,6 +140,7 @@ displayPost();
 const displayComments = async (comments) => {
   const commentContainer = document.getElementById("commentContainer");
   comments.forEach(async (comment) => {
+    console.log(comment);
     if (comment.status !== "deleted") {
       const us = await userInfo();
 
@@ -173,6 +174,7 @@ const displayComments = async (comments) => {
       footer.appendChild(commentByUser);
 
       article.appendChild(footer);
+      article.appendChild(commentByUser);
 
       const commentText = document.createElement("p");
       commentText.classList.add("text-gray-500", "dark:text-gray-400");
@@ -218,7 +220,7 @@ const displayComments = async (comments) => {
       buttonContainer.appendChild(delButton);
 
       if (us.display_name == comment.createdByUser) {
-        article.appendChild(buttonContainer);
+        commentContainer.appendChild(buttonContainer);
       }
       commentContainer.appendChild(article);
 

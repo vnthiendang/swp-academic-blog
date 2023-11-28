@@ -112,6 +112,10 @@ function displayPosts(posts) {
         voteIcon.className = "fa-regular fa-heart fa-beat-fade fa-xl";
         flexElement.appendChild(voteIcon);
 
+        const elm6 = document.createElement("div");
+        elm6.className = "p-0.5 bg-gray-900 rounded-full mx-4";
+        flexElement.appendChild(elm6);
+
         const voteList = document.createElement("div");
         voteList.className =
           "vote-list rounded-xl bg-gray-300 text-gray-900 px-2 mr-4";
@@ -170,13 +174,12 @@ function displayPosts(posts) {
       }
 
       if (post.tagList.length > 0) {
-        const iconTagElement = document.createElement("div");
-        iconTagElement.className = "icon-tag";
-        const iconTagImg = document.createElement("img");
-        iconTagImg.src = "img/tag.png";
-        iconTagImg.alt = "icon-tag";
-        iconTagElement.appendChild(iconTagImg);
-        flexItemsElement.appendChild(iconTagElement);
+        // const iconTagElement = document.createElement("div");
+        // iconTagElement.className = "icon-tag";
+        // const iconTagImg = document.createElement("img");
+        // iconTagImg.alt = "icon-tag";
+        // iconTagElement.appendChild(iconTagImg);
+        // flexItemsElement.appendChild(iconTagElement);
 
         post.tagList.forEach((tag) => {
           const tagLink = document.createElement("a");

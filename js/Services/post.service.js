@@ -3,12 +3,15 @@ import * as request from "../utils/request.js";
 const token = localStorage.getItem("token");
 
 //POST
-export const getAllApprovedPosts = async () => {
+export const getAllApprovedPosts = async (postStatuses) => {
   try {
     const response = await request.get(`post/GetAllApproved/filter`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      params: {
+        postStatuses
+      }
     });
     return response;
   } catch (error) {

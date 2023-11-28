@@ -101,7 +101,7 @@ const getChosenTags = () => {
   const selectElement = document.getElementById('tags');
   const selectedOptions = Array.from(selectElement.selectedOptions);
   const chosenTags = selectedOptions.map(option => option.value);
-  return chosenTags.length > 0 ? chosenTags : [document.getElementById('tagLists').textContent];
+  return chosenTags > 0 ? chosenTags : [document.getElementById('tagLists').textContent];
 };
 
 document.addEventListener("DOMContentLoaded", function () {
