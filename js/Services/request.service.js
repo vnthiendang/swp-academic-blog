@@ -61,7 +61,7 @@ export const getPostRequest = async () => {
 
 export const approvePost = async (id, postData) => {
   try {
-    const apiUrl = `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/post/postRequest/approve/${id}`;
+    const apiUrl = `http://localhost:8080/blog/post/postRequest/approve/${id}`;
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -84,7 +84,7 @@ export const approvePost = async (id, postData) => {
 
 export const rejectPost = async (id, postData) => {
   try {
-    const apiUrl = `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/post/postRequest/reject/${id}`;
+    const apiUrl = `http://localhost:8080/blog/post/postRequest/reject/${id}`;
 
     const response = await fetch(apiUrl, {
       method: "POST",
