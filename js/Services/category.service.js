@@ -77,7 +77,7 @@ export const createTeacherCategory = async (model) => {
 export const createTeacherCategory2 = async (model) => {
   try {
     const response = await fetch(
-      `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/categoryManagement/post`,
+      `http://localhost:8080/blog/categoryManagement/post`,
       {
         method: "POST",
         headers: {

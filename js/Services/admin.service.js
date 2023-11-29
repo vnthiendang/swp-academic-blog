@@ -67,7 +67,7 @@ export const approvedPostList = async (postApprovalStatuses) => {
 
   try {
     const response = await fetch(
-      `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/postapproval/getall?postApprovalStatuses=${approvalStatusesArray.join(
+      `http://localhost:8080/blog/postapproval/getall?postApprovalStatuses=${approvalStatusesArray.join(
         ","
       )}`,
       {

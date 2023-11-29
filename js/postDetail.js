@@ -140,10 +140,8 @@ displayPost();
 const displayComments = async (comments) => {
   const commentContainer = document.getElementById("commentContainer");
   comments.forEach(async (comment) => {
-    console.log(comment);
     if (comment.status !== "deleted") {
       const us = await userInfo();
-
       const article = document.createElement("article");
       article.classList.add(
         "p-6",
@@ -155,10 +153,8 @@ const displayComments = async (comments) => {
         "dark:border-gray-700",
         "dark:bg-gray-900"
       );
-
       const footer = document.createElement("footer");
       footer.classList.add("flex", "justify-between", "items-center", "mb-2");
-
       const commentByUser = document.createElement("p");
       commentByUser.classList.add(
         "inline-flex",
@@ -170,17 +166,12 @@ const displayComments = async (comments) => {
         "font-semibold"
       );
       commentByUser.textContent = comment.createdByUser;
-
       footer.appendChild(commentByUser);
-
       article.appendChild(footer);
-      // article.appendChild(commentByUser);
-
       const commentText = document.createElement("p");
       commentText.classList.add("text-gray-500", "dark:text-gray-400");
       commentText.textContent = comment.commentText;
       article.appendChild(commentText);
-
       const buttonContainer = document.createElement("div");
       buttonContainer.classList.add(
         "flex",
@@ -188,7 +179,6 @@ const displayComments = async (comments) => {
         "mt-4",
         "space-x-4"
       );
-
       const editBtn = document.createElement("button");
       editBtn.type = "button";
       editBtn.dataset.commentId = comment.id;
@@ -203,7 +193,6 @@ const displayComments = async (comments) => {
       );
       editBtn.innerHTML = '<i class="fa-regular fa-comment px-2"></i>Edit';
       buttonContainer.appendChild(editBtn);
-
       const delButton = document.createElement("button");
       delButton.type = "button";
       delButton.dataset.commentId = comment.id;
@@ -218,27 +207,21 @@ const displayComments = async (comments) => {
       );
       delButton.innerHTML = '<i class="fa-regular fa-delete px-2"></i>Delete';
       buttonContainer.appendChild(delButton);
-
       if (us.display_name == comment.createdByUser) {
-        commentContainer.appendChild(buttonContainer);
+        article.appendChild(buttonContainer);
       }
       commentContainer.appendChild(article);
-
       //EDIT COMMENT
       editBtn.addEventListener("click", async () => {
         const commentId = editBtn.dataset.commentId;
-
         // Make comment editable
         commentText.contentEditable = true;
         commentText.focus();
         commentText.classList.add("editable");
-
         // Disable other buttons
         editBtn.disabled = true;
         delButton.disabled = true;
-
         const originalCommentText = commentText.textContent.trim();
-
         const submitForm = async () => {
           const updatedCommentText = commentText.textContent.trim();
           if (
@@ -262,14 +245,12 @@ const displayComments = async (comments) => {
             // If the updated comment text is empty or unchanged, revert the changes
             commentText.textContent = comment.commentText;
           }
-
           // Disable editing and enable buttons
           commentText.contentEditable = false;
           commentText.classList.remove("editable");
           editBtn.disabled = false;
           delButton.disabled = false;
         };
-
         commentText.addEventListener("keydown", (event) => {
           if (event.key === "Enter" && !event.shiftKey) {
             event.preventDefault();
@@ -277,7 +258,6 @@ const displayComments = async (comments) => {
           }
         });
       });
-
       delButton.addEventListener("click", async () => {
         const commentId = delButton.dataset.commentId;
         const confirmDelete = confirm(

@@ -1,5 +1,5 @@
 const request = axios.create({
-    baseURL: 'https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/'
+    baseURL: 'http://localhost:8080/blog/'
 });
 
 export const get = async (path, options = {})=>{

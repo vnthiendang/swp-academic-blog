@@ -31,7 +31,7 @@ export const getAllAward = async () => {
 export const getAllAwardForAdminPage = async () => {
   try {
     const response = await fetch(
-      `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/award/getall`,
+      `http://localhost:8080/blog/award/getall`,
       {
         method: "GET",
         headers: {
@@ -72,7 +72,7 @@ export const getAllAwardForAdminPage = async () => {
 export const createAward = async (model) => {
   try {
     const response = await fetch(
-      "https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/award/post",
+      "http://localhost:8080/blog/award/post",
       {
         method: "POST",
         headers: {

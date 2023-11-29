@@ -3,14 +3,11 @@ import * as request from "../utils/request.js";
 const token = localStorage.getItem("token");
 
 //POST
-export const getAllApprovedPosts = async (postStatuses) => {
+export const getAllApprovedPosts = async () => {
   try {
     const response = await request.get(`post/GetAllApproved/filter`, {
       headers: {
         Authorization: `Bearer ${token}`,
-      },
-      params: {
-        postStatuses
       }
     });
     return response;
@@ -53,7 +50,7 @@ export const getAwardedPosts = async (
 
   try {
     const apiUrl =
-      `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/post/GetAll/filter?postApprovalStatuses=${approvalStatusesArray.join(
+      `http://localhost:8080/blog/GetAll/filter?postApprovalStatuses=${approvalStatusesArray.join(
         ","
       )}` +
       (minimumLikeCount !== undefined

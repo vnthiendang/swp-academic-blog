@@ -101,7 +101,7 @@ const renderPostTable = (posts) => {
       const id = updateStatusBtn.dataset.id;
       try {
         const response = await fetch(
-          `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/postapproval/${id}`,
+          `http://localhost:8080/blog/postapproval/${id}`,
           {
             method: "DELETE",
             headers: {
@@ -413,7 +413,7 @@ const displayAwards = async () => {
         const id = updateAwardBtn.dataset.id;
         try {
           const response = await fetch(
-            `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/award/${id}`,
+            `http://localhost:8080/blog/award/${id}`,
             {
               method: "DELETE",
               headers: {
@@ -656,7 +656,7 @@ const displayTeacherCategory = async () => {
         const id = updateCateBtn.dataset.id;
         try {
           const response = await fetch(
-            `https://aidoctorbigsix-083a0cad02e1.herokuapp.com/blog/categoryManagement/${id}`,
+            `http://localhost:8080/blog/categoryManagement/${id}`,
             {
               method: "DELETE",
               headers: {
