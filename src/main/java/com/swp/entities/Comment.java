@@ -26,7 +26,7 @@ public class Comment {
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"created_by_user_id\"")
+    @JoinColumn(name = "created_by_user_id")
     private User createdByUser;
 
     @JsonIgnore

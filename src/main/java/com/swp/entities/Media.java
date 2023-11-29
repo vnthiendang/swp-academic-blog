@@ -33,7 +33,7 @@ public class Media {
     private String contentType;
 
     @Lob
-    @Column(name = "data")
+    @Column(name = "data", length = 100000)
     private byte[] data;
 
     @ManyToOne(fetch = FetchType.EAGER)

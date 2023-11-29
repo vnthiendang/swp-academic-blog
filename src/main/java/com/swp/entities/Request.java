@@ -24,7 +24,7 @@ public class Request {
     private RequestType requestType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"requested_by_user_id\"")
+    @JoinColumn(name = "requested_by_user_id")
     private User requestedByUser;
 
     @Column(name = "request_detail")
@@ -37,7 +37,7 @@ public class Request {
     private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"reviewed_by_user_id\"")
+    @JoinColumn(name = "reviewed_by_user_id")
     private User reviewedByAdmin;
 
     @Column(name = "reviewed_date")

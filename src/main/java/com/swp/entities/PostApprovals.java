@@ -28,7 +28,7 @@ public class PostApprovals {
     private Post post;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "\"viewed_by_user_id\"")
+    @JoinColumn(name = "viewed_by_user_id")
     private User viewedByUser;
 
     @Column(name = "teacher_message")

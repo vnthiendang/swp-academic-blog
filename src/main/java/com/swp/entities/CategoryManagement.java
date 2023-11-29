@@ -24,7 +24,7 @@ public class CategoryManagement {
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"teacher_id\"")
+    @JoinColumn(name = "teacher_id")
     private User teacher;
 
     @Column(name = "created_date")

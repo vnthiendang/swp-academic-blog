@@ -28,7 +28,7 @@ public class Post {
     private LocalDateTime createdTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"created_by_user_id\"")
+    @JoinColumn(name = "created_by_user_id")
     private User createdByUser;
 
     @ManyToOne(fetch = FetchType.LAZY)

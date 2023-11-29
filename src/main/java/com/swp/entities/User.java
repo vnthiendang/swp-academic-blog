@@ -52,7 +52,7 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "\"role_id\"")
+    @JoinColumn(name = "role_id")
     private Role role_id;
 
     @Column(name = "created_date")

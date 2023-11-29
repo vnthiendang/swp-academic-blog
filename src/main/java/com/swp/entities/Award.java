@@ -25,7 +25,7 @@ public class Award {
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"given_by_user_id\"")
+    @JoinColumn(name = "given_by_user_id")
     private User givenByUser;
 
     @Column(name = "created_date")

@@ -24,7 +24,7 @@ public class Report {
     private ReportType reportType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"created_by_user_id\"")
+    @JoinColumn(name = "created_by_user_id")
     private User reportedByUser;
 
     @Column(name = "report_detail")
@@ -37,7 +37,7 @@ public class Report {
     private String status;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "\"reviewed_by\"")
+    @JoinColumn(name = "reviewed_by")
     private User viewedByUser;
 
     @Column(name = "reviewed_time")
