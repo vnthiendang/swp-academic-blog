@@ -54,7 +54,7 @@ public class PostController {
 
     //update a post by postId
     @PutMapping("/edit/{id}")
-    public PostDto updatePost(@PathVariable Integer id, @RequestBody PostRequest postRequest){
+    public PostDto updatePost(@PathVariable Integer id, @ModelAttribute PostRequest postRequest){
         Post post = postService.updatePost(id, postRequest);
         PostDto dto = postService.mapPostToPostDto(post);
         return dto;
@@ -232,6 +232,13 @@ public List<PostDto> getAllApprovedPostDtosByCategoryIdAndTagIds(
         posts = postService.sortPosts(posts, sortBy, sortDirection);
         List<PostDto> dtos = postService.mapPostsToPostDtos(posts);
         return dtos;
+    }
+
+    @GetMapping("/GetAll/{id}")
+    public PostDto getAllById(@PathVariable Integer id) {
+        Post post = postService.getPostById(id);
+        PostDto dto = postService.mapPostToPostDto(post);
+        return dto;
     }
 
 

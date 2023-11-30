@@ -157,7 +157,6 @@ public class PostService {
     public Post updatePost(Integer postId, PostRequest postRequest) {
         Post post = getPostById(postId);
         if (post == null) {
-            System.out.println("1111111111111111111111111111111111111111" + postId);
             throw new IllegalArgumentException("Post not found"); // Or handle it as needed
         }
 
@@ -172,41 +171,34 @@ public class PostService {
         // Update Medias
         List<MultipartFile> medias = postRequest.getMediaList();
         if (medias != null) {
-            // Clear existing media
-            post.getMedias().clear();
-
             List<Media> mediaList = new ArrayList<>();
-
             for (MultipartFile media : medias) {
                 if (!media.isEmpty()) {
                     Media media1 = new Media();
                     media1.setPost(post);
-                    media1.setName(media.getOriginalFilename()); // Set the name from the uploaded file
+                    media1.setMediaUrl("ko co URL");
+                    media1.setName(media.getOriginalFilename());
                     media1.setContentType(media.getContentType());
                     try {
-                        // Read the bytes from the uploaded file and compress the image
                         byte[] compressedImageData = ImageUtils.compressImage(media.getBytes());
-
                         // Set the compressed image data
                         media1.setData(compressedImageData);
-
-                        // Save the media object to the repository
-                        //media1 = mediaRepository.save(media1);
+                        if (!post.getMedias().isEmpty()) {
+                            Media existingMedia = post.getMedias().get(0);
+                        }
 
                         mediaList.add(media1);
                     } catch (IOException e) {
-                        // Handle any potential IO errors
-                        e.printStackTrace(); // You might want to log or handle the exception appropriately
+                        e.printStackTrace();
                     }
                 }
             }
 
-            // Add the new media to the post
-            post.getMedias().addAll(mediaList);
+            // set new media
+            post.setMedias(mediaList);
         }
 
         for (PostTag postTag : post.getPostTags()) {
-            System.out.println(postTag.getId() + "11111111111111111111111111111111111111111111111111111");
             postTagRepository.updatePostIdToNullById(postTag.getId());
             postTagRepository.deleteById(postTag.getId());
         }
