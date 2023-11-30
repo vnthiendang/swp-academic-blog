@@ -1,4 +1,6 @@
 import { getPostRequest } from "./Services/request.service.js";
+import { userInfo } from "./Services/auth.service.js";
+
 
 
 const options = {
@@ -27,11 +29,14 @@ const showHeaderForTeacher = async() => {
 showHeaderForTeacher();
 
 // DISPLAY LIST APPROVED POSTS
-function displayPosts(posts) {
+const displayPosts = async (posts) => {
   const postContainer = document.querySelector(".main-blog");
   postContainer.innerHTML = "";
 
-  if (posts.length === 0) {
+  const usersInfo = await userInfo();
+  const userRole = usersInfo.role_id;
+  if (userRole === 'Teacher'){
+    if (posts.length === 0) {
       const noResultsElement = document.createElement("div");
       noResultsElement.className =
           "text-center text-4xl font-bold text-gray-500 dark:text-gray-400";
@@ -237,16 +242,16 @@ function displayPosts(posts) {
     });
   });
 }
+    
+  }else{
+    postContainer.innerHTML += `
+    <h2>Unauthorized</h2>
+    <p>You are not authorized to access this page.</p>
+    `;
+  }
+
 }
 
-
-
-
-function extractTextFromHTML(html) {
-  const tempElement = document.createElement("div");
-  tempElement.innerHTML = html;
-  return tempElement.textContent || tempElement.innerText || "";
-}
 
 const displayPostRequests = () => {
     getPostRequest()

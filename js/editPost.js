@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
       categoryName: categorySelect.textContent,
       title: titleInput.value,
       detail: textEditor.innerHTML,
-      mediaList: [],
+      mediaList: mediaList,
       tagList: getChosenTags()
     };
 
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
       alert('Your Post Edit successfully!');
       window.location.href = '/profile.html';
     } else {
-      alert('You need to choose tag!');
+      alert(res);
     }
   });
 });

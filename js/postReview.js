@@ -12,8 +12,12 @@ const options = {
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get("postId");
 
-function displayPost() {
-  request
+const displayPost = async () => {
+  const userInfos = await userInfo();
+  const userRole = userInfos.role_id;
+
+  if (userRole === 'Teacher'){
+    request
     .get(`post/postRequest/${postId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -59,8 +63,15 @@ function displayPost() {
       console.error("Error retrieving post:", error);
       // Handle error display or logging
     });
-}
+  }else{
+    const postContainer = document.querySelector('#containerPost');
+    postContainer.innerHTML += `
+    <h2>Unauthorized</h2>
+    <p>You are not authorized to access this page.</p>
+    `;
+  }
 
+}
 // Display the post
 displayPost();
 
@@ -108,16 +119,30 @@ displayPost();
 //     window.location.href = "../teacherPage.html";
 //   }
 // });
+const showHeaderForTeacher = async() => {
+  try {
+      const usersInfo = await userInfo();
+      const userRole = usersInfo.role_id;
+
+      if (userRole === 'Teacher') {
+          document.getElementById('approveButton').style.display = 'block';
+          document.getElementById('rejectButton').style.display = 'block';
+      } else {
+          // Hide the form
+          document.getElementById('approveButton').style.display = 'none';
+          document.getElementById('rejectButton').style.display = 'none';
+      }
+  } catch (error) {}
+};
+
+showHeaderForTeacher();
 
 const approveButton = document.getElementById("approveButton");
 const rejectButton = document.getElementById("rejectButton");
-const userInfos = await userInfo();
-const usId = userInfos.userId;
 
 approveButton.addEventListener("click", async (event) => {
   event.preventDefault();
 
-  // Create the model object with the expected structure
   const postData = {
     teacherMessage: "approved",
   };
