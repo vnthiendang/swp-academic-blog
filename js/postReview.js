@@ -163,8 +163,9 @@ rejectButton.addEventListener("click", async (event) => {
   event.preventDefault();
 
   // Create the model object with the expected structure
+  const rejectMsg = document.getElementById("rejectMsg");
   const postData = {
-    teacherMessage: "rejected",
+    teacherMessage: rejectMsg.value,
   };
 
   // Call the approvePost function with the postId and the model object

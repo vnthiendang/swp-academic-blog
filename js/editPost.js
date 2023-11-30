@@ -1,3 +1,4 @@
+import { userInfo } from "./Services/auth.service.js";
 import { getAllCategory } from "./Services/category.service.js";
 import { updatePost } from "./Services/post.service.js";
 import { getAllTag } from "./Services/tag.service.js";
@@ -18,7 +19,7 @@ function displayEditPost() {
   //   mediaItem.style.height = 'auto';
   //   //mediaList.appendChild(mediaItem);
 
-  request.get(`post/GetAllApproved/${postId}`, {
+  request.get(`post/GetAll/${postId}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -105,10 +106,9 @@ const getChosenTags = () => {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  //const imageInput = document.getElementById("mediaList");
   const mediaInput = document.getElementById('mediaList');
-  const selectedFiles = mediaInput.files;
-  const mediaList = Array.from(selectedFiles);
+  // const selectedFiles = mediaInput.files;
+  // const mediaList = Array.from(selectedFiles);
 
   const form = document.getElementById('updatePost');
   form.addEventListener('submit', async (event) => {
@@ -130,19 +130,25 @@ document.addEventListener("DOMContentLoaded", function () {
     //const allowCommentSelect = document.querySelector('#comment');
     const categorySelect = document.querySelector('#opt');
     const textEditor = document.querySelector('#text-editor');
+    
+    const usersInfo = await userInfo();
+    const userId = usersInfo.userId;
 
-    const selectedFiles = mediaInput.files;
-    const mediaList = Array.from(selectedFiles);
+    const formData = new FormData();
+    formData.append('categoryName', categorySelect.textContent);
+    formData.append('title', titleInput.value);
+    formData.append('userID', userId);
+    formData.append('detail', textEditor.innerHTML);
+    if (mediaInput.files.length > 0) {
+      for (let i = 0; i < mediaInput.files.length; i++) {
+        formData.append('mediaList', mediaInput.files[i]);
+      }
+    } else {
+      formData.append('mediaList', new Blob([]));
+    }
+    formData.append('tagList', getChosenTags());
 
-    const model = {
-      categoryName: categorySelect.textContent,
-      title: titleInput.value,
-      detail: textEditor.innerHTML,
-      mediaList: mediaList,
-      tagList: getChosenTags()
-    };
-
-    const res = await updatePost(postId, model);
+    const res = await updatePost(postId, formData);
     if (res != null) {
       alert('Your Post Edit successfully!');
       window.location.href = '/profile.html';

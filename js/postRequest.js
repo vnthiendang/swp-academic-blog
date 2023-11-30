@@ -41,7 +41,7 @@ const displayPosts = async (posts) => {
       noResultsElement.className =
           "text-center text-4xl font-bold text-gray-500 dark:text-gray-400";
       noResultsElement.textContent =
-          "No results related to your search. Please use other keywords.";
+          "No post requests available.";
       postContainer.appendChild(noResultsElement);
   } else {
       $(document).ready(function() {
@@ -183,7 +183,7 @@ const displayPosts = async (posts) => {
                   post.mediaList.length > 0
                     ? `
                   <div class="container-img" title="Cover Image">
-                    <img src="data:image/jpeg;base64, ${post.mediaList}" alt="Post Image">
+                    <img src="data:image/jpeg;base64, ${post.mediaList[0]}" alt="Post Image">
                   </div>
                 `
                     : ""

@@ -16,31 +16,10 @@ export const getAllApprovedPosts = async () => {
   }
 };
 
-// export const getAwardedPosts = async (minimumLikeCount, postApprovalStatuses) => {
-//   try {
-//     const response = await request.get(`post/GetAll/filter`, {
-//       headers: {
-//         Authorization: `Bearer ${token}`
-//       },
-//       params: {
-//         minimumLikeCount,
-//         postApprovalStatuses
-//       }
-//     });
-//     return response;
-//   } catch (error) {
-//     console.error('Error fetching posts:', error);
-//   }
-// };
-
-export const getAwardedPosts = async (
-  minimumLikeCount,
-  postApprovalStatuses
-) => {
+export const getAwardedPosts = async (minimumLikeCount, postApprovalStatuses) => {
   if (
     (minimumLikeCount !== undefined && typeof minimumLikeCount !== "number") ||
-    (postApprovalStatuses !== undefined &&
-      typeof postApprovalStatuses !== "string")
+    (postApprovalStatuses !== undefined && typeof postApprovalStatuses !== "string")
   ) {
     throw new Error("Invalid input. Please provide valid parameters.");
   }
@@ -49,23 +28,18 @@ export const getAwardedPosts = async (
     postApprovalStatuses !== undefined ? postApprovalStatuses.split(",") : [];
 
   try {
-    const apiUrl =
-      `http://localhost:8080/blog/GetAll/filter?postApprovalStatuses=${approvalStatusesArray.join(
-        ","
-      )}` +
-      (minimumLikeCount !== undefined
-        ? `&minimumLikeCount=${minimumLikeCount}`
-        : "");
-
-    const response = await fetch(apiUrl, {
-      method: "GET",
+    const requestOptions = {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
       },
-    });
+    };
 
+    const url = `GetAll/filter?postApprovalStatuses=${approvalStatusesArray.join(",")}` +
+      (minimumLikeCount !== undefined ? `&minimumLikeCount=${minimumLikeCount}` : "");
+
+    const response = await request.get(url, requestOptions);
     const data = await response.json();
+
     console.log("Approved Posts:", data);
     return data; // You can return the data if needed
   } catch (error) {
@@ -98,7 +72,6 @@ export const createPost = async (post, config) => {
     console.error("Error creating post:", error);
   }
 };
-
 export const updatePost = async (postId, post) => {
   try {
     const response = await request.put(`post/edit/${postId}`, post, {
@@ -111,7 +84,6 @@ export const updatePost = async (postId, post) => {
     console.error("Error updating post:", error);
   }
 };
-
 export const deletePost = async (postId) => {
   try {
     const response = await request.put(`post/delete/${postId}`, {
@@ -138,14 +110,14 @@ export const getPostById = async (id) => {
   }
 };
 
-export const getPostByUserId = async (userId) => {
+export const getPostByUserId = async (postApprovalStatuses,userId) => {
   try {
-    const response = await request.get(`post/GetAllApproved`, {
+    const response = await request.get(`post/GetAll/filter`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
       params: {
-        userId,
+        postApprovalStatuses,userId
       },
     });
     return response;

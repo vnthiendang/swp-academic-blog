@@ -218,7 +218,7 @@ const displayPosts = async (posts) => {
       noResultsElement.className =
         "text-center text-4xl font-bold text-gray-500 dark:text-gray-400";
       noResultsElement.textContent =
-        "No results related to your search. Please use other keywords.";
+        "No posts available.";
       postContainer.appendChild(noResultsElement);
     } else {
       for (let i = 0; i < posts.length; i++) {
@@ -411,14 +411,14 @@ const displayPosts = async (posts) => {
 }
 
 const displayAllPosts = async () => {
-  try {
-    const posts = await getAwardedPosts(3, "approved,rejected");
+  getAwardedPosts(3, "approved,rejected")
+  .then((posts) => {
     displayPosts(posts);
-    // alert("hell22222222222222o");
-  } catch (error) {
-    console.error("Error displaying posts:", error);
+  })
+  .catch((error) => {
+    console.error(error);
     // Handle the error as needed
-  }
+  });
 };
 
 displayAllPosts();

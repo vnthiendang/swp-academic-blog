@@ -122,9 +122,9 @@ const displayPosts = async() => {
   try {
     const userInfos = await userInfo();
     const usId = userInfos.userId;
-    //const postApprovalStatuses = "approved,rejected,pending";
+    const postApprovalStatuses = "approved,rejected,pending";
 
-    const posts = await getPostByUserId(usId);
+    const posts = await getPostByUserId(postApprovalStatuses, usId);
 
     if(posts.length === 0){
       const postDiv = document.querySelector('.postDiv');
@@ -139,12 +139,14 @@ const displayPosts = async() => {
       tableBody.innerHTML = '';
 
       posts.forEach((post, index) => {
+        console.log(post);
         const row = document.createElement('tr');
         row.innerHTML = `
           <td>${index + 1}</td>
           <td>${post.title}</td>
           <td>${post.belongedToCategory}</td>
           <td>${post.status || 'pending'}</td>
+          <td>${post.postApprovals}</td>
           <td>
             <form class="form"> 
               <div class="flex flex-col">

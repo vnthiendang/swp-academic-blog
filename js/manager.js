@@ -42,6 +42,7 @@ const renderPostTable = async (posts) => {
     const headers = [
       "Post Status",
       "Teacher Review",
+      "Teacher Message",
       "Created Date",
       "Post",
       "Action",
@@ -69,6 +70,10 @@ const renderPostTable = async (posts) => {
       const additionalInfoCell = document.createElement("td");
       additionalInfoCell.textContent = post.viewedByUser || "-";
       row.appendChild(additionalInfoCell);
+
+      const teacherMsgCell = document.createElement("td");
+      teacherMsgCell.textContent = post.teacherMessage || "-";
+      row.appendChild(teacherMsgCell);
   
       const createdDateCell = document.createElement("td");
       const createdTime = new Date(post.createdDate);
@@ -76,9 +81,12 @@ const renderPostTable = async (posts) => {
       createdDateCell.textContent = formattedTime || "-";
       row.appendChild(createdDateCell);
   
-      const roleIdCell = document.createElement("td");
-      roleIdCell.textContent = post.post;
-      row.appendChild(roleIdCell);
+      const postDetailCell = document.createElement("td");
+      const postDetailLink = document.createElement("a");
+      postDetailLink.textContent = 'view post';
+      postDetailLink.href = 'blogDetail.html?belongedToPostID=' + encodeURIComponent(JSON.stringify(post.post));
+      postDetailCell.appendChild(postDetailLink);
+      row.appendChild(postDetailCell);
   
       const actionCell = document.createElement("td");
   

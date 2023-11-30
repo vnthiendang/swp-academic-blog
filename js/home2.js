@@ -182,7 +182,7 @@ function displayPosts(posts) {
                     post.mediaList.length > 0
                       ? `
                     <div class="container-img" title="Cover Image">
-                      <img src="data:image/jpeg;base64, ${post.mediaList}" alt="Post Image">
+                      <img src="data:image/jpeg;base64, ${post.mediaList[0]}" alt="Post Image">
                     </div>
                   `
                       : ""
